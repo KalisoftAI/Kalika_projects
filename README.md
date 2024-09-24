@@ -1,4 +1,4 @@
-# Soltar
+# Projects 
 
 List of projects 
 1) Kalika E-commerce website
