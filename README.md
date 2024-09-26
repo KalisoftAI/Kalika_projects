@@ -20,3 +20,5 @@ Steps to be taken
 https://help.indiamart.com/knowledge-base/lms-crm-integration-v2/
 
 Project Outline: https://docs.google.com/spreadsheets/d/1jei42QUOiNzo5J6xIHBwuHo6uoQ5sr_1r7fMYyPya9M/edit?usp=sharing
+
+https://ollama.com/library
