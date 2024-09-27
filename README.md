@@ -2,6 +2,8 @@
 
 List of projects 
 1) Kalika E-commerce website
+
+![Kalika_ecommerce](https://github.com/user-attachments/assets/eb59cc75-5a2a-4e65-96d8-c3338a6abbb4)
    
 https://ecommerce2.avetti.ca/preview/kalikaindiastore//
 
