@@ -8,6 +8,9 @@
    
 https://ecommerce2.avetti.ca/preview/kalikaindiastore//
 
+### Docs 
+https://docs.google.com/document/d/14zoIo3iFxCo_y37EiFscNPUVQiu1VP2thiZxbnmMg8I/edit?usp=sharing
+
 ### AI Newsletter
 Extracting subscribed Newsletters using python and send to LLM to get json response to get all details then it can be used to generate newsletters  
 
