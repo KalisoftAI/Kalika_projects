@@ -8,15 +8,6 @@
    
 https://ecommerce2.avetti.ca/preview/kalikaindiastore//
 
-### Docs 
-https://docs.google.com/document/d/14zoIo3iFxCo_y37EiFscNPUVQiu1VP2thiZxbnmMg8I/edit?usp=sharing
-
-### AI Newsletter
-Extracting subscribed Newsletters using python and send to LLM to get json response to get all details then it can be used to generate newsletters  
-
-
-![AI_newsletter_flow](https://github.com/user-attachments/assets/4aadc3d3-630a-4fb6-8fe5-c23565784e03)
-
 
 ### Kalika Smart Procurement
 
