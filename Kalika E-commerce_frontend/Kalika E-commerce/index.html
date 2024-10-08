@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Kalika Industrial eCommerce</title>
+    <title>Kalika  eCommerce</title>
     <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Your go-to platform for industrial machinery, tools, and equipment.">
     <meta name="keywords" content="industrial, machinery, B2B, tools, heavy equipment">
@@ -30,16 +32,31 @@
               </a>
               <li class="dropdown">
                 <a href="category.html">All Categories</a>
-                <ul class="dropdown-menu">
-                  <li><a href="#design">Abrasives</a></li>
+                <ul class="dropdown-menu" style="list-style-type:circle;">
+                  <li><a href="#design">Abrasives</a>
+                    <ul style="list-style-type:circle;">
+                      <li><a href="#">Security</a></li>
+                      <li><a href="#">Antislip Products</a></li>
+                      <li><a href="#">Medical & Health Care</a></li>
+                      <li><a href="#">Safety Identification</a></li>
+                      <li><a href="#">PPE</a></li>
+                    </ul>
+                  </li>
+
                   <li><a href="#development">Packaging</a></li>
+                  <li><a href="#design">Janitorial</a></li>
+                  <li><a href="#development">Facility Maintenance</a></li>
+                  <li><a href="#design">Chemical & Lubricant</a></li>
+                  <li><a href="#development">Safety</a></li>
+                  <li><a href="#design">Hand & Power Tool</a></li>
+                  <li><a href="#development">Cutting Tool</a></li>
                 </ul>
               </li>
         
               <li><a href="aboutus.html">About Us</a></li>
             <li><a href="contactus.html">Contact</a></li>
             <div class="header-actions">
-              <a href="login.html" class="btn-login">Cart</a>
+              <a href="cart.html" class="btn-login">Cart</a>
                 <a href="login.html" class="btn-login">Login</a>
               </div>
           </ul>
@@ -47,13 +64,129 @@
       </div>
     </header>
     <!-- HEADER END -->
-    <!-- --Frame Diplay-- -->
-    <div>
-      <iframe width="100%" height="550" name="my_frame" src="dash.html" style="border: none">
+     
+    <!-- HERO SECTION START -->
+    <section class="hero">
+      <div class="container">
+          <h1>Top Industrial Equipment for Your Business</h1>
+          <p>We provide high-quality industrial machinery, tools, and safety gear for manufacturers, construction companies, and B2B vendors.</p>
+          <!-- <a href="shop.html" class="btn-primary">Shop Now</a> -->
+      </div>
+  </section>
+<!-- HERO SECTION END -->
+      <!-- CATEGORY  -->
+    <section class="py-5 overflow-hidden">
+      <div class="container-lg">
+          <div class="row">
+              <div class="col-md-12">
 
+                  <div class="section-header d-flex flex-wrap justify-content-between mb-5">
+                  <h2 class="section-title">Category</h2>
 
-      </iframe>
-  </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="category-carousel swiper">
+            <div class="swiper-wrapper">
+              <a href="category.html" class="nav-link swiper-slide text-center">
+                <img src="image/Safety.jpg" class="rounded-circle" alt="Category Thumbnail">
+                <h4 class="fs-6 mt-3 fw-normal category-title">Safety</h4>
+              </a>
+              <a href="category.html" class="nav-link swiper-slide text-center">
+                <img src="image/Janitorial.jpg" class="rounded-circle" alt="Category Thumbnail">
+                <h4 class="fs-6 mt-3 fw-normal category-title">Janitorial</h4>
+              </a>
+              <a href="category.html" class="nav-link swiper-slide text-center">
+                <img src="image/Packaging.jpg" class="rounded-circle" alt="Category Thumbnail">
+                <h4 class="fs-6 mt-3 fw-normal category-title">Packaging</h4>
+              </a>
+              <a href="category.html" class="nav-link swiper-slide text-center">
+                <img src="image/Proactive-Maintenance.jpg" class="rounded-circle" alt="Category Thumbnail">
+                <h4 class="fs-6 mt-3 fw-normal category-title">Facility Maintenance</h4>
+              </a>
+              <a href="category.html" class="nav-link swiper-slide text-center">
+                <img src="image/lubricant.jpg" class="rounded-circle" alt="Category Thumbnail">
+                <h4 class="fs-6 mt-3 fw-normal category-title">Chemical & Lubricant</h4>
+              </a>
+              <a href="category.html" class="nav-link swiper-slide text-center">
+                <img src="image/abrasives.jpg" class="rounded-circle" alt="Category Thumbnail">
+                <h4 class="fs-6 mt-3 fw-normal category-title">Abrasives</h4>
+              </a>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+    <!-- PRODUCT SECTION START -->
+  <section class="products">
+    <div class="container">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <!-- Product Item 1 -->
+        <div class="product-card">
+          <img src="images/lathe.jpg" alt="Industrial Lathe Machine">
+          <div class="product-info">
+            <h3>Industrial Lathe Machine</h3>
+            <p>Precision-engineered lathe, perfect for metalworking. Power: 220V/380V</p>
+            <span class="price">RS.5,000</span>
+            <div class="product-actions">
+              <button class="btn-secondary">Add to Cart</button>
+              <button class="btn-primary">Request Quote</button>
+            </div>
+          </div>
+        </div>
+        <!-- Product Item 2 -->
+        <div class="product-card">
+          <img src="images/hydraulic_press.jpg" alt="Hydraulic Press">
+          <div class="product-info">
+            <h3>Hydraulic Press</h3>
+            <p>100-ton capacity press, built for heavy-duty operations.</p>
+            <span class="price">RS.12,000</span>
+            <div class="product-actions">
+              <button class="btn-secondary">Add to Cart</button>
+              <button class="btn-primary">Request Quote</button>
+            </div>
+          </div>
+        </div>
+         <!-- Product Item 3 -->
+         <div class="product-card">
+          <img src="images/hydraulic_press.jpg" alt="Hydraulic Press">
+          <div class="product-info">
+            <h3>Hydraulic Press</h3>
+            <p>100-ton capacity press, built for heavy-duty operations.</p>
+            <span class="price">RS.12,000</span>
+            <div class="product-actions">
+              <button class="btn-secondary">Add to Cart</button>
+              <button class="btn-primary">Request Quote</button>
+            </div>
+          </div>
+        </div>
+         <!-- Product Item 4 -->
+         <div class="product-card">
+          <img src="images/hydraulic_press.jpg" alt="Hydraulic Press">
+          <div class="product-info">
+            <h3>Hydraulic Press</h3>
+            <p>100-ton capacity press, built for heavy-duty operations.</p>
+            <span class="price">RS.12,000</span>
+            <div class="product-actions">
+              <a href="cart.html" class="cart-container">Add to Cart</a>
+              <button class="btn-primary">Request Quote</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Add more products as needed -->
+      </div>
+    </div>
+  </section>
+  <!-- PRODUCT SECTION END -->
    
     <!-- FOOTER START -->
     <footer>
@@ -79,7 +212,9 @@
             <p>Subscribe to our newsletter for the latest updates</p>
             <input type="email" placeholder="Enter your email" />
             <button class="btn-secondary">Subscribe</button>
+            
           </div>
+          
         </div>
         <div class="footer-bottom">
           <p>&copy; 2024 Kalika Industrial eCommerce. All rights reserved.</p>
