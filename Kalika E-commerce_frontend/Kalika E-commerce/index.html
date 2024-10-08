@@ -175,16 +175,32 @@
             <h3>Hydraulic Press</h3>
             <p>100-ton capacity press, built for heavy-duty operations.</p>
             <span class="price">RS.12,000</span>
+
             <div class="product-actions">
-              <a href="cart.html" class="cart-container">Add to Cart</a>
+<!--              <a href="cart.html" class="cart-container">Add to Cart</a>-->
+              <button class="add-to-cart" data-id="1" data-name="Product 1" data-price="12,000">Add to Cart test</button>
               <button class="btn-primary">Request Quote</button>
             </div>
           </div>
         </div>
-        
+
+        <div class="product-card">
+    <img src="images/hydraulic_press.jpg" alt="Hydraulic Press">
+    <div class="product-info">
+        <h3>Hydraulic Press</h3>
+        <p>100-ton capacity press, built for heavy-duty operations.</p>
+        <span class="price">RS.12,000</span>
+        <div class="product-actions">
+            <button class="add-to-cart" data-id="1">Add to Cart</button>
+            <button class="btn-primary">Request Quote</button>
+        </div>
+    </div>
+</div>
+
         <!-- Add more products as needed -->
       </div>
     </div>
+
   </section>
   <!-- PRODUCT SECTION END -->
    
@@ -223,5 +239,61 @@
     </footer>
     <!-- FOOTER END -->
 
-  </body>
+
+  <script>
+  // Initialize an empty cart
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Function to add item to cart
+  function addToCart(productId, productName, productPrice) {
+      const product = {
+          id: productId,
+          name: productName,
+          price: productPrice,
+          quantity: 1 // Default quantity
+      };
+
+      // Check if product already exists in cart
+      const existingProduct = cart.find(item => item.id === productId);
+      if (existingProduct) {
+          existingProduct.quantity += 1; // Increase quantity if exists
+      } else {
+          cart.push(product); // Add new product if not exists
+      }
+
+      // Save updated cart to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${productName} has been added to your cart!`);
+  }
+
+  // Event listener for button click
+  document.querySelector('.add-to-cart').addEventListener('click', function() {
+      const productId = this.getAttribute('data-id');
+      const productName = this.getAttribute('data-name');
+      const productPrice = parseFloat(this.getAttribute('data-price'));
+      addToCart(productId, productName, productPrice);
+  });
+
+
+<!--    // Get product information-->
+<!--    const productCard = document.querySelector('.product-card');-->
+<!--    const priceElement = productCard.querySelector('.price');-->
+<!--    const addToCartButton = productCard.querySelector('.add-to-cart');-->
+
+<!--    // Extract price and format it-->
+<!--    const priceText = priceElement.textContent;-->
+<!--    const formattedPrice = priceText.replace('RS.', '').replace(',', '').trim(); // Remove currency and commas-->
+
+<!--    // Set data attributes-->
+<!--    addToCartButton.setAttribute('data-name', productCard.querySelector('h3').textContent); // Product name from h3-->
+<!--    addToCartButton.setAttribute('data-price', formattedPrice); // Price without currency-->
+
+<!--    // Optional: Log to console for verification-->
+<!--    console.log('Product Name:', addToCartButton.getAttribute('data-name'));-->
+<!--    console.log('Product Price:', addToCartButton.getAttribute('data-price'));-->
+
+  </script>
+    </body>
+
 </html>
+
