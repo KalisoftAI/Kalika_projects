@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "f:\\KaliSoft\\Kalika E-commerce\\index.html"
+            "file": "f:\\KaliSoft\\Git Project\\Kalika_projects\\Kalika E-commerce_frontend\\Kalika E-commerce\\index.html"
         }
     ]
 }
