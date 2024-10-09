@@ -115,6 +115,8 @@ request.data ="""
     </Request>
 </cXML>
 """
+# KALIKA ENTERPRISES PUNCHOUT_IN
+# https://ecommerce2.avetti.ca/preview/punchout.xml?vid=201
 @app.route('/punchout', methods=['POST'])
 def punchout_setup():
     # Parse incoming cXML request
