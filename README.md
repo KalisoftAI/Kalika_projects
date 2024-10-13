@@ -15,6 +15,7 @@ https://ecommerce2.avetti.ca/preview/kalikaindiastore//
 
 ![Kalika_ecommerce](https://github.com/user-attachments/assets/eb59cc75-5a2a-4e65-96d8-c3338a6abbb4)
 
+1. Look for AWS for integration
 
 ### Doc
 https://docs.google.com/document/d/14zoIo3iFxCo_y37EiFscNPUVQiu1VP2thiZxbnmMg8I/edit?usp=sharing
