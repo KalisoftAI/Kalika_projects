@@ -7,6 +7,8 @@ from psycopg2.extras import RealDictCursor
 import xml.etree.ElementTree as ET
 from werkzeug.middleware.proxy_fix import ProxyFix
 # app = Flask(__name__)
+from flask import Flask, request, Response
+import xml.etree.ElementTree as ET
 
 # from flask import Flask, request, Response
 import xml.etree.ElementTree as ET
@@ -34,7 +36,7 @@ def connect_db():
 # Route for homepage
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_test.html')
 
 @app.route('/products')
 def products():
@@ -65,6 +67,39 @@ def search_products():
         return jsonify(results)
     
     return jsonify([])
+
+## for category and subcategory
+import pandas as pd
+catalog_df = pd.read_csv('../data/kalika_catalog_products.csv')
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+@app.route('/products/<category>')
+def show_category(category):
+    products = catalog_df[catalog_df['Main Category'] == category].to_dict(orient='records')
+    return render_template('category.html', products=products, category=category)
+
+@app.route('/products/<category>/<subcategory>')
+def show_subcategory(category, subcategory):
+    products = catalog_df[(catalog_df['Main Category'] == category) & (catalog_df['Sub Categories'] == subcategory)].to_dict(orient='records')
+    return render_template('subcategory.html', products=products, category=category, subcategory=subcategory)
+### test code end
+
+### test code for punchout
+@app.route('/punchout', methods=['POST'])
+def punchout():
+    # Process the incoming PunchOutSetupRequest
+    # Here you would typically validate the request
+
+    # Create the PunchOutSetupResponse
+    response_xml = ET.Element('cXML')
+    response = ET.SubElement(response_xml, 'PunchOutSetupResponse')
+    start_page = ET.SubElement(response, 'StartPage')
+    start_page.text = 'https://lemonchiffon-ram-961910.hostingersite.com'
+
+    return Response(ET.tostring(response_xml), mimetype='text/xml')
+### test code end
 
 # # Route for displaying products
 # @app.route('/')

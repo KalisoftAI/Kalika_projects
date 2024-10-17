@@ -1,83 +1,107 @@
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <title>Kalika eCommerce</title>
-      <meta charset="utf-8">
-      <link rel="icon" type="image/x-icon" href="static/image/logo.png">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Your go-to platform for industrial machinery, tools, and equipment.">
-      <meta name="keywords" content="industrial, machinery, B2B, tools, heavy equipment">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kalika eCommerce</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="static/image/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your go-to platform for industrial machinery, tools, and equipment.">
+    <meta name="keywords" content="industrial, machinery, B2B, tools, heavy equipment">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-      <!-- Link to CSS file -->
-      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-      <!-- External Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    </head>
+    <!-- External Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-    <body>
+    <style>
+        /* Custom styles for the navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+        }
 
-      <!-- HEADER START -->
-      <header>
-        <div class="container">
+        .toggle-button {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
 
-          <nav class="navbar">
-            <ul class="navbar-nav">
-              <a href="/">
-                <img src="static/image/logo_enhanced.png" alt="Industrial eCommerce Logo" class="logo-image">
-              </a>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
 
-              <!-- SEARCH BAR -->
-              <form>
-                <input type="text" id="search-bar" name="query" placeholder="Search products" onkeyup="fetchSuggestions(this.value)">
-              </form>
+        .dropdown-menu li {
+            list-style-type: none;
+            padding: 10px;
+        }
 
-              <!-- SUGGESTIONS LIST -->
-  <!--            <ul id="suggestions" class="suggestion-list"></ul>-->
+        .sub-category {
+            display: none; /* Initially hidden */
+        }
 
-              <li class="dropdown">
-                <a href="category">All Categories</a>
-                <ul class="dropdown-menu" style="list-style-type:circle;">
-                  <li><a href="#design">Abrasives</a></li>
-                  <li><a href="#development">Packaging</a></li>
-                  <li><a href="#design">Janitorial</a></li>
-                  <li><a href="#development">Facility Maintenance</a></li>
-                  <li><a href="#design">Chemical & Lubricant</a></li>
-                  <li><a href="#development">Safety</a></li>
-                  <li><a href="#design">Hand & Power Tool</a></ li>
-                  <li><a href="#development">Cutting Tool</a></li>
-                </ul>
-              </li>
+        .arrow {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
 
-              <li><a href="about">About Us</a></li>
-              <li><a href="contact">Contact</a></li>
-              <div class="header-actions">
-                <a href="login" class="btn-login">Login</a>
-              </div>
-              <div class="header-actions">
-                <a href="cart" class="btn-login">Cart</a>
-              </div>
+<body>
 
+<!-- HEADER START -->
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <div class="toggle-button" onclick="toggleCategoryMenu()">☰ Categories</div>
+            <ul id="category-menu" class="dropdown-menu">
+                <li>
+                    <a href="/products/safety">Safety</a>
+                    <span class="arrow" onclick="toggleSubMenu(this)">▶</span>
+                    <ul class="sub-category">
+                        <li><a href="/products/safety/helmet">Safety Helmet</a></li>
+                        <li><a href="/products/safety/gloves">Safety Gloves</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/products/janitorial">Janitorial</a>
+                    <span class="arrow" onclick="toggleSubMenu(this)">▶</span>
+                    <ul class="sub-category">
+                        <li><a href="/products/janitorial/cleaning-supplies">Cleaning Supplies</a></li>
+                        <li><a href="/products/janitorial/trash-bags">Trash Bags</a></li>
+                    </ul>
+                </li>
             </ul>
-          </nav>
-        </div>
-      </header>
-      <!-- HEADER END -->
 
-      <!-- HERO SECTION START -->
-      <section class="hero">
-        <div class="container">
-          <h1>Top Industrial Equipment for Your Business</h1>
-          <p>We provide high-quality industrial machinery, tools, and safety gear for manufacturers, construction companies, and B2B vendors.</p>
-        </div>
-      </section>
-      <!-- HERO SECTION END -->
-
-      <!-- CATEGORY SECTION -->
-      <section class="py-5 overflow-hidden">
+            <!-- Other Navigation Links -->
+            <ul class="navbar-nav">
+                <a href="/">
+                 <img src="static/image/logo_enhanced.png" alt="Industrial eCommerce Logo" class="logo-image" style="width: 400px; height: auto;">
+                </a>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="header-actions">
+                    <a href="/login" class="btn-login">Login</a>
+                </div>
+                <div class="header-actions">
+                    <a href="/cart" class="btn-login">Cart</a>
+                </div>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- HEADER END -->
+ <section class="py-5 overflow-hidden">
         <div class="container-lg">
           <div class="row">
             <div class="col-md-12">
@@ -241,5 +265,44 @@
         }
       </script>
 
-    </body>
-  </html>
+<!-- JavaScript for Toggle Functionality -->
+<script>
+    function toggleCategoryMenu() {
+        const menu = document.getElementById('category-menu');
+        menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+    }
+
+    // Toggle subcategories
+    function toggleSubMenu(element) {
+        const subMenu = element.parentElement.querySelector('.sub-category');
+        subMenu.style.display = (subMenu.style.display === 'none' || subMenu.style.display === '') ? 'block' : 'none';
+
+        // Change arrow direction
+        element.textContent = (subMenu.style.display === 'block') ? '▼' : '▶';
+    }
+</script>
+
+<!-- HERO SECTION START -->
+<section class="hero">
+    <div class="container">
+        <h1>Top Industrial Equipment for Your Business</h1>
+        <p>We provide high-quality industrial machinery, tools, and safety gear for manufacturers, construction companies, and B2B vendors.</p>
+    </div>
+</section>
+<!-- HERO SECTION END -->
+
+<!-- PRODUCT SECTION START -->
+<div class="container">
+    <h2>Featured Products</h2>
+    <!-- Product cards go here -->
+</div>
+
+<!-- FOOTER START -->
+<footer>
+    <!-- Footer content goes here -->
+</footer>
+<!-- FOOTER END -->
+
+</body>
+
+</html>
