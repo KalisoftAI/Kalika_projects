@@ -25,7 +25,8 @@ def connect_db():
         host='localhost',
         database='postgres',
         user='postgres',
-        password='komal17'
+        password='Vikas@1992'
+
     )
 
 
@@ -35,6 +36,7 @@ def connect_db():
 def index():
     return render_template('index.html')
 
+@app.route('/products')
 def products():
     conn = connect_db()
     cur = conn.cursor()
@@ -64,16 +66,16 @@ def search_products():
     
     return jsonify([])
 
-# Route for displaying products
-@app.route('/')
-def products():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT Product_Title as name, Product_Description as description, Price as price, image_url FROM kalika_catalog LIMIT 10;')
-    products = cur.fetchall()
-    cur.close()
-    conn.close()
-    return render_template('products.html', products=products)
+# # Route for displaying products
+# @app.route('/')
+# def products():
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+#     cur.execute('SELECT Product_Title as name, Product_Description as description, Price as price, image_url FROM kalika_catalog LIMIT 10;')
+#     products = cur.fetchall()
+#     cur.close()
+#     conn.close()
+#     return render_template('products.html', products=products)
 
 # Route for about us page
 @app.route('/about')
