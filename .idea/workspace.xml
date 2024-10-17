@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Deployment.md" beforeDir="false" afterPath="$PROJECT_DIR$/Deployment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +90,21 @@
       <option name="project" value="LOCAL" />
       <updated>1729175253785</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Deployment doc updated">
+      <created>1729175369847</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729175369847</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Deployment doc updated">
+      <created>1729175499444</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1729175499444</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -110,9 +126,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="Deployment doc updated" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729175371595">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729175500786">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729175371595" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729175500786" />
   </component>
 </project>

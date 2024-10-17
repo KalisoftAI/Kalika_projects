@@ -1,3 +1,4 @@
+### Steps to deploy flask website with nginx and postgres in ec2
 
 ### Step 1: Launch an EC2 Instance
 
