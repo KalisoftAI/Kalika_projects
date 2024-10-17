@@ -65,8 +65,8 @@ GRANT ALL PRIVILEGES ON DATABASE flaskdb TO flaskuser;
 ### Step 4: Install Flask and Dependencies
 
 1. Install Required Packages:
-    bash
-    <code>sudo apt install python3-pip python3-dev nginx curl<code>
+bash
+<code>sudo apt install python3-pip python3-dev nginx curl</code>
 
 2. Set Up a Virtual Environment:
     1. sudo apt install python3-venv
@@ -82,21 +82,23 @@ GRANT ALL PRIVILEGES ON DATABASE flaskdb TO flaskuser;
 <code>pip install -r requirements.txt</code>
 
 ### Step 5: Set Up Gunicorn
+
 1. Install Gunicorn:
 
 bash
 
-pip install gunicorn
+<code>pip install gunicorn</code>
 
 Test Gunicorn with Your Flask App (replace app with your Flask app name):
 bash
-gunicorn --bind 0.0.0.0:8000 app:app
+<code>gunicorn --bind 0.0.0.0:8000 app:app</code>
 
 
 Step 6: Configure Nginx
 Create Nginx Configuration File:
+
 bash
-sudo nano /etc/nginx/sites-available/flask-todos
+<code>sudo nano /etc/nginx/sites-available/flask-todos</code>
 
 Add Configuration:
 Replace server_name with your EC2 public DNS:
@@ -116,6 +118,7 @@ server {
     }
 }
 </code>
+
 Enable the Configuration:
 
 bash
@@ -124,7 +127,6 @@ bash
 Test Nginx Configuration:
 
 bash
-
 <code>sudo nginx -t</code>
 
 Restart Nginx:
