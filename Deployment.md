@@ -94,7 +94,7 @@ bash
 <code>gunicorn --bind 0.0.0.0:8000 app:app</code>
 
 
-Step 6: Configure Nginx
+### Step 6: Configure Nginx
 Create Nginx Configuration File:
 
 bash
