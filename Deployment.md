@@ -26,7 +26,7 @@
 
     bash
 
-    <code>chmod 400 path_to_key_pair/flask-todos.pem<code>
+    <code>chmod 400 path_to_key_pair/flask-todos.pem</code>
 
 3. SSH into the Instance:
 
@@ -35,7 +35,7 @@
     <code>ssh -i path_to_key_pair/flask-todos.pem ubuntu@your-instance-public-ipv4-dns-address</code>
 
 
-###Step 3: Set Up PostgreSQL
+### Step 3: Set Up PostgreSQL
 1. Install PostgreSQL:
     1. <code>sudo apt update</code>
 
