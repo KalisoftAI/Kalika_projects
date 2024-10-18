@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ category }} Products - Kalika eCommerce</title>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<h1>{{ category }} Products</h1>
+
+<div class="product-grid">
+    {% for product in products %}
+        <div class="product-card">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <span class="price">{{ product.price }}</span>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    {% endfor %}
+</div>
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>
