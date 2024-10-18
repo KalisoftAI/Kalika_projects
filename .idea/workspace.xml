@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +51,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="TF_FMT" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kalika_ecommerce_junk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -138,7 +137,21 @@
       <option name="project" value="LOCAL" />
       <updated>1729261886533</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="updated with new code">
+      <created>1729265332270</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1729265332270</updated>
+    </task>
+    <task id="LOCAL-00012" summary="updated with new code">
+      <created>1729265359559</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1729265359559</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -159,17 +172,18 @@
     <MESSAGE value="Deployment doc updated" />
     <MESSAGE value="Index pages cart &amp; login with search issues resolved" />
     <MESSAGE value="New categories and subcategories working updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="New categories and subcategories working updated" />
+    <MESSAGE value="updated with new code" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated with new code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="422" y="91" key="FileChooserDialogImpl" timestamp="1729263030812">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1729263030812" />
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729261888764">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729265361225">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729261888764" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729265361225" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
