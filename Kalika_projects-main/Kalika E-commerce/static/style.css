@@ -1,366 +1,308 @@
-/* General Styles */
 
-body, html {
+/* Global Styles */
+body,html {
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Nunito', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f8f9fa;
   color: #333;
 }
 
+
 .container {
-  width: 85%;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+body {
+  font-family: 'Open Sans', sans-serif;
 }
 
-a {
-  text-decoration: none;
-  color: #02060a;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Header */
-header {
-  background-color: white;
-  padding: 1rem 0;
-  color: rgb(7, 0, 0);
-}
-
-.header .logo a {
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 .navbar {
   display: flex;
-  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  
+  
+}
 
+.navbar-logo img {
+  height: 50px;
 }
 
 .navbar-nav {
-  list-style: none;
+  list-style-type: none;
   display: flex;
-  gap: 2rem;
-
+  margin: 0;
 }
 
 .navbar-nav li {
-  list-style: none;
+  position: relative;
+  margin-right: 20px;
 }
 
 .navbar-nav a {
-  color: rgb(0, 4, 10);
-  font-weight: 600;
+  color: #041347;
+  text-decoration: none;
+  padding: 5px 10px;
 }
 
-.dropdown-menu {
+.navbar-nav > li > a {
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+/* Hide dropdown menus initially */
+.dropdown-menu, .dropdown-submenu {
   display: none;
   position: absolute;
-  background-color: #2a8bf3;
+  top: 100%; /* Aligns the submenu below the parent */
+  left: 0; /* For the main dropdown, left aligned */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  z-index: 1000;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+/* Show submenu to the right of the parent */
+.dropdown-submenu {
+  top: 0; /* Keep at same height */
+  left: 100%; /* Shift to the right of parent item */
+}
+
+/* Styling for individual menu items */
+.dropdown-menu li, .dropdown-submenu li {
+  padding: 2px;
+  width: 270px;
+}
+
+.dropdown-menu li a, .dropdown-submenu li a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Hover behavior to display dropdowns */
+.navbar-nav li:hover > .dropdown-menu,
+.dropdown-menu li:hover > .dropdown-submenu {
+  display: block; /* Show the dropdown on hover */
+}
+
+/* Hover styling for links */
+.dropdown-menu li a:hover, .dropdown-submenu li a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #08034e;
+  border-radius: 5px;
+}
+
+.btn-login {
+  color: #041347;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.btn-login:hover {
+  background-color: #fff;
   color: #333;
 }
 
-
-.header-actions a {
-  color: rgb(1, 4, 8);
-  background-color: #007bff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  margin-left: 1rem;
-}
-
-.header-actions a:hover {
-  background-color: #052950;
-}
-   /* Hero Section */
-.hero {
-  background: url('image/banner.jpg') no-repeat center center/cover;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+ /* Hero Section Styles */
+ .hero {
+  background-image: url('image/banner.jpg'); /* Update with your hero image */
+  background-size: cover;
+  color: #ffffff;
+  padding: 50px 20px;
   text-align: center;
-  color: rgb(247, 240, 240);
 }
 
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
 .hero p {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 1.25rem;
 }
 
-.hero .btn-primary {
-  background-color: #28a745;
-  padding: 1rem 2rem;
-}
-
-.hero .btn-primary:hover {
-  background-color: #218838;
-}
-/* General Section Styling */
-.py-5 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-/* Container Styling */
-.container-lg {
-  max-width: 1140px;
-  margin: 0 auto;
-}
-/* Swiper Buttons Styling */
-.swiper-buttons {
-  display: flex;
-  align-items: center;
-}
-
-.swiper-prev, .swiper-next {
-  font-size: 1.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 50%;
-  background-color: #ffc107;
-  color: #f7f7fa;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.swiper-prev:hover, .swiper-next:hover {
-  background-color: #e0a800;
-}
-
-/* Swiper Category Carousel */
+/* Category Section Styles */
 .category-carousel {
   display: flex;
-  overflow: hidden;
-  margin: 2rem 0;
+  overflow: auto;
+  padding: 20px auto;
 }
-
 .swiper-wrapper {
   display: flex;
+  padding:  10px;
+  margin: 0 auto;
 }
-
-.swiper-slide {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 200px;
-  margin: 0 1rem;
-  transition: transform 0.3s ease;
+.swiper-wrapper a{
+  padding: 15px;
 }
-
-.swiper-slide img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-}
-
-.swiper-slide img:hover {
-  transform: scale(1.05);
-}
-
-.category-title {
-  margin-top: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #333;
-}
-/* Section Header */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .section-title {
   font-size: 2rem;
   font-weight: 700;
   color: #333;
-}
-
-.btn {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-yellow {
-  background-color: #ffc107;
-  color: white;
-}
-
-.btn-yellow:hover {
-  background-color: #e0a800;
-}
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-  .section-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .swiper-prev, .swiper-next {
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  .swiper-slide {
-    min-width: 120px;
-  }
-
-  .swiper-slide img {
-    width: 100px;
-    height: 100px;
-  }
-
-  .category-title {
-    font-size: 0.875rem;
-  }
-}
-
-/* Products Section */
-.products {
-  padding: 3rem 0;
-}
-
-.products h2 {
   text-align: center;
-  margin-bottom: 2rem;
+}
+.category-carousel .swiper-slide {
+  margin: 0 10px;
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.category-carousel img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.category-title {
+  font-size: 1rem;
+  margin-top: 10px auto;
+  text-align: center;
+}
+
+/* Product Section Styles */
+.products {
+  padding: 40px 0;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1.5fr));
+  gap: 30px;
 }
 
 .product-card {
-  background-color: white;
+  background-color: #ffffff;
   border: 1px solid #ddd;
-  padding: 1.5rem;
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.2s;
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
+  transform: scale(1.05);
 }
 
 .product-card img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  margin-bottom: 1rem;
 }
 
 .product-info h3 {
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.product-info .price {
-  color: #28a745; font-size: 1.25rem; margin: 1rem 0; }
-
-  .product-actions { display: flex; justify-content: space-between; gap: 1rem; }
-
-  .btn-secondary { background-color: #ffc107; padding: 0.75rem 1.5rem; color: white; border: none; cursor: pointer; border-radius: 5px; transition: background-color 0.3s ease-in-out; }
-
-  .btn-secondary
-  { background-color: #e0a800; }
-
-  /* Style for the search bar */
-#search-bar {
-  margin: 20px;
-  padding: 10px;
-  font-size: 16px;
-  width: 300px;
-}
-
-/* Style for the suggestions list */
-#suggestions {
-  list-style-type: none;
-  padding: 0;
   margin: 10px 0;
-  width: 300px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
 }
 
-#suggestions li {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+.product-info p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.price {
+  font-size: 1.25rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.product-actions {
+  margin-top: 15px;
+}
+
+.add-to-cart {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-#suggestions li:hover {
-  background-color: #f0f0f0;
+.add-to-cart:hover {
+  background-color: #0056b3;
 }
 
 
-### category and sub
+/* Footer Styles */
+footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 30px 0;
+  text-align: center;
+}
 
-### end of test code for categroy and sub
+.footer-columns {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
 
+.footer-column {
+  flex: 1;
+  padding: 10px;
+}
 
-/* Footer */ footer { background-color: #343a40; color: white; padding: 2rem 0; }
+.footer-column h4 {
+  margin-bottom: 15px;
+}
 
-.footer-columns { display: flex; justify-content: space-between; gap: 2rem; }
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
 
-.footer-column h4 { font-size: 1.5rem; margin-bottom: 1rem; }
+.footer-column ul li {
+  margin-bottom: 10px;
+}
 
-.footer-column ul { list-style: none; padding: 0; }
+.footer-column a {
+  color: #ffffff;
+  text-decoration: none;
+}
 
-.footer-column ul li { margin-bottom: 0.5rem; }
+.footer-column input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+}
 
-.footer-column ul li a { color: #adb5bd; }
+.btn-secondary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
 
-.footer-column ul li a
-{ color: white; }
-
-.footer-bottom { text-align: center; margin-top: 2rem; border-top: 1px solid #555; padding-top: 1rem; }
-
-input[type="email"] { padding: 0.75rem; border-radius: 5px; border: none; margin-right: 0.5rem; }
-
-input[type="email"]::placeholder { color: #666; }
-
-/* Responsive Styles */ @media (max-width: 768px) { .navbar, .footer-columns { flex-direction: column; align-items: center; }
-
-.product-grid { grid-template-columns: 1fr; } }
-
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
