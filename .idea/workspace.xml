@@ -20,15 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/category.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index_test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/subcategory.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/KALIKA_vikas.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/KALIKA_vikas.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729184704992</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="New categories and subcategories working updated">
+      <created>1729191531362</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729191531362</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,13 +147,14 @@
     <MESSAGE value="directory root tree  path updated" />
     <MESSAGE value="Deployment doc updated" />
     <MESSAGE value="Index pages cart &amp; login with search issues resolved" />
-    <option name="LAST_COMMIT_MESSAGE" value="Index pages cart &amp; login with search issues resolved" />
+    <MESSAGE value="New categories and subcategories working updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="New categories and subcategories working updated" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729184707155">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729191852529">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729184707155" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729191852529" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
