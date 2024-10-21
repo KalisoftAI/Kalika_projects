@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            text-align: center;
+            display: none;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #007BFF;
+        }
+
+        .toggle-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <h2>Login</h2>
+        <form id="form">
+            <label for="email-mobile">Email/Mobile Number</label>
+            <input type="text" id="email-mobile" name="email-mobile" placeholder="Enter your email or mobile number" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+            <p id="error-message" class="error"></p>
+        </form>
+        <!-- Link to registration page -->
+        <p class="toggle-link">Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+
+    <script>
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const form = document.getElementById('form');
+        const errorMessage = document.getElementById('error-message');
+
+        // Function to handle form submission for login
+        function handleLogin(event) {
+            event.preventDefault();
+            const emailOrMobile = document.getElementById("email-mobile").value;
+            const password = document.getElementById("password").value;
+
+            const user = users.find(u => 
+                (u.email === emailOrMobile || u.mobile === emailOrMobile) && u.password === password
+            );
+            if (user) {
+                alert("Login successful!");
+                // Redirect or proceed to the next step here
+                window.location.href = "index.html"; // Replace with your redirect page
+            } else {
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Invalid email/mobile number or password!";
+            }
+        }
+
+        // Initial event listener for login
+        form.addEventListener('submit', handleLogin);
+    </script>
+</body>
+</html>

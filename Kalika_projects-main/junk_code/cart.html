@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Shopping Cart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Product Listing Section */
+        .products {
+            width: 60%;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product p {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .product button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product button:hover {
+            background-color: #218838;
+        }
+
+        /* Cart Section */
+        .cart {
+            width: 35%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: auto;
+        }
+
+        .cart h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+
+        td {
+            color: #555;
+        }
+
+        .remove {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove:hover {
+            background-color: #c82333;
+        }
+
+        .cart-total {
+            font-size: 1.5em;
+            text-align: right;
+            padding: 10px 0;
+            color: #333;
+        }
+
+        .quantity-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-control button:hover {
+            background-color: #138496;
+        }
+
+        .quantity-control input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 5px;
+            font-size: 1em;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+
+    <div class="container">
+        <!-- Products Section -->
+        <div class="products">
+            <div class="product">
+                <p>Product 1</p>
+                <button class="add-to-cart" data-id="1" data-name="Product 1" data-price="100">Add to Cart</button>
+            </div>
+            <div class="product">
+                <p>Product 2</p>
+                <button class="add-to-cart" data-id="2" data-name="Product 2" data-price="150">Add to Cart</button>
+            </div>
+            <div class="product">
+                <p>Product 3</p>
+                <button class="add-to-cart" data-id="3" data-name="Product 3" data-price="200">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Cart Section -->
+        <div class="cart">
+            <h2>Your Cart</h2>
+            <table id="cart-items">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <div class="cart-total">
+                Total: Rs. <span id="total-amount">0</span>
+            </div>
+            <a href="checkout.html" class="checkout-btn">Proceed to Checkout
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        const cart = [];
+
+        document.addEventListener('click', function(e) {
+            // Add to Cart Button Clicked
+            if (e.target.classList.contains('add-to-cart')) {
+                const id = e.target.getAttribute('data-id');
+                const name = e.target.getAttribute('data-name');
+                const price = parseFloat(e.target.getAttribute('data-price'));
+
+                addToCart(id, name, price);
+                updateCart();
+            }
+
+            // Remove from Cart Button Clicked
+            if (e.target.classList.contains('remove-from-cart')) {
+                const id = e.target.getAttribute('data-id');
+                removeFromCart(id);
+                updateCart();
+            }
+        });
+
+        function addToCart(id, name, price) {
+            const existingProduct = cart.find(product => product.id === id);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+        }
+
+        function removeFromCart(id) {
+            const productIndex = cart.findIndex(product => product.id === id);
+            if (productIndex > -1) {
+                if (cart[productIndex].quantity > 1) {
+                    cart[productIndex].quantity -= 1;
+                } else {
+                    cart.splice(productIndex, 1);
+                }
+            }
+        }
+
+        function updateCart() {
+            const cartItemsTable = document.querySelector('#cart-items tbody');
+            cartItemsTable.innerHTML = ''; // Clear current cart display
+
+            let totalAmount = 0;
+
+            cart.forEach(product => {
+                const row = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = product.name;
+                row.appendChild(nameCell);
+
+                const priceCell = document.createElement('td');
+                priceCell.textContent = `Rs. ${product.price}`;
+                row.appendChild(priceCell);
+
+                const quantityCell = document.createElement('td');
+                const quantityControl = document.createElement('div');
+                quantityControl.classList.add('quantity-control');
+
+                const minusButton = document.createElement('button');
+                minusButton.textContent = '-';
+                minusButton.setAttribute('data-id', product.id);
+                minusButton.onclick = function() {
+                    removeFromCart(product.id);
+                    updateCart();
+                };
+                quantityControl.appendChild(minusButton);
+
+                const quantityInput = document.createElement('input');
+                quantityInput.type = 'text';
+                quantityInput.value = product.quantity;
+                quantityInput.readOnly = true;
+                quantityControl.appendChild(quantityInput);
+
+                const plusButton = document.createElement('button');
+                plusButton.textContent = '+';
+                plusButton.setAttribute('data-id', product.id);
+                plusButton.onclick = function() {
+                    addToCart(product.id, product.name, product.price);
+                    updateCart();
+                };
+                quantityControl.appendChild(plusButton);
+
+                quantityCell.appendChild(quantityControl);
+                row.appendChild(quantityCell);
+
+                const removeCell = document.createElement('td');
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('remove-from-cart');
+                removeButton.setAttribute('data-id', product.id);
+                removeButton.textContent = 'Remove';
+                removeCell.appendChild(removeButton);
+                row.appendChild(removeCell);
+
+                cartItemsTable.appendChild(row);
+
+                totalAmount += product.price * product.quantity;
+            });
+
+            document.querySelector('#total-amount').textContent = totalAmount;
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+</head>
+<body>
+
+<h2>Your Cart</h2>
+<ul id="cart-items"></ul>
+
+<script>
+// Retrieve cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Function to display cart items
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<li>Your cart is empty.</li>';
+        return;
+    }
+
+    // Clear previous items
+    cartItemsContainer.innerHTML = '';
+
+    // Loop through each item and create list elements
+    cart.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.name} - Quantity: ${item.quantity} - Price: RS.${item.price}`;
+        cartItemsContainer.appendChild(listItem);
+    });
+}
+
+// Call display function on page load
+displayCart();
+</script>
+
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .item-details {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .item-info {
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+        .remove-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .remove-button:hover {
+            background-color: #c0392b;
+        }
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .empty-cart {
+            text-align: center;
+            font-style: italic;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div class="total" id="total-amount">Total Amount: RS. 0</div>
+</div> -->
+
+<!-- <script>
+// Retrieve cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Function to display cart items
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const totalAmountContainer = document.getElementById('total-amount');
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty.</div>';
+        totalAmountContainer.textContent = 'Total Amount: RS. 0';
+        return;
+    }
+
+    // Clear previous items
+    cartItemsContainer.innerHTML = '';
+
+    let totalAmount = 0;
+
+    // Loop through each item and create cart item elements
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+
+        const itemDetails = document.createElement('div');
+        itemDetails.className = 'item-details';
+        itemDetails.innerHTML = `
+            <div class="item-info">
+                <strong>${item.name}</strong><br>
+                Quantity: ${item.quantity}<br>
+                Price: RS.${item.price}
+            </div>
+        `;
+
+        // Create remove button
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.className = 'remove-button';
+        removeButton.onclick = () => removeItem(index); // Set remove function on click
+
+        itemDetails.appendChild(removeButton);
+        itemDiv.appendChild(itemDetails);
+        cartItemsContainer.appendChild(itemDiv);
+
+        // Update total amount
+        totalAmount += item.price * item.quantity;
+    });
+
+    // Update total amount display
+    totalAmountContainer.textContent = `Total Amount: RS. ${totalAmount}`;
+}
+
+// Function to remove item from cart
+function removeItem(index) {
+    cart.splice(index, 1); // Remove item from the array
+    localStorage.setItem('cart', JSON.stringify(cart)); // Update local storage
+    displayCart(); // Refresh the cart display
+}
+
+<!--// Call display function on page load-->
+<!--displayCart();-->
+<!--</script> &ndash;&gt;-->
+<!--&lt;!&ndash; <script>-->
+<!--    // Retrieve cart from localStorage-->
+<!--    let cart = JSON.parse(localStorage.getItem('cart')) || [];-->
+<!--    -->
+<!--    // Function to display cart items-->
+<!--    function displayCart() {-->
+<!--        const cartItemsContainer = document.getElementById('cart-items');-->
+<!--        const totalAmountContainer = document.getElementById('total-amount');-->
+<!--    -->
+<!--        if (cart.length === 0) {-->
+<!--            cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty.</div>';-->
+<!--            totalAmountContainer.textContent = 'Total Amount: RS. 0';-->
+<!--            return;-->
+<!--        }-->
+<!--    -->
+<!--        // Clear previous items-->
+<!--        cartItemsContainer.innerHTML = '';-->
+<!--    -->
+<!--        let totalAmount = 0;-->
+<!--    -->
+<!--        // Loop through each item and create cart item elements-->
+<!--        cart.forEach((item, index) => {-->
+<!--            const itemDiv = document.createElement('div');-->
+<!--            itemDiv.className = 'cart-item';-->
+<!--    -->
+<!--            const itemDetails = document.createElement('div');-->
+<!--            itemDetails.className = 'item-details';-->
+<!--            itemDetails.innerHTML = `-->
+<!--                <div class="item-info">-->
+<!--                    <strong>${item.name}</strong><br>-->
+<!--                    Quantity: ${item.quantity}<br>-->
+<!--                    Price: RS.${item.price}-->
+<!--                </div>-->
+<!--            `;-->
+<!--    -->
+<!--            // Create remove button-->
+<!--            const removeButton = document.createElement('button');-->
+<!--            removeButton.textContent = 'Remove';-->
+<!--            removeButton.className = 'remove-button';-->
+<!--            removeButton.onclick = () => removeItem(index); // Set remove function on click-->
+<!--    -->
+<!--            itemDetails.appendChild(removeButton);-->
+<!--            itemDiv.appendChild(itemDetails);-->
+<!--            cartItemsContainer.appendChild(itemDiv);-->
+<!--    -->
+<!--            // Update total amount-->
+<!--            totalAmount += item.price * item.quantity;-->
+<!--        });-->
+<!--    -->
+<!--        // Update total amount display-->
+<!--        totalAmountContainer.textContent = `Total Amount: RS. ${totalAmount}`;-->
+<!--    }-->
+<!--    -->
+<!--    // Function to remove item from cart-->
+<!--    function removeItem(index) {-->
+<!--        cart.splice(index, 1); // Remove item from the array-->
+<!--        localStorage.setItem('cart', JSON.stringify(cart)); // Update local storage-->
+<!--        displayCart(); // Refresh the cart display-->
+<!--    }-->
+<!--    -->
+<!--    // Add event listeners to "Add to Cart" buttons-->
+<!--    document.querySelectorAll('.add-to-cart').forEach(button => {-->
+<!--        button.addEventListener('click', () => {-->
+<!--            const id = button.getAttribute('data-id');-->
+<!--            const name = button.getAttribute('data-name');-->
+<!--            const price = parseFloat(button.getAttribute('data-price'));-->
+<!--    -->
+<!--            // Check if the item is already in the cart-->
+<!--            const existingItemIndex = cart.findIndex(item => item.id === id);-->
+<!--    -->
+<!--            if (existingItemIndex > -1) {-->
+<!--                // Update quantity if it exists-->
+<!--                cart[existingItemIndex].quantity += 1;-->
+<!--            } else {-->
+<!--                // Add new item if it doesn't exist-->
+<!--                cart.push({ id, name, price, quantity: 1 });-->
+<!--            }-->
+<!--    -->
+<!--            // Save cart to localStorage-->
+<!--            localStorage.setItem('cart', JSON.stringify(cart));-->
+<!--    -->
+<!--            // Refresh cart display-->
+<!--            displayCart();-->
+<!--        });-->
+<!--    });-->
+<!--    -->
+<!--    // Call display function on page load-->
+<!--    displayCart();-->
+<!--    </script>-->
+
+</body>
+</html> -->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Your Cart</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f4f4f4;-->
+<!--            color: #333;-->
+<!--        }-->
+<!--        .container {-->
+<!--            width: 80%;-->
+<!--            margin: auto;-->
+<!--            background: #fff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 2px 10px rgba(0,0,0,0.1);-->
+<!--        }-->
+<!--        h2 {-->
+<!--            text-align: center;-->
+<!--            color: #007BFF;-->
+<!--        }-->
+<!--        #user-personalization {-->
+<!--            text-align: center;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        #cart-items {-->
+<!--            list-style-type: none;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        #cart-items li {-->
+<!--            margin-bottom: 15px;-->
+<!--            padding: 15px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 5px;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--        }-->
+<!--        .product-image {-->
+<!--            width: 80px;-->
+<!--            height: auto;-->
+<!--            margin-right: 15px;-->
+<!--        }-->
+<!--        .product-info {-->
+<!--            flex-grow: 1;-->
+<!--        }-->
+<!--        .btn {-->
+<!--            background-color: #007BFF;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 15px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--        .btn:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--        .logout-btn {-->
+<!--            background-color: #FF4D4D;-->
+<!--        }-->
+<!--        .logout-btn:hover {-->
+<!--            background-color: #c70000;-->
+<!--        }-->
+<!--        .quantity-btn {-->
+<!--            background-color: #28a745;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 5px 10px;-->
+<!--            margin: 0 5px;-->
+<!--            border-radius: 3px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--        .quantity-btn:hover {-->
+<!--            background-color: #218838;-->
+<!--        }-->
+<!--        .remove-btn {-->
+<!--            background-color: #dc3545;-->
+<!--            margin-left: 10px;-->
+<!--        }-->
+<!--        .remove-btn:hover {-->
+<!--            background-color: #c82333;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <h2>Your Cart</h2>-->
+
+<!--    <div id="user-personalization">-->
+<!--        <label for="user-name">Enter your name:</label>-->
+<!--        <input type="text" id="user-name" placeholder="Your Name" />-->
+<!--        <button class="btn" id="save-name">Save Name</button>-->
+<!--    </div>-->
+
+<!--    <ul id="cart-items"></ul>-->
+
+<!--    <a href="index.html" class="btn">Continue Shopping</a>-->
+<!--    <a href="setup.php" class="btn">Checkout</a>-->
+<!--    <button class="btn logout-btn" id="logout">Logout</button>-->
+<!--</div>-->
+
+<script>
+// Retrieve cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Function to display user name
+function displayUserName() {
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+        document.getElementById('user-personalization').innerHTML = `<h3>Welcome, ${userName}!</h3>`;
+    }
+}
+
+// Function to update the cart in localStorage and re-render the display
+function updateCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCart();
+}
+
+// Function to display cart items
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<li>Your cart is empty.</li>';
+        return;
+    }
+
+    // Clear previous items
+    cartItemsContainer.innerHTML = '';
+
+    // Loop through each item and create list elements
+    cart.forEach((item, index) => {
+        const listItem = document.createElement('li');
+
+        // Create product image element
+        const productImage = document.createElement('img');
+        productImage.src = `images/${item.name.replace(/\s+/g, '_').toLowerCase()}.jpg`;
+        productImage.alt = item.name;
+        productImage.classList.add('product-image');
+
+        // Create product info element
+        const productInfo = document.createElement('div');
+        productInfo.classList.add('product-info');
+        productInfo.innerHTML = `${item.name} - Quantity: ${item.quantity} - Price: RS.${item.price}`;
+
+        // Create buttons to increase/decrease quantity
+        const increaseButton = document.createElement('button');
+        increaseButton.classList.add('quantity-btn');
+        increaseButton.textContent = '+';
+        increaseButton.addEventListener('click', () => {
+            cart[index].quantity += 1;
+            updateCart();
+        });
+
+        const decreaseButton = document.createElement('button');
+        decreaseButton.classList.add('quantity-btn');
+        decreaseButton.textContent = '-';
+        decreaseButton.addEventListener('click', () => {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                cart.splice(index, 1); // Remove item if quantity is 0
+            }
+            updateCart();
+        });
+
+        // Create remove button
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('remove-btn');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => {
+            cart.splice(index, 1); // Remove item from cart
+            updateCart();
+        });
+
+        // Append image, info, and buttons to list item
+        listItem.appendChild(productImage);
+        listItem.appendChild(productInfo);
+        listItem.appendChild(increaseButton);
+        listItem.appendChild(decreaseButton);
+        listItem.appendChild(removeButton);
+
+        cartItemsContainer.appendChild(listItem);
+    });
+}
+
+// Function to clear the cart and logout
+function logout() {
+    localStorage.removeItem('cart');
+    localStorage.removeItem('userName');
+    alert("You have been logged out.");
+    window.location.href = "index.html";
+}
+
+// Event listener for logout button
+document.getElementById('logout').addEventListener('click', logout);
+
+// Call functions on page load
+displayUserName();
+displayCart();
+</script>
+
+<!--</body>-->
+<!--</html>-->

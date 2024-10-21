@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+        #user-personalization {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        #cart-items li {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .product-image {
+            width: 80px;
+            height: auto;
+            margin-right: 15px;
+        }
+        .product-info {
+            flex-grow: 1;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .logout-btn {
+            background-color: #FF4D4D;
+        }
+        .logout-btn:hover {
+            background-color: #c70000;
+        }
+        .quantity-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .quantity-btn:hover {
+            background-color: #218838;
+        }
+        .remove-btn {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Your Cart</h2>
+
+<!--    <div id="user-personalization">-->
+<!--        <label for="user-name">Enter your name:</label>-->
+<!--        <input type="text" id="user-name" placeholder="Your Name" />-->
+<!--        <button class="btn" id="save-name">Save Name</button>-->
+<!--    </div>-->
+
+    <ul id="cart-items">
+        <!-- Example cart item -->
+        <li data-product-id="1" data-name="Product 1" data-price="29.99">
+            Product 1 - $29.99 <input type="number" value="1" min="1" class="quantity" />
+        </li>
+        <!-- Add more items dynamically -->
+    </ul>
+    <a href="index.html" class="btn">Continue Shopping</a>
+    <button class="btn" id="checkout">Checkout</button>
+    <button class="btn logout-btn" id="logout">Logout</button>
+</div>
+
+
+<script>
+// Retrieve cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Function to display user name
+function displayUserName() {
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+        document.getElementById('user-personalization').innerHTML = `<h3>Welcome, ${userName}!</h3>`;
+    }
+}
+
+// Function to update the cart in localStorage and re-render the display
+function updateCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCart();
+}
+
+// Function to display cart items
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<li>Your cart is empty.</li>';
+        return;
+    }
+
+    // Clear previous items
+    cartItemsContainer.innerHTML = '';
+
+    // Loop through each item and create list elements
+    cart.forEach((item, index) => {
+        const listItem = document.createElement('li');
+
+        // Create product image element
+        const productImage = document.createElement('img');
+        productImage.src = `images/${item.name.replace(/\s+/g, '_').toLowerCase()}.jpg`;
+        productImage.alt = item.name;
+        productImage.classList.add('product-image');
+
+        // Create product info element
+        const productInfo = document.createElement('div');
+        productInfo.classList.add('product-info');
+        productInfo.innerHTML = `${item.name} - Quantity: ${item.quantity} - Price: RS.${item.price}`;
+
+        // Create buttons to increase/decrease quantity
+        const increaseButton = document.createElement('button');
+        increaseButton.classList.add('quantity-btn');
+        increaseButton.textContent = '+';
+        increaseButton.addEventListener('click', () => {
+            cart[index].quantity += 1;
+            updateCart();
+        });
+
+        const decreaseButton = document.createElement('button');
+        decreaseButton.classList.add('quantity-btn');
+        decreaseButton.textContent = '-';
+        decreaseButton.addEventListener('click', () => {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                cart.splice(index, 1); // Remove item if quantity is 0
+            }
+            updateCart();
+        });
+
+        // Create remove button
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('remove-btn');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => {
+            cart.splice(index, 1); // Remove item from cart
+            updateCart();
+        });
+
+        // Append image, info, and buttons to list item
+        listItem.appendChild(productImage);
+        listItem.appendChild(productInfo);
+        listItem.appendChild(increaseButton);
+        listItem.appendChild(decreaseButton);
+        listItem.appendChild(removeButton);
+
+        cartItemsContainer.appendChild(listItem);
+    });
+}
+
+// Function to clear the cart and logout
+function logout() {
+    localStorage.removeItem('cart');
+    localStorage.removeItem('userName');
+    alert("You have been logged out.");
+    window.location.href = "index.html";
+}
+
+// Event listener for logout button
+document.getElementById('logout').addEventListener('click', logout);
+
+// Call functions on page load
+displayUserName();
+displayCart();
+</script>
+
+<!--after checkout order details are added in order db-->
+<script>
+document.getElementById('checkout').addEventListener('click', function() {
+    const cartItems = [];
+
+    document.querySelectorAll('#cart-items li').forEach(item => {
+        const productId = item.getAttribute('data-product-id');
+        const productName = item.getAttribute('data-name');
+        const price = item.getAttribute('data-price');
+        const quantity = item.querySelector('.quantity').value;
+
+        cartItems.push({
+            product_id: productId,
+            name: productName,
+            price: price,
+            quantity: quantity
+        });
+    });
+
+    const userId = document.getElementById('user-id').value;
+
+    fetch('/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cartItems, userId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // Handle success message
+        // Optionally redirect or update UI
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+
+
+<!--&lt;!&ndash; punchout after clicking checkout&ndash;&gt;-->
+<!--<script>-->
+<!--document.getElementById('checkout').addEventListener('click', function() {-->
+<!--    const cartItems = [];-->
+
+<!--    document.querySelectorAll('#cart-items li').forEach(item => {-->
+<!--        const productId = item.getAttribute('data-product-id');-->
+<!--        const productName = item.getAttribute('data-name');-->
+<!--        const price = item.getAttribute('data-price');-->
+<!--        const quantity = item.querySelector('.quantity').value;-->
+
+<!--        cartItems.push({-->
+<!--            product_id: productId,-->
+<!--            name: productName,-->
+<!--            price: price,-->
+<!--            quantity: quantity-->
+<!--        });-->
+<!--    });-->
+
+<!--    fetch('/punchout', {-->
+<!--        method: 'POST',-->
+<!--        headers: {-->
+<!--            'Content-Type': 'application/json'-->
+<!--        },-->
+<!--        body: JSON.stringify({ cartItems })-->
+<!--    })-->
+<!--    .then(response => response.text())-->
+<!--    .then(data => {-->
+<!--        console.log(data); // Handle the XML response here-->
+<!--        // You might want to display it or redirect to another page-->
+<!--    })-->
+<!--    .catch(error => console.error('Error:', error));-->
+<!--});-->
+<!--</script>-->
+
+</body>
+</html>
