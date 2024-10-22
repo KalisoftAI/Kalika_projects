@@ -13,6 +13,8 @@
     <!-- Link to CSS file -->
     <link rel="stylesheet" href="../static/style.css">
 
+    
+
     <!-- External Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -362,6 +364,7 @@
             <a href="cart.html" class="btn-login"> 
               <i class="fa fa-shopping-cart"></i> 
               (<span class="cart-count"></span>) 
+              
           </a>
           
             <a href="login.html" class="btn-login">
@@ -534,58 +537,9 @@
     </footer>
     <!-- FOOTER END -->
 
-
-  <script>
-// Retrieve cart from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// Function to add item to cart
-function addToCart(name, price) {
-    const existingItem = cart.find(item => item.name === name);
-
-    if (existingItem) {
-        existingItem.quantity += 1; // Increase quantity if already in cart
-    } else {
-        cart.push({ name, price, quantity: 1 }); // Add new item
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
-}
-
-// Event listener for "Add to Cart" buttons
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', function() {
-        const productName = this.getAttribute('data-name');
-        const productPrice = parseInt(this.getAttribute('data-price'));
-
-        addToCart(productName, productPrice); // Add product to cart
-    });
-});
-
-// Function to calculate and display the cart count
-function updateCartCount() {
-    const cartCountElement = document.querySelector('.cart-count');
+    <!-- Link to JS file -->
+    <script src="../static/js/script.js"></script>
     
-    // Calculate total quantity of items in the cart
-    let totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    
-    // Update the cart count in the HTML
-    cartCountElement.textContent = totalItems;
-}
-// Function to calculate and display the cart count
-function updateCartCount() {
-    const cartCountElement = document.querySelector('.cart-count');
-    
-    // Calculate total quantity of items in the cart
-    let totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    
-    // Update the cart count in the HTML
-    cartCountElement.textContent = totalItems;
-}
-
-// Call the function to display the count on page load
-updateCartCount();
-</script>
     </body>
 
 </html>
