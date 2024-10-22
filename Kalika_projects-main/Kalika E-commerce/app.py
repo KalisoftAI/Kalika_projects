@@ -1,73 +1,9 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
-import psycopg2
-from psycopg2.extras import RealDictCursor
 from punchout import *
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import psycopg2
-import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_bcrypt import Bcrypt
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for flashing messages
-
-# Initialize Bcrypt for password hashing
-bcrypt = Bcrypt(app)
-
-# Sample user data (in a real app, use a database)
-users = {
-    "admin": bcrypt.generate_password_hash("password123").decode('utf-8'),  # Hashed password
-}
-
-
-@app.route('/punchout', methods=['POST'])
-def punchout():
-    cart_items = request.json.get('cartItems', [])
-
-    # Create XML structure
-    punchout_order = ET.Element("PunchOutOrder")
-
-    for item in cart_items:
-        product_element = ET.SubElement(punchout_order, "Product")
-        ET.SubElement(product_element, "ProductID").text = str(item['product_id'])
-        ET.SubElement(product_element, "ProductName").text = item['name']
-        ET.SubElement(product_element, "Quantity").text = str(item['quantity'])
-        ET.SubElement(product_element, "Price").text = str(item['price'])
-
-    xml_str = ET.tostring(punchout_order, encoding='utf-8', method='xml').decode('utf-8')
-
-    # Return XML response
-    return xml_str, 200, {'Content-Type': 'application/xml'}
-
-
-# Other routes remain unchanged...
-
-
-
-# @app.route('/login_page')
-# def home():
-#     return render_template('login.html')  # Render the login form
-#
-#
-# @app.route('/login', methods=['POST'])
-# def login():
-#     username = request.form.get('username')
-#     password = request.form.get('password')
-#
-#     # Check if the username exists
-#     if username in users:
-#         # Verify the password against the stored hash
-#         if bcrypt.check_password_hash(users[username], password):
-#             flash("Welcome to the Kalika E-Commerce.")
-#             return redirect(url_for('dashboard'))
-#
-#     # If authentication fails
-#     flash("Invalid username or password. Please try again.")
-#     return redirect(url_for('home'))  # Redirect back to the login page
-#
 
 # Database connection
 def get_db_connection():
@@ -129,43 +65,11 @@ def home():
 #     return Response(xml_response, mimetype='application/xml')
 
 
-# Route for about us page
-@app.route('/about')
-def about():
-    return render_template('aboutus.html')
 
-    # Route for cart page
-#
-#
+# Route for cart page
 @app.route('/cart.html')
 def cart():
     return render_template('cart.html')
-
-
-
-
-# Route for contact us page
-@app.route('/contact.html')
-def contact():
-    return render_template('contactus.html')
-
-
-# Route for dashboard
-@app.route('/dashboard.html')
-def dashboard():
-    return render_template('dash.html')
-
-
-# Route for payment page
-@app.route('/payment.html')
-def payment():
-    return render_template('payment.html')
-
-
-# Route for register page
-@app.route('/register.html')
-def register():
-    return render_template('register.html')
 
 
 if __name__ == '__main__':

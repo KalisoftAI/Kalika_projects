@@ -20,29 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/db.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/rds_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/processPunchout.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/setup.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/aboutus.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/category.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/contactus.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/dash.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/faq.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index_test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/payment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/privacy.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/products.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/subcategory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/terms.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/test_cart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/old_app_with_punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/junk_code/old_app_with_punchout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +165,21 @@
       <option name="project" value="LOCAL" />
       <updated>1729278185973</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="checkout with punchout updated">
+      <created>1729531372778</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1729531372778</updated>
+    </task>
+    <task id="LOCAL-00015" summary="checkout with punchout updated">
+      <created>1729531481065</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1729531481065</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,20 +201,25 @@
     <MESSAGE value="Index pages cart &amp; login with search issues resolved" />
     <MESSAGE value="New categories and subcategories working updated" />
     <MESSAGE value="updated with new code" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated with new code" />
+    <MESSAGE value="checkout with punchout updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkout with punchout updated" />
   </component>
   <component name="WindowStateProjectService">
     <state x="269" y="15" key="#Inspections" timestamp="1729361730764">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="269" y="15" key="#Inspections/0.0.1280.672@0.0.1280.672" timestamp="1729361730764" />
+    <state x="371" y="137" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1729531162269">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="371" y="137" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.672@0.0.1280.672" timestamp="1729531162269" />
     <state x="422" y="91" key="FileChooserDialogImpl" timestamp="1729444359240">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1729444359240" />
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729278194821">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729531482643">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729278194821" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729531482643" />
   </component>
 </project>
