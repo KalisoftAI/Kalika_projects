@@ -55,3 +55,6 @@ document.getElementById('checkout').addEventListener('click', async () => {
 });
 
 fetchProducts();
+
+
+
