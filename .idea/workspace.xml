@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/db.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/rds_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/test_db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729531481065</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="DB with EC2 updated">
+      <created>1729628569111</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1729628569111</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,7 +208,8 @@
     <MESSAGE value="New categories and subcategories working updated" />
     <MESSAGE value="updated with new code" />
     <MESSAGE value="checkout with punchout updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkout with punchout updated" />
+    <MESSAGE value="DB with EC2 updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB with EC2 updated" />
   </component>
   <component name="WindowStateProjectService">
     <state x="269" y="15" key="#Inspections" timestamp="1729361730764">
@@ -217,9 +224,9 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1729444359240" />
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729531482643">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729628570662">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729531482643" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729628570662" />
   </component>
 </project>
