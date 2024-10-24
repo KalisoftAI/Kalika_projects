@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template
+from flask import Flask, redirect, url_for, render_template
 import psycopg2
 import os
 from flask import Flask, request, jsonify, render_template, send_from_directory
@@ -39,6 +39,10 @@ def products():
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/login')
+def login():
+
 
 # @app.route('/punchout', methods=['POST'])
 # def punchout_setup():

@@ -30,9 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (cartCountElement) { // Check if element exists
             let totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
             cartCountElement.textContent = totalItems;
-        } else {
-            console.error('Cart count element not found');
-        }
+            updateCartCount();
+        } 
     }
 
     // Function to display user name
@@ -123,10 +122,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 cartItemsContainer.appendChild(listItem);
             });
-        } else {
-            console.error("Cart items container not found");
-        }
-    }
+        } 
+        
+   }
 
     // Function to clear the cart and logout
     function logout() {
@@ -137,17 +135,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event listener for logout button
-    const logoutButton = document.getElementById('logout');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', logout);
-    } else {
-        console.error("Logout button not found");
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoutButton = document.getElementById('logout');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', logout);
+        } else {
+            console.warn("Logout button not found, no action will be taken.");
+        }
+
+        function logout() {
+            // Your logout logic here
+            console.log("Logging out...");
+        }
+    });
 
     // Call functions on page load
     displayUserName();
     updateCartCount();
     displayCart();
+    
 
     // Registration Logic
     function handleRegister(event) {
@@ -190,8 +196,36 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Registration successful! You can now log in.");
             window.location.href = "login.html"; // Redirect to login page
         }
+    
     }
 });
+
+
+
+const users = JSON.parse(localStorage.getItem('users')) || [];
+        const form = document.getElementById('form');
+        const errorMessage = document.getElementById('error-message');
+        // Function to handle form submission for login
+        function handleLogin(event) {
+            event.preventDefault();
+            const emailOrMobile = document.getElementById("email-mobile").value;
+            const password = document.getElementById("password").value;
+
+            const user = users.find(u => 
+                (u.email === emailOrMobile || u.mobile === emailOrMobile) && u.password === password
+            );
+            if (user) {
+                alert("Login successful!");
+                // Redirect or proceed to the next step here
+                window.location.href = "index.html"; // Replace with your redirect page
+            } else {
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Invalid email/mobile number or password!";
+            }
+        }
+
+        // Initial event listener for login
+        form.addEventListener('submit', handleLogin);
 
 
 
