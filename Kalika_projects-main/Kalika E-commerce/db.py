@@ -51,11 +51,31 @@ def create_orders_table():
         cursor = connection.cursor()
 
         # Create table query
-        create_table_query = ''' '''
+        create_table_query = ''' CREATE TABLE orders (
+                                order_id SERIAL PRIMARY KEY,                  -- Unique order ID
+                                customer_id INT NOT NULL,                     -- Reference to the customer who placed the order
+                                product_id INT NOT NULL,                      -- Reference to the product being ordered
+                                quantity INT NOT NULL CHECK (quantity > 0),   -- Quantity of the product
+                                price DECIMAL(10, 2) NOT NULL,                -- Price of the product at the time of order
+                                order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Date and time the order was placed
+                                status VARCHAR(50) DEFAULT 'Pending',         -- Order status (e.g., 'Pending', 'Shipped', 'Delivered')
+                                shipping_address TEXT,                        -- Shipping address for the order
+                                payment_method VARCHAR(50),                   -- Payment method (e.g., 'Credit Card', 'PayPal')
+                                payment_status VARCHAR(50) DEFAULT 'Unpaid',  -- Payment status (e.g., 'Paid', 'Unpaid')
+                                shipping_date TIMESTAMP,                      -- Date the order was shipped
+                                delivery_date TIMESTAMP,                      -- Date the order was delivered
+                                CONSTRAINT fk_customer
+                                    FOREIGN KEY (customer_id) 
+                                    REFERENCES customers(customer_id),        -- Foreign key to customers table
+                                CONSTRAINT fk_product
+                                    FOREIGN KEY (product_id) 
+                                    REFERENCES products(product_id)           -- Foreign key to products table
+                            );
+                            '''
 
         cursor.execute(create_table_query)
         connection.commit()
-        print("Table 'users' created successfully.")
+        print("Table 'orders' created successfully.")
 
     except Exception as error:
         print(f"Error creating table: {error}")
@@ -78,7 +98,7 @@ def initialize_connection():
         cursor = connection.cursor()
 
         # Grant permissions on the public schema
-        cursor.execute("\c {db_name}")
+        # cursor.execute("\c {db_name}")
         cursor.execute(f"GRANT USAGE ON SCHEMA public TO {db_user};")
         cursor.execute(f"GRANT CREATE ON SCHEMA public TO {db_user};")
         cursor.execute("GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO vikas;")
@@ -98,3 +118,4 @@ def initialize_connection():
 if __name__ == '__main__':
     initialize_connection()
     # insert_users_data('john_doe', 'john@example.com')
+    create_orders_table()
