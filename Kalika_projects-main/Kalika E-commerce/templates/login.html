@@ -85,7 +85,8 @@
 <body>
     <div class="container" id="container">
         <h2>Login</h2>
-        <form id="form">
+        <!-- <form id="form"> -->
+        <form id="form" method="POST" action="/login">
             <label for="email-mobile">Email/Mobile Number</label>
             <input type="text" id="email-mobile" name="email-mobile" placeholder="Enter your email or mobile number" required>
 
@@ -96,7 +97,7 @@
             <p id="error-message" class="error"></p>
         </form>
         <!-- Link to registration page -->
-        <p class="toggle-link">Don't have an account? <a href="register.html">Register here</a></p>
+        <p class="toggle-link">Don't have an account? <a href="register">Register here</a></p>
     </div>
 
     <script>
@@ -116,7 +117,7 @@
             if (user) {
                 alert("Login successful!");
                 // Redirect or proceed to the next step here
-                window.location.href = "index.html"; // Replace with your redirect page
+                window.location.href = "/"; // Replace with your redirect page
             } else {
                 errorMessage.style.display = "block";
                 errorMessage.textContent = "Invalid email/mobile number or password!";
