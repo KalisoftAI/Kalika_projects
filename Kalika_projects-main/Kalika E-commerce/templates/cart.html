@@ -90,14 +90,16 @@
     <h2>Your Cart</h2>
 
     <div id="user-personalization">
+        <form action="{{ url_for('cart') }}" method="POST">
         <label for="user-name">Enter your name:</label>
         <input type="text" id="user-name" placeholder="Your Name" />
         <button class="btn" id="save-name">Save Name</button>
+        </form>
     </div>
 
     <ul id="cart-items"></ul>
 
-    <a href="index.html" class="btn">Continue Shopping</a>
+    <a href="{{ url_for('home') }}" method="POST" class="btn">Continue Shopping</a>
     <a href="setup.php" class="btn">Checkout</a>
     <button class="btn logout-btn" id="logout">Logout</button>
 </div>

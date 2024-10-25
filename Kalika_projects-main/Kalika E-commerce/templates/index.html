@@ -35,44 +35,44 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="products.html" target="_blank">Safety</a>
+                        <a href="{{ url_for('products') }}" target="_blank">Safety</a>
                         <ul class="dropdown-submenu">
                             <li>
-                                <a href="products.html" target="_blank">Security</a>
+                                <a href="{{ url_for('products') }}" target="_blank">Security</a>
                                 <ul class="dropdown-submenu">
-                                    <li><a href="products.html" target="_blank">Lock</a></li>
+                                    <li><a href="{{ url_for('products') }}" target="_blank">Lock</a></li>
                                     <!-- Add more sub-subcategories if needed -->
                                 </ul>
                             </li>
-                            <li><a href="products.html" target="_blank">Antislip Product</a>
+                            <li><a href="{{ url_for('products') }}" target="_blank">Antislip Product</a>
                               <ul class="dropdown-submenu">
                                 <li><a href="products.html" target="_blank">Rubber Mat</a></li>
                                 <!-- Add more sub-subcategories if needed -->
                             </ul>
                             </li>
-                            <li><a href="products.html" target="_blank">Medical & Health Care</a>
+                            <li><a href="{{ url_for('products') }}" target="_blank">Medical & Health Care</a>
                               <ul class="dropdown-submenu">
-                                <li><a href="products.html" target="_blank">Barrier Cream</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Barrier Cream</a></li>
                                 <!-- Add more sub-subcategories if needed -->
                             </ul>
                           </li>
-                            <li><a href="products.html" target="_blank">Satety Identification</a>
+                            <li><a href="{{ url_for('products') }}" target="_blank">Satety Identification</a>
                             <ul class="dropdown-submenu">
-                              <li><a href="products.html" target="_blank">Floor Marking Tape</a></li>
-                              <li><a href="products.html" target="_blank">Barrication Tape</a></li>
+                              <li><a href="{{ url_for('products') }}" target="_blank">Floor Marking Tape</a></li>
+                              <li><a href="{{ url_for('products') }}" target="_blank">Barrication Tape</a></li>
                              </ul>
                             </li>
-                            <li><a href="products.html" target="_blank">PPE</a>
+                            <li><a href="{{ url_for('products') }}" target="_blank">PPE</a>
                               <ul class="dropdown-submenu">
-                                <li><a href="products.html" target="_blank">Safety Goggle (Splash)</a></li>
-                                <li><a href="products.html" target="_blank">Bouffant Cap</a></li>
-                                <li><a href="products.html" target="_blank">Welding Helmet</a></li>
-                                <li><a href="products.html" target="_blank">Face Sheild</a></li>
-                                <li><a href="products.html" target="_blank">Apron</a></li>
-                                <li><a href="products.html" target="_blank">Respirator & Accessories</a></li>
-                                <li><a href="products.html" target="_blank">Ear Muffs</a></li>
-                                <li><a href="products.html" target="_blank">Hand Sleeves</a></li>
-                                <li><a href="products.html" target="_blank">Glove</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Safety Goggle (Splash)</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Bouffant Cap</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Welding Helmet</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Face Sheild</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Apron</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Respirator & Accessories</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Ear Muffs</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Hand Sleeves</a></li>
+                                <li><a href="{{ url_for('products') }}" target="_blank">Glove</a></li>
                                </ul>
                             </li>
                         </ul>
@@ -361,13 +361,13 @@
             <button>
               <i class="fa fa-search"></i> Search
             </button>
-            <a href="cart.html" class="btn-login"> 
+            <a href="{{ url_for('cart') }}" class="btn-login">
               <i class="fa fa-shopping-cart"></i> 
               (<span class="cart-count"></span>) 
               
           </a>
           
-            <a href="login.html" class="btn-login">
+          <a href="{{ url_for('login') }}" class="btn-login">
               <i class="fa fa-user"></i> Login</a>
           </div>
         </nav>
