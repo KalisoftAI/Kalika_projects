@@ -1,4 +1,5 @@
 from punchout import *
+import secrets
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import psycopg2
@@ -6,6 +7,8 @@ from psycopg2 import sql
 
 app = Flask(__name__)
 
+# Set a random secret key for session management
+app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
 
 # Database connection parameters
 db_host = "3.108.190.220" 
@@ -13,6 +16,14 @@ db_name = 'ecom_prod_catalog'
 db_user = 'vikas'
 db_password = 'kalika1667'
 
+connection = psycopg2.connect(
+            host=db_host,
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            port='5432'
+        )
+cursor = connection.cursor()
 
 # Connect to your PostgreSQL database
 def get_db_connection():
@@ -31,30 +42,30 @@ def get_db_connection():
 
 get_db_connection()
 
-@app.route('/checkout', methods=['POST'])
-def checkout():
-    cart_items = request.json.get('cartItems', [])
-    user_id = request.json.get('userId')  # Assuming you have user ID from session or input
+# @app.route('/checkout', methods=['POST'])
+# def checkout():
+#     cart_items = request.json.get('cartItems', [])
+#     user_id = request.json.get('userId')  # Assuming you have user ID from session or input
 
-    # Create a new order
-    conn = get_db_connection()
-    cur = conn.cursor()
+#     # Create a new order
+#     conn = get_db_connection()
+#     cur = conn.cursor()
 
-    cur.execute('INSERT INTO Orders (user_id, status) VALUES (%s, %s) RETURNING order_id',
-                (user_id, 'Pending'))
-    order_id = cur.fetchone()[0]  # Get the newly created order ID
+#     cur.execute('INSERT INTO Orders (user_id, status) VALUES (%s, %s) RETURNING order_id',
+#                 (user_id, 'Pending'))
+#     order_id = cur.fetchone()[0]  # Get the newly created order ID
 
-    # Insert order items
-    for item in cart_items:
-        cur.execute('INSERT INTO OrderItems (order_id, product_id, quantity, price) VALUES (%s, %s, %s, %s)',
-                    (order_id, item['product_id'], item['quantity'], item['price']))
+#     # Insert order items
+#     for item in cart_items:
+#         cur.execute('INSERT INTO OrderItems (order_id, product_id, quantity, price) VALUES (%s, %s, %s, %s)',
+#                     (order_id, item['product_id'], item['quantity'], item['price']))
 
-    print("Data inserted after checkout ")
-    conn.commit()
-    cur.close()
-    conn.close()
+#     print("Data inserted after checkout ")
+#     conn.commit()
+#     cur.close()
+#     conn.close()
 
-    return jsonify({'message': 'Order placed successfully!', 'order_id': order_id}), 200
+#     return jsonify({'message': 'Order placed successfully!', 'order_id': order_id}), 200
 
 # Route for displaying products
 @app.route('/products', methods=['GET', 'POST'])
@@ -236,6 +247,78 @@ def cart():
             return redirect(url_for('cart'))
     
     return render_template('cart.html')
+
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    
+    item_name = request.form['product_name']
+    item_price = float(request.form['product_price'])
+    
+    # Initialize the cart if it doesn't exist
+    if 'cart' not in session:
+        session['cart'] = []
+
+    # Add the item to the cart
+    session['cart'].append({
+
+        'name': item_name,
+        'price': item_price
+    })
+
+    flash(f'Item {item_name} added to cart!', 'success')
+    return redirect(url_for('cart'))
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
+    connection = psycopg2.connect(
+            host=db_host,
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            port='5432'
+        )
+    cursor = connection.cursor()
+
+    user_name = request.form['user_name']
+    shipping_address = request.form['shipping_address']
+    total_amount = float(request.form['total_amount'])
+    payment_status = request.form['payment_status']
+    order_date = datetime.now()
+
+    cursor = connection.cursor()
+    # Find user_id from Users table using user_name
+    cursor.execute("SELECT user_id FROM Users WHERE username = %s", (user_name,))
+    user = cursor.fetchone()
+
+    
+
+    try:
+        if user:
+            user_id = user[0]
+            # Insert the order into the Orders table
+            cursor.execute('''
+                INSERT INTO Orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            ''', (user_id, order_date, total_amount, 'pending', shipping_address, payment_status, order_date, order_date))
+            connection.commit()
+            flash("Order placed successfully!", "success")
+            # Clear the cart after successful checkout
+            session.pop('cart', None)  # Assuming 'cart' is the key used to store cart items
+        else:
+            flash("User not found. Please check your name.", "error")
+    except Exception as e:
+        connection.rollback()
+        flash("Error placing order: " + str(e), "error")
+        
+    
+
+    return redirect(url_for('cart'))
+
+# Close the database connection on app teardown
+@app.teardown_appcontext
+def close_connection(exception):
+    cursor.close()
+    connection.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
