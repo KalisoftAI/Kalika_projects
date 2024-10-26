@@ -85,7 +85,7 @@
 <body>
     <div class="container" id="container">
         <h2>Login</h2>
-        <form id="form">
+        <form id="form" method="POST" action="/login">
             <label for="email-mobile">Email/Mobile Number</label>
             <input type="text" id="email-mobile" name="email-mobile" placeholder="Enter your email or mobile number" required>
 
@@ -96,35 +96,9 @@
             <p id="error-message" class="error"></p>
         </form>
         <!-- Link to registration page -->
-        <p class="toggle-link">Don't have an account? <a href="register.html">Register here</a></p>
+        <p class="toggle-link">Don't have an account? <a href="{{ url_for('register1.register') }}">Register here</a></p>
     </div>
 
-    <script>
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const form = document.getElementById('form');
-        const errorMessage = document.getElementById('error-message');
-
-        // Function to handle form submission for login
-        function handleLogin(event) {
-            event.preventDefault();
-            const emailOrMobile = document.getElementById("email-mobile").value;
-            const password = document.getElementById("password").value;
-
-            const user = users.find(u => 
-                (u.email === emailOrMobile || u.mobile === emailOrMobile) && u.password === password
-            );
-            if (user) {
-                alert("Login successful!");
-                // Redirect or proceed to the next step here
-                window.location.href = "dashboard.html"; // Replace with your redirect page
-            } else {
-                errorMessage.style.display = "block";
-                errorMessage.textContent = "Invalid email/mobile number or password!";
-            }
-        }
-
-        // Initial event listener for login
-        form.addEventListener('submit', handleLogin);
-    </script>
+    <script src="../static/js/script.js"></script>
 </body>
 </html>

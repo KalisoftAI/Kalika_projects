@@ -1,0 +1,233 @@
+document.addEventListener('DOMContentLoaded', function () {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const form = document.getElementById('form');
+    const errorMessage = document.getElementById('error-message');
+
+    // Function to add item to cart
+    function addToCart(name, price) {
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += 1; // Increase quantity if already in cart
+        } else {
+            cart.push({ name, price, quantity: 1 }); // Add new item
+        }
+        updateCart(); // Update localStorage and re-render the display
+    }
+
+    // Event listener for "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+            const productName = this.getAttribute('data-name');
+            const productPrice = parseInt(this.getAttribute('data-price'));
+            addToCart(productName, productPrice); // Add product to cart
+        });
+    });
+
+    // Function to calculate and display the cart count
+    function updateCartCount() {
+        const cartCountElement = document.querySelector('.cart-count');
+        if (cartCountElement) { // Check if element exists
+            let totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+            updateCartCount();
+        } 
+    }
+
+    // Function to display user name
+    function displayUserName() {
+        const userName = localStorage.getItem('userName');
+        if (userName) {
+            const userElement = document.getElementById('user-personalization');
+            if (userElement) {
+                userElement.innerHTML = `<h3>Welcome, ${userName}!</h3>`;
+            } else {
+                console.error('User personalization element not found');
+            }
+        }
+    }
+
+    // Function to update the cart in localStorage and re-render the display
+    function updateCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+    }
+
+    // Function to display cart items
+    function displayCart() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        if (cartItemsContainer) {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<li>Your cart is empty.</li>';
+                return;
+            }
+
+            // Clear previous items
+            cartItemsContainer.innerHTML = '';
+
+            // Loop through each item and create list elements
+            cart.forEach((item, index) => {
+                const listItem = document.createElement('li');
+
+                // Create product image element
+                const productImage = document.createElement('img');
+                productImage.src = `images/${item.name.replace(/\s+/g, '_').toLowerCase()}.jpg`;
+                productImage.alt = item.name;
+                productImage.classList.add('product-image');
+
+                // Create product info element
+                const productInfo = document.createElement('div');
+                productInfo.classList.add('product-info');
+                productInfo.innerHTML = `${item.name} - Quantity: ${item.quantity} - Price: RS.${item.price}`;
+
+                // Create buttons to increase/decrease quantity
+                const increaseButton = document.createElement('button');
+                increaseButton.classList.add('quantity-btn');
+                increaseButton.textContent = '+';
+                increaseButton.addEventListener('click', () => {
+                    cart[index].quantity += 1;
+                    updateCart();
+                    updateCartCount(); // Update count after changing quantity
+                });
+
+                const decreaseButton = document.createElement('button');
+                decreaseButton.classList.add('quantity-btn');
+                decreaseButton.textContent = '-';
+                decreaseButton.addEventListener('click', () => {
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity -= 1;
+                    } else {
+                        cart.splice(index, 1); // Remove item if quantity is 0
+                    }
+                    updateCart();
+                    updateCartCount(); // Update count after changing quantity
+                });
+
+                // Create remove button
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('remove-btn');
+                removeButton.textContent = 'Remove';
+                removeButton.addEventListener('click', () => {
+                    cart.splice(index, 1); // Remove item from cart
+                    updateCart();
+                    updateCartCount(); // Update count after removing item
+                });
+
+                // Append image, info, and buttons to list item
+                listItem.appendChild(productImage);
+                listItem.appendChild(productInfo);
+                listItem.appendChild(increaseButton);
+                listItem.appendChild(decreaseButton);
+                listItem.appendChild(removeButton);
+
+                cartItemsContainer.appendChild(listItem);
+            });
+        } 
+        
+   }
+
+    // Function to clear the cart and logout
+    function logout() {
+        localStorage.removeItem('cart');
+        localStorage.removeItem('userName');
+        alert("You have been logged out.");
+        window.location.href = "index.html";
+    }
+
+    // Event listener for logout button
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoutButton = document.getElementById('logout');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', logout);
+        } else {
+            console.warn("Logout button not found, no action will be taken.");
+        }
+
+        function logout() {
+            // Your logout logic here
+            console.log("Logging out...");
+        }
+    });
+
+    // Call functions on page load
+    displayUserName();
+    updateCartCount();
+    displayCart();
+    
+
+    // Registration Logic
+    function handleRegister(event) {
+        event.preventDefault();
+        
+        // Retrieve form elements
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const mobileInput = document.getElementById("mobile");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+    
+        // Check if elements exist before accessing their values
+        if (!nameInput || !emailInput || !mobileInput || !passwordInput || !confirmPasswordInput) {
+            console.error("One or more form fields not found");
+            if (errorMessage) {
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Form elements missing!";
+            }
+            return;
+        }
+    
+        const name = nameInput.value;
+        const email = emailInput.value;
+        const mobile = mobileInput.value;
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+    
+        // Check for existing user
+        if (users.some(u => u.email === email || u.mobile === mobile)) {
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Email or mobile number already exists!";
+        } else if (password !== confirmPassword) {
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Passwords do not match!";
+        } else {
+            // Register the user
+            users.push({ name, email, mobile, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert("Registration successful! You can now log in.");
+            window.location.href = "login.html"; // Redirect to login page
+        }
+    
+    }
+});
+
+
+
+const users = JSON.parse(localStorage.getItem('users')) || [];
+        const form = document.getElementById('form');
+        const errorMessage = document.getElementById('error-message');
+        // Function to handle form submission for login
+        function handleLogin(event) {
+            event.preventDefault();
+            const emailOrMobile = document.getElementById("email-mobile").value;
+            const password = document.getElementById("password").value;
+
+            const user = users.find(u => 
+                (u.email === emailOrMobile || u.mobile === emailOrMobile) && u.password === password
+            );
+            if (user) {
+                alert("Login successful!");
+                // Redirect or proceed to the next step here
+                window.location.href = "index.html"; // Replace with your redirect page
+            } else {
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Invalid email/mobile number or password!";
+            }
+        }
+
+        // Initial event listener for login
+        form.addEventListener('submit', handleLogin);
+
+
+
+
+
