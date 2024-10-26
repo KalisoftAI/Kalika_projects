@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Vikas" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -146,7 +145,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -170,16 +175,5 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729261888764" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py</url>
-          <line>5</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
