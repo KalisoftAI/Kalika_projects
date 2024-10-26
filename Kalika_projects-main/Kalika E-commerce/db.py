@@ -1,10 +1,25 @@
 import psycopg2
 
 # Database connection parameters
-db_host = '15.206.157.168'
+db_host = '3.108.190.220'
 db_name = 'ecom_prod_catalog'
 db_user = 'vikas'
 db_password = 'kalika1667'
+
+# Connect to your PostgreSQL database
+def get_db_connection():
+    try:
+        connection = psycopg2.connect(
+            host=db_host,
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            port='5432'
+        )
+        print("Database connected")
+        return connection
+    except Exception as e:
+        print(f"Database connection error: {e}")
 
 
 def insert_user_data(username, email):
