@@ -24,12 +24,12 @@ def cart():
                 cursor.close()
                 conn.close()
                 flash("Name saved successfully!", "success")
-                return redirect(url_for('cart'))
+                return redirect(url_for('index'))
             except Exception as e:
                 flash(f"Error inserting data: {e}", "error")
-                return redirect(url_for('cart'))
+                return redirect(url_for('index'))
         else:
             flash("Database connection failed", "error")
-            return redirect(url_for('cart'))
+            return redirect(url_for('index'))
     
     return render_template('cart.html')

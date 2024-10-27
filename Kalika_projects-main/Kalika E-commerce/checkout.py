@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from db import get_db_connection
 from datetime import datetime
-
+from addtocart import add_cart
 check = Blueprint('check', __name__)
 
 @check.route('/checkout', methods=['POST'])
@@ -22,6 +22,11 @@ def checkout():
     total_amount = float(request.form['total_amount'])
     payment_status = request.form['payment_status']
     order_date = datetime.now()
+    cart_items = session.get('cart', [])
+    print('cart_items',cart_items)
+    if not cart_items:
+        flash("Your cart is empty!", "error")
+        return redirect(url_for('add_cart.view_cart'))
 
     cursor = connection.cursor()
     # Find user_id from Users table using user_name
@@ -42,6 +47,7 @@ def checkout():
             flash("Order placed successfully!", "success")
             # Clear the cart after successful checkout
             session.pop('cart', None)  # Assuming 'cart' is the key used to store cart items
+            return redirect(url_for('index'))
         else:
             flash("User not found. Please check your name.", "error")
     except Exception as e:

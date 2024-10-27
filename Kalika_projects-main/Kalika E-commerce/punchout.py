@@ -1,9 +1,20 @@
 import xml.etree.ElementTree as ET
 import os
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+
 from datetime import datetime
-from werkzeug.middleware.proxy_fix import ProxyFix
+# from werkzeug.middleware.proxy_fix import ProxyFix
 from flask import Flask, request, Response
 
+@check.route('/punchout/setup', methods=['GET', 'POST'])
+def punchout_setup():
+    # Handle PunchOut Setup Request (POSR)
+    if request.method == 'POST':
+        # Extract necessary data from request
+        user_data = request.form  # Assuming data is sent in form
+        # Generate PunchOut Setup Response (POSR)
+        response = generate_punchout_response(user_data)
+        return response  # Return XML response
 
 
 def create_punchout_request():
@@ -45,7 +56,7 @@ def create_punchout_request():
 
     # Generate XML string
     xml_str = ET.tostring(cxml, encoding='utf-8', method='xml').decode('utf-8')
-
+    print(xml_str)
     return xml_str
 
 
@@ -81,3 +92,4 @@ def create_punchout_request():
 #
 #     return Response(response_xml, content_type='application/xml')
 #
+create_punchout_request()
