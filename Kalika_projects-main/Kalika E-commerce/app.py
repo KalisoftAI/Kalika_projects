@@ -15,8 +15,11 @@ from cart import cart1
 
 from db import get_db_connection
 
+from flask_session import Session
 
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'  # Store session data on the filesystem
+Session(app)
 
 
 app.register_blueprint(login1)
