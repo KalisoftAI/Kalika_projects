@@ -1,10 +1,7 @@
 # from punchout import *
 import secrets
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-from flask import Flask, render_template, request, redirect, url_for, flash, session
 import psycopg2
-from psycopg2 import sql
-
+from flask import Flask, render_template, request, redirect, url_for, jsonify,  flash, session
 from login import login1
 from register import register1
 from addtocart import add_cart
@@ -33,38 +30,6 @@ app.register_blueprint(cart1)
 
 # Set a random secret key for session management
 app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
-
-# Database connection parameters
-# db_host = "3.108.190.220" 
-# db_name = 'ecom_prod_catalog'
-# db_user = 'vikas'
-# db_password = 'kalika1667'
-
-# connection = psycopg2.connect(
-#             host=db_host,
-#             database=db_name,
-#             user=db_user,
-#             password=db_password,
-#             port='5432'
-#         )
-# cursor = connection.cursor()
-
-# Connect to your PostgreSQL database
-# def get_db_connection():
-#     try:
-#         connection = psycopg2.connect(
-#             host=db_host,
-#             database=db_name,
-#             user=db_user,
-#             password=db_password,
-#             port='5432'
-#         )
-#         print("Database connected")
-#         return connection
-#     except Exception as e:
-#         print(f"Database connection error: {e}")
-
-# get_db_connection()
 
 
 @app.route('/')
