@@ -64,7 +64,7 @@ body {
 }
 
 /* Hide dropdown menus initially */
-.dropdown-menu, .dropdown-submenu {
+.dropdown-menu, .dropdown-submenu,dropdown-product {
   display: none;
   position: absolute;
   top: 100%; /* Aligns the submenu below the parent */
@@ -78,18 +78,18 @@ body {
 }
 
 /* Show submenu to the right of the parent */
-.dropdown-submenu {
+.dropdown-submenu, dropdown-product {
   top: 0; /* Keep at same height */
   left: 100%; /* Shift to the right of parent item */
 }
 
 /* Styling for individual menu items */
-.dropdown-menu li, .dropdown-submenu li {
+.dropdown-menu li, .dropdown-submenu li, dropdown-product li {
   padding: 2px;
   width: 270px;
 }
 
-.dropdown-menu li a, .dropdown-submenu li a {
+.dropdown-menu li a, .dropdown-submenu li a, dropdown-product li a {
   color: #333;
   text-decoration: none;
 }
