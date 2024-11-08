@@ -12,6 +12,7 @@ def punchout_setup():
     if request.method == 'POST':
         # Extract necessary data from request
         user_data = request.form  # Assuming data is sent in form
+        print(user_data)
         # Generate PunchOut Setup Response (POSR)
         response = generate_punchout_response(user_data)
         return response  # Return XML response
