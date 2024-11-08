@@ -124,7 +124,7 @@ def initialize_connection():
             print(table[0])
 
         # Query to fetch all rows in the orders table
-        query = "SELECT * FROM orders;"
+        query = "SELECT * FROM users LIMIT 20;"
 
         # Execute the query
         cursor.execute(query)
