@@ -82,42 +82,52 @@
         .remove-btn:hover {
             background-color: #c82333;
         }
+        .cart-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>Your Cart</h2>
-    
+
+        <!-- User personalization and checkout form -->
         <div id="user-personalization">
             <form action="{{ url_for('check.checkout') }}" method="POST">
                 <label for="user-name">Enter your name:</label>
                 <input type="text" name="user_name" id="user-name" placeholder="Your Name" required />
-                
+
                 <label for="shipping-address">Shipping Address:</label>
                 <input type="text" name="shipping_address" id="shipping-address" placeholder="Shipping Address" required />
-    
+
                 <label for="total-amount">Total Amount:</label>
-                <input type="number" name="total_amount" id="total-amount" placeholder="Total Amount" required />
-    
+                <input type="number" name="total_amount" id="total-amount" placeholder="Total Amount" required readonly />
+
                 <label for="payment-status">Payment Status:</label>
                 <select name="payment_status" id="payment-status" required>
                     <option value="paid">Paid</option>
                     <option value="pending">Pending</option>
                     <option value="refunded">Refunded</option>
                 </select>
-    
+
                 <button type="submit" class="btn">Checkout</button>
             </form>
         </div>
-    
+
+        <!-- Cart items list -->
         <ul id="cart-items"></ul>
-    
-        <a href="{{ url_for('home') }}" class="btn">Continue Shopping</a>
-        <button class="btn logout-btn" id="logout">Logout</button>
+
+        <div class="cart-footer">
+            <a href="{{ url_for('home') }}" class="btn">Continue Shopping</a>
+            <button class="btn logout-btn" id="logout">Logout</button>
+        </div>
     </div>
 
-    <!-- Link to JS file -->
-    <script src="../static/js/script.js"></script>  
+    <!-- Link to JS file for dynamic functionality -->
+    <script src="../static/js/script.js"></script>
+
 </body>
 </html>

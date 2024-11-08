@@ -1,4 +1,5 @@
 import psycopg2
+from tabulate import tabulate
 
 # Database connection parameters
 db_host = '3.108.190.220'
@@ -112,6 +113,35 @@ def initialize_connection():
         )
         cursor = connection.cursor()
 
+        # Execute a query to get table names
+        cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
+
+        # Fetch all results
+        tables = cursor.fetchall()
+
+        # Print each table name
+        for table in tables:
+            print(table[0])
+
+        # Query to fetch all rows in the orders table
+        query = "SELECT * FROM orders;"
+
+        # Execute the query
+        cursor.execute(query)
+
+        # Fetch all rows
+        rows = cursor.fetchall()
+
+        # Get column names for table structure
+        colnames = [desc[0] for desc in cursor.description]
+
+        # Display results in a table format
+        print(tabulate(rows, headers=colnames, tablefmt="pretty"))
+
+        # Print each row
+        for row in rows:
+            print(row)
+
         # Grant permissions on the public schema
         # cursor.execute("\c {db_name}")
         cursor.execute(f"GRANT USAGE ON SCHEMA public TO {db_user};")
@@ -133,4 +163,4 @@ def initialize_connection():
 if __name__ == '__main__':
     initialize_connection()
     # insert_users_data('john_doe', 'john@example.com')
-    create_orders_table()
+    # create_orders_table()

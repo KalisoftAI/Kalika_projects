@@ -21,6 +21,7 @@ def add_to_cart():
         'name': item_name,
         'price': item_price
     })
+    print('session::',session['cart'])
 
     flash(f'Item {item_name} added to cart!', 'success')
     return redirect(url_for('cart'))
