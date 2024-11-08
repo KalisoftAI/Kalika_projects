@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .cart { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd; }
+        .cart-item:last-child { border-bottom: none; }
+        .total { font-weight: bold; margin-top: 20px; }
+        #checkoutButton { background-color: #28a745; color: white; padding: 10px; border: none; cursor: pointer; }
+        #checkoutButton:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+<div class="cart">
+    <h2>Your Shopping Cart</h2>
+    
+    <div id="cartItems">
+        <!-- Dynamic list of cart items will go here -->
+    </div>
+    
+    
+
+    <div class="total" id="totalAmount">
+        Total: RS. <span id="totalAmountValue">0</span>
+    </div>
+    <ul id="cart-items"></ul>
+    
+    <button id="checkoutButton">Checkout</button>
+</div>
+
+<script>
+    // Sample cart data for demonstration
+    const cartItems = [
+        { name: "Item 1", quantity: 2, price: 500 },
+        { name: "Item 2", quantity: 1, price: 700 }
+    ];
+    const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Display cart items and total
+    function displayCart() {
+        const cartItemsContainer = document.getElementById('cartItems');
+        const totalAmountElement = document.getElementById('totalAmountValue');
+
+        cartItemsContainer.innerHTML = ''; // Clear previous items
+        cartItems.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            itemDiv.innerHTML = `<span>${item.name} (x${item.quantity})</span> <span>RS. ${item.price * item.quantity}</span>`;
+            cartItemsContainer.appendChild(itemDiv);
+        });
+
+        totalAmountElement.textContent = totalAmount;
+    }
+
+    // Function to send cart data to the backend
+    function submitPunchOutOrder() {
+        fetch('/generate_punchout_order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cartItems: cartItems,
+                totalAmount: totalAmount
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirect to thank you page if the request was successful
+                window.location.href = data.redirectURL;
+            } else {
+                console.error('PunchOut order submission failed:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Add event listener to the checkout button
+    document.getElementById('checkoutButton').addEventListener('click', submitPunchOutOrder);
+
+    // Initialize the cart display
+    // displayCart();
+</script>
+<script src="../static/js/script.js"></script>
+
+</body>
+</html>
