@@ -11,10 +11,6 @@ cart1 = Blueprint('cart1', __name__)
 def cart():
     if request.method == 'POST':
         user_name = request.form['user-name']
-
-        session['user_name'] = user_name
-        
-
         
         # Connect to the database
         conn = get_db_connection()
@@ -36,4 +32,4 @@ def cart():
             flash("Database connection failed", "error")
             return redirect(url_for('index'))
     
-    return render_template('testcart.html')
+    return render_template('cart.html')
