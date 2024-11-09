@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create product info element
                 const productInfo = document.createElement('div');
                 productInfo.classList.add('product-info');
-                productInfo.innerHTML = ` ${item.name}- Quantity: ${item.quantity} - Price: RS.${item.price}`;
+                productInfo.innerHTML = `${item.name} - Quantity: ${item.quantity} - Price: RS.${item.price}`;
 
                 // Create buttons to increase/decrease quantity
                 const increaseButton = document.createElement('button');
