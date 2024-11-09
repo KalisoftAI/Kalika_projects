@@ -25,7 +25,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="fixup! Code Updated">
+    <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/5af50c25ad9536080fef5fc64674e290" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
@@ -181,7 +182,8 @@
     <MESSAGE value="Deployment doc updated" />
     <MESSAGE value="Index pages cart &amp; login with search issues resolved" />
     <MESSAGE value="New categories and subcategories working updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="New categories and subcategories working updated" />
+    <MESSAGE value="Updated with recent changes to new" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated with recent changes to new" />
   </component>
   <component name="WindowStateProjectService">
     <state x="176" y="0" key="CommitChangelistDialog2" timestamp="1731174694213">
