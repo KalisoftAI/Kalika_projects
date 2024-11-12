@@ -8,6 +8,8 @@ from addtocart import add_cart
 from checkout import check
 from products import products1
 from cart import cart1
+from main import punchout
+from punchoutsetup import punchout1
 # from home import home
 
 from db import get_db_connection
@@ -25,6 +27,8 @@ app.register_blueprint(add_cart)
 app.register_blueprint(check)
 app.register_blueprint(products1)
 app.register_blueprint(cart1)
+app.register_blueprint(punchout)
+app.register_blueprint(punchout1)
 # # app.register_blueprint(home)
 
 

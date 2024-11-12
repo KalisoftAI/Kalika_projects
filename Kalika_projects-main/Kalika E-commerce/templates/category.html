@@ -61,7 +61,7 @@ h1 {
     margin-bottom: 15px;
 }
 
-.product-name {
+.product_name {
     font-size: 1.2em;
     margin-bottom: 10px;
 }
@@ -72,7 +72,7 @@ h1 {
     margin-bottom: 15px;
 }
 
-.product-price {
+.product_price {
     font-size: 1.1em;
     font-weight: bold;
     color: #333;
@@ -94,6 +94,7 @@ h1 {
     background-color: #218838;
 }
 </style>
+
 </head>
 <body>
 
@@ -102,17 +103,19 @@ h1 {
         <a href="/" class="back-link">Back to Home</a>
     </header>
 
+    <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
     <div class="product-grid">
         {% for product in products %}
             <div class="product-card">
                 <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
-                <h3 class="product-name">{{ product['productname'] }}</h3>
+                <h3 class="product_name">{{ product['productname'] }}</h3>
                 <p class="product-description">{{ subcategory }}</p>
-                <span class="product-price">Rs.{{ product.price | round(2) }}</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <span class="product_price">Rs.{{ product.price | round(2) }}</span>
+                <button class="add-to-cart" data-name="{{ product['productname'] }}" data-price="{{ product.price | round(2) }}">Add to Cart</button>
             </div>
         {% endfor %}
     </div>
-
+    </form>
+    <script src="../static/js/script.js"></script>
 </body>
 </html>
