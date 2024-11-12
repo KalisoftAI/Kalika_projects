@@ -4,10 +4,7 @@ from db import get_db_connection
 from datetime import datetime
 from addtocart import add_cart
 
-
 check = Blueprint('check', __name__)
-
-
 
 @check.route('/checkout', methods=['POST'])
 def checkout():

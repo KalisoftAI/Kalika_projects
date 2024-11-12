@@ -4,7 +4,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 add_cart = Blueprint('add_cart', __name__)
 
 
-@add_cart.route('/add_to_cart', methods=['POST'])  
+
+@add_cart.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
     item_name = request.form.get('product_name')
     item_price = request.form.get('product_price')

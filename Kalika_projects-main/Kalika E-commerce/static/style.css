@@ -64,7 +64,7 @@ body {
 }
 
 /* Hide dropdown menus initially */
-.dropdown-menu, .dropdown-submenu,dropdown-product {
+.dropdown-menu, .dropdown-submenu,.dropdown-product {
   display: none;
   position: absolute;
   top: 100%; /* Aligns the submenu below the parent */
@@ -78,30 +78,32 @@ body {
 }
 
 /* Show submenu to the right of the parent */
-.dropdown-submenu, dropdown-product {
+.dropdown-submenu, .dropdown-product {
   top: 0; /* Keep at same height */
   left: 100%; /* Shift to the right of parent item */
 }
 
 /* Styling for individual menu items */
-.dropdown-menu li, .dropdown-submenu li, dropdown-product li {
+.dropdown-menu li, .dropdown-submenu li, .dropdown-product li {
   padding: 2px;
   width: 270px;
 }
 
-.dropdown-menu li a, .dropdown-submenu li a, dropdown-product li a {
+.dropdown-menu li a, .dropdown-submenu li a, .dropdown-product li a {
   color: #333;
   text-decoration: none;
 }
 
 /* Hover behavior to display dropdowns */
 .navbar-nav li:hover > .dropdown-menu,
-.dropdown-menu li:hover > .dropdown-submenu {
+.dropdown-menu li:hover > .dropdown-submenu,
+.dropdown-submenu li:hover > .dropdown-product  
+{
   display: block; /* Show the dropdown on hover */
 }
 
 /* Hover styling for links */
-.dropdown-menu li a:hover, .dropdown-submenu li a:hover {
+.dropdown-menu li a:hover, .dropdown-submenu li a:hover, .dropdown-product li a:hover {
   background-color: #007bff;
   color: #fff;
 }
