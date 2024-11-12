@@ -16,12 +16,23 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Pratiksha" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="">
+    <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/5af50c25ad9536080fef5fc64674e290" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +63,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="TF_FMT" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kalika_ecommerce_junk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kalika_ecommerce_junk/Kalika_projects-main" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -146,7 +157,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Pratiksha" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -159,13 +182,18 @@
     <MESSAGE value="Deployment doc updated" />
     <MESSAGE value="Index pages cart &amp; login with search issues resolved" />
     <MESSAGE value="New categories and subcategories working updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="New categories and subcategories working updated" />
+    <MESSAGE value="Updated with recent changes to new" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated with recent changes to new" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="422" y="91" key="FileChooserDialogImpl" timestamp="1729263030812">
+    <state x="176" y="0" key="CommitChangelistDialog2" timestamp="1731174694213">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1729263030812" />
+    <state x="176" y="0" key="CommitChangelistDialog2/0.0.1280.672@0.0.1280.672" timestamp="1731174694213" />
+    <state x="422" y="91" key="FileChooserDialogImpl" timestamp="1731176034618">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1731176034618" />
     <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729261888764">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
