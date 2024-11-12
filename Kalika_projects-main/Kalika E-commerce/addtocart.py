@@ -10,6 +10,7 @@ def add_to_cart():
     item_name = request.form.get('product_name')
     item_price = request.form.get('product_price')
 
+    session['cart'] = [{'item': item_name, 'quantity': item_price} for item_name, item_price in zip(item_name, item_price)] 
     # Check if product price and name are provided and valid
     if not item_name or item_price is None:
         flash('Product name and price are required!', 'error')
@@ -26,11 +27,13 @@ def add_to_cart():
     if 'cart' not in session:
         session['cart'] = []
 
+    # session.pop('cart', None)
     # Add the item to the cart
     session['cart'].append({
         'name': item_name,
         'price': item_price
     })
+    print("session1",session)
 
-    flash(f'Item {item_name} added to cart!', 'success')
+    # flash(f'Item {item_name} added to cart!', 'success')
     return redirect(url_for('cart1.cart'))
