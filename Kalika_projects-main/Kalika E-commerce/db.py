@@ -51,9 +51,6 @@ def insert_user_data(username, email):
             connection.close()
 
 
-
-
-
 def create_orders_table():
     try:
         # Connect to your PostgreSQL database

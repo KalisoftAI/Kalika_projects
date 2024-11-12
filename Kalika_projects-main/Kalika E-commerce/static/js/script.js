@@ -201,31 +201,41 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+//  Login Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById('form');
+    const errorMessage = document.getElementById('error-message');
 
-const users = JSON.parse(localStorage.getItem('users')) || [];
-        const form = document.getElementById('form');
-        const errorMessage = document.getElementById('error-message');
-        // Function to handle form submission for login
-        function handleLogin(event) {
-            event.preventDefault();
-            const emailOrMobile = document.getElementById("email-mobile").value;
-            const password = document.getElementById("password").value;
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-            const user = users.find(u => 
-                (u.email === emailOrMobile || u.mobile === emailOrMobile) && u.password === password
-            );
-            if (user) {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'email': email, 'password': password })
+            });
+
+            const result = await response.json();
+            if (result.success) {
                 alert("Login successful!");
-                // Redirect or proceed to the next step here
-                window.location.href = "index.html"; // Replace with your redirect page
+                window.location.href = "/";  // Redirect to the desired page
             } else {
                 errorMessage.style.display = "block";
-                errorMessage.textContent = "Invalid email/mobile number or password!";
+                errorMessage.textContent = result.message;
             }
+        } catch (error) {
+            console.error('Error during login:', error);
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Login failed! Please try again.";
         }
-
-        // Initial event listener for login
-        form.addEventListener('submit', handleLogin);
+    });
+});
 
 
 
