@@ -30,10 +30,11 @@ def checkout():
         user = cursor.fetchone()
 
         if user:
+            print(user)
             user_id = user[0]
             # Insert the order into the Orders table
             cursor.execute('''
-                INSERT INTO Orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
+                INSERT INTO orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING order_id
             ''', (user_id, order_date, total_amount, 'pending', shipping_address, payment_status, order_date, order_date))
@@ -41,7 +42,7 @@ def checkout():
 
             # Insert each cart item into the OrderItems table
             for item in cart_items:
-                product_id = item['product_id']
+                product_id = item['id']
                 quantity = item['quantity']
                 price = item['price']  # Assuming each item has a price field
 
