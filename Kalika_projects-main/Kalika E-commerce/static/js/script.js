@@ -4,23 +4,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('form');
     const errorMessage = document.getElementById('error-message');
 
-    // Function to add item to cart
-    function addToCart(name, price) {
-        const existingItem = cart.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.quantity += 1; // Increase quantity if already in cart
-        } else {
-            cart.push({ name, price, quantity: 1 }); // Add new item
-        }
-        updateCart(); // Update localStorage and re-render the display
-    }
-
-    // Event listener for "Add to Cart" buttons
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function () {
-            const productName = this.getAttribute('data-name');
-            const productPrice = parseInt(this.getAttribute('data-price'));
-            addToCart(productName, productPrice); // Add product to cart
+    document.querySelectorAll('.product-form').forEach(form => {
+        form.addEventListener('submit', event => {
+            event.preventDefault(); // Prevent default form submission
+    
+            const formData = new FormData(form);
+    
+            fetch('/add_to_cart', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Redirect to the cart page
+                } else {
+                    console.log('Item added to cart successfully!');
+                }
+            })
+            .catch(error => console.error('Error adding to cart:', error));
         });
     });
 

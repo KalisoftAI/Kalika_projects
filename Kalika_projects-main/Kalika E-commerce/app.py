@@ -126,7 +126,8 @@ def fetch_productcatalog_data():
         # Query to fetch maincategory and subcategory data from productcatalog
         cursor.execute("""
             SELECT maincategory, subcategory
-            FROM productcatalog
+            FROM productcatalog LIMIT 15
+            
         """)
         rows = cursor.fetchall()
 
@@ -150,7 +151,7 @@ def fetch_productcatalog_data():
 
 # Example usage
 categories = fetch_productcatalog_data()
-print(categories)
+# print(categories)
 if __name__ == "__main__":
     app.run(debug=True)
 

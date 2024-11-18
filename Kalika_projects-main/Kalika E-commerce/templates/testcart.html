@@ -5,91 +5,211 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .cart { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd; }
-        .cart-item:last-child { border-bottom: none; }
-        .total { font-weight: bold; margin-top: 20px; }
-        #checkoutButton { background-color: #28a745; color: white; padding: 10px; border: none; cursor: pointer; }
-        #checkoutButton:hover { background-color: #218838; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .cart-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .product-info {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .product-info strong {
+            font-size: 1.2rem;
+        }
+        .cart-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-buttons button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .cart-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .cart-buttons .remove-btn {
+            background-color: #dc3545;
+        }
+        .cart-buttons .remove-btn:hover {
+            background-color: #c82333;
+        }
+        .total {
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .product-image {
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+            .product-info {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="cart">
-    <h2>Your Shopping Cart</h2>
-    
+<div class="cart-container">
+    <div class="cart-header">Your Shopping Cart</div>
     <div id="cartItems">
-        <!-- Dynamic list of cart items will go here -->
-    </div>
-    
-    
+        {% if cart_items and cart_items|length > 0 %}
+        <form method="POST" action="{{ url_for('check.checkout') }}">
+            {% for item in cart_items %}
+            <div class="cart-item" data-item-id="{{ loop.index }}">
+                <img src="/images/{{ item.name.replace(' ', '_')|lower }}.jpg" alt="{{ item.name }}" class="product-image">
+                <div class="product-info">
+                    <strong>{{ item.name }}</strong>
+                    <p>Quantity: <span class="item-quantity">{{ item.quantity }}</span></p>
+                    <p>Price: RS.{{ item.price }}</p>
+                    <p>Total: RS.<span class="item-total">{{ item.quantity * item.price }}</span></p>
+                </div>
+                <div class="cart-buttons">
+                    <button class="increase-btn">+</button>
+                    <button class="decrease-btn">-</button>
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="checkout-details">
+                <label for="user_name">Name:</label>
+                <input type="text" id="user_name" name="user_name" required>
 
-    <div class="total" id="totalAmount">
-        Total: RS. <span id="totalAmountValue">0</span>
+                <label for="shipping_address">Shipping Address:</label>
+                <input id="shipping_address" name="shipping_address" required>
+
+                <label for="payment_status">Payment Status:</label>
+                <select id="payment_status" name="payment_status" required>
+                    <option value="paid">Paid</option>
+                    <option value="pending">Pending</option>
+                </select>
+
+                <input type="hidden" name="total_amount" value="{{ cart_items|sum(attribute='price') }}">
+            </div>
+
+            <div class="total">Total: RS. <span id="totalAmountValue">{{ cart_items|sum(attribute='price') }}</span></div>
+            <button type="submit" class="btn">Checkout</button>
+        </form>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
     </div>
-    <ul id="cart-items"></ul>
-    
-    <button id="checkoutButton">Checkout</button>
 </div>
 
 <script>
-    // Sample cart data for demonstration
-    const cartItems = [
-        { name: "Item 1", quantity: 2, price: 500 },
-        { name: "Item 2", quantity: 1, price: 700 }
-    ];
-    const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    // Display cart items and total
-    function displayCart() {
-        const cartItemsContainer = document.getElementById('cartItems');
-        const totalAmountElement = document.getElementById('totalAmountValue');
-
-        cartItemsContainer.innerHTML = ''; // Clear previous items
-        cartItems.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('cart-item');
-            itemDiv.innerHTML = `<span>${item.name} (x${item.quantity})</span> <span>RS. ${item.price * item.quantity}</span>`;
-            cartItemsContainer.appendChild(itemDiv);
-        });
-
-        totalAmountElement.textContent = totalAmount;
-    }
-
-    // Function to send cart data to the backend
-    function submitPunchOutOrder() {
-        fetch('/generate_punchout_order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                cartItems: cartItems,
-                totalAmount: totalAmount
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Redirect to thank you page if the request was successful
-                window.location.href = data.redirectURL;
-            } else {
-                console.error('PunchOut order submission failed:', data.message);
+    function fetchCartData() {
+    fetch('/cart')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            return response.json();
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
+        .then(data => {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const totalAmountElement = document.getElementById('totalAmountValue');
 
-    // Add event listener to the checkout button
-    document.getElementById('checkoutButton').addEventListener('click', submitPunchOutOrder);
+            cartItemsContainer.innerHTML = ''; // Clear existing items
+            let totalAmount = 0;
 
-    // Initialize the cart display
-    // displayCart();
+            data.cart_items.forEach((item) => {
+                // Create cart item container
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+                itemDiv.dataset.itemId = item.id; // Use item.id for backend tracking
+
+                // Create item HTML
+                itemDiv.innerHTML = `
+                    <img src="/images/${item.name.replace(/\s+/g, '_').toLowerCase()}.jpg" alt="${item.name}" class="product-image">
+                    <div class="product-info">
+                        <strong>${item.name}</strong>
+                        <p>Quantity: <span class="item-quantity">${item.quantity}</span></p>
+                        <p>Price: RS.${item.price}</p>
+                        <p>Total: RS.<span class="item-total">${item.price * item.quantity}</span></p>
+                    </div>
+                    <div class="cart-buttons">
+                        <button class="increase-btn">+</button>
+                        <button class="decrease-btn">-</button>
+                        <button class="remove-btn">Remove</button>
+                    </div>
+                `;
+
+                cartItemsContainer.appendChild(itemDiv);
+                totalAmount += item.price * item.quantity;
+
+                // Add event listeners for buttons
+                const increaseButton = itemDiv.querySelector('.increase-btn');
+                const decreaseButton = itemDiv.querySelector('.decrease-btn');
+                const removeButton = itemDiv.querySelector('.remove-btn');
+
+                increaseButton.addEventListener('click', () => updateCartItem(item.id, 'increase'));
+                decreaseButton.addEventListener('click', () => updateCartItem(item.id, 'decrease'));
+                removeButton.addEventListener('click', () => updateCartItem(item.id, 'remove'));
+            });
+
+            totalAmountElement.textContent = totalAmount;
+        })
+        .catch(error => console.error('Error fetching cart data:', error));
+}
 </script>
-<script src="../static/js/script.js"></script>
 
 </body>
 </html>
