@@ -4,7 +4,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from db import get_db_connection
 from psycopg2 import sql
 
+
 cart1 = Blueprint('cart1', __name__)
+
 
 # Route for cart page
 @cart1.route('/cart', methods=['GET', 'POST'])
