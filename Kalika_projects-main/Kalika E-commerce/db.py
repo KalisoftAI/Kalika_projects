@@ -1,5 +1,6 @@
 import psycopg2
 from tabulate import tabulate
+from datetime import datetime
 
 # Database connection parameters
 db_host = '3.108.190.220'
@@ -49,9 +50,6 @@ def insert_user_data(username, email):
             cursor.close()
         if connection:
             connection.close()
-
-
-
 
 
 def create_orders_table():
@@ -114,21 +112,73 @@ def initialize_connection():
         cursor = connection.cursor()
 
         # Execute a query to get table names
-        cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
+        # cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
 
-        # Fetch all results
-        tables = cursor.fetchall()
+        # # Fetch all results
+        # tables = cursor.fetchall()
 
-        # Print each table name
-        for table in tables:
-            print(table[0])
+        # # Print each table name
+        # for table in tables:
+        #     print(table[0])
+
+
+        sample_order = {
+        "user_id": 1,
+        "order_date": datetime.now(),
+        "total_amount": 150.75,
+        "status": "Pending",
+        "shipping_address": "1234 Elm Street, Springfield, IL",
+        "payment_status": "Unpaid",
+        "created_at": datetime.now(),
+        "updated_at": datetime.now()
+        }
+
+        # SQL query to insert data into the orders table
+        insert_query = """
+        INSERT INTO orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING order_id;
+        """
+        
+        # Connect to the PostgreSQL database
+        cursor = connection.cursor()
+
+        # Execute the insert query with the sample data
+        cursor.execute(insert_query, (
+            sample_order["user_id"],
+            sample_order["order_date"],
+            sample_order["total_amount"],
+            sample_order["status"],
+            sample_order["shipping_address"],
+            sample_order["payment_status"],
+            sample_order["created_at"],
+            sample_order["updated_at"]
+        ))
+
+        # Fetch the returned order_id
+        order_id = cursor.fetchone()[0]
+        connection.commit()
+
+        print(f"Order inserted successfully with order_id: {order_id}")
+       
+       
+        
+
+    except Exception as e:
+        print(f"Error: {e}")
+        if connection:
+            connection.rollback()
+
+    finally:
+        
+
 
         # Query to fetch all rows in the orders table
-        query = "SELECT * FROM productcatalog LIMIT 20;"
-
-        # Execute the query
+        
+        query = "SELECT * FROM orders;"
         cursor.execute(query)
 
+        
         # Fetch all rows
         rows = cursor.fetchall()
 
@@ -141,23 +191,22 @@ def initialize_connection():
         # Print each row
         for row in rows:
             print(row)
-
-        # Grant permissions on the public schema
-        # cursor.execute("\c {db_name}")
-        cursor.execute(f"GRANT USAGE ON SCHEMA public TO {db_user};")
-        cursor.execute(f"GRANT CREATE ON SCHEMA public TO {db_user};")
-        cursor.execute("GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO vikas;")
-
-        connection.commit()
-        print(f"Permissions granted to user '{db_user}' on public schema.")
-
-    except Exception as error:
-        print(f"Error creating permissions: {error}")
-    finally:
+            
         if cursor:
             cursor.close()
         if connection:
             connection.close()
+
+#         # Grant permissions on the public schema
+#         # cursor.execute("\c {db_name}")
+#         cursor.execute(f"GRANT USAGE ON SCHEMA public TO {db_user};")
+#         cursor.execute(f"GRANT CREATE ON SCHEMA public TO {db_user};")
+#         cursor.execute("GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO vikas;")
+
+#         connection.commit()
+#         print(f"Permissions granted to user '{db_user}' on public schema.")
+
+    
 
 
 if __name__ == '__main__':
