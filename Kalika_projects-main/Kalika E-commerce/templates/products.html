@@ -109,7 +109,7 @@ h1 {
                 <h3 class="product-name">{{ product['productname'] }}</h3>
                 <p class="product-description">{{ subcategory }}</p>
                 <span class="product-price">Rs.{{ product.price | round(2) }}</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <button type="submit" class="add-to-cart">Add to Cart</button>
             </div>
         {% endfor %}
     </div>
