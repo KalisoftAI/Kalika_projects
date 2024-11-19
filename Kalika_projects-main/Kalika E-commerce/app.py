@@ -8,6 +8,8 @@ from addtocart import add_cart
 from checkout import check
 from products import products1
 from cart import cart1
+from main import punchout
+from punchoutsetup import punchout1
 # from home import home
 
 from db import get_db_connection
@@ -25,6 +27,8 @@ app.register_blueprint(add_cart)
 app.register_blueprint(check)
 app.register_blueprint(products1)
 app.register_blueprint(cart1)
+app.register_blueprint(punchout)
+app.register_blueprint(punchout1)
 # # app.register_blueprint(home)
 
 
@@ -34,8 +38,9 @@ app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex st
 
 @app.route('/')
 def home():
-    return render_template('index.html')
-
+    # return render_template('index.html')
+    categories = fetch_productcatalog_data()
+    return render_template('index.html', categories=categories)
 
 
 
@@ -47,7 +52,7 @@ def show_category_products(maincategory):
 
     # Fetch products by category
     query = """
-        SELECT productname,  subcategory, price 
+        SELECT productname, subcategory, price 
         FROM productcatalog 
         WHERE maincategory = %s;
     """
@@ -56,10 +61,9 @@ def show_category_products(maincategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'productname': row[0], ' subcategory': row[1], 'price': row[2]}
+        {'productname': row[0], 'subcategory': row[1], 'price': row[2]}
         for row in productcatalog
     ]
-    
 
     cursor.close()
     conn.close()
@@ -113,6 +117,41 @@ def close_connection(exception):
     connection.close()
 
 
+def fetch_productcatalog_data():
+    try:
+        # Connect to the PostgreSQL database
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        # Query to fetch maincategory and subcategory data from productcatalog
+        cursor.execute("""
+            SELECT maincategory, subcategory
+            FROM productcatalog LIMIT 15
+            
+        """)
+        rows = cursor.fetchall()
+
+        # Organize the data into a dictionary
+        category_data = {}
+        for maincategory, subcategory in rows:
+            if maincategory not in category_data:
+                category_data[maincategory] = []
+            if subcategory not in category_data[maincategory]:
+                category_data[maincategory].append(subcategory)
+
+        # Close the database connection
+        cursor.close()
+        connection.close()
+
+        return category_data
+
+    except Exception as e:
+        print(f"Error fetching product catalog data: {e}")
+        return {}
+
+# Example usage
+categories = fetch_productcatalog_data()
+# print(categories)
 if __name__ == "__main__":
     app.run(debug=True)
 

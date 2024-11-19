@@ -4,23 +4,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('form');
     const errorMessage = document.getElementById('error-message');
 
-    // Function to add item to cart
-    function addToCart(name, price) {
-        const existingItem = cart.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.quantity += 1; // Increase quantity if already in cart
-        } else {
-            cart.push({ name, price, quantity: 1 }); // Add new item
-        }
-        updateCart(); // Update localStorage and re-render the display
-    }
-
-    // Event listener for "Add to Cart" buttons
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function () {
-            const productName = this.getAttribute('data-name');
-            const productPrice = parseInt(this.getAttribute('data-price'));
-            addToCart(productName, productPrice); // Add product to cart
+    document.querySelectorAll('.product-form').forEach(form => {
+        form.addEventListener('submit', event => {
+            event.preventDefault(); // Prevent default form submission
+    
+            const formData = new FormData(form);
+    
+            fetch('/add_to_cart', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Redirect to the cart page
+                } else {
+                    console.log('Item added to cart successfully!');
+                }
+            })
+            .catch(error => console.error('Error adding to cart:', error));
         });
     });
 
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create product info element
                 const productInfo = document.createElement('div');
                 productInfo.classList.add('product-info');
-                productInfo.innerHTML = `${item.name} - Quantity: ${item.quantity} - Price: RS.${item.price}`;
+                productInfo.innerHTML = ` ${item.name}- Quantity: ${item.quantity} - Price: RS.${item.price}`;
 
                 // Create buttons to increase/decrease quantity
                 const increaseButton = document.createElement('button');
@@ -201,31 +202,41 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+//  Login Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById('form');
+    const errorMessage = document.getElementById('error-message');
 
-const users = JSON.parse(localStorage.getItem('users')) || [];
-        const form = document.getElementById('form');
-        const errorMessage = document.getElementById('error-message');
-        // Function to handle form submission for login
-        function handleLogin(event) {
-            event.preventDefault();
-            const emailOrMobile = document.getElementById("email-mobile").value;
-            const password = document.getElementById("password").value;
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-            const user = users.find(u => 
-                (u.email === emailOrMobile || u.mobile === emailOrMobile) && u.password === password
-            );
-            if (user) {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'email': email, 'password': password })
+            });
+
+            const result = await response.json();
+            if (result.success) {
                 alert("Login successful!");
-                // Redirect or proceed to the next step here
-                window.location.href = "index.html"; // Replace with your redirect page
+                window.location.href = "/";  // Redirect to the desired page
             } else {
                 errorMessage.style.display = "block";
-                errorMessage.textContent = "Invalid email/mobile number or password!";
+                errorMessage.textContent = result.message;
             }
+        } catch (error) {
+            console.error('Error during login:', error);
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Login failed! Please try again.";
         }
-
-        // Initial event listener for login
-        form.addEventListener('submit', handleLogin);
+    });
+});
 
 
 

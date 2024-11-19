@@ -27,330 +27,33 @@
     <header>
       <div class="container">
         <nav class="navbar">
-
           <ul class="navbar-nav">
             <li class="dropdown1">
-                <a href="category.html" class="btn-categories">
+                <a href="#" class="btn-categories">
                     <i class="fa fa-list"></i> All Categories
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ url_for('products1.products') }}" target="_blank">Safety</a>
-                        <ul class="dropdown-submenu">
-                            <li>
-                                <a href="{{ url_for('products1.products') }}" target="_blank">Security</a>
-                                <ul class="dropdown-product">
-                                    <li><a href="{{ url_for('products1.products') }}" target="_blank">Lock</a></li>
-                                    <!-- Add more sub-subcategories if needed -->
-                                </ul>
-                            </li>
-                            <li><a href="{{ url_for('products1.products') }}" target="_blank">Antislip Product</a>
-                              <ul class="dropdown-submenu">
-                                <li><a href="products.html" target="_blank">Rubber Mat</a></li>
-                                <!-- Add more sub-subcategories if needed -->
-                            </ul>
-                            </li>
-                            <li><a href="{{ url_for('products1.products') }}" target="_blank">Medical & Health Care</a>
-                              <ul class="dropdown-submenu">
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Barrier Cream</a></li>
-                                <!-- Add more sub-subcategories if needed -->
-                            </ul>
-                          </li>
-                            <li><a href="{{ url_for('products1.products') }}" target="_blank">Satety Identification</a>
-                            <ul class="dropdown-submenu">
-                              <li><a href="{{ url_for('products1.products') }}" target="_blank">Floor Marking Tape</a></li>
-                              <li><a href="{{ url_for('products1.products') }}" target="_blank">Barrication Tape</a></li>
-                             </ul>
-                            </li>
-                            <li><a href="{{ url_for('products1.products') }}" target="_blank">PPE</a>
-                              <ul class="dropdown-submenu">
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Safety Goggle (Splash)</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Bouffant Cap</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Welding Helmet</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Face Sheild</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Apron</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Respirator & Accessories</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Ear Muffs</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Hand Sleeves</a></li>
-                                <li><a href="{{ url_for('products1.products') }}" target="_blank">Glove</a></li>
-                               </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Janitorial</a>
-                      <ul class="dropdown-submenu">
+                    {% for maincategory, subcategories in categories.items() %}
                         <li>
-                            <a href="products.html" target="_blank">Saw Dust</a>
+                            <!-- Link to maincategory page -->
+                            <a href="{{ url_for('show_category_products', maincategory=maincategory) }}" target="_blank">
+                                {{ maincategory }}
+                            </a>
                             <ul class="dropdown-submenu">
-                              <li><a href="products.html" target="_blank">Cotton Waste</a></li>
-                              <li><a href="products.html" target="_blank">Hosiery Cloth</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="products.html" target="_blank">Cleaning</a>
-                          <ul class="dropdown-submenu">
-                            <li><a href="products.html" target="_blank">Hosiery Cloth</a></li>
-                            <li><a href="products.html" target="_blank">Cotton Waste</a></li>
-                          </ul>
-                      </li>
-                </ul>
-              </li>
-                    <li><a href="products.html" target="_blank">Packaging</a></li>
-                    <li><a href="products.html" target="_blank">Facility Maintainance</a>
-                      <ul class="dropdown-submenu">
-                        <li>
-                            <a href="products.html" target="_blank">Welding Supplies & Equipment</a>
-                            <ul class="dropdown-submenu">
-                              <li><a href="products.html" target="_blank">Gas Pipe</a></li>
+                                {% for subcategory in subcategories %}
+                                    <li>
+                                        <!-- Link to subcategory page within maincategory -->
+                                        <a href="{{ url_for('show_products', maincategory=maincategory, subcategory=subcategory) }}" target="_blank">
+                                            {{ subcategory }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </li>
-                       <li>
-                            <a href="products.html" target="_blank">Electrical & Electronic Components</a>
-                            <ul class="dropdown-submenu">
-                              <li><a href="products.html" target="_blank">Thyritor/Diode</a></li>
-                              <li><a href="products.html" target="_blank">Limit Switch</a></li>
-                              <li><a href="products.html" target="_blank">Solderig Gun</a></li>
-                              <li><a href="products.html" target="_blank">Batteries</a></li>
-                              <li><a href="products.html" target="_blank">Fuse</a></li>
-                              <li><a href="products.html" target="_blank">Tube Light Choke</a></li>
-                              <li><a href="products.html" target="_blank">Tube Light</a></li>
-                              <li><a href="products.html" target="_blank">Heater</a></li>
-                            </ul>
-                        </li>
-                       <li>
-                        <a href="products.html" target="_blank">Paint & Painting Supplies</a>
-                        <ul class="dropdown-submenu">
-                          <li><a href="products.html" target="_blank">Paper Paint Strainer</a></li>
-                          <li><a href="products.html" target="_blank">Spray Painting Gun</a></li>
-                          <li><a href="products.html" target="_blank">Solderig Gun</a></li>
-                          <li><a href="products.html" target="_blank">Tack Rag</a></li>
-                          <li><a href="products.html" target="_blank">Paint Brush</a></li>
-                          <li><a href="products.html" target="_blank">Spray Gun</a></li>
-                          <li><a href="products.html" target="_blank">Oil Paint</a></li>
-                        </ul>
-                        </li>
-                        <li>
-                        <a href="products.html" target="_blank">Fittings</a>
-                        <ul class="dropdown-submenu">
-                          <li><a href="products.html" target="_blank">Wheel Ball</a></li>
-                          <li><a href="products.html" target="_blank">Wheel</a></li>
-                          <li><a href="products.html" target="_blank">Hoses Clips</a></li>
-                          <li><a href="products.html" target="_blank">Flexible Hoses (Tube) </a></li>
-                        </ul>
-                      </li>
-                        <li>
-                        <a href="products.html" target="_blank">Fasteners & Hardware</a>
-                        <ul class="dropdown-submenu">
-                          <li><a href="products.html" target="_blank">Hinges</a></li>
-                          <li><a href="products.html" target="_blank">Foil</a></li>
-                          <li><a href="products.html" target="_blank">Chemical Fasteners</a></li>
-                          <li><a href="products.html" target="_blank">Mechanical Fasteners</a></li>
-                          <li><a href="products.html" target="_blank">Grub Screw</a></li>
-                          <li><a href="products.html" target="_blank">Dowel Pin</a></li>
-                          <li><a href="products.html" target="_blank">Allen Screw</a></li>
-                          <li><a href="products.html" target="_blank">Self Drilling Screw</a></li>
-                          <li><a href="products.html" target="_blank">Nail Coil</a></li>
-                          <li><a href="products.html" target="_blank">Latch</a></li>
-                          <li><a href="products.html" target="_blank">Eyebolts</a></li>
-                        </ul>
-                        </li>
-                        <li>
-                        <a href="products.html" target="_blank">Hydraulics & Pneumatics</a>
-                        <ul class="dropdown-submenu">
-                          <li><a href="products.html" target="_blank">VALVES AND CYLINDERS</a></li>
-                        </ul>
-                        </li>
-                        <li>
-                        <a href="products.html" target="_blank">Bearing</a></li>
-                </ul>
-              </li>
-                <li><a href="products.html" target="_blank">Chemical & Lubricants </a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Hydraulic Oil</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Frl Unit Oil</a></li>
-                        <li><a href="products.html" target="_blank">Oil</a></li>
-                        <li><a href="products.html" target="_blank">Gearbox Oil</a></li>
-                        <li><a href="products.html" target="_blank">Foot Powerpack Oil</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Chemicals</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Distilled Water</a></li>
-                        <li><a href="products.html" target="_blank">Battery Acid</a></li>
-                        <li><a href="products.html" target="_blank">Equipments</a></li>
-                        <li><a href="products.html" target="_blank">GEL</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Lubricants</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Grease</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Abrasives</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Abrasive Wheel</a></li>
-                    <li><a href="products.html" target="_blank">Wire Brush</a></li>
-                    <li><a href="products.html" target="_blank">Polish Paper</a></li>
-                    <li><a href="products.html" target="_blank">Abrasive Paper</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Adhesives, Sealants & Tape</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Glue Gun</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Masking Tape</a></li>
-                        <li><a href="products.html" target="_blank">Transparent Tape</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">M Seal</a></li>
-                    <li><a href="products.html" target="_blank">Teflon Tape</a></li>
-                    <li><a href="products.html" target="_blank">Tape</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Transparent Tape</a></li>
-                        <li><a href="products.html" target="_blank">Masking Tape</a></li>
-                        </ul>
-                    </li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Hand & Power Tools</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Grinder Accessories</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Backing Pad</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Hot Air Gun</a></li>
-                    <li><a href="products.html" target="_blank">Air Powered Tools</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Air Drill Drivers</a></li>
-                        <li><a href="products.html" target="_blank">Spring-Air Hammer Drill Gun</a></li>
-                        <li><a href="products.html" target="_blank">Air Hammer Drill Gun</a></li>
-                        <li><a href="products.html" target="_blank">Die Sander Nut Retaining</a></li>
-                        <li><a href="products.html" target="_blank">Die Sander Backing Plate</a></li>
-                        <li><a href="products.html" target="_blank">Die Sander</a></li>
-                        <li><a href="products.html" target="_blank">Die Grinder</a></li>
-                        <li><a href="products.html" target="_blank">Angle (Ratchets) Wrench </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Impack Wrench</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Blue Point AT360 Spare Parts</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Safety Tools</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Continuity Tester</a></li>
-                        <li><a href="products.html" target="_blank">Tester</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Screwdrivers & Keys</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Allen Keys</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Ratchet</a></li>
-                    <li><a href="products.html" target="_blank">Spanner</a></li>
-                    <li><a href="products.html" target="_blank">Sharpening Tool</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">File</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Hammers & Axes</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Chisels</a></li>
-                        <li><a href="products.html" target="_blank">Scrapere</a></li>
-                        <li><a href="products.html" target="_blank">Mallet</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Cable & Wire Tools</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Jib Crane Pendant Cable</a></li>
-                        <li><a href="products.html" target="_blank">Lugs</a></li>
-                        <li><a href="products.html" target="_blank">Sleeve Cutter</a></li>
-                        <li><a href="products.html" target="_blank">Cable Tie Gun Blade Kit</a></li>
-                        <li><a href="products.html" target="_blank">Cable Tie Gun</a></li>
-                        <li><a href="products.html" target="_blank">Crimping Tool/a></li>
-                          <li><a href="products.html" target="_blank">Insulation Stripper</a></li>
-                        <li><a href="products.html" target="_blank">Crimpin Die</a></li>
-                        <li><a href="products.html" target="_blank">Cable Cutter</a></li>
-                        <li><a href="products.html" target="_blank">Wire Stripper & Cutter</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Pliers</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Nose Pliers</a></li>
-                        <li><a href="products.html" target="_blank">Circlip Pilers</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Circlips</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Circlip</a></li>
-                        <li><a href="products.html" target="_blank">Circlip Sets</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Riveting Gun</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Pneumatics</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Air Compression Equipment</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Cutting Tools</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Scissors</a></li>
-                    <li><a href="products.html" target="_blank">Threading Tools</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Thread Repair Kit</a></li>
-                        <li><a href="products.html" target="_blank">Tape</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="products.html" target="_blank">Drilling Tools</a>
-                      <ul class="dropdown-submenu">
-                        <li><a href="products.html" target="_blank">Hammer Drill Bits</a></li>
-                        <li><a href="products.html" target="_blank">Drill Bits</a></li>
-                        </ul>
-                    </li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Welding Tools</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Welding Mask</a></li>
-                    <li><a href="products.html" target="_blank">Welding ROD</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Measuring Instruments & Tools</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Measuring Jar</a></li>
-                    <li><a href="products.html" target="_blank">Measuring Tape</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">Mechanical Power Transmission</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">Bearings</a></li>
-                    <li><a href="products.html" target="_blank">Belts & Pulleys</a></li>
-                    <li><a href="products.html" target="_blank">MOTOR</a></li>
-                    <li><a href="products.html" target="_blank">COUPLING</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">ACCESSORIES</a>
-                  <ul class="dropdown-submenu">
-                    <li><a href="products.html" target="_blank">GASKET</a></li>
-                    <li><a href="products.html" target="_blank">CP Accessories</a></li>
-                    </ul>
-                </li>
-                <li><a href="products.html" target="_blank">STATIONERY</a></li>
-                <li><a href="products.html" target="_blank">Appliances And Utilities</a></li>
-                <li><a href="products.html" target="_blank">WAVE PROJECT</a></li>
-                <li><a href="products.html" target="_blank">PLastic Bags</a></li>
-                <li><a href="products.html" target="_blank">PTFE HOSE CTCI</a></li>
+                    {% endfor %}
                 </ul>
             </li>
         </ul>
-
           <div class="navbar-logo">
             <a href="index.html">
               <img src="../static/image/logo.png" alt="Industrial eCommerce Logo" class="logo-image">
@@ -534,7 +237,7 @@
             <h4>Customer Service</h4>
             <ul>
               <li><a href="contactus.html">Contact Us</a></li>
-              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="test.html">FAQs</a></li>
             </ul>
           </div>
           <div class="footer-column">
