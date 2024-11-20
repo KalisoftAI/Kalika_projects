@@ -52,7 +52,7 @@ def show_category_products(maincategory):
 
     # Fetch products by category
     query = """
-        SELECT productname, subcategory, price 
+        SELECT itemcode, productname, subcategory, price 
         FROM productcatalog 
         WHERE maincategory = %s;
     """
@@ -61,9 +61,10 @@ def show_category_products(maincategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'productname': row[0], 'subcategory': row[1], 'price': row[2]}
+        {'itemcode': row[0],'productname': row[1], 'subcategory': row[2], 'price': row[3]}
         for row in productcatalog
     ]
+    #print
 
     cursor.close()
     conn.close()
@@ -84,7 +85,7 @@ def show_products(maincategory, subcategory):
 
     # Fetch products based on category and subcategory
     query = """
-        SELECT productname, productdescription, price 
+        SELECT itemcode, productname, productdescription, price 
         FROM productcatalog 
         WHERE maincategory = %s AND subcategory = %s;
     """
@@ -93,7 +94,7 @@ def show_products(maincategory, subcategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'productname': row[0], 'productdescription': row[1], 'price': row[2]}
+        {'itemcode': row[0],'productname': row[1], 'productdescription': row[2], 'price': row[3]}
         for row in productcatalog
     ]
 

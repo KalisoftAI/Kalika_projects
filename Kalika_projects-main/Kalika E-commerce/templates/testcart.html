@@ -155,60 +155,48 @@
 </div>
 
 <script>
-    function fetchCartData() {
-    fetch('/cart')
+   document.querySelector('.product-grid').addEventListener('click', event => {
+    if (event.target.classList.contains('add-to-cart')) {
+        event.preventDefault(); // Prevent default button behavior
+
+        // Find the parent form for the clicked button
+        const productForm = event.target.closest('.product-form');
+        if (!productForm) {
+            console.error("Form not found for the product!");
+            return;
+        }
+
+        // Collect form data
+        const formData = new FormData(productForm);
+
+        // Debugging: Log data being sent to the server
+        console.log("Product data being sent to server:", Object.fromEntries(formData));
+
+        // Send the data to the backend
+        fetch(productForm.action, {
+            method: 'POST',
+            body: formData
+        })
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            if (response.ok) {
+                window.location.href = '{{ url_for("cart1.cart") }}'; // Redirect to cart page
+            } else {
+                alert('Failed to add product to cart.');
             }
-            return response.json();
         })
-        .then(data => {
-            const cartItemsContainer = document.getElementById('cartItems');
-            const totalAmountElement = document.getElementById('totalAmountValue');
+        .catch(error => {
+            console.error('Error sending product data:', error);
+        });
+    }
+});
+function updateCartTotal() {
+        const totals = Array.from(document.querySelectorAll('.item-total')).map(el => parseFloat(el.textContent));
+        const totalAmount = totals.reduce((sum, current) => sum + current, 0);
 
-            cartItemsContainer.innerHTML = ''; // Clear existing items
-            let totalAmount = 0;
+        document.getElementById('totalAmountValue').textContent = totalAmount.toFixed(2);
+        document.getElementById('totalAmountInput').value = totalAmount.toFixed(2);
+    }
 
-            data.cart_items.forEach((item) => {
-                // Create cart item container
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('cart-item');
-                itemDiv.dataset.itemId = item.id; // Use item.id for backend tracking
-
-                // Create item HTML
-                itemDiv.innerHTML = `
-                    <img src="/images/${item.name.replace(/\s+/g, '_').toLowerCase()}.jpg" alt="${item.name}" class="product-image">
-                    <div class="product-info">
-                        <strong>${item.name}</strong>
-                        <p>Quantity: <span class="item-quantity">${item.quantity}</span></p>
-                        <p>Price: RS.${item.price}</p>
-                        <p>Total: RS.<span class="item-total">${item.price * item.quantity}</span></p>
-                    </div>
-                    <div class="cart-buttons">
-                        <button class="increase-btn">+</button>
-                        <button class="decrease-btn">-</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                `;
-
-                cartItemsContainer.appendChild(itemDiv);
-                totalAmount += item.price * item.quantity;
-
-                // Add event listeners for buttons
-                const increaseButton = itemDiv.querySelector('.increase-btn');
-                const decreaseButton = itemDiv.querySelector('.decrease-btn');
-                const removeButton = itemDiv.querySelector('.remove-btn');
-
-                increaseButton.addEventListener('click', () => updateCartItem(item.id, 'increase'));
-                decreaseButton.addEventListener('click', () => updateCartItem(item.id, 'decrease'));
-                removeButton.addEventListener('click', () => updateCartItem(item.id, 'remove'));
-            });
-
-            totalAmountElement.textContent = totalAmount;
-        })
-        .catch(error => console.error('Error fetching cart data:', error));
-}
 </script>
 
 </body>

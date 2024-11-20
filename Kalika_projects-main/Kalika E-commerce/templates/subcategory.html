@@ -104,13 +104,18 @@ h1 {
 
     <div class="product-grid">
         {% for product in products %}
+        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST" class="product-form">
             <div class="product-card">
                 <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
-                <h3 class="product-name">{{ product['productname'] }}</h3>
+                <h3 class="product_name">{{ product['productname'] }}</h3>
                 <p class="product-description">{{ subcategory }}</p>
-                <span class="product-price">Rs.{{ product.price | round(2) }}</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <span class="product_price">Rs.{{ product.price | round(2) }}</span>
+                <input type="hidden" name="itemcode" value="{{ product['itemcode'] }}">
+                <input type="hidden" name="product_name" value="{{ product['productname'] }}">
+                <input type="hidden" name="product_price" value="{{ product.price | round(2) }}">
+                <button type="submit" class="add-to-cart">Add to Cart</button>
             </div>
+        </form>
         {% endfor %}
     </div>
     <script src="../static/js/script.js"></script>

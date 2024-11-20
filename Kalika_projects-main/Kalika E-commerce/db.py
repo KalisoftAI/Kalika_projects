@@ -175,7 +175,7 @@ def initialize_connection():
 
         # Query to fetch all rows in the orders table
         
-        query = "SELECT * FROM orders;"
+        query = "SELECT * FROM productcatalog LIMIT 10;"
         cursor.execute(query)
 
         
