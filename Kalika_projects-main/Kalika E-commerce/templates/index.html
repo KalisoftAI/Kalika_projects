@@ -30,7 +30,10 @@
           <ul class="navbar-nav">
             <li class="dropdown1">
                 <a href="#" class="btn-categories">
-                    <i class="fa fa-list"></i> All Categories
+                    <div class="all-categories">
+                          <i class="fa fa-list"></i> All Categories
+                        </div>
+
                 </a>
                 <ul class="dropdown-menu">
                     {% for maincategory, subcategories in categories.items() %}
@@ -60,10 +63,37 @@
             </a>
           </div>
           <div class="header-actions">
-            <input type="text" placeholder="Search products..." class="search-bar">
+            <input
+                type="text"
+                class="search-bar"
+                id="searchInput"
+                placeholder="Search for products..."
+            />
             <button>
-              <i class="fa fa-search"></i> Search
+                <i class="fa fa-search"></i> Search
             </button>
+            <ul id="searchResults"></ul>
+                  <!-- Product details section (initially hidden) -->
+                <div id="product-details" style="display:none;">
+                    <h2 id="product-name"></h2>
+                    <p id="product-description"></p>
+                    <p id="product-price"></p>
+                    <button id="add-to-cart">Add to Cart</button>
+                </div>
+        </div>
+
+
+<!--            <input-->
+<!--                type="text"-->
+<!--                placeholder="Search products..."-->
+<!--                class="search-bar"-->
+<!--                id="searchInput"-->
+<!--            >-->
+<!--            <button>-->
+<!--                <i class="fa fa-search"></i> Search-->
+<!--            </button>-->
+
+
             <a href="{{ url_for('cart1.cart') }}" class="btn-login">
               <i class="fa fa-shopping-cart"></i>
               (<span class="cart-count"></span>)
@@ -77,6 +107,9 @@
       </div>
     </header>
       <!-- HEADER END -->
+
+
+
 
 
       <!-- HERO SECTION START -->
@@ -106,7 +139,7 @@
 
           <div class="category-carousel swiper">
             <div class="swiper-wrapper">
-              <a href="category.html" class="nav-link swiper-slide text-center">
+              <a href="category" class="nav-link swiper-slide text-center">
                 <img src="../static/image/Safety.jpg" class="rounded-circle" alt="Category Thumbnail">
                 <h4 class="fs-6 mt-3 fw-normal category-title">Safety</h4>
               </a>

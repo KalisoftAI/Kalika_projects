@@ -186,11 +186,11 @@ def product_detail(product_id):
         })
     else:
         return "Product not found", 404
-
-# Test cart page route
-@app.route('/test_cart')
-def test_cart():
-    return render_template('test_cart.html')
+#
+# # Test cart page route
+# @app.route('/test_cart')
+# def test_cart():
+#     return render_template('test_cart.html')
 
 @app.route('/api/punchout/setup', methods=['POST'])
 def punchout_setup():
