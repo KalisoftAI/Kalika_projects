@@ -9,8 +9,7 @@ from checkout import check
 from products import products1
 from cart import cart1
 from main import punchout
-from punchoutsetup import punchout1
-# from home import home
+import logging
 
 from db import get_db_connection
 
@@ -28,8 +27,6 @@ app.register_blueprint(check)
 app.register_blueprint(products1)
 app.register_blueprint(cart1)
 app.register_blueprint(punchout)
-app.register_blueprint(punchout1)
-# # app.register_blueprint(home)
 
 
 # Set a random secret key for session management
@@ -43,6 +40,58 @@ def home():
     return render_template('index.html', categories=categories)
 
 
+@app.route('/search', methods=['GET'])
+def search():
+    term = request.args.get('q', '')  # Get the search term from query params
+    if not term:
+        return jsonify([])  # Return empty list if no search term is provided
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Execute the SQL query to search for products matching the term
+    cur.execute("""
+        SELECT itemcode, productname, subcategory, price 
+        FROM productcatalog 
+        WHERE productname ILIKE %s
+    """, (f"%{term}%",))  # Case-insensitive match
+    results = cur.fetchall()
+    # print("results:", results)
+
+    cur.close()
+    return jsonify([{
+        "itemcode": row[0],
+        "name": row[1],
+        "subcategory": row[2],
+        "price": row[3]
+    } for row in results])
+
+
+@app.route('/product/<itemcode>', methods=['GET'])
+def get_product_details(itemcode):
+    print("Fetching product details")
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT itemcode, productname, subcategory, price, productdescription 
+        FROM productcatalog 
+        WHERE itemcode = %s
+    """, (itemcode,))
+    result = cur.fetchone()
+    print("results:", result[1])
+    cur.close()
+
+    if result:
+        return jsonify({
+            "itemcode": result[0],
+            "name": result[1],
+            "subcategory": result[2],
+            "price": result[3],
+            "description": result[4]
+        })
+    else:
+        # logging.warning(f"Product not found for itemcode: {itemcode}")
+        return jsonify({"error": "Product not found"}), 404
 
 # Route to display products by category
 @app.route('/<string:maincategory>')
@@ -52,7 +101,7 @@ def show_category_products(maincategory):
 
     # Fetch products by category
     query = """
-        SELECT productname, subcategory, price 
+        SELECT itemcode, productname, subcategory, price 
         FROM productcatalog 
         WHERE maincategory = %s;
     """
@@ -61,19 +110,18 @@ def show_category_products(maincategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'productname': row[0], 'subcategory': row[1], 'price': row[2]}
+        {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
         for row in productcatalog
     ]
+    # print
 
     cursor.close()
     conn.close()
 
     # Render the HTML template with fetched products
-    return render_template('category.html', 
-                           maincategory=maincategory, 
+    return render_template('category.html',
+                           maincategory=maincategory,
                            products=product_list)
-
-
 
 
 # Route to display products by subcategory
@@ -84,7 +132,7 @@ def show_products(maincategory, subcategory):
 
     # Fetch products based on category and subcategory
     query = """
-        SELECT productname, productdescription, price 
+        SELECT itemcode, productname, productdescription, price 
         FROM productcatalog 
         WHERE maincategory = %s AND subcategory = %s;
     """
@@ -93,7 +141,7 @@ def show_products(maincategory, subcategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'productname': row[0], 'productdescription': row[1], 'price': row[2]}
+        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3]}
         for row in productcatalog
     ]
 
@@ -101,11 +149,10 @@ def show_products(maincategory, subcategory):
     conn.close()
 
     # Render the HTML template with the fetched products
-    return render_template('subcategory.html', 
-                           maincategory=maincategory, 
-                           subcategory=subcategory, 
+    return render_template('subcategory.html',
+                           maincategory=maincategory,
+                           subcategory=subcategory,
                            products=product_list)
-
 
 
 # Close the database connection on app teardown
@@ -127,7 +174,7 @@ def fetch_productcatalog_data():
         cursor.execute("""
             SELECT maincategory, subcategory
             FROM productcatalog LIMIT 15
-            
+
         """)
         rows = cursor.fetchall()
 
@@ -149,11 +196,10 @@ def fetch_productcatalog_data():
         print(f"Error fetching product catalog data: {e}")
         return {}
 
+
 # Example usage
 categories = fetch_productcatalog_data()
 # print(categories)
 if __name__ == "__main__":
     app.run(debug=True)
 
-
-# Route for Prouct page
