@@ -17,10 +17,19 @@ def punchout_setup():
         response = generate_punchout_response(user_data)
         return response  # Return XML response
 
+def generate_punchout_response(user_data):
+    """
+    Generate a PunchOut Setup Response (POSR) in XML format.
 
-def create_punchout_request():
+    Parameters:
+        user_data (dict): The data received from the PunchOut Setup Request (e.g., buyer details).
+
+    Returns:
+        str: An XML string representing the PunchOut Setup Response.
+    """
     # Create the root element
-    cxml = ET.Element('cXML', version="1.2.020", payloadID="1234567890", timestamp=datetime.utcnow().isoformat() + 'Z')
+    cxml = ET.Element('cXML', version="1.2.020", payloadID="response_1234567890",
+                      timestamp=datetime.utcnow().isoformat() + 'Z')
 
     # Create Header
     header = ET.SubElement(cxml, 'Header')
@@ -28,69 +37,112 @@ def create_punchout_request():
     # From
     from_elem = ET.SubElement(header, 'From')
     credential_from = ET.SubElement(from_elem, 'Credential', domain="DUNS")
-    ET.SubElement(credential_from, 'Identity').text = "123456789"
+    ET.SubElement(credential_from, 'Identity').text = user_data.get('buyer_identity', 'UnknownBuyer')
 
     # To
     to_elem = ET.SubElement(header, 'To')
     credential_to = ET.SubElement(to_elem, 'Credential', domain="DUNS")
-    ET.SubElement(credential_to, 'Identity').text = "987654321"
+    ET.SubElement(credential_to, 'Identity').text = user_data.get('supplier_identity', 'UnknownSupplier')
 
     # Sender
     sender_elem = ET.SubElement(header, 'Sender')
     credential_sender = ET.SubElement(sender_elem, 'Credential', domain="DUNS")
     ET.SubElement(credential_sender, 'Identity').text = "555555555"
-    ET.SubElement(credential_sender, 'SharedSecret').text = "secret123"
+    ET.SubElement(credential_sender, 'SharedSecret').text = "response_secret"
     ET.SubElement(sender_elem, 'UserAgent').text = "YourAppName/1.0"
 
-    # Create Request
-    request_elem = ET.SubElement(cxml, 'Request', deploymentMode="test")
+    # PunchOutSetupResponse
+    response_elem = ET.SubElement(cxml, 'Response')
+    status_elem = ET.SubElement(response_elem, 'Status', code="200", text="OK")
+    status_elem.text = "PunchOut Setup Response Generated Successfully"
 
-    # PunchOutSetupRequest
-    punchout_request = ET.SubElement(request_elem, 'PunchOutSetupRequest', operation="create", id="PO12345")
-    ET.SubElement(punchout_request, 'BuyerCookie').text = "cookieValue"
-
-    redirect_url = ET.SubElement(punchout_request, 'RedirectURL')
-    redirect_url.text = "https://darkviolet-seal-221814.hostingersite.com/punchout.xml?vid=123456&sessionid=session123"
-
-    supplier_setup = ET.SubElement(punchout_request, 'SupplierSetup')
-    ET.SubElement(supplier_setup, 'SupplierID').text = "SupplierID123"
+    # PunchOutSetupResponse Details
+    punchout_response = ET.SubElement(response_elem, 'PunchOutSetupResponse')
+    start_page = ET.SubElement(punchout_response, 'StartPage')
+    start_page_url = ET.SubElement(start_page, 'URL')
+    start_page_url.text = "https://darkviolet-seal-221814.hostingersite.com/punchout/start"
 
     # Generate XML string
     xml_str = ET.tostring(cxml, encoding='utf-8', method='xml').decode('utf-8')
-    print(xml_str)
+    print(xml_str)  # Optional: Print for debugging
     return xml_str
 
 
+#how to get duns number and other credentials
+# duns number supplier = 651009354
+# anid = AN01052123957
+# Sum/gsm 167428
 
 
-# @app.route('/punchout_setup', methods=['POST'])
-# def punch_out_setup():
-#     # Get the cXML input (from the buyer's procurement system)
-#     input_data = request.data.decode('utf-8')
+# from flask import request, Response
+# import xml.etree.ElementTree as ET
+# from datetime import datetime
 #
-#     # Load cXML request into ElementTree for parsing
-#     cxml = ET.fromstring(input_data)
+# @check.route('/punchout/setup', methods=['POST'])
+# def punchout_setup():
+#     # Parse incoming XML
+#     posr_xml = request.data.decode('utf-8')
+#     root = ET.fromstring(posr_xml)
 #
-#     # Parse important data from the PunchOutSetupRequest
-#     buyer_cookie = cxml.find('.//BuyerCookie').text
-#     operation = cxml.find('.//Operation').text
+#     # Extract BuyerCookie (mandatory field in Ariba POSR)
+#     buyer_cookie = root.find(".//BuyerCookie").text
+#     buyer_identity = root.find(".//From/Credential/Identity").text
+#     supplier_identity = root.find(".//To/Credential/Identity").text
 #
+#     # Generate the PunchOut Setup Response
+#     response = generate_punchout_response({
+#         'buyer_cookie': buyer_cookie,
+#         'buyer_identity': buyer_identity,
+#         'supplier_identity': supplier_identity
+#     })
 #
-#     # Define PunchOut URL where the buyer will be redirected to complete shopping
-#     punchout_url = f"https://lemonchiffon-ram-961910.hostingersite.com?session={buyer_cookie}"
+#     # Return the response to Ariba
+#     return Response(response, content_type='text/xml')
+
+
+# def generate_punchout_response(user_data):
+#     cxml = ET.Element('cXML', version="1.2.020", payloadID="response_1234567890", timestamp=datetime.utcnow().isoformat() + 'Z')
 #
-#     # Create the PunchOutSetupResponse XML
-#     response_xml = f'''<?xml version="1.0" encoding="UTF-8"?>
-#     <cXML payloadID="{uuid.uuid4()}" timestamp="{datetime.datetime.now().isoformat()}" version="1.2.010">
-#         <Response>
-#             <PunchOutSetupResponse>
-#                 <StartPage>
-#                     <URL>{punchout_url}</URL>
-#                 </StartPage>
-#             </PunchOutSetupResponse>
-#         </Response>
-#     </cXML>'''
+#     # Header
+#     header = ET.SubElement(cxml, 'Header')
+#     from_elem = ET.SubElement(header, 'From')
+#     ET.SubElement(from_elem, 'Credential', domain="DUNS").text = user_data['buyer_identity']
 #
-#     return Response(response_xml, content_type='application/xml')
+#     to_elem = ET.SubElement(header, 'To')
+#     ET.SubElement(to_elem, 'Credential', domain="DUNS").text = user_data['supplier_identity']
 #
-create_punchout_request()
+#     sender_elem = ET.SubElement(header, 'Sender')
+#     ET.SubElement(sender_elem, 'Credential', domain="DUNS").text = "555555555"
+#     ET.SubElement(sender_elem, 'SharedSecret').text = "response_secret"
+#     ET.SubElement(sender_elem, 'UserAgent').text = "YourAppName/1.0"
+#
+#     # Response with RedirectURL
+#     response_elem = ET.SubElement(cxml, 'Response')
+#     status_elem = ET.SubElement(response_elem, 'Status', code="200", text="OK")
+#     punchout_response = ET.SubElement(response_elem, 'PunchOutSetupResponse')
+#
+#     start_page = ET.SubElement(punchout_response, 'StartPage')
+#     redirect_url = ET.SubElement(start_page, 'URL')
+#     redirect_url.text = f"https://yourdomain.com/punchout/session?buyerCookie={user_data['buyer_cookie']}"
+#
+#     # Generate XML
+#     return ET.tostring(cxml, encoding='utf-8', method='xml').decode('utf-8')
+
+# @app.route('/punchout/session', methods=['GET'])
+# def punchout_session():
+#     buyer_cookie = request.args.get('buyerCookie')
+#     # Create a session for the buyer
+#     # Display product catalog
+#     return render_template('product_catalog.html', buyer_cookie=buyer_cookie)
+
+#alredy build this function so no testing reuqired
+# def send_punchout_order(buyer_cookie, order_details):
+#     # Generate POOM XML
+#     poom_xml = generate_poom_xml(buyer_cookie, order_details)
+#
+#     # Send the XML to Ariba
+#     url = "https://ariba-network-endpoint.com/poom"
+#     headers = {'Content-Type': 'text/xml'}
+#     response = requests.post(url, data=poom_xml, headers=headers)
+#     return response
+

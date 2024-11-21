@@ -112,7 +112,7 @@
     <div class="cart-header">Your Shopping Cart</div>
     <div id="cartItems">
         {% if cart_items and cart_items|length > 0 %}
-        <form method="POST" action="{{ url_for('check.checkout') }}">
+        <form method="POST" action="{{ url_for('cart1.checkout') }}">
             {% for item in cart_items %}
             <div class="cart-item" data-item-id="{{ loop.index }}">
                 <img src="/images/{{ item.name.replace(' ', '_')|lower }}.jpg" alt="{{ item.name }}" class="product-image">
@@ -153,63 +153,6 @@
         {% endif %}
     </div>
 </div>
-
-<script>
-    function fetchCartData() {
-    fetch('/cart')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const cartItemsContainer = document.getElementById('cartItems');
-            const totalAmountElement = document.getElementById('totalAmountValue');
-
-            cartItemsContainer.innerHTML = ''; // Clear existing items
-            let totalAmount = 0;
-
-            data.cart_items.forEach((item) => {
-                // Create cart item container
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('cart-item');
-                itemDiv.dataset.itemId = item.id; // Use item.id for backend tracking
-
-                // Create item HTML
-                itemDiv.innerHTML = `
-                    <img src="/images/${item.name.replace(/\s+/g, '_').toLowerCase()}.jpg" alt="${item.name}" class="product-image">
-                    <div class="product-info">
-                        <strong>${item.name}</strong>
-                        <p>Quantity: <span class="item-quantity">${item.quantity}</span></p>
-                        <p>Price: RS.${item.price}</p>
-                        <p>Total: RS.<span class="item-total">${item.price * item.quantity}</span></p>
-                    </div>
-                    <div class="cart-buttons">
-                        <button class="increase-btn">+</button>
-                        <button class="decrease-btn">-</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                `;
-
-                cartItemsContainer.appendChild(itemDiv);
-                totalAmount += item.price * item.quantity;
-
-                // Add event listeners for buttons
-                const increaseButton = itemDiv.querySelector('.increase-btn');
-                const decreaseButton = itemDiv.querySelector('.decrease-btn');
-                const removeButton = itemDiv.querySelector('.remove-btn');
-
-                increaseButton.addEventListener('click', () => updateCartItem(item.id, 'increase'));
-                decreaseButton.addEventListener('click', () => updateCartItem(item.id, 'decrease'));
-                removeButton.addEventListener('click', () => updateCartItem(item.id, 'remove'));
-            });
-
-            totalAmountElement.textContent = totalAmount;
-        })
-        .catch(error => console.error('Error fetching cart data:', error));
-}
-</script>
 
 </body>
 </html>
