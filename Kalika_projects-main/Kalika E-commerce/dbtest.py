@@ -206,7 +206,7 @@ if __name__ == "__main__":
 
     # create_products_table()
     # Run the function to insert data from CSV
-    csv_file_path='../data/kalika_catalog_products.csv'
+    csv_file_path= '../data/kalika_catalog_products.csv'
     insert_data_from_csv(csv_file_path)
 
 

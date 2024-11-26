@@ -39,7 +39,7 @@ def products():
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute(
-        'SELECT Product_Title as name, Product_Description as description, Price as price, image_url FROM kalika_catalog LIMIT 10;'
+        'SELECT Product_Title as name, Product_Description as description, Price as price, image_url FROM kalika_catalog_product_filter LIMIT 10;'
     )
     products = cur.fetchall()
     cur.close()

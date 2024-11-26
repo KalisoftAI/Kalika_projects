@@ -13,6 +13,7 @@ def register():
         # mobile = request.form['mobile']
         password = request.form['password']
         confirm_password = request.form['confirm-password']
+        print("name:", name, "email:", email )
 
         if password != confirm_password:
             flash('Passwords do not match!')
