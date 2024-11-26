@@ -24,34 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.ipynb_checkpoints/KALIKA_vikas-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/.ipynb_checkpoints/KALIKA_vikas-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.vscode/launch.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/KALIKA_vikas.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/KALIKA_vikas.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/addtocart.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/addtocart.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/cart.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/cart.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/dbtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/dbtest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/products.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/register.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/products.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/subcategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/subcategory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products_filter.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/main_categories.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/main_categories_with_subcategory_id.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/subcategories.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/old_app_with_punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/junk_code/old_app_with_punchout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +81,7 @@
     "Python.main.executor": "Run",
     "Python.punchout.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "komalpachupate",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/KOMAL/Kalika/Kalika_projects_main"
   }
 }]]></component>

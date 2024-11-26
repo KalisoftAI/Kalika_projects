@@ -8,6 +8,49 @@ db_name = 'ecom_prod_catalog'
 db_user = 'vikas'
 db_password = 'kalika1667'
 
+import psycopg2
+import pandas as pd
+from sqlalchemy import create_engine
+# Connect to the PostgreSQL database
+conn = psycopg2.connect(
+    host=db_host,
+    database=db_name,
+    user=db_user,
+    password=db_password,
+    # port=port
+)
+print("Connection successful!")
+
+# # Write query to fetch the table
+# query = "SELECT * FROM productcatalog"
+#
+# # Use Pandas to execute the query and load data into a DataFrame
+# df = pd.read_sql(query, conn)
+#
+# # Save the table to a CSV file
+# df.to_csv("productcatalog.csv", index=False)
+# print("Table saved as your_table_name.csv")
+
+# CSV file to upload
+# csv_file = "product_catlog_image_url.csv"
+# table_name = "product_catlog_image_url"  # Name of the table to save data
+
+# try:
+#     # Load the CSV into a Pandas DataFrame
+#     data = pd.read_csv(csv_file)
+#
+#     # Create a connection to the PostgreSQL database
+#     engine = create_engine(f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}/{db_name}")
+#
+#     # Save the DataFrame to PostgreSQL
+#     data.to_sql(table_name, engine, index=False, if_exists="replace")  # Options: 'fail', 'replace', 'append'
+#
+#     print(f"Data from '{csv_file}' has been successfully saved to the table '{table_name}' in the database '{db_name}'.")
+#
+# except Exception as e:
+#     print(f"An error occurred: {e}")
+
+
 # Connect to your PostgreSQL database
 def get_db_connection():
     try:
@@ -48,7 +91,7 @@ def view_tables_and_data():
         # selected_table = input("\nEnter the punchout_responses to view its data: ")
 
         # Query to fetch data from the selected table
-        cursor.execute(f"SELECT * FROM productcatalog limit 10;")  # Limit for safety
+        cursor.execute(f"SELECT * FROM product_catlog_image_url limit 10;")  # Limit for safety
         rows = cursor.fetchall()
         colnames = [desc[0] for desc in cursor.description]  # Fetch column names
 
