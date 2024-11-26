@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from db import get_db_connection
+from werkzeug.security import generate_password_hash
 
 register1 = Blueprint('register1', __name__)
 
@@ -16,35 +17,41 @@ def register():
 
         if password != confirm_password:
             flash('Passwords do not match!')
-            return redirect(url_for('register'))
+            return redirect(url_for('register1.register'))
+
+        # Validate email format (basic check)
+        if '@' not in email or '.' not in email:
+            flash('Invalid email format!')
+            return redirect(url_for('register1.register'))
+
+        # Hash the password before storing
+        hashed_password = generate_password_hash(password)
 
         connection = get_db_connection()
         cursor = connection.cursor()
-        # cursor.execute("SELECT * FROM users")
 
         # Check if user already exists
-        cursor.execute("SELECT * FROM users WHERE email = %s", (email, ))
+        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
         existing_user = cursor.fetchone()
-
-        # existing_user = cursor.fetchall()
 
         if existing_user:
             flash('Email already exists!')
             cursor.close()
             connection.close()
-            return redirect(url_for('login'))
-        
-        print(f"Inserting user: Name={name}, Email={email}, Password={password}")
+            return redirect(url_for('login1.login'))
 
-        cursor.execute(("INSERT INTO users (username, email, password_hash) VALUES (%s, %s, %s)"),
-                       (name, email, password))  # Store a hashed password in production!
+        # Insert new user data into the database
+        print(f"Inserting user: Name={name}, Email={email}")
+
+        cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (%s, %s, %s)",
+                       (name, email, hashed_password))
         print("Data inserted successfully!")
         connection.commit()
         cursor.close()
         connection.close()
 
-        # flash('Registration successful! You can now log in.')
-        return redirect(url_for('login'))
+        flash('Registration successful! You can now log in.')
+        return redirect(url_for('login1.login'))
 
     return render_template('register.html')
 

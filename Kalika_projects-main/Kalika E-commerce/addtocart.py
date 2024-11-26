@@ -28,22 +28,14 @@ def add_to_cart():
     if 'cart' not in session:
         session['cart'] = []
 
-     # Debugging: Before Session add cart
-    print("Current Cart:", session['cart'])
-
-    # Ensure cart is a list
     cart = session['cart']
 
     # Check if the product is already in the cart
-    product_found = False
-    for item in cart:
-        if item['itemcode'] == product_id:
-            item['quantity'] += 1
-            product_found = True
-            break
+    existing_item = next((item for item in cart if item['itemcode'] == product_id), None)
 
-    if not product_found:
-        # Add new product if it's not in the cart
+    if existing_item:
+        existing_item['quantity'] += 1
+    else:
         cart.append({
             'itemcode': product_id,
             'name': item_name,
@@ -51,12 +43,8 @@ def add_to_cart():
             'quantity': 1
         })
 
-    # Update session cart and mark it modified
     session['cart'] = cart
     session.modified = True
-
-    # Debugging: Log the updated cart
-    print("Updated Cart:", session['cart'])
 
     # Inform the user of success
     flash(f"{item_name} added to cart!", "success")

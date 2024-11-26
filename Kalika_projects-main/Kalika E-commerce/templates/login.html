@@ -86,8 +86,8 @@
     <div class="container" id="container">
         <h2>Login</h2>
         <form id="form" method="POST" action="/login">
-            <label for="email">Email/Mobile Number</label>
-            <input type="text" id="email" name="email" placeholder="Enter your email or mobile number" required>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email " required>
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
@@ -100,6 +100,43 @@
         <p class="toggle-link">Don't have an account? <a href="{{ url_for('register1.register') }}">Register here</a></p>
     </div>
 
-    <script src="../static/js/script.js"></script>
+    <script >
+        document.addEventListener("DOMContentLoaded", () => {
+     const form = document.getElementById('form');
+     const errorMessage = document.getElementById('error-message');
+ 
+     form.addEventListener('submit', async (event) => {
+         event.preventDefault();
+ 
+         const email = document.getElementById("email").value.trim();
+         const password = document.getElementById("password").value.trim();
+ 
+         errorMessage.style.display = "none"; // Clear any previous error messages
+ 
+         try {
+             const response = await fetch('/login', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json'
+                 },
+                 body: JSON.stringify({ 'email': email, 'password': password })
+             });
+ 
+             const result = await response.json();
+             if (result.success) {
+                 alert(result.message); // Success message
+                 window.location.href = "/"; // Redirect to home page or dashboard
+             } else {
+                 errorMessage.style.display = "block";
+                 errorMessage.textContent = result.message; // Display server-provided error
+             }
+         } catch (error) {
+             console.error('Error during login:', error);
+             errorMessage.style.display = "block";
+             errorMessage.textContent = "An unexpected error occurred. Please try again.";
+         }
+     });
+ });
+     </script>
 </body>
 </html>

@@ -3,6 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const form = document.getElementById('form');
     const errorMessage = document.getElementById('error-message');
+    // Select the search input and the container for search results
+//    const searchInput = document.getElementById('searchInput');
+//    let searchResults = null; // Placeholder for the dynamically created results container
+//    const productDetailsSection = document.getElementById('productDetails'); // Product details section
+//    const productName = document.getElementById('productName');
+//    const productSubcategory = document.getElementById('productSubcategory');
+//    const productPrice = document.getElementById('productPrice');
+//    const productDescription = document.getElementById('productDescription');
+//    const addToCartButton = document.getElementById('addToCart');
 
     document.querySelectorAll('.product-form').forEach(form => {
         form.addEventListener('submit', event => {
@@ -156,87 +165,126 @@ document.addEventListener('DOMContentLoaded', function () {
     displayCart();
     
 
-    // Registration Logic
-    function handleRegister(event) {
-        event.preventDefault();
-        
-        // Retrieve form elements
-        const nameInput = document.getElementById("name");
-        const emailInput = document.getElementById("email");
-        const mobileInput = document.getElementById("mobile");
-        const passwordInput = document.getElementById("password");
-        const confirmPasswordInput = document.getElementById("confirm-password");
     
-        // Check if elements exist before accessing their values
-        if (!nameInput || !emailInput || !mobileInput || !passwordInput || !confirmPasswordInput) {
-            console.error("One or more form fields not found");
-            if (errorMessage) {
-                errorMessage.style.display = "block";
-                errorMessage.textContent = "Form elements missing!";
-            }
+
+// Function to create the results container
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    let searchResults = null; // Placeholder for dynamically created results container
+    const productDetailsSection = document.getElementById('productDetails');
+    const productName = document.getElementById('productName');
+    const productSubcategory = document.getElementById('productSubcategory');
+    const productPrice = document.getElementById('productPrice');
+    const productDescription = document.getElementById('productDescription');
+    const addToCartButton = document.getElementById('addToCart');
+    function createSearchResultsContainer() {
+        searchResults = document.createElement('ul');
+        searchResults.id = 'searchResults';
+        searchResults.classList.add('search-results');
+        searchInput.parentNode.appendChild(searchResults); // Append results below the input
+    }
+
+    // Event listener for handling input changes in the search bar
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim(); // Get the input value and trim extra spaces
+
+        // Clear the results if the input is empty
+        if (query.length === 0) {
+            if (searchResults) searchResults.innerHTML = '';
             return;
         }
-    
-        const name = nameInput.value;
-        const email = emailInput.value;
-        const mobile = mobileInput.value;
-        const password = passwordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
-    
-        // Check for existing user
-        if (users.some(u => u.email === email || u.mobile === mobile)) {
-            errorMessage.style.display = "block";
-            errorMessage.textContent = "Email or mobile number already exists!";
-        } else if (password !== confirmPassword) {
-            errorMessage.style.display = "block";
-            errorMessage.textContent = "Passwords do not match!";
-        } else {
-            // Register the user
-            users.push({ name, email, mobile, password });
-            localStorage.setItem('users', JSON.stringify(users));
-            alert("Registration successful! You can now log in.");
-            window.location.href = "login.html"; // Redirect to login page
-        }
-    
+
+        // Ensure the search results container exists
+        if (!searchResults) createSearchResultsContainer();
+
+        // Fetch data from the backend API
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch search results');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Clear previous results
+                searchResults.innerHTML = '';
+
+                // Check if there are results
+                if (data.length === 0) {
+                    searchResults.innerHTML = '<li>No products found</li>';
+                    return;
+                }
+
+                // Limit results to 7 products
+                const limitedResults = data.slice(0, 7);
+
+                // Populate the search results
+                limitedResults.forEach(product => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" class="product-link" data-itemcode="${product.itemcode}">${product.name}</a>`;
+                    searchResults.appendChild(li);
+                });
+
+                // Add event listeners for each product link
+                const productLinks = document.querySelectorAll('.product-link');
+                productLinks.forEach(link => {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault();  // Prevent the default link behavior
+                        const itemcode = this.getAttribute('data-itemcode');
+                        showProductDetails(itemcode);  // Show product details
+                    });
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
+            });
+    });
+
+
+
+    // Function to display product details
+    function showProductDetails(itemcode) {
+        const productDetailsSection = document.getElementById('product-details');
+        const productName = document.getElementById('product-name');
+        const productDescription = document.getElementById('product-description');
+        const productPrice = document.getElementById('product-price');
+        const addToCartButton = document.getElementById('add-to-cart');
+        // Fetch product details from the backend
+        fetch(`/product/${itemcode}`)
+            .then(response => response.json())
+            .then(product => {
+                if (product.error) {
+                    alert(product.error); // Handle backend errors
+                    return;
+                }
+
+                // Update the product details section with fetched data
+                productName.innerText = product.name;
+                productDescription.innerText = product.description;
+                productPrice.innerText = `Price: $${product.price}`;
+
+                // Show the product details section
+                productDetailsSection.style.display = 'block';
+
+                // Handle 'Add to Cart' button functionality
+                addToCartButton.onclick = () => {
+                    alert(`${product.name} added to cart!`);
+                    // Add logic to update cart, if needed
+                };
+            })
+            .catch(error => {
+                console.error('Error fetching product details:', error);
+                alert('Error fetching product details');
+            });
     }
 });
 
 
-//  Login Logic
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById('form');
-    const errorMessage = document.getElementById('error-message');
 
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
 
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'email': email, 'password': password })
-            });
-
-            const result = await response.json();
-            if (result.success) {
-                alert("Login successful!");
-                window.location.href = "/";  // Redirect to the desired page
-            } else {
-                errorMessage.style.display = "block";
-                errorMessage.textContent = result.message;
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            errorMessage.style.display = "block";
-            errorMessage.textContent = "Login failed! Please try again.";
-        }
-    });
 });
+
 
 
 

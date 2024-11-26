@@ -1,73 +1,68 @@
 from flask import Blueprint, render_template
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+import xml.etree.ElementTree as ET
 from db import get_db_connection
 from datetime import datetime
 from addtocart import add_cart
 
 check = Blueprint('check', __name__)
 
+
 @check.route('/checkout', methods=['POST'])
 def checkout():
-    # Connect to the database
+    print("in checkout")
+    if 'cart' not in session or not session['cart']:
+        return jsonify({'success': False, 'message': 'Cart is empty'})
+
+    print("Starting XML generation...")
+    punchout_xml = generate_punchout_xml(session['cart'], session.get('user_name'))
+    print('punchout xml type', type(punchout_xml))
+    print('punchout xml', punchout_xml)
+
+
+    # Connect to PostgreSQL
     connection = get_db_connection()
-    cursor = connection.cursor()
-
-    # Retrieve form data
-    user_name = request.form.get('user_name')
-    shipping_address = request.form.get('shipping_address')
-    total_amount = float(request.form.get('total_amount', 0))
-    payment_status = request.form.get('payment_status')
-    order_date = datetime.now()
-    cart_items = session.get('cart', [])
-
-    if not cart_items:
-        flash("Your cart is empty!", "error")
-        return redirect(url_for('home'))
+    if not connection:
+        print("Failed to connect to the database.")
+        return jsonify({'success': False, 'message': 'Database connection failed'})
+    print("Database connection successful!")
 
     try:
-        # Find user_id from Users table using user_name
-        cursor.execute("SELECT user_id FROM Users WHERE username = %s", (user_name,))
-        user = cursor.fetchone()
-
-        if user:
-            print(user)
-            user_id = user[0]
-            # Insert the order into the Orders table
-            cursor.execute('''
-                INSERT INTO orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING order_id
-            ''', (user_id, order_date, total_amount, 'pending', shipping_address, payment_status, order_date, order_date))
-            order_id = cursor.fetchone()[0]
-
-            # Insert each cart item into the OrderItems table
-            for item in cart_items:
-                product_id = item['id']
-                quantity = item['quantity']
-                price = item['price']  # Assuming each item has a price field
-
-                cursor.execute('''
-                    INSERT INTO OrderItems (order_id, product_id, quantity, price, created_at, updated_at)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                ''', (order_id, product_id, quantity, price, order_date, order_date))
-
-            # Commit transaction
-            connection.commit()
-
-            # Flash success message and clear cart
-            flash("Order placed successfully!", "success")
-            session.pop('cart', None)  # Clears the entire cart
-
-            return redirect(url_for('home'))
-        else:
-            flash("User not found. Please check your name.", "error")
-            return redirect(url_for('cart1.cart'))  # Redirects to cart for retry
-
+        cursor = connection.cursor()
+        query = "INSERT INTO punchout_responses (response) VALUES (%s)"
+        cursor.execute(query, (punchout_xml,))
+        connection.commit()
+        print("XML response saved successfully!")
     except Exception as e:
-        connection.rollback()
-        flash(f"Error placing order: {e}", "error")
-        return redirect(url_for('cart1.cart'))  # Redirects to cart for retry in case of error
-
+        print("Error while inserting XML:", e)
+        return jsonify({'success': False, 'message': 'Error saving XML'})
     finally:
-        cursor.close()
-        connection.close()
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+    print("Checkout and PunchOut completed.")
+
+    # Clear the cart after checkout
+    session.pop('cart', None)
+
+    return jsonify({'success': True, 'message': 'Checkout successful'})
+
+
+def generate_punchout_xml(cart_items, user_name):
+    root = ET.Element("PunchOutOrder")
+
+    buyer_element = ET.SubElement(root, "Buyer")
+    ET.SubElement(buyer_element, "Name").text = user_name
+
+    items_element = ET.SubElement(root, "Items")
+
+    for item in cart_items:
+
+        item_element = ET.SubElement(items_element, "Item")
+        ET.SubElement(item_element, "Name").text = item['name']
+        ET.SubElement(item_element, "Quantity").text = str(item['quantity'])
+        ET.SubElement(item_element, "Price").text = str(item['price'])
+
+    return ET.tostring(root, encoding='unicode')
