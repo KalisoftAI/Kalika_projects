@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS -->
+</head>
+<body>
+    <div id="product-details">
+        {% if error %}
+            <h2>Error</h2>
+            <p>{{ error }}</p>
+        {% else %}
+            <h2 id="product-name">{{ name }}</h2>
+            <p id="product-description">{{ description or 'No description available.' }}</p>
+            <p id="product-price">Price: ${{ price }}</p>
+            <p id="product-subcategory">Subcategory: {{ subcategory }}</p>
+            <button id="add-to-cart">Add to Cart</button>
+        {% endif %}
+    </div>
+
+    <script>
+        // Optional: Add JavaScript for handling "Add to Cart" functionality
+        document.getElementById('add-to-cart').addEventListener('click', function() {
+            alert('Product added to cart!');
+            // Implement further logic to handle cart updates
+        });
+    </script>
+</body>
+</html>
