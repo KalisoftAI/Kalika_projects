@@ -126,64 +126,64 @@ def get_product_details(itemcode):
 #                            products=product_list)
 
 # Route to display products by category
-# @app.route('/<string:maincategory>')
-# def show_category_products(maincategory):
-#     conn = get_db_connection()
-#     cursor = conn.cursor()
-#
-#     # Fetch products by category
-#     query = """
-#         SELECT itemcode, productname, subcategory, price
-#         FROM productcatalog
-#         WHERE maincategory = %s;
-#     """
-#     cursor.execute(query, (maincategory,))
-#     productcatalog = cursor.fetchall()
-#
-#     # Convert fetched data to a list of dictionaries
-#     product_list = [
-#         {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
-#         for row in productcatalog
-#     ]
-#     # print
-#
-#     cursor.close()
-#     conn.close()
-#
-#     # Render the HTML template with fetched products
-#     return render_template('category.html',
-#                            maincategory=maincategory,
-#                            products=product_list)
-
-# Route to display products by category
 @app.route('/<string:maincategory>')
 def show_category_products(maincategory):
-    product_list = []
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-    # Read products from the CSV file
-    with open('imagedata1.csv', mode='r', encoding='utf-8') as csvfile:
-        csv_reader = csv.DictReader(csvfile)
-        # Skip the first row
-        # next(csv_reader, None)
+    # Fetch products by category
+    query = """
+        SELECT itemcode, productname, subcategory, price
+        FROM productcatalog
+        WHERE maincategory = %s;
+    """
+    cursor.execute(query, (maincategory,))
+    productcatalog = cursor.fetchall()
 
-        for row in csv_reader:
-            # Filter products by main category
-            if row['Main Category'] == maincategory:
-                product_list.append({
-                    'itemcode': row['Item Code'],
-                    'productname': row['Product Title'],
-                    'subcategory': row['Sub Categories'],
-                    'price': float(row['Price']),
-                    'image_url': url_for('static', filename=f'images/{row["Large Image"]}')
+    # Convert fetched data to a list of dictionaries
+    product_list = [
+        {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
+        for row in productcatalog
+    ]
+    # print
 
-                })
-
-    # print("Product details:", product_list)
+    cursor.close()
+    conn.close()
 
     # Render the HTML template with fetched products
     return render_template('category.html',
                            maincategory=maincategory,
                            products=product_list)
+
+# Route to display products by category
+# @app.route('/<string:maincategory>')
+# def show_category_products(maincategory):
+#     product_list = []
+#
+#     # Read products from the CSV file
+#     with open('imagedata1.csv', mode='r', encoding='utf-8') as csvfile:
+#         csv_reader = csv.DictReader(csvfile)
+#         # Skip the first row
+#         # next(csv_reader, None)
+#
+#         for row in csv_reader:
+#             # Filter products by main category
+#             if row['Main Category'] == maincategory:
+#                 product_list.append({
+#                     'itemcode': row['Item Code'],
+#                     'productname': row['Product Title'],
+#                     'subcategory': row['Sub Categories'],
+#                     'price': float(row['Price']),
+#                     'image_url': url_for('static', filename=f'images/{row["Large Image"]}')
+#
+#                 })
+#
+#     # print("Product details:", product_list)
+#
+#     # Render the HTML template with fetched products
+#     return render_template('category.html',
+#                            maincategory=maincategory,
+#                            products=product_list)
 
 
 
