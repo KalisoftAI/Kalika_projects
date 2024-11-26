@@ -80,20 +80,55 @@ def get_product_details(itemcode):
         WHERE itemcode = %s
     """, (itemcode,))
     result = cur.fetchone()
-    print("results:", result[1])
-    cur.close()
+    print("results:",result[0],itemcode)
+    # cur.close()
 
     if result:
-        return jsonify({
-            "itemcode": result[0],
-            "name": result[1],
-            "subcategory": result[2],
-            "price": result[3],
-            "description": result[4]
-        })
+        # return jsonify({
+        #     "itemcode": result[0],
+        #     "name": result[1],
+        #     "subcategory": result[2],
+        #     "price": result[3],
+        #     "description": result[4]
+        # })
+        return render_template('product.html',
+                                   itemcode=result[0],
+                                   name=result[1],
+                                   subcategory=result[2],
+                                   price=result[3],
+                                   description=result[4])
     else:
         # logging.warning(f"Product not found for itemcode: {itemcode}")
         return jsonify({"error": "Product not found"}), 404
+
+@app.route('/product/<string:itemcode>')
+def get_product(itemcode):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Fetch product details by item code
+    query = """
+        SELECT itemcode, productname AS name, productdescription AS description, price, subcategory 
+        FROM productcatalog 
+        WHERE itemcode = %s;
+    """
+    cursor.execute(query, (itemcode,))
+    product = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if product:
+        return jsonify({
+            "itemcode": product[0],
+            "name": product[1],
+            "description": product[2],
+            "price": str(product[3]),  # Ensure price is a string
+            "subcategory": product[4]
+        })
+    else:
+        return jsonify({"error": "Product not found"}), 404
+
 
 # Route to display products by category
 # @app.route('/<string:maincategory>')

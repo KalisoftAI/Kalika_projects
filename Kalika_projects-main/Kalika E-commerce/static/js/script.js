@@ -227,62 +227,62 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.parentNode.appendChild(searchResults); // Append results below the input
     }
 
-    // Event listener for handling input changes in the search bar
-    searchInput.addEventListener('input', () => {
-        const query = searchInput.value.trim(); // Get the input value and trim extra spaces
-
-        // Clear the results if the input is empty
-        if (query.length === 0) {
-            if (searchResults) searchResults.innerHTML = '';
-            return;
-        }
-
-        // Ensure the search results container exists
-        if (!searchResults) createSearchResultsContainer();
-
-        // Fetch data from the backend API
-        fetch(`/search?q=${encodeURIComponent(query)}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch search results');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Clear previous results
-                searchResults.innerHTML = '';
-
-                // Check if there are results
-                if (data.length === 0) {
-                    searchResults.innerHTML = '<li>No products found</li>';
-                    return;
-                }
-
-                // Limit results to 7 products
-                const limitedResults = data.slice(0, 7);
-
-                // Populate the search results
-                limitedResults.forEach(product => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<a href="#" class="product-link" data-itemcode="${product.itemcode}">${product.name}</a>`;
-                    searchResults.appendChild(li);
-                });
-
-                // Add event listeners for each product link
-                const productLinks = document.querySelectorAll('.product-link');
-                productLinks.forEach(link => {
-                    link.addEventListener('click', function(event) {
-                        event.preventDefault();  // Prevent the default link behavior
-                        const itemcode = this.getAttribute('data-itemcode');
-                        showProductDetails(itemcode);  // Show product details
-                    });
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching search results:', error);
-                searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
-            });
-    });
+//    // Event listener for handling input changes in the search bar
+//    searchInput.addEventListener('input', () => {
+//        const query = searchInput.value.trim(); // Get the input value and trim extra spaces
+//
+//        // Clear the results if the input is empty
+//        if (query.length === 0) {
+//            if (searchResults) searchResults.innerHTML = '';
+//            return;
+//        }
+//
+//        // Ensure the search results container exists
+//        if (!searchResults) createSearchResultsContainer();
+//
+//        // Fetch data from the backend API
+//        fetch(`/search?q=${encodeURIComponent(query)}`)
+//            .then(response => {
+//                if (!response.ok) {
+//                    throw new Error('Failed to fetch search results');
+//                }
+//                return response.json();
+//            })
+//            .then(data => {
+//                // Clear previous results
+//                searchResults.innerHTML = '';
+//
+//                // Check if there are results
+//                if (data.length === 0) {
+//                    searchResults.innerHTML = '<li>No products found</li>';
+//                    return;
+//                }
+//
+//                // Limit results to 7 products
+//                const limitedResults = data.slice(0, 7);
+//
+//                // Populate the search results
+//                limitedResults.forEach(product => {
+//                    const li = document.createElement('li');
+//                    li.innerHTML = `<a href="#" class="product-link" data-itemcode="${product.itemcode}">${product.name}</a>`;
+//                    searchResults.appendChild(li);
+//                });
+//
+//                // Add event listeners for each product link
+//                const productLinks = document.querySelectorAll('.product-link');
+//                productLinks.forEach(link => {
+//                    link.addEventListener('click', function(event) {
+//                        event.preventDefault();  // Prevent the default link behavior
+//                        const itemcode = this.getAttribute('data-itemcode');
+//                        showProductDetails(itemcode);  // Show product details
+//                    });
+//                });
+//            })
+//            .catch(error => {
+//                console.error('Error fetching search results:', error);
+//                searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
+//            });
+//    });
 
 
 
@@ -323,7 +323,82 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    let searchResults = null; // Placeholder for dynamically created results container
 
+    function createSearchResultsContainer() {
+        searchResults = document.createElement('ul');
+        searchResults.id = 'searchResults';
+        searchResults.classList.add('search-results');
+        searchInput.parentNode.appendChild(searchResults); // Append results below the input
+    }
+
+    // Event listener for handling input changes in the search bar
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim(); // Get the input value and trim extra spaces
+
+        // Clear the results if the input is empty
+        if (query.length === 0) {
+            if (searchResults) searchResults.innerHTML = '';
+            return;
+        }
+
+        // Ensure the search results container exists
+        if (!searchResults) createSearchResultsContainer();
+
+        // Fetch data from the backend API
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch search results');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Clear previous results
+                searchResults.innerHTML = '';
+
+                // Check if there are results
+                if (!Array.isArray(data) || data.length === 0) {
+                    searchResults.innerHTML = '<li>No products found</li>';
+                    return;
+                }
+
+                // Limit results to 7 products
+                const limitedResults = data.slice(0, 7);
+
+//                // Populate the search results
+//                limitedResults.forEach(product => {
+//                    const li = document.createElement('li');
+//                    li.innerHTML = `<a href="/product/${product.itemcode}" target="_blank">${product.productname || 'Unnamed Product'}</a>`;
+//                    searchResults.appendChild(li);
+//                });
+//            })
+                         // Populate the search results
+                limitedResults.forEach(product => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="/product/${product.itemcode}" target="_blank">${product.name || 'Unnamed Product'}</a>`;
+                    searchResults.appendChild(li);
+                });
+
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                if (searchResults) {
+                    searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
+                }
+            });
+    });
+
+    // Event listener for the search button to redirect to a category page if needed
+    document.getElementById('searchButton').addEventListener('click', () => {
+        const query = searchInput.value.trim();
+        if (query.length > 0) {
+            window.location.href = `/search?q=${encodeURIComponent(query)}`;
+        }
+    });
+});
 
 //  Login Logic
 document.addEventListener("DOMContentLoaded", () => {
