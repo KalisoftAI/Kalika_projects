@@ -72,7 +72,7 @@
             <button>
                 <i class="fa fa-search"></i> Search
             </button>
-            <ul id="searchResults"></ul>
+            <ul id="searchResults" class="search-results-dropdown"></ul>
                   <!-- Product details section (initially hidden) -->
                 <div id="product-details" style="display:none;">
                     <h2 id="product-name"></h2>
@@ -94,10 +94,9 @@
 <!--            </button>-->
 
 
-            <a href="{{ url_for('cart1.cart') }}" class="btn-login">
-              <i class="fa fa-shopping-cart"></i>
-              (<span class="cart-count"></span>)
-
+          <a href="{{ url_for('cart1.cart') }}" class="btn-login">
+            <i class="fa fa-shopping-cart"></i>
+            (<span class="cart-count">0</span>)
           </a>
 
           <a href="{{ url_for('login1.login') }}" class="btn-login">
@@ -141,11 +140,14 @@
             <div class="swiper-wrapper">
                 {% for category in maincategory %}
                 <a href="{{ url_for('show_category_products', maincategory=category.name) }}" class="nav-link swiper-slide text-center">
-                    <img src="{{ category.image }}" class="rounded-circle" alt="{{ category.name }}">
+                    <!-- Dynamically construct the image path -->
+                    <img src="{{ '../static', filename='image/' + category.name+ '.jpg') }}"
+                     
+                         class="rounded-circle" alt="{{ category[0] }}">
                     <h4 class="fs-6 mt-3 fw-normal category-title">{{ category.name }}</h4>
                 </a>
                 {% endfor %}
-            </div>
+            </div> 
         </div>
 
         </div>
@@ -153,79 +155,31 @@
     </div>
   </section>
     <!-- PRODUCT SECTION START -->
-  <div class="container">
-    <h2>Featured Products</h2>
-    <div class="product-grid">
-        <!-- Product Item 1 -->
-        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
-        <div class="product-card">
-          <img src="../static/image/lathe.jfif" alt="Industrial Lathe Machine">
-          <div class="product-info">
-            <h3>Industrial Lathe Machine</h3>
-            <p>Precision-engineered lathe, perfect for metalworking. Power: 220V/380V</p>
-            <span class="price">RS.5,000</span>
-
-            <input type="hidden" name="product_name" value="Industrial Lathe Machine">
-            <input type="hidden" name="product_price" value="5000">
-            <div class="product-actions">
-              <button class="add-to-cart" data-name="Industrial Lathe Machine" data-price="5000">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </form>
-   
-        <!-- Product Item 2 -->
-        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
-        <div class="product-card">
-          <img src="../static/image/lathe.jfif" alt="Hydraulic Press ">
-          <div class="product-info">
-            <h3>Hydraulic PUMP</h3>
-            <p>100-ton capacity press, built for heavy-duty operations.</p>
-            <span class="price">RS.12,000</span>
-            <input type="hidden" name="product_name" value="Hydraulic PUMP">
-            <input type="hidden" name="product_price" value="12000">
-            <div class="product-actions">
-              <button class="add-to-cart" data-name="Hydraulic PUMP" data-price="2000">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        </form>
-        <!-- Product Item 3 -->
-        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
-        <div class="product-card">
-            <img src="../static/image/lathe.jfif" alt="Hydraulic Press">
-            <div class="product-info">
-                <h3>Welding mask (venus 425)</h3>
-                <p>The Venus Welding Series is uniquely designed to provide relief from nuisance odors specifically in welding applications. </p>
-                <span class="price">RS.56</span>
-                <input type="hidden" name="product_name" value="Welding mask (venus 425)">
-                <input type="hidden" name="product_price" value="56">
-                <div class="product-actions">
-                    <button class="add-to-cart" data-name="welding mask (venus 425)" data-price="56">Add to Cart</button>
-                 </div>
-            </div>
-        </div>
-        </form>
-        <!-- Product Item 4 -->
-        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
-        <div class="product-card">
-          <img src="../static/image/lathe.jfif" alt="Hydraulic Press">
-          <div class="product-info">
-              <h3>Duracell type c type - medium</h3>
-              <p>Enjoy long usage durations as the Duracell batteries provide you a long-lasting performance and come with the Duralock technology to store the battery for a long period of time. </p>
-              <span class="price">RS.98</span>
-              <input type="hidden" name="product_name" value="Duracell type c type - medium">
-                <input type="hidden" name="product_price" value="98">
-              <div class="product-actions">
-                  <button class="add-to-cart" data-name="Duracell type C type - medium" data-price="98">Add to Cart</button>
+    <div class="container">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+          {% for product in random_products %}
+          <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
+              <div class="product-card">
+                  <img src="{{ product.product_image }}" alt="{{ product.product_name }}">
+                  <div class="product-info">
+                      <h3>{{ product.product_name }}</h3>
+                      <p>{{ product.product_description }}</p>
+                      <span class="price">RS.{{ product.product_price }}</span>
+  
+                      <input type="hidden" name="product_name" value="{{ product.product_name }}">
+                      <input type="hidden" name="product_price" value="{{ product.product_price }}">
+                      <input type="hidden" name="itemcode" value="{{ product.product_id }}">
+                      <div class="product-actions">
+                          <button class="add-to-cart">Add to Cart</button>
+                      </div>
+                  </div>
               </div>
-          </div>
+          </form>
+          {% endfor %}
       </div>
-      </form>
+  </div>
 
-        <!-- Add more product items as needed -->
-    </div>
-</div>
 
 
         <!-- Add more products as needed -->
@@ -242,16 +196,16 @@
           <div class="footer-column">
             <h4>Company</h4>
             <ul>
-              <li><a href="aboutus.html">About Us</a></li>
-              <li><a href="privacy.html">Privacy Policy</a></li>
-              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="/aboutus">About Us</a></li>
+              <li><a href="/privacypolicy">Privacy Policy</a></li>
+              <li><a href="/termsofservices">Terms of Service</a></li>
             </ul>
           </div>
           <div class="footer-column">
             <h4>Customer Service</h4>
             <ul>
-              <li><a href="contactus.html">Contact Us</a></li>
-              <li><a href="test.html">FAQs</a></li>
+              <li><a href="/contactus">Contact Us</a></li>
+              <li><a href="/faqs">FAQs</a></li>
             </ul>
           </div>
           <div class="footer-column">

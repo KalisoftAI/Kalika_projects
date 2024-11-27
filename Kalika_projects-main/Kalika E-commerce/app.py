@@ -13,6 +13,7 @@ import csv
 from urllib.parse import quote
 import logging
 
+
 from db import get_db_connection
 
 from flask_session import Session
@@ -37,10 +38,77 @@ app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex st
 
 @app.route('/')
 def home():
+    # Fetch main categories and categories for other sections
     maincategory = fetch_categories()  # For the carousel
     categories = fetch_productcatalog_data()  # For category-subcategory mapping
-    return render_template('index.html', maincategory=maincategory, categories=categories)
 
+    # maincategory = [
+    #     ('Gloves',), 
+    #     ('Hand Sleeves',), 
+    #     ('Ear Muffs',), 
+    #     ('Respirator & Accessories',), 
+    #     ('Apron',), 
+    #     ('Welding Helmet',), 
+    #     ('Bouffant Cap',), 
+    #     ('Barrication Tape',), 
+    #     ('Floor Marking Tape',)
+    # ]
+
+    # Fetch random products from the database
+    random_products_query = """
+        SELECT itemcode AS product_id, 
+               productname AS product_name, 
+               subcategory AS product_description, 
+               price AS product_price, 
+               productdescription AS product_image
+        FROM productcatalog
+        ORDER BY RANDOM()
+        LIMIT 4;
+    """
+
+    # Fetch data using the connection
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute(random_products_query)
+
+    # Fetch column names
+    column_names = [desc[0] for desc in cur.description]
+
+    # Convert tuples to dictionaries
+    random_products = [dict(zip(column_names, row)) for row in cur.fetchall()]
+
+    cur.close()
+    conn.close()
+
+    return render_template(
+        'index.html',
+        maincategory=maincategory,
+        categories=categories,
+        random_products=random_products
+    )
+
+
+
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')
+
+
+@app.route('/contactus')
+def contactus():
+    return render_template('contactus.html')
+
+@app.route('/privacypolicy')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/termsofservices')
+def termsofservices():
+    return render_template('terms.html')
+
+@app.route('/faqs')
+def faqs():
+    return render_template('faq.html')
 
 @app.route('/search', methods=['GET'])
 def search():
@@ -263,7 +331,7 @@ def fetch_categories():
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
-        cursor.execute("SELECT maincategory FROM productcatalog LIMIT 5;")
+        cursor.execute("SELECT maincategory FROM productcatalog LIMIT 12;")
         maincategories = cursor.fetchall()  # Fetch only the main categories
         print("maincategories", maincategories)
         cursor.close()

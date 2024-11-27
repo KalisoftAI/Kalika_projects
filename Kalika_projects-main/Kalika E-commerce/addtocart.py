@@ -18,7 +18,6 @@ def add_to_cart():
         return redirect(url_for('home'))
 
     try:
-        # Convert price to float
         item_price = float(item_price)
     except ValueError:
         flash('Invalid price value!', 'error')
@@ -46,6 +45,5 @@ def add_to_cart():
     session['cart'] = cart
     session.modified = True
 
-    # Inform the user of success
     flash(f"{item_name} added to cart!", "success")
     return redirect(url_for('cart1.cart'))

@@ -128,7 +128,7 @@ body {
 }
 
 button {
-    background-color: #0056b3; /* Green button */
+    background-color: #007bff; /* Green button */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -292,7 +292,7 @@ button i {
   0% {
     transform: translateX(0);
   }
-  100% {
+  80% {
     transform: translateX(-100%); /* Move all the way to the left */
   }
 }

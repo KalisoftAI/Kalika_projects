@@ -54,6 +54,13 @@ def cart():
         total_amount = sum(item['total_price'] for item in cart_items)
 
         return jsonify({"cart_items": cart_items, "total_amount": total_amount})
+    
+@cart1.route('/cart/count', methods=['GET'])
+def cart_count():
+    cart_items = session.get('cart', [])
+    total_items = sum(item['quantity'] for item in cart_items)
+    return jsonify({"cart_count": total_items})
+
 
 @cart1.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
