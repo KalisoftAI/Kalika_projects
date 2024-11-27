@@ -20,19 +20,16 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:Pratiksha" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/5af50c25ad9536080fef5fc64674e290" afterDir="false" />
+    <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -55,6 +53,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2nZGvCSL6VFCdtB8ibzVQG1SzmA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -67,6 +68,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main\Kalika E-commerce" />
       <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main" />
     </key>
   </component>
@@ -163,7 +165,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Pratiksha" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -194,10 +196,18 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1731176034618" />
+    <state x="113" y="50" key="MergeDialog" timestamp="1732722428830">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="113" y="50" key="MergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1732722428830" />
     <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1729261888764">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1729261888764" />
+    <state x="436" y="249" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1732722627299">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="436" y="249" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.672@0.0.1280.672" timestamp="1732722627299" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

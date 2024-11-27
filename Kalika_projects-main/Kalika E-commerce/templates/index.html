@@ -132,27 +132,21 @@
           </div>
 
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-
-          <div class="category-carousel swiper">
+<div class="row">
+    <div class="col-md-12">
+        <div class="category-carousel swiper">
             <div class="swiper-wrapper">
                 {% for category in maincategory %}
                 <a href="{{ url_for('show_category_products', maincategory=category.name) }}" class="nav-link swiper-slide text-center">
-                    <!-- Dynamically construct the image path -->
-                    <img src="{{ '../static', filename='image/' + category.name+ '.jpg') }}"
-                     
-                         class="rounded-circle" alt="{{ category[0] }}">
+                    <img src="{{ url_for('static', filename='image/' + category.name + '.jpg') }}"
+                         class="rounded-circle" alt="{{ category.name }}">
                     <h4 class="fs-6 mt-3 fw-normal category-title">{{ category.name }}</h4>
                 </a>
                 {% endfor %}
-            </div> 
+            </div>
         </div>
-
-        </div>
-      </div>
     </div>
+</div>
   </section>
     <!-- PRODUCT SECTION START -->
     <div class="container">
