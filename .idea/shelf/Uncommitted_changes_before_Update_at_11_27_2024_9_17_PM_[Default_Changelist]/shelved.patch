@@ -1,0 +1,317 @@
+Index: Kalika_projects-main/Kalika E-commerce/templates/testcart.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Shopping Cart</title>\r\n    <style>\r\n        body {\r\n            font-family: Arial, sans-serif;\r\n            background-color: #f9f9f9;\r\n            margin: 0;\r\n            padding: 0;\r\n        }\r\n        .cart-container {\r\n            max-width: 800px;\r\n            margin: 50px auto;\r\n            background-color: #fff;\r\n            border-radius: 8px;\r\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n            padding: 20px;\r\n        }\r\n        .cart-header {\r\n            text-align: center;\r\n            font-size: 1.5rem;\r\n            font-weight: bold;\r\n            margin-bottom: 20px;\r\n        }\r\n        .cart-item {\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n            padding: 15px;\r\n            border-bottom: 1px solid #ddd;\r\n        }\r\n        .cart-item:last-child {\r\n            border-bottom: none;\r\n        }\r\n        .product-image {\r\n            width: 80px;\r\n            height: 80px;\r\n            border-radius: 8px;\r\n            object-fit: cover;\r\n        }\r\n        .product-info {\r\n            flex: 1;\r\n            margin-left: 20px;\r\n        }\r\n        .product-info strong {\r\n            font-size: 1.2rem;\r\n        }\r\n        .cart-buttons {\r\n            display: flex;\r\n            align-items: center;\r\n            gap: 10px;\r\n        }\r\n        .cart-buttons button {\r\n            background-color: #007bff;\r\n            color: white;\r\n            border: none;\r\n            padding: 8px 10px;\r\n            font-size: 1rem;\r\n            cursor: pointer;\r\n            border-radius: 4px;\r\n            transition: background-color 0.3s;\r\n        }\r\n        .cart-buttons button:hover {\r\n            background-color: #0056b3;\r\n        }\r\n        .cart-buttons .remove-btn {\r\n            background-color: #dc3545;\r\n        }\r\n        .cart-buttons .remove-btn:hover {\r\n            background-color: #c82333;\r\n        }\r\n        .total {\r\n            text-align: right;\r\n            font-size: 1.5rem;\r\n            font-weight: bold;\r\n            margin-top: 20px;\r\n        }\r\n        .btn {\r\n            background-color: #007BFF;\r\n            color: white;\r\n            border: none;\r\n            padding: 10px 15px;\r\n            border-radius: 5px;\r\n            cursor: pointer;\r\n        }\r\n        .btn:hover {\r\n            background-color: #0056b3;\r\n        }\r\n        /* Responsive Design */\r\n        @media (max-width: 600px) {\r\n            .cart-item {\r\n                flex-direction: column;\r\n                align-items: flex-start;\r\n            }\r\n            .product-image {\r\n                width: 100%;\r\n                height: auto;\r\n                margin-bottom: 10px;\r\n            }\r\n            .product-info {\r\n                margin-left: 0;\r\n            }\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n\r\n<div class=\"cart-container\">\r\n    <div class=\"cart-header\">Your Shopping Cart</div>\r\n    <div id=\"cartItems\">\r\n        {% if cart_items and cart_items|length > 0 %}\r\n        <form method=\"POST\" action=\"{{ url_for('check.checkout') }}\">\r\n            {% for item in cart_items %}\r\n            <div class=\"cart-item\" data-item-id=\"{{ loop.index }}\">\r\n                <img src=\"/images/{{ item.name.replace(' ', '_')|lower }}.jpg\" alt=\"{{ item.name }}\" class=\"product-image\">\r\n                <div class=\"product-info\">\r\n                    <strong>{{ item.name }}</strong>\r\n                    <p>Quantity: <span class=\"item-quantity\">{{ item.quantity }}</span></p>\r\n                    <p>Price: RS.{{ item.price }}</p>\r\n                    <p>Total: RS.<span class=\"item-total\">{{ item.quantity * item.price }}</span></p>\r\n                </div>\r\n                <div class=\"cart-buttons\">\r\n                    <button class=\"increase-btn\">+</button>\r\n                    <button class=\"decrease-btn\">-</button>\r\n                    <button class=\"remove-btn\">Remove</button>\r\n                </div>\r\n            </div>\r\n            {% endfor %}\r\n            <div class=\"checkout-details\">\r\n                <label for=\"user_name\">Name:</label>\r\n                <input type=\"text\" id=\"user_name\" name=\"user_name\" required>\r\n\r\n                <label for=\"shipping_address\">Shipping Address:</label>\r\n                <input id=\"shipping_address\" name=\"shipping_address\" required>\r\n\r\n                <label for=\"payment_status\">Payment Status:</label>\r\n                <select id=\"payment_status\" name=\"payment_status\" required>\r\n                    <option value=\"paid\">Paid</option>\r\n                    <option value=\"pending\">Pending</option>\r\n                </select>\r\n\r\n                <input type=\"hidden\" name=\"total_amount\" value=\"{{ cart_items|sum(attribute='price') }}\">\r\n            </div>\r\n\r\n            <div class=\"total\">Total: RS. <span id=\"totalAmountValue\">{{ cart_items|sum(attribute='price') }}</span></div>\r\n            <button type=\"submit\" class=\"btn\">Checkout</button>\r\n        </form>\r\n        {% else %}\r\n            <p>Your cart is empty.</p>\r\n        {% endif %}\r\n    </div>\r\n</div>\r\n\r\n<script>\r\n   document.querySelector('.product-grid').addEventListener('click', event => {\r\n    if (event.target.classList.contains('add-to-cart')) {\r\n        event.preventDefault(); // Prevent default button behavior\r\n\r\n        // Find the parent form for the clicked button\r\n        const productForm = event.target.closest('.product-form');\r\n        if (!productForm) {\r\n            console.error(\"Form not found for the product!\");\r\n            return;\r\n        }\r\n\r\n        // Collect form data\r\n        const formData = new FormData(productForm);\r\n\r\n        // Debugging: Log data being sent to the server\r\n        console.log(\"Product data being sent to server:\", Object.fromEntries(formData));\r\n\r\n        // Send the data to the backend\r\n        fetch(productForm.action, {\r\n            method: 'POST',\r\n            body: formData\r\n        })\r\n        .then(response => {\r\n            if (response.ok) {\r\n                window.location.href = '{{ url_for(\"cart1.cart\") }}'; // Redirect to cart page\r\n            } else {\r\n                alert('Failed to add product to cart.');\r\n            }\r\n        })\r\n        .catch(error => {\r\n            console.error('Error sending product data:', error);\r\n        });\r\n    }\r\n});\r\nfunction updateCartTotal() {\r\n        const totals = Array.from(document.querySelectorAll('.item-total')).map(el => parseFloat(el.textContent));\r\n        const totalAmount = totals.reduce((sum, current) => sum + current, 0);\r\n\r\n        document.getElementById('totalAmountValue').textContent = totalAmount.toFixed(2);\r\n        document.getElementById('totalAmountInput').value = totalAmount.toFixed(2);\r\n    }\r\n\r\n</script>\r\n\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Kalika_projects-main/Kalika E-commerce/templates/testcart.html	(revision 11b5cc75eac7025377d639b15fd0ea5de837ebbf)
++++ Kalika_projects-main/Kalika E-commerce/templates/testcart.html	(date 1732635753031)
+@@ -32,9 +32,6 @@
+             padding: 15px;
+             border-bottom: 1px solid #ddd;
+         }
+-        .cart-item:last-child {
+-            border-bottom: none;
+-        }
+         .product-image {
+             width: 80px;
+             height: 80px;
+@@ -45,32 +42,15 @@
+             flex: 1;
+             margin-left: 20px;
+         }
+-        .product-info strong {
+-            font-size: 1.2rem;
+-        }
+-        .cart-buttons {
+-            display: flex;
+-            align-items: center;
+-            gap: 10px;
+-        }
+         .cart-buttons button {
+             background-color: #007bff;
+             color: white;
+             border: none;
+             padding: 8px 10px;
+-            font-size: 1rem;
+             cursor: pointer;
+-            border-radius: 4px;
+-            transition: background-color 0.3s;
+-        }
+-        .cart-buttons button:hover {
+-            background-color: #0056b3;
+         }
+         .cart-buttons .remove-btn {
+-            background-color: #dc3545;
+-        }
+-        .cart-buttons .remove-btn:hover {
+-            background-color: #c82333;
++            background-color: #dc3545; /* Red for remove */
+         }
+         .total {
+             text-align: right;
+@@ -78,126 +58,90 @@
+             font-weight: bold;
+             margin-top: 20px;
+         }
+-        .btn {
+-            background-color: #007BFF;
+-            color: white;
+-            border: none;
+-            padding: 10px 15px;
+-            border-radius: 5px;
+-            cursor: pointer;
+-        }
+-        .btn:hover {
+-            background-color: #0056b3;
+-        }
+-        /* Responsive Design */
+-        @media (max-width: 600px) {
+-            .cart-item {
+-                flex-direction: column;
+-                align-items: flex-start;
+-            }
+-            .product-image {
+-                width: 100%;
+-                height: auto;
+-                margin-bottom: 10px;
+-            }
+-            .product-info {
+-                margin-left: 0;
+-            }
+-        }
+     </style>
+ </head>
+ <body>
+-
+-<div class="cart-container">
+-    <div class="cart-header">Your Shopping Cart</div>
+-    <div id="cartItems">
+-        {% if cart_items and cart_items|length > 0 %}
+-        <form method="POST" action="{{ url_for('check.checkout') }}">
+-            {% for item in cart_items %}
+-            <div class="cart-item" data-item-id="{{ loop.index }}">
+-                <img src="/images/{{ item.name.replace(' ', '_')|lower }}.jpg" alt="{{ item.name }}" class="product-image">
+-                <div class="product-info">
+-                    <strong>{{ item.name }}</strong>
+-                    <p>Quantity: <span class="item-quantity">{{ item.quantity }}</span></p>
+-                    <p>Price: RS.{{ item.price }}</p>
+-                    <p>Total: RS.<span class="item-total">{{ item.quantity * item.price }}</span></p>
+-                </div>
+-                <div class="cart-buttons">
+-                    <button class="increase-btn">+</button>
+-                    <button class="decrease-btn">-</button>
+-                    <button class="remove-btn">Remove</button>
+-                </div>
+-            </div>
+-            {% endfor %}
+-            <div class="checkout-details">
+-                <label for="user_name">Name:</label>
+-                <input type="text" id="user_name" name="user_name" required>
+-
+-                <label for="shipping_address">Shipping Address:</label>
+-                <input id="shipping_address" name="shipping_address" required>
+-
+-                <label for="payment_status">Payment Status:</label>
+-                <select id="payment_status" name="payment_status" required>
+-                    <option value="paid">Paid</option>
+-                    <option value="pending">Pending</option>
+-                </select>
+-
+-                <input type="hidden" name="total_amount" value="{{ cart_items|sum(attribute='price') }}">
+-            </div>
+-
+-            <div class="total">Total: RS. <span id="totalAmountValue">{{ cart_items|sum(attribute='price') }}</span></div>
+-            <button type="submit" class="btn">Checkout</button>
+-        </form>
+-        {% else %}
+-            <p>Your cart is empty.</p>
+-        {% endif %}
+-    </div>
+-</div>
++    <div class="cart-container">
++        <div class="cart-header">Your Shopping Cart</div>
++        <div id="cartItems"></div>
++        <div class="total">Total Amount: RS. <span id="totalAmountValue">0</span></div>
++    </div>
++
++    <script>
++        let cartItems = []; // This will hold the cart items
++
++        // Function to update the UI with current cart items
++        function updateCartUI() {
++            const cartContainer = document.getElementById('cartItems');
++            cartContainer.innerHTML = ''; // Clear existing items
++            let totalAmount = 0;
++
++            if (cartItems.length === 0) {
++                cartContainer.innerHTML = '<p>Your cart is empty.</p>';
++                return; // Exit if no items
++            }
++
++            cartItems.forEach(item => {
++                const itemHTML = `
++                    <div class="cart-item" data-item-id="${item.itemcode}">
++                        <img src="/images/${item.name.replace(' ', '_').toLowerCase()}.jpg" alt="${item.name}" class="product-image">
++                        <div class="product-info">
++                            <strong>${item.name}</strong>
++                            <p>Quantity: <span class="item-quantity">${item.quantity}</span></p>
++                            <p>Price per item: RS.${item.price}</p>
++                            <p>Total Price: RS.<span class="item-total">${item.total_price}</span></p>
++                        </div>
++                        <div class="cart-buttons">
++                            <button type="button" class="increase-btn">+</button>
++                            <button type="button" class="decrease-btn">-</button>
++                            <button type="button" class="remove-btn">Remove</button>
++                        </div>
++                    </div>`;
++                cartContainer.insertAdjacentHTML('beforeend', itemHTML);
++                totalAmount += item.total_price; // Calculate total amount
++            });
++
++            document.getElementById('totalAmountValue').textContent = totalAmount; // Update total amount
++        }
+ 
+-<script>
+-   document.querySelector('.product-grid').addEventListener('click', event => {
+-    if (event.target.classList.contains('add-to-cart')) {
+-        event.preventDefault(); // Prevent default button behavior
++        // Function to handle button clicks
++        function handleButtonClick(event) {
++            const action = event.target.classList.contains('increase-btn') ? 'increase' :
++                           event.target.classList.contains('decrease-btn') ? 'decrease' :
++                           'remove';
+ 
+-        // Find the parent form for the clicked button
+-        const productForm = event.target.closest('.product-form');
+-        if (!productForm) {
+-            console.error("Form not found for the product!");
+-            return;
+-        }
++            const itemcode = event.target.closest('.cart-item').dataset.itemId;
+ 
+-        // Collect form data
+-        const formData = new FormData(productForm);
++            const item = cartItems.find(i => i.itemcode === itemcode);
+ 
+-        // Debugging: Log data being sent to the server
+-        console.log("Product data being sent to server:", Object.fromEntries(formData));
++            if (action === 'increase') {
++                item.quantity++;
++                item.total_price = item.quantity * item.price; // Update total price
++                updateCartUI();
+ 
+-        // Send the data to the backend
+-        fetch(productForm.action, {
+-            method: 'POST',
+-            body: formData
+-        })
+-        .then(response => {
+-            if (response.ok) {
+-                window.location.href = '{{ url_for("cart1.cart") }}'; // Redirect to cart page
+-            } else {
+-                alert('Failed to add product to cart.');
+-            }
+-        })
+-        .catch(error => {
+-            console.error('Error sending product data:', error);
+-        });
+-    }
+-});
+-function updateCartTotal() {
+-        const totals = Array.from(document.querySelectorAll('.item-total')).map(el => parseFloat(el.textContent));
+-        const totalAmount = totals.reduce((sum, current) => sum + current, 0);
+-
+-        document.getElementById('totalAmountValue').textContent = totalAmount.toFixed(2);
+-        document.getElementById('totalAmountInput').value = totalAmount.toFixed(2);
+-    }
++            } else if (action === 'decrease') {
++                if (item.quantity > 1) {
++                    item.quantity--;
++                    item.total_price = item.quantity * item.price; // Update total price
++                } else {
++                    cartItems = cartItems.filter(i => i.itemcode !== itemcode); // Remove if quantity is zero
++                }
++                updateCartUI();
++
++            } else if (action === 'remove') {
++                cartItems = cartItems.filter(i => i.itemcode !== itemcode); // Remove from cart
++                updateCartUI();
++
++            }
++        }
+ 
+-</script>
+-
++        // Adding event listeners to buttons after DOM loads
++        document.addEventListener('DOMContentLoaded', () => {
++           document.querySelectorAll('.increase-btn, .decrease-btn, .remove-btn').forEach(button => {
++               button.addEventListener('click', handleButtonClick);
++           });
++           updateCartUI(); // Initial UI update
++       });
++    </script>
+ </body>
+-</html>
++</html>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"BRANCH:Pratiksha\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </select>\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a259c414-5671-4a82-a49e-ce5da8045216\" name=\"Default Changelist\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/5af50c25ad9536080fef5fc64674e290\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"HTML File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2nZGvCSL6VFCdtB8ibzVQG1SzmA\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DefaultHtmlFileTemplate\" value=\"HTML File\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"TF_FMT\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../Kalika_ecommerce_junk/Kalika_projects-main\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"V:\\ML_projects\\Kalika_projects1\\Kalika_projects-main\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c7ad3278-7bf9-407e-b74b-4e280373e072\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1729173412569</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1729173412569</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"New version updated\">\r\n      <created>1729173470450</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729173470450</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"New version updated\">\r\n      <created>1729173488743</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729173488743</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"directory root tree  path updated\">\r\n      <created>1729173799951</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729173799954</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Deployment doc updated\">\r\n      <created>1729175165893</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729175165893</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Deployment doc updated\">\r\n      <created>1729175253785</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729175253785</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Deployment doc updated\">\r\n      <created>1729175369847</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729175369847</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Deployment doc updated\">\r\n      <created>1729175499444</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729175499444</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Index pages cart &amp; login with search issues resolved\">\r\n      <created>1729184704992</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729184704992</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"New categories and subcategories working updated\">\r\n      <created>1729191531362</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729191531362</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"New categories and subcategories working updated\">\r\n      <created>1729261886533</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1729261886533</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"11\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"Pratiksha\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"New version updated\" />\r\n    <MESSAGE value=\"directory root tree  path updated\" />\r\n    <MESSAGE value=\"Deployment doc updated\" />\r\n    <MESSAGE value=\"Index pages cart &amp; login with search issues resolved\" />\r\n    <MESSAGE value=\"New categories and subcategories working updated\" />\r\n    <MESSAGE value=\"Updated with recent changes to new\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Updated with recent changes to new\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"176\" y=\"0\" key=\"CommitChangelistDialog2\" timestamp=\"1731174694213\">\r\n      <screen x=\"0\" y=\"0\" width=\"1280\" height=\"672\" />\r\n    </state>\r\n    <state x=\"176\" y=\"0\" key=\"CommitChangelistDialog2/0.0.1280.672@0.0.1280.672\" timestamp=\"1731174694213\" />\r\n    <state x=\"422\" y=\"91\" key=\"FileChooserDialogImpl\" timestamp=\"1731176034618\">\r\n      <screen x=\"0\" y=\"0\" width=\"1280\" height=\"672\" />\r\n    </state>\r\n    <state x=\"422\" y=\"91\" key=\"FileChooserDialogImpl/0.0.1280.672@0.0.1280.672\" timestamp=\"1731176034618\" />\r\n    <state x=\"234\" y=\"56\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1729261888764\">\r\n      <screen x=\"0\" y=\"0\" width=\"1280\" height=\"672\" />\r\n    </state>\r\n    <state x=\"234\" y=\"56\" key=\"Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672\" timestamp=\"1729261888764\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py</url>\r\n          <line>5</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 11b5cc75eac7025377d639b15fd0ea5de837ebbf)
++++ .idea/workspace.xml	(date 1732635737115)
+@@ -20,19 +20,16 @@
+       <path>
+         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-        <item name="BRANCH:Pratiksha" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+       </path>
+     </select>
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/5af50c25ad9536080fef5fc64674e290" afterDir="false" />
++    <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/cart.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/cart.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/testcart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/testcart.html" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -43,6 +40,7 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="HTML File" />
++        <option value="Python Script" />
+       </list>
+     </option>
+   </component>
+@@ -55,6 +53,9 @@
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="ProjectId" id="2nZGvCSL6VFCdtB8ibzVQG1SzmA" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="1" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -67,6 +68,7 @@
+   </component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
++      <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main\Kalika E-commerce" />
+       <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main" />
+     </key>
+   </component>
