@@ -27,8 +27,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/static/js/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,10 +63,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="TF_FMT" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kalika_ecommerce_junk/Kalika_projects-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kalika_projects" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="V:\ML_projects\Kalika_projects1\Kalika E-commerce\static\js" />
+      <recent name="V:\ML_projects\Kalika_projects1\Kalika E-commerce\templates" />
+      <recent name="V:\ML_projects\Kalika_projects1\Kalika E-commerce\static\image" />
       <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main\Kalika E-commerce" />
       <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main" />
     </key>
@@ -164,7 +167,21 @@
       <option name="project" value="LOCAL" />
       <updated>1732723692171</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Updated with recent updates">
+      <created>1732724242881</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732724242881</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated with recent updates">
+      <created>1732724458836</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1732724458836</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,18 +223,18 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="176" y="0" key="CommitChangelistDialog2/0.0.1280.672@0.0.1280.672" timestamp="1731174694213" />
-    <state x="422" y="91" key="FileChooserDialogImpl" timestamp="1731176034618">
+    <state x="422" y="91" key="FileChooserDialogImpl" timestamp="1732726550137">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1731176034618" />
+    <state x="422" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1732726550137" />
     <state x="113" y="50" key="MergeDialog" timestamp="1732722428830">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="113" y="50" key="MergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1732722428830" />
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732723693541">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732724460745">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732723693541" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732724460745" />
     <state x="463" y="70" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1732723680937">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
