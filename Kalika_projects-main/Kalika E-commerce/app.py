@@ -1,7 +1,7 @@
 # from punchout import *
 import secrets
 import psycopg2
-from flask import Flask, render_template, request, redirect, url_for, jsonify,  flash, session
+from flask import Flask, render_template, request, redirect, url_for, jsonify,  flash, session, send_from_directory
 from login import login1
 from register import register1
 from addtocart import add_cart
@@ -9,13 +9,15 @@ from checkout import check
 from products import products1
 from cart import cart1
 from main import punchout
+import csv
+from urllib.parse import quote
 import logging
 
 from db import get_db_connection
 
 from flask_session import Session
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.config['SESSION_TYPE'] = 'filesystem'  # Store session data on the filesystem
 Session(app)
 
@@ -78,55 +80,50 @@ def get_product_details(itemcode):
         WHERE itemcode = %s
     """, (itemcode,))
     result = cur.fetchone()
-    print("results:",result[0],itemcode)
-    # cur.close()
+    print("results:", result[1])
+    cur.close()
 
     if result:
-        # return jsonify({
-        #     "itemcode": result[0],
-        #     "name": result[1],
-        #     "subcategory": result[2],
-        #     "price": result[3],
-        #     "description": result[4]
-        # })
-        return render_template('product.html',
-                                   itemcode=result[0],
-                                   name=result[1],
-                                   subcategory=result[2],
-                                   price=result[3],
-                                   description=result[4])
+        return jsonify({
+            "itemcode": result[0],
+            "name": result[1],
+            "subcategory": result[2],
+            "price": result[3],
+            "description": result[4]
+        })
     else:
         # logging.warning(f"Product not found for itemcode: {itemcode}")
         return jsonify({"error": "Product not found"}), 404
 
-@app.route('/product/<string:itemcode>')
-def get_product(itemcode):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    # Fetch product details by item code
-    query = """
-        SELECT itemcode, productname AS name, productdescription AS description, price, subcategory 
-        FROM productcatalog 
-        WHERE itemcode = %s;
-    """
-    cursor.execute(query, (itemcode,))
-    product = cursor.fetchone()
-
-    cursor.close()
-    conn.close()
-
-    if product:
-        return jsonify({
-            "itemcode": product[0],
-            "name": product[1],
-            "description": product[2],
-            "price": str(product[3]),  # Ensure price is a string
-            "subcategory": product[4]
-        })
-    else:
-        return jsonify({"error": "Product not found"}), 404
-
+# Route to display products by category
+# @app.route('/<string:maincategory>')
+# def show_category_products(maincategory):
+#     conn = get_db_connection()
+#     cursor = conn.cursor()
+#
+#     # Fetch products by category
+#     query = """
+#         SELECT itemcode, productname, subcategory, price
+#         FROM productcatalog
+#         WHERE maincategory = %s;
+#     """
+#     cursor.execute(query, (maincategory,))
+#     productcatalog = cursor.fetchall()
+#
+#     # Convert fetched data to a list of dictionaries
+#     product_list = [
+#         {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
+#         for row in productcatalog
+#     ]
+#     # print
+#
+#     cursor.close()
+#     conn.close()
+#
+#     # Render the HTML template with fetched products
+#     return render_template('category.html',
+#                            maincategory=maincategory,
+#                            products=product_list)
 
 # Route to display products by category
 @app.route('/<string:maincategory>')
@@ -136,8 +133,8 @@ def show_category_products(maincategory):
 
     # Fetch products by category
     query = """
-        SELECT itemcode, productname, subcategory, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, image_url
+        FROM product_catlog_image_url
         WHERE maincategory = %s;
     """
     cursor.execute(query, (maincategory,))
@@ -145,7 +142,7 @@ def show_category_products(maincategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
+        {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3], 'image_url': row[4]}
         for row in productcatalog
     ]
     # print
@@ -158,6 +155,39 @@ def show_category_products(maincategory):
                            maincategory=maincategory,
                            products=product_list)
 
+# Route to display products by category
+# @app.route('/<string:maincategory>')
+# def show_category_products(maincategory):
+#     product_list = []
+#
+#     # Read products from the CSV file
+#     with open('imagedata1.csv', mode='r', encoding='utf-8') as csvfile:
+#         csv_reader = csv.DictReader(csvfile)
+#         # Skip the first row
+#         # next(csv_reader, None)
+#
+#         for row in csv_reader:
+#             # Filter products by main category
+#             if row['Main Category'] == maincategory:
+#                 product_list.append({
+#                     'itemcode': row['Item Code'],
+#                     'productname': row['Product Title'],
+#                     'subcategory': row['Sub Categories'],
+#                     'price': float(row['Price']),
+#                     'image_url': url_for('static', filename=f'images/{row["Large Image"]}')
+#
+#                 })
+#
+#     # print("Product details:", product_list)
+#
+#     # Render the HTML template with fetched products
+#     return render_template('category.html',
+#                            maincategory=maincategory,
+#                            products=product_list)
+
+
+
+
 
 # Route to display products by subcategory
 @app.route('/<string:maincategory>/<string:subcategory>')
@@ -167,8 +197,8 @@ def show_products(maincategory, subcategory):
 
     # Fetch products based on category and subcategory
     query = """
-        SELECT itemcode, productname, productdescription, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, productdescription, price, image_url
+        FROM product_catlog_image_url 
         WHERE maincategory = %s AND subcategory = %s;
     """
     cursor.execute(query, (maincategory, subcategory))
@@ -176,7 +206,7 @@ def show_products(maincategory, subcategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3]}
+        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3], 'image_url': row[4]}
         for row in productcatalog
     ]
 
@@ -208,7 +238,7 @@ def fetch_productcatalog_data():
         # Query to fetch maincategory and subcategory data from productcatalog
         cursor.execute("""
             SELECT maincategory, subcategory
-            FROM productcatalog LIMIT 15
+            FROM product_catlog_image_url LIMIT 15
 
         """)
         rows = cursor.fetchall()
