@@ -133,8 +133,8 @@ def show_category_products(maincategory):
 
     # Fetch products by category
     query = """
-        SELECT itemcode, productname, subcategory, price
-        FROM productcatalog
+        SELECT itemcode, productname, subcategory, price, image_url
+        FROM product_catlog_image_url
         WHERE maincategory = %s;
     """
     cursor.execute(query, (maincategory,))
@@ -142,7 +142,7 @@ def show_category_products(maincategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
+        {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3], 'image_url': row[4]}
         for row in productcatalog
     ]
     # print
@@ -197,8 +197,8 @@ def show_products(maincategory, subcategory):
 
     # Fetch products based on category and subcategory
     query = """
-        SELECT itemcode, productname, productdescription, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, productdescription, price, image_url
+        FROM product_catlog_image_url 
         WHERE maincategory = %s AND subcategory = %s;
     """
     cursor.execute(query, (maincategory, subcategory))
@@ -206,7 +206,7 @@ def show_products(maincategory, subcategory):
 
     # Convert fetched data to a list of dictionaries
     product_list = [
-        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3]}
+        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3], 'image_url': row[4]}
         for row in productcatalog
     ]
 
@@ -238,7 +238,7 @@ def fetch_productcatalog_data():
         # Query to fetch maincategory and subcategory data from productcatalog
         cursor.execute("""
             SELECT maincategory, subcategory
-            FROM productcatalog LIMIT 15
+            FROM product_catlog_image_url LIMIT 15
 
         """)
         rows = cursor.fetchall()
