@@ -26,6 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1732723117120</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Updated with recent updates">
+      <created>1732723692171</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732723692171</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,10 +214,14 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="113" y="50" key="MergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1732722428830" />
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732723122615">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732723693541">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732723122615" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732723693541" />
+    <state x="463" y="70" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1732723680937">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="463" y="70" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1280.672@0.0.1280.672" timestamp="1732723680937" />
     <state x="436" y="249" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1732722627299">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
