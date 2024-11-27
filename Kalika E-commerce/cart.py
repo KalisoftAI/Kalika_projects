@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import xml.etree.ElementTree as ET
 from db import get_db_connection
 
-
 cart1 = Blueprint('cart1', __name__)
 
 

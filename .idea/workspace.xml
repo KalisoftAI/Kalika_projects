@@ -25,11 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/static/js/script.js" afterDir="false" />
-    </list>
+    <list default="true" id="c7ad3278-7bf9-407e-b74b-4e280373e072" name="Default Changelist" comment="New categories and subcategories working updated" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1732724458836</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Updated with recent updates for search functionality">
+      <created>1732728150461</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732728150461</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,7 +219,8 @@
     <MESSAGE value="New categories and subcategories working updated" />
     <MESSAGE value="Updated with recent changes to new" />
     <MESSAGE value="Updated with recent updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated with recent updates" />
+    <MESSAGE value="Updated with recent updates for search functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated with recent updates for search functionality" />
   </component>
   <component name="WindowStateProjectService">
     <state x="176" y="0" key="CommitChangelistDialog2" timestamp="1731174694213">
@@ -231,10 +235,10 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="113" y="50" key="MergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1732722428830" />
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732724460745">
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732728151480">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732724460745" />
+    <state x="234" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732728151480" />
     <state x="463" y="70" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1732723680937">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
