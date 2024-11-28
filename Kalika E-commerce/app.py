@@ -1,7 +1,7 @@
 # from punchout import *
 import secrets
 import psycopg2
-from flask import Flask, render_template, request, redirect, url_for, jsonify,  flash, session, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session, send_from_directory
 from login import login1
 from register import register1
 from addtocart import add_cart
@@ -9,6 +9,9 @@ from checkout import check
 from products import products1
 from cart import cart1
 from main import punchout
+from flask_session import Session
+from datetime import timedelta
+from db import get_db_connection
 import csv
 from urllib.parse import quote
 import logging
@@ -18,9 +21,21 @@ from db import get_db_connection
 
 from flask_session import Session
 
+# Initialize the Flask application
 app = Flask(__name__, static_folder='static')
+
+
+# Flask Session Configuration
+app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
 app.config['SESSION_TYPE'] = 'filesystem'  # Store session data on the filesystem
+app.config['SESSION_PERMANENT'] = False  # Make sessions non-permanent by default
+app.config['SESSION_USE_SIGNER'] = True  # Sign the session ID for added security
+app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS for cookies in production
+app.config['SESSION_COOKIE_HTTPONLY'] = True  # Prevent JavaScript access to cookies
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Mitigate CSRF attacks
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Session expiration time
 Session(app)
+
 
 
 app.register_blueprint(login1)
@@ -32,8 +47,8 @@ app.register_blueprint(cart1)
 app.register_blueprint(punchout)
 
 
-# Set a random secret key for session management
-app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
+# # Set a random secret key for session management
+# app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
 
 
 @app.route('/')
@@ -41,18 +56,6 @@ def home():
     # Fetch main categories and categories for other sections
     maincategory = fetch_categories()  # For the carousel
     categories = fetch_productcatalog_data()  # For category-subcategory mapping
-
-    # maincategory = [
-    #     ('Gloves',), 
-    #     ('Hand Sleeves',), 
-    #     ('Ear Muffs',), 
-    #     ('Respirator & Accessories',), 
-    #     ('Apron',), 
-    #     ('Welding Helmet',), 
-    #     ('Bouffant Cap',), 
-    #     ('Barrication Tape',), 
-    #     ('Floor Marking Tape',)
-    # ]
 
     # Fetch random products from the database
     random_products_query = """
@@ -109,6 +112,25 @@ def termsofservices():
 @app.route('/faqs')
 def faqs():
     return render_template('faq.html')
+
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' in session:
+        return f"Welcome back, {session['user_email']}!"
+    return redirect(url_for('login1.login'))
+
+@app.route('/get_user_info', methods=['GET'])
+def get_user_info():
+    print("User info session:", dict(session)) 
+    
+    # Check for user_name in session
+    if 'user_name' in session:
+        return jsonify({'success': True, 'user_name': session['user_name']})
+    
+    # Return failure response if not logged in
+    return jsonify({'success': False, 'message': 'User not logged in.'})
+
 
 @app.route('/search', methods=['GET'])
 def search():

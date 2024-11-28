@@ -24,21 +24,25 @@ def login():
             connection = get_db_connection()
             cursor = connection.cursor()
 
-            # Fetch user data
-            cursor.execute("SELECT password_hash FROM users WHERE email = %s", (email,))
+            # Fetch user data including name
+            cursor.execute("SELECT user_id, password_hash, username FROM users WHERE email = %s", (email,))
             user = cursor.fetchone()
 
             if not user:
                 print(f"Login failed: No user found with email {email}")
                 return jsonify({'success': False, 'message': 'Invalid email or password!'})
 
-            stored_hash = user[0]
+            user_id, stored_hash, username = user
             print(f"User found with email: {email}, Stored Hash: {stored_hash}")
 
             # Validate the password
             if check_password_hash(stored_hash, password):
-                session['user_email'] = email
-                print("Login successful")
+                # Start session and store user information
+                session['user_id'] = user_id  # Store the user ID in session
+                session['user_email'] = email  # Store the user's email in session
+                session['user_name'] = username  # Store the user's name in session
+                session.permanent = True  # Make the session last longer if configured
+                print(f"Login successful for user {user_id} - {email}")
                 return jsonify({'success': True, 'message': 'Login successful!'})
             else:
                 print("Login failed: Incorrect password")
@@ -57,3 +61,9 @@ def login():
 
     # Render login page for GET requests
     return render_template('login.html')
+
+
+@login1.route('/logout')
+def logout():
+    session.clear()  # Remove all session data
+    return jsonify({'success': True, 'message': 'Logged out successfully!'})
