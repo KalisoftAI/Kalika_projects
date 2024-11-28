@@ -15,6 +15,7 @@ from db import get_db_connection
 import csv
 from urllib.parse import quote
 import logging
+from flask_cors import CORS
 
 
 from db import get_db_connection
@@ -23,6 +24,7 @@ from flask_session import Session
 
 # Initialize the Flask application
 app = Flask(__name__, static_folder='static')
+CORS(app)
 
 
 # Flask Session Configuration
@@ -90,6 +92,11 @@ def home():
         random_products=random_products
     )
 
+# def dashboard():
+#     print("user",session)
+#     if 'user_id' in session:
+#         return f"Welcome back, {session['user_email']}!"
+#     return redirect(url_for('login1.login'))
 
 
 @app.route('/aboutus')
@@ -114,22 +121,14 @@ def faqs():
     return render_template('faq.html')
 
 
-@app.route('/dashboard')
-def dashboard():
-    if 'user_id' in session:
-        return f"Welcome back, {session['user_email']}!"
-    return redirect(url_for('login1.login'))
+# @app.route('/dashboard')
+# def dashboard():
+#     print("user",session)
+#     if 'user_id' in session:
+#         return f"Welcome back, {session['user_email']}!"
+#     return redirect(url_for('login1.login'))
 
-@app.route('/get_user_info', methods=['GET'])
-def get_user_info():
-    print("User info session:", dict(session)) 
-    
-    # Check for user_name in session
-    if 'user_name' in session:
-        return jsonify({'success': True, 'user_name': session['user_name']})
-    
-    # Return failure response if not logged in
-    return jsonify({'success': False, 'message': 'User not logged in.'})
+
 
 
 @app.route('/search', methods=['GET'])
@@ -355,7 +354,7 @@ def fetch_categories():
         cursor = connection.cursor()
         cursor.execute("SELECT maincategory FROM productcatalog LIMIT 12;")
         maincategories = cursor.fetchall()  # Fetch only the main categories
-        print("maincategories", maincategories)
+        # print("maincategories", maincategories)
         cursor.close()
         connection.close()
 

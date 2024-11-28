@@ -137,6 +137,22 @@
          }
      });
  });
+ document.addEventListener("DOMContentLoaded", async () => {
+            const userElement = document.getElementById('user-personalization');
+            const loginButton = document.getElementById('login-button');
+
+            fetch('/get_user_info')
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success && result.user_name) {
+                        userElement.innerHTML = `<h3>Welcome, ${result.user_name}!</h3>`;
+                        loginButton.style.display = 'none'; // Hide login button
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching user info:', error);
+                });
+        });
      </script>
 </body>
 </html>

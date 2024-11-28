@@ -52,15 +52,29 @@ def login():
             print(f"Error during login: {e}")
             return jsonify({'success': False, 'message': 'An unexpected error occurred. Please try again.'})
 
-        finally:
-            # Ensure the cursor and connection are closed
-            if cursor:
-                cursor.close()
-            if connection:
-                connection.close()
+        # finally:
+        #     # Ensure the cursor and connection are closed
+        #     if cursor:
+        #         cursor.close()
+        #     if connection:
+        #         connection.close()
 
     # Render login page for GET requests
     return render_template('login.html')
+
+@login1.route('/get_user_info', methods=['GET'])
+def get_user_info():
+    print("userinfo",session)
+    if 'user_id' in session:
+        return jsonify({
+            'success': True,
+            'user_name': session['user_name']
+        })
+    else:
+        return jsonify({
+            'success': False,
+            'user_name': None
+        })
 
 
 @login1.route('/logout')

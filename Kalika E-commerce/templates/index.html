@@ -99,9 +99,11 @@
             (<span class="cart-count">0</span>)
           </a>
 
-          <a href="{{ url_for('login1.login') }}" class="btn-login">
-              <i class="fa fa-user"></i> Login</a>
-              <div id="user-personalization"></div>
+          <div id="user-personalization">
+            <a href="{{ url_for('login1.login') }}" class="btn-login" id="login-button">
+                <i class="fa fa-user"></i> Login
+            </a>
+        </div>
           </div>
         </nav>
       </div>
@@ -221,6 +223,25 @@
 
     <!-- Link to JS file -->
     <script src="../static/js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const userElement = document.getElementById('user-personalization');
+        const loginButton = document.getElementById('login-button');
+    
+        fetch('/get_user_info')
+        .then(response => response.json())
+        .then(result => {
+            if (result.success && result.user_name) {
+                userElement.innerHTML = `<h3>Welcome, ${result.user_name}!</h3>`;
+                loginButton.style.display = 'none'; // Hide login button
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user info:', error);
+        });
+
+    });
+    </script>
 
     </body>
 

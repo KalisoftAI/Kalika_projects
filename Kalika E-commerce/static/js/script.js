@@ -16,35 +16,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener("DOMContentLoaded", async () => {
         const userElement = document.getElementById('user-personalization');
+        const loginButton = document.getElementById('login-button');
     
-        try {
-            const response = await fetch('/get_user_info', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-    
-            console.log('Response status:', response.status); // Log response status
-    
-            // Check if the response is OK (status in the range 200-299)
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-    
-            const result = await response.json();
-            console.log('Result:', result); // Log result for debugging
-    
-            // Display username or fallback message
+        fetch('/get_user_info')
+        .then(response => response.json())
+        .then(result => {
             if (result.success && result.user_name) {
                 userElement.innerHTML = `<h3>Welcome, ${result.user_name}!</h3>`;
-            } else {
-                userElement.innerHTML = '<h3>Welcome, Guest!</h3>';
+                loginButton.style.display = 'none'; // Hide login button
             }
-        } catch (error) {
+        })
+        .catch(error => {
             console.error('Error fetching user info:', error);
-            userElement.innerHTML = '<h3>Welcome, Guest!</h3>';
-        }
+        });
+
     });
 
     // Function to update cart in localStorage and refresh the display
