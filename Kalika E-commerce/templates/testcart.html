@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    {% extends "base.html" %}
+
+    {% block title %} Shopping Cart {% endblock %}
+    {% block extra_css %}
     <style>
         body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f9;
-        margin: 40px;
+        margin: 0;
         padding: 0;
         color: #333;
         }
 
         .cart-container {
-            max-width: 500px;
+            max-width: 400px;
             margin: 50px auto;
             background-color: #ffffff;
             border-radius: 10px;
@@ -42,6 +45,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px;
+            margin: 40px;
             border-bottom: 1px solid #e0e0e0;
             transition: background-color 0.3s ease-in-out;
         }
@@ -121,12 +125,17 @@
             font-weight: bold;
             color: #007bff;
             margin-top: 30px;
+            margin-right: 70px;
         }
 
+        .checkout-details {
+            margin: 40px;
+           
+        }
         .checkout-details label {
             display: inline;
             font-weight: bold;
-            margin: 10px 0 5px;
+            margin: 40px 0 20px;
             color: #444;
         }
 
@@ -134,7 +143,7 @@
         .checkout-details select {
             width: 20%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 40px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
@@ -154,7 +163,8 @@
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 12px;
+            margin-left: 50%;
+            
             border-radius: 5px;
             font-size: 1.2rem;
             cursor: pointer;
@@ -202,9 +212,10 @@
             }
         }
     </style>
+    {% endblock %}
 </head>
 <body>
-
+    {% block content %}
     <div id="cartItems">
         <div class="cart-items-container">
             {% if cart_items and cart_items|length > 0 %}
@@ -247,7 +258,9 @@
             </form>
         </div>
     </div>
+    {% endblock %}
 
+    {% block extra_js %}
 <script>
     document.querySelectorAll('.increase-btn, .decrease-btn, .remove-btn').forEach(button => {
     button.addEventListener('click', function () {
@@ -335,6 +348,6 @@ function updateCartEventListener() {
     .catch(error => console.error('Error:', error));
 }
 </script>
-
+{% endblock %}
 </body>
 </html>

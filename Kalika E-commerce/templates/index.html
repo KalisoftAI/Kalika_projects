@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Kalika Industrial eCommerce</title>
+    <title>{% block title %}Kalika Industrial eCommerce{% endblock %}</title>
     <meta charset="utf-8">
     <link rel="icon" type="../static/image/x-icon" href="../static/image/logo.png">
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Your go-to platform for industrial machinery, tools, and equipment.">
     <meta name="keywords" content="industrial, machinery, B2B, tools, heavy equipment">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/style.css">
-
-
-
-    <!-- External Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   </head>
 
@@ -27,90 +18,12 @@
     <header>
       <div class="container">
         <nav class="navbar">
-          <ul class="navbar-nav">
-            <li class="dropdown1">
-                <a href="#" class="btn-categories">
-                    <div class="all-categories">
-                          <i class="fa fa-list"></i> All Categories
-                        </div>
-
-                </a>
-                <ul class="dropdown-menu">
-                    {% for maincategory, subcategories in categories.items() %}
-                        <li>
-                            <!-- Link to maincategory page -->
-                            <a href="{{ url_for('show_category_products', maincategory=maincategory) }}" target="_blank">
-                                {{ maincategory }}
-                            </a>
-                            <ul class="dropdown-submenu">
-                                {% for subcategory in subcategories %}
-                                    <li>
-                                        <!-- Link to subcategory page within maincategory -->
-                                        <a href="{{ url_for('show_products', maincategory=maincategory, subcategory=subcategory) }}" target="_blank">
-                                            {{ subcategory }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        </ul>
-          <div class="navbar-logo">
-            <a href="index.html">
-              <img src="../static/image/logo.png" alt="Industrial eCommerce Logo" class="logo-image">
-            </a>
-          </div>
-          <div class="header-actions">
-            <input
-                type="text"
-                class="search-bar"
-                id="searchInput"
-                placeholder="Search for products..."
-            />
-            <button>
-                <i class="fa fa-search"></i> Search
-            </button>
-            <ul id="searchResults" class="search-results-dropdown"></ul>
-                  <!-- Product details section (initially hidden) -->
-                <div id="product-details" style="display:none;">
-                    <h2 id="product-name"></h2>
-                    <p id="product-description"></p>
-                    <p id="product-price"></p>
-                    <button id="add-to-cart">Add to Cart</button>
-                </div>
-        </div>
-
-
-<!--            <input-->
-<!--                type="text"-->
-<!--                placeholder="Search products..."-->
-<!--                class="search-bar"-->
-<!--                id="searchInput"-->
-<!--            >-->
-<!--            <button>-->
-<!--                <i class="fa fa-search"></i> Search-->
-<!--            </button>-->
-
-
-          <a href="{{ url_for('cart1.cart') }}" class="btn-login">
-            <i class="fa fa-shopping-cart"></i>
-            (<span class="cart-count">0</span>)
-          </a>
-
-          <div id="user-personalization">
-            <a href="{{ url_for('login1.login') }}" class="btn-login" id="login-button">
-                <i class="fa fa-user"></i> Login
-            </a>
-        </div>
-          </div>
+          {% include 'header.html' %}
+          
         </nav>
       </div>
     </header>
       <!-- HEADER END -->
-
-
 
 
 
@@ -223,25 +136,6 @@
 
     <!-- Link to JS file -->
     <script src="../static/js/script.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const userElement = document.getElementById('user-personalization');
-        const loginButton = document.getElementById('login-button');
-    
-        fetch('/get_user_info')
-        .then(response => response.json())
-        .then(result => {
-            if (result.success && result.user_name) {
-                userElement.innerHTML = `<h3>Welcome, ${result.user_name}!</h3>`;
-                loginButton.style.display = 'none'; // Hide login button
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching user info:', error);
-        });
-
-    });
-    </script>
 
     </body>
 

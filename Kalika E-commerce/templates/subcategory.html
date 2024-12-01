@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ category }} Products - Kalika eCommerce</title>
+    {% extends "base.html" %}
+    {% block title %}{{ category }} Products - Kalika eCommerce{% endblock %}
+    {% block extra_css %}
     <style>
         /* Basic Reset */
 * {
@@ -18,7 +20,7 @@ body {
     color: #333;
 }
 
-header {
+.product-subcategory {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,10 +96,11 @@ h1 {
     background-color: #218838;
 }
 </style>
+{% endblock %}
 </head>
 <body>
-
-    <header>
+    {% block content %}
+    <header class="product-subcategory">
         <h1>{{ subcategory }} Products</h1>
         <a href="/" class="back-link">Back to Home</a>
     </header>
@@ -118,6 +121,11 @@ h1 {
         </form>
         {% endfor %}
     </div>
+    {% endblock %}
+
+
+    {% block extra_js %}
     <script src="../static/js/script.js"></script>
+    {% endblock %}
 </body>
 </html>

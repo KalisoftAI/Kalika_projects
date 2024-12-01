@@ -53,6 +53,11 @@ app.register_blueprint(punchout)
 # app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
 
 
+def get_shared_data():
+    return {
+        "categories": fetch_productcatalog_data()
+    }
+
 @app.route('/')
 def home():
     # Fetch main categories and categories for other sections
@@ -86,7 +91,7 @@ def home():
     conn.close()
 
     return render_template(
-        'index.html',
+        'index.html', 
         maincategory=maincategory,
         categories=categories,
         random_products=random_products
@@ -247,6 +252,7 @@ def get_product_details(itemcode):
 @app.route('/<string:maincategory>')
 def show_category_products(maincategory):
     conn = get_db_connection()
+    categories = fetch_productcatalog_data()
     cursor = conn.cursor()
 
     # Fetch products by category
@@ -271,6 +277,7 @@ def show_category_products(maincategory):
     # Render the HTML template with fetched products
     return render_template('category.html', 
                            maincategory=maincategory, 
+                           categories=categories,
                            products=product_list)
 
 
@@ -280,6 +287,7 @@ def show_category_products(maincategory):
 @app.route('/<string:maincategory>/<string:subcategory>')
 def show_products(maincategory, subcategory):
     conn = get_db_connection()
+    categories = fetch_productcatalog_data()
     cursor = conn.cursor()
 
     # Fetch products based on category and subcategory
@@ -304,6 +312,7 @@ def show_products(maincategory, subcategory):
     return render_template('subcategory.html',
                            maincategory=maincategory,
                            subcategory=subcategory,
+                           categories=categories,
                            products=product_list)
 
 

@@ -14,31 +14,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    document.addEventListener("DOMContentLoaded", async () => {
+    // Fetch user info and personalize the page
+    async function fetchUserInfo() {
         const userElement = document.getElementById('user-personalization');
         const loginButton = document.getElementById('login-button');
-    
-        fetch('/get_user_info')
-        .then(response => response.json())
-        .then(result => {
+        
+        try {
+            const response = await fetch('/get_user_info');
+            const result = await response.json();
             if (result.success && result.user_name) {
                 userElement.innerHTML = `<h3>Welcome, ${result.user_name}!</h3>`;
                 loginButton.style.display = 'none'; // Hide login button
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error fetching user info:', error);
-        });
+        }
+    }
 
-    });
-
-    // Function to update cart in localStorage and refresh the display
+    // Function to update cart count from the server
     function updateCartCountOnIndex() {
         fetch('/cart/count', {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
+            headers: { 'Accept': 'application/json' }
         })
         .then(response => response.json())
         .then(data => {
@@ -71,28 +68,22 @@ document.addEventListener('DOMContentLoaded', function () {
         logoutButton.addEventListener('click', logout);
     }
 
-    
-
     // Search Functionality
     const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const popupSearchResults = document.getElementById('popupSearchResults');
+
     if (searchInput) {
-        let searchResults = null;
-
-        function createSearchResultsContainer() {
-            searchResults = document.createElement('ul');
-            searchResults.id = 'searchResults';
-            searchResults.classList.add('search-results');
-            searchInput.parentNode.appendChild(searchResults);
-        }
-
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.trim();
+
             if (!query) {
-                if (searchResults) searchResults.innerHTML = '';
+                popupSearchResults.style.display = 'none'; // Hide popup if input is empty
+                searchResults.innerHTML = '';
                 return;
             }
 
-            if (!searchResults) createSearchResultsContainer();
+            popupSearchResults.style.display = 'block'; // Show popup
 
             fetch(`/search?q=${encodeURIComponent(query)}`)
                 .then(response => response.json())
@@ -109,6 +100,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Error fetching search results:', error);
                     searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
                 });
+        });
+
+        // Hide popup when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!popupSearchResults.contains(event.target) && event.target !== searchInput) {
+                popupSearchResults.style.display = 'none';
+            }
         });
     }
 
@@ -131,9 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initial calls on page load
-    displayUserName();
+    fetchUserInfo();
     updateCartCount();
     displayCart();
     updateCartCountOnIndex();
-    
 });

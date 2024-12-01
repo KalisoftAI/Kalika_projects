@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ category }} Products - Kalika eCommerce</title>
+    {% extends "base.html" %}
+    {% block title %} {{ category }} Products - Kalika eCommerce{% endblock %}
+    {% block extra_css %}
     <style>
         /* Basic Reset */
 * {
@@ -18,7 +20,7 @@ body {
     color: #333;
 }
 
-header {
+.product-category {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,11 +96,12 @@ h1 {
     background-color: #218838;
 }
 </style>
+{% endblock %}
 
 </head>
 <body>
-
-<header>
+    {% block content %}
+<header class="product-category">
     <h1>{{ maincategory }} Products</h1>
     <a href="/" class="back-link">Back to Home</a>
 </header>
@@ -114,15 +117,18 @@ h1 {
             <input type="hidden" name="itemcode" value="{{ product.itemcode }}">
             <input type="hidden" name="product_name" value="{{ product.productname }}">
             <input type="hidden" name="product_price" value="{{ product.price | round(2) }}">
-<!--            <img src="{{ product.image_url }}" alt="{{ product.productname }}" class="product-image">-->
+           <!-- <img src="{{ product.image_url }}" alt="{{ product.productname }}" class="product-image"> -->
             <button type="submit" class="add-to-cart">Add to Cart</button>
         </div>
     </form>
     {% endfor %}
 </div>
+{% endblock %}
 
 <!--<script src="../static/js/script.js"></script>-->
+{% block extra_js %}
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
 
 </body>
 </html>

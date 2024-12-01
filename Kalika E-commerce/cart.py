@@ -3,12 +3,16 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import xml.etree.ElementTree as ET
 from db import get_db_connection
 
+
 cart1 = Blueprint('cart1', __name__)
 
 
 # Route for cart page
 @cart1.route('/cart', methods=['GET', 'POST'])
 def cart():
+    from app import get_shared_data
+    shared_data = get_shared_data()
+    categories = shared_data['categories']
     cart_items = session.get('cart', [])
     print("Debug: Cart items", cart_items)
 
@@ -21,7 +25,7 @@ def cart():
         if request.headers.get('Accept') == 'application/json':
             return jsonify({"cart_items": cart_items, "total_amount": total_amount})
         else:
-            return render_template('testcart.html', cart_items=cart_items, total_amount=total_amount)
+            return render_template('testcart.html', cart_items=cart_items, total_amount=total_amount, categories=categories)
 
     elif request.method == 'POST':
         data = request.get_json()
