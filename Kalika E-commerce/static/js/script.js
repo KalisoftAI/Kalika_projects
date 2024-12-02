@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const errorMessage = document.getElementById('error-message');
+    const userElement = document.getElementById('user-personalization');
+    const userMenu = document.getElementById('user-menu');
+    const userDropdown = document.getElementById('user-dropdown');
+    const userInitial = document.getElementById('user-initial');
+    const usernameDisplay = document.getElementById('username-display');
+    const loginButton = document.getElementById('login-button');
+    const logoutButton = document.getElementById('logout-button');
+    const dropdownList = document.getElementById('dropdown-list');
+    
 
     // Function to update cart count
     function updateCartCount() {
@@ -13,24 +22,57 @@ document.addEventListener('DOMContentLoaded', function () {
             cartCountElement.textContent = totalItems;
         }
     }
+    // Remove item from the cart
+    function removeItemFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+        updateCartCount();
+    }
+
 
     // Fetch user info and personalize the page
     async function fetchUserInfo() {
-        const userElement = document.getElementById('user-personalization');
-        const loginButton = document.getElementById('login-button');
-        
         try {
             const response = await fetch('/get_user_info');
             const result = await response.json();
+
             if (result.success && result.user_name) {
-                userElement.innerHTML = `<h3>Welcome, ${result.user_name}!</h3>`;
+                // Get first initial of the username
+                const firstInitial = result.user_name.charAt(0).toUpperCase();
+                userInitial.textContent = firstInitial;
+                usernameDisplay.textContent = result.user_name;
+
+                // Hide login button and show the dropdown button with the user's initial
                 loginButton.style.display = 'none'; // Hide login button
+                userDropdown.style.display = 'inline-flex'; // Show the dropdown button
+                userMenu.style.display = 'block'; // Show user menu (dropdown content)
             }
         } catch (error) {
             console.error('Error fetching user info:', error);
         }
     }
 
+    // Toggle dropdown menu
+    userDropdown.addEventListener('click', () => {
+        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Logout handler
+    logoutButton.addEventListener('click', async () => {
+        try {
+            const response = await fetch('/logout', { method: 'GET' });
+            const result = await response.json();
+            if (result.success) {
+                alert(result.message);
+                location.reload(); // Reload the page to reset UI
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    });
+    
+    // Call fetchUserInfo on page load
+    fetchUserInfo();
     // Function to update cart count from the server
     function updateCartCountOnIndex() {
         fetch('/cart/count', {
@@ -47,13 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error fetching cart count:', error));
     }
 
-    // Remove item from the cart
-    function removeItemFromCart(index) {
-        cart.splice(index, 1);
-        updateCart();
-        updateCartCount();
-    }
-
+    
     // Logout functionality
     function logout() {
         localStorage.removeItem('cart');
@@ -63,10 +99,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Attach logout event listener
-    const logoutButton = document.getElementById('logout');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', logout);
-    }
+    // const logoutButton = document.getElementById('logout');
+    // if (logoutButton) {
+    //     logoutButton.addEventListener('click', logout);
+    // }
 
     // Search Functionality
     const searchInput = document.getElementById('searchInput');
@@ -133,4 +169,5 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCartCount();
     displayCart();
     updateCartCountOnIndex();
+    fetchUserInfo();
 });

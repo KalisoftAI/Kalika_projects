@@ -156,7 +156,7 @@ button i {
 /* Popup Search Results */
 .popup-search-results {
   position: absolute;
-  top: 95px;
+  top: 60px;
   left: 50;
   width: 320px;
   max-height: 300px;
@@ -198,37 +198,106 @@ button i {
 
 
 /* Attractive Login Button */
+#user-personalization {
+  display: inline-block;
+}
+
+/* Login Button */
+#user-personalization {
+  display: inline-block;
+}
+
+/* Login Button */
 .btn-login {
-  color: #fff; /* White text */
-  background-color: #007bff; /* Blue background */
+  color: #fff;
+  background-color: #007bff;
   text-decoration: none;
   padding: 12px 20px;
-  border: 2px solid transparent; /* Border to handle focus effect */
-  border-radius: 30px; /* Rounded corners */
+  border: 2px solid transparent;
+  border-radius: 30px;
   font-size: 16px;
   font-weight: 600;
   text-align: center;
   display: inline-block;
-  transition: all 0.3s ease; /* Smooth transition for hover and focus */
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); /* Subtle shadow */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
 }
 
 .btn-login:hover {
-  background-color: #0056b3; /* Darker blue when hovered */
-  color: #fff;
-  border-color: #0056b3; /* Add border effect when hovered */
-  transform: translateY(-3px); /* Lift the button on hover */
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-3px);
 }
 
 .btn-login:focus {
-  outline: none; /* Remove default focus outline */
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6); /* Add glowing effect on focus */
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
 }
 
-/* Optionally add a subtle animation when the button is clicked */
 .btn-login:active {
-  transform: scale(0.98); /* Slightly shrink the button on click */
+  transform: scale(0.98);
 }
+
+/* User Dropdown Button */
+.btn-user {
+  background-color: #007bff;
+  color: #fff;
+  border: 2px solid #ddd;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+  
+}
+#user-initial {
+  margin-right: 10px; /* Adjust the value as needed */
+}
+
+.btn-user:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+/* Dropdown Menu */
+#user-menu {
+  position: absolute;
+  top: 60px;
+  right: 35px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+  display:none /* Hidden initially */
+}
+
+#dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+#dropdown-list li {
+  margin: 5px 0;
+}
+
+#dropdown-list li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+#dropdown-list li a:hover {
+  text-decoration: underline;
+}
+
 
 
  /* Hero Section Styles */
@@ -261,13 +330,12 @@ button i {
   position: relative;
 }
 
-.swiper-wrapper {
-  display: flex;
-  padding: 10px;
-  margin: 0;
-  animation: slide 20s linear infinite; /* Continuous scrolling animation */
+.scrolling-element {
+  display: inline-block;
+  position: absolute;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
 }
-
 .swiper-wrapper a {
   padding: 15px;
   display: flex;
@@ -333,9 +401,9 @@ button i {
 /* Keyframes for infinite scrolling */
 @keyframes slide {
   0% {
-    transform: translateX(0);
+    transform: translateX(100%);
   }
-  80% {
+  100% {
     transform: translateX(-100%); /* Move all the way to the left */
   }
 }

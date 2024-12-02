@@ -67,5 +67,16 @@
     <a href="{{ url_for('login1.login') }}" class="btn-login" id="login-button">
         <i class="fa fa-user"></i> Login
     </a>
+    <button class="btn-user" id="user-dropdown" style="display: none;">
+        <span id="user-initial"></span>
+        <i class="fa fa-user"></i>
+    </button>
 </div>
+<div id="user-menu" style="display: none;">
+    <ul id="dropdown-list" style="display: none;">
+        <li><span id="username-display"></span></li>
+        <li><a href="#" id="logout-button">Logout</a></li>
+    </ul>
+</div>
+
 </div>

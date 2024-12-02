@@ -225,6 +225,7 @@ def create_orders_table():
     #     cursor.close()
     #     connection.close()
 
+
 # def initialize_connection():
         # sample_order = {
         # "user_id": 1,

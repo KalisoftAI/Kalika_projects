@@ -361,9 +361,9 @@ def fetch_categories():
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
-        cursor.execute("SELECT maincategory FROM productcatalog LIMIT 12;")
+        cursor.execute("SELECT DISTINCT maincategory FROM productcatalog WHERE maincategory != 'Spring-\xa0Air Hammer Drill Gun' LIMIT 12;")
         maincategories = cursor.fetchall()  # Fetch only the main categories
-        # print("maincategories", maincategories)
+        print("maincategories", maincategories)
         cursor.close()
         connection.close()
 

@@ -79,5 +79,30 @@ def get_user_info():
 
 @login1.route('/logout')
 def logout():
-    session.clear()  # Remove all session data
+    user_id = session.get('user_id')  # Fetch the current user's ID
+    if user_id:
+        try:
+            connection = get_db_connection()
+            cursor = connection.cursor()
+
+            # Save logout details to the database
+            cursor.execute(
+                "INSERT INTO session_logs (user_id, logout_time) VALUES (%s, NOW())",
+                (user_id,)
+            )
+            connection.commit()
+
+            # Optionally log this event
+            print(f"Session data stored for user {user_id} at logout.")
+        
+        except Exception as e:
+            print(f"Error saving session data: {e}")
+        
+        finally:
+            # Close the connection
+            cursor.close()
+            connection.close()
+
+    # Clear the session
+    session.clear()
     return jsonify({'success': True, 'message': 'Logged out successfully!'})
