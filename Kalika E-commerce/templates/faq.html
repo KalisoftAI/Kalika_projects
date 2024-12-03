@@ -1,173 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Registration Form</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>FAQs</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #020000;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
 
-        .container {
-            background-color: white;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            width: 650px;
-            border-radius: 15px;
-            background-image: url('image/ai.jpg'); /* Set the background image */
-            background-size: cover; /* Ensure the image covers the entire div */
-            background-position: center; /* Center the image within the div */
-            background-repeat: no-repeat; 
-        }
+    header {
+      background: #0288d1; /* Sea Blue */
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #070000;
-            font-size: 28px;
-        }
+    header h1 {
+      font-size: 2.5rem;
+    }
 
-        .registration-form label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #030000;
-        }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .registration-form input, 
-        .registration-form select, 
-        .registration-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-            transition: 0.3s;
-        }
+    .container h2 {
+      font-size: 1.8rem;
+      color: #01579b; /* Darker Sea Blue */
+      margin-bottom: 20px;
+    }
 
-        .registration-form input:focus, 
-        .registration-form select:focus, 
-        .registration-form textarea:focus {
-            border-color: #2575fc;
-            background-color: #fff;
-            box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
-        }
+    .container p,
+    .container ul {
+      font-size: 1.1rem;
+      color: #455a64;
+      margin-bottom: 15px;
+      text-align: justify;
+      font-family: 'Georgia', serif;
+    }
 
-        fieldset {
-            border: none;
-            margin-bottom: 20px;
-        }
+    .faq-section {
+      margin-bottom: 30px;
+    }
 
-        legend {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+    .faq-section h3 {
+      font-size: 1.5rem;
+      color: #0288d1; /* Sea Blue */
+      margin-bottom: 10px;
+    }
 
-        input[type="radio"] {
-            margin-right: 10px;
-        }
+    .faq-section p {
+      margin-left: 20px;
+    }
 
-        .registration-form textarea {
-            resize: vertical;
-            height: 100px;
-        }
+    .faq-section ul {
+      margin-left: 40px;
+      list-style: disc;
+    }
 
-        button {
-            width: 100%;
-            padding: 15px;
-            background-color: #2575fc;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: #6a11cb;
-            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
-        }
-
-        .registration-form input[type="radio"] {
-            margin-top: 10px;
-        }
-
-        .registration-form label[for="course"] {
-            margin-bottom: 15px;
-        }
-
-        /* Responsive design */
-        @media (max-width: 500px) {
-            .container {
-                width: 90%;
-                padding: 30px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+    
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Course Registration Form</h1>
-        <form action="mailto:pratikshahindule48@gmail.com" method="post" class="registration-form" >
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-            <label for="name">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" placeholder="Enter your Date of Birth" required>
+  <header>
+    <h1>FAQs</h1>
+  </header>
 
-            <label for="name">Address:</label>
-            <input type="text" id="add" name="add" placeholder="Enter your Address" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="phone">Contact Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-
-            <label for="name">Educational Qualification</label>
-            <input type="text" id="education" name="education" placeholder="Enter your Educational Qualification" required>
-
-            <label for="course">Course Selection:</label>
-            <select id="course" name="course" required>
-                <option value="" disabled selected>Select a course</option>
-                <option value="Data Science to Basic GenAI journey">Data Science to Basic GenAI journey</option>
-                <option value="Data Science to Practical GenAI journey">Data Science to Practical GenAI journey</option>
-                <option value="Generative AI Concepts">Generative AI Concepts</option>
-            </select>
-
-            <label for="start-date">Preferred Batch:</label>
-            <select id="course" name="course" required>
-                <option value="" disabled selected>Select a Batch</option>
-                <option value="Batch-1">Batch 1 : 5th Nov (Weekday)</option>
-                <option value="Batch-2">Batch 2 : 15th Nov (Weekday)</option>
-                <option value="Batch-3">Batch 3 : 9th Nov (Weekend)</option>
-            </select>
-
-
-
-            <button type="submit">Register</button>
-        </form>
+  <div class="container">
+    <div class="faq-section">
+      <h3>1. General Questions</h3>
+      <p><strong>Q1: What is Kalika Industrial eCommerce?</strong></p>
+      <p>A: Kalika Industrial eCommerce is an e-commerce platform providing a wide range of industrial supplies, including MRO products, safety equipment, power tools, and more.</p>
+      <p><strong>Q2: Where is Kalika Industrial eCommerce based?</strong></p>
+      <p>A: Kalika Industrial eCommerce operates from Ahmednagar MIDC, Maharashtra, India, but caters to customers nationwide through our online platform.</p>
+      <p><strong>Q3: Do I need an account to place an order?</strong></p>
+      <p>A: While you can browse products without an account, creating an account allows you to track orders, save preferences, and receive exclusive offers.</p>
     </div>
+
+    <div class="faq-section">
+      <h3>2. Products and Orders</h3>
+      <p><strong>Q4: How can I search for products on your website?</strong></p>
+      <p>A: Use the search bar at the top of our homepage or browse through the categories listed on our site to find specific products.</p>
+      <p><strong>Q5: What should I do if I can't find a product?</strong></p>
+      <p>A: Contact us at info@kalikaindia.com with the details of the product you're looking for, and we’ll assist you.</p>
+      <p><strong>Q6: Can I modify or cancel my order after placing it?</strong></p>
+      <p>A: Orders can only be modified or canceled before they are processed. Contact our support team immediately for assistance.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>3. Payments and Billing</h3>
+      <p><strong>Q7: What payment methods do you accept?</strong></p>
+      <p>A: We accept major credit/debit cards, UPI, net banking, and other secure online payment options.</p>
+      <p><strong>Q8: Are my payment details secure?</strong></p>
+      <p>A: Yes, we use industry-standard encryption and secure payment gateways to protect your data.</p>
+      <p><strong>Q9: Can I get an invoice for my order?</strong></p>
+      <p>A: Yes, an invoice will be emailed to you after your order is confirmed. You can also download it from your account dashboard.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>4. Shipping and Delivery</h3>
+      <p><strong>Q10: Where do you deliver?</strong></p>
+      <p>A: We currently deliver across India. For specific locations, please check during checkout.</p>
+      <p><strong>Q11: How long does delivery take?</strong></p>
+      <p>A: Delivery times vary by location, but orders are usually delivered within 3–7 business days.</p>
+      <p><strong>Q12: What are the shipping charges?</strong></p>
+      <p>A: Shipping charges, if any, are displayed during checkout. Free shipping may be available on select orders or promotions.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>5. Returns and Refunds</h3>
+      <p><strong>Q13: What is your return policy?</strong></p>
+      <p>A: Products can be returned within 7 days of delivery, provided they are unused, in original packaging, and meet our return policy terms.</p>
+      <p><strong>Q14: How do I initiate a return or refund?</strong></p>
+      <p>A: Contact our support team at info@kalikaindia.com with your order details to begin the process.</p>
+      <p><strong>Q15: When will I receive my refund?</strong></p>
+      <p>A: Refunds are processed within 7–10 business days after the returned product is received and inspected.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>6. Customer Support</h3>
+      <p><strong>Q16: How can I contact customer support?</strong></p>
+      <p>A: You can reach us via:</p>
+      <ul>
+        <li>Email: info@kalikaindia.com</li>
+        <li>Phone: +91 9405536016, +91 9423023047, +91 9623429623</li>
+      </ul>
+      <p><strong>Q17: What are your support hours?</strong></p>
+      <p>A: Our support team is available from 9:00 AM to 6:00 PM, Sunday to Friday.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>7. Miscellaneous</h3>
+      <p><strong>Q18: Can I place bulk orders?</strong></p>
+      <p>A: Yes, we accept bulk orders. Please contact us for custom quotes and special pricing.</p>
+      <p><strong>Q19: Do you offer discounts or promotions?</strong></p>
+      <p>A: Yes, we run periodic promotions and offer discounts to our customers. Check the homepage or subscribe to our newsletter for updates.</p>
+      <p><strong>Q20: Are your products genuine?</strong></p>
+      <p>A: Yes, we only source products from trusted suppliers to ensure quality and authenticity.</p>
+    </div>
+  </div>
+
+  
+
 </body>
 </html>
