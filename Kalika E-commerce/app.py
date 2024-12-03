@@ -319,10 +319,10 @@ def show_products(maincategory, subcategory):
 # Close the database connection on app teardown
 @app.teardown_appcontext
 def close_connection(exception):
-    connection = get_db_connection()
-    cursor = connection.cursor()
-    cursor.close()
-    connection.close()
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.close()
+    conn.close()
 
 
 def fetch_productcatalog_data():
