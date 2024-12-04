@@ -1,7 +1,5 @@
-from flask import Blueprint, render_template
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from db import get_db_connection
-from werkzeug.security import generate_password_hash
 
 register1 = Blueprint('register1', __name__)
 
@@ -24,8 +22,8 @@ def register():
             flash('Invalid email format!')
             return redirect(url_for('register1.register'))
 
-        # Hash the password before storing
-        hashed_password = generate_password_hash(password)
+        # Do not hash the password, just store it as plain text
+        plain_password = password  # Storing the password as is
 
         connection = get_db_connection()
         cursor = connection.cursor()
@@ -44,7 +42,7 @@ def register():
         print(f"Inserting user: Name={name}, Email={email}")
 
         cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (%s, %s, %s)",
-                       (name, email, hashed_password))
+                       (name, email, plain_password))  # Use plain password here
         print("Data inserted successfully!")
         connection.commit()
         cursor.close()
@@ -54,8 +52,3 @@ def register():
         return redirect(url_for('login1.login'))
 
     return render_template('register.html')
-
-
-
-
-

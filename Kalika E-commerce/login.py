@@ -1,10 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
 from db import get_db_connection
-from werkzeug.security import check_password_hash
-
 
 login1 = Blueprint('login1', __name__)
-
 
 # Login route
 @login1.route('/login', methods=['GET', 'POST'])
@@ -24,7 +21,7 @@ def login():
             connection = get_db_connection()
             cursor = connection.cursor()
 
-            # Fetch user data including name
+            # Fetch user data including name and plain password
             cursor.execute("SELECT user_id, password_hash, username FROM users WHERE email = %s", (email,))
             user = cursor.fetchone()
 
@@ -32,11 +29,11 @@ def login():
                 print(f"Login failed: No user found with email {email}")
                 return jsonify({'success': False, 'message': 'Invalid email or password!'})
 
-            user_id, stored_hash, username = user
-            print(f"User found with email: {email}, Stored Hash: {stored_hash}")
+            user_id, stored_password, username = user
+            print(f"User found with email: {email}, Stored Password: {stored_password}")
 
-            # Validate the password
-            if check_password_hash(stored_hash, password):
+            # Validate the plain text password
+            if stored_password == password:
                 # Start session and store user information
                 session['user_id'] = user_id  # Store the user ID in session
                 session['user_email'] = email  # Store the user's email in session
@@ -51,13 +48,6 @@ def login():
         except Exception as e:
             print(f"Error during login: {e}")
             return jsonify({'success': False, 'message': 'An unexpected error occurred. Please try again.'})
-
-        # finally:
-        #     # Ensure the cursor and connection are closed
-        #     if cursor:
-        #         cursor.close()
-        #     if connection:
-        #         connection.close()
 
     # Render login page for GET requests
     return render_template('login.html')
