@@ -29,11 +29,637 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="Updated with recent changes to new">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_21_2024_10_11_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_21_2024_10_11_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_21_2024_10_11_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_21_2024_10_11_PM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/testcart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/testcart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/Kalika_projects.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/aws.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/.ipynb_checkpoints/KALIKA_vikas-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/KALIKA_vikas.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/addtocart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/cart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/checkout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/dbtest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/327116367e500c51ba9fdbbcd55ee822" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/home.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/junk.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/login.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/products.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/punchout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/register.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/setup.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/Janitorial.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/Packaging.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/Proactive-Maintenance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/Safety.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/abrasives.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/ai.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/duracell.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/hydraulic_press.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/lathe.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/logo.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/lubricant.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/image/welding_mask.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/js/product.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/static/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/aboutus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/checkout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/contactus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/dash.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/faq.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/index_test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/payment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/product.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/products.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/subcategory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/terms.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/test_cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/templates/testcart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/test_db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/data/kalika_catalog_products.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/apple-touch-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/card.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/messages-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/messages-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/messages-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/news-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/news-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/news-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/news-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/news-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/not-found.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/product-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/product-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/product-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/product-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/product-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/profile-img.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/slides-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/slides-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/img/slides-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/scss/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/apexcharts.amd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/apexcharts.common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/apexcharts.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/apexcharts.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/apexcharts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ar.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/be-cyrl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/be-latn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ca.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/cs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/da.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/de.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/el.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/en.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/es.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/et.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/fa.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/fi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/fr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/he.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/hi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/hr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/hu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/hy.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/id.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/it.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ja.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ka.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ko.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/lt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/lv.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ms.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/nb.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/nl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/pl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/pt-br.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/pt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/rs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ru.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/se.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/sk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/sl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/sq.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/th.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/tr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/ua.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/vi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/zh-cn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/apexcharts/locales/zh-tw.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/css/prb.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.esm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.esm.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/css/animations.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/css/boxicons.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/css/transformations.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/fonts/boxicons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/fonts/boxicons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/fonts/boxicons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/fonts/boxicons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/boxicons/fonts/boxicons.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chart.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chart.cjs.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chart.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chart.umd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chart.umd.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chunks/helpers.segment.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chunks/helpers.segment.cjs.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chunks/helpers.segment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/chunks/helpers.segment.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.bar.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.bubble.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.doughnut.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.line.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.pie.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.polarArea.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.radar.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/controller.scatter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/controllers/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.adapters.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.animation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.animations.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.animations.defaults.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.animator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.config.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.controller.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.datasetController.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.defaults.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.element.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.interaction.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.layouts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.layouts.defaults.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.plugins.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.registry.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.scale.autoskip.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.scale.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.scale.defaults.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.ticks.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/core.typedRegistry.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/core/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/elements/element.arc.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/elements/element.bar.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/elements/element.line.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/elements/element.point.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/elements/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers.cjs.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.canvas.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.collection.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.color.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.config.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.config.types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.core.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.curve.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.dom.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.easing.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.extras.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.interpolation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.intl.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.math.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.options.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.rtl.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/helpers.segment.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/helpers/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/index.umd.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/platform/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/platform/platform.base.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/platform/platform.basic.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/platform/platform.dom.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.colors.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.decimation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/filler.drawing.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/filler.helper.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/filler.options.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/filler.segment.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/filler.target.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/filler.target.stack.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.filler/simpleArc.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.legend.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.subtitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.title.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/plugins/plugin.tooltip.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.category.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.linear.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.linearbase.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.logarithmic.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.radialLinear.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.time.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/scales/scale.timeseries.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/animation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/basic.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/color.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/geometric.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/layout.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/chart.js/types/utils.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.common.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.common.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.esm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.esm.min.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.esm.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.esm.mjs.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.simple.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.simple.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/echarts.simple.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/extension/bmap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/extension/bmap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/extension/bmap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/extension/dataTool.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/extension/dataTool.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/extension/dataTool.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/echarts/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/php-email-form/validate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.bubble.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.bubble.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.core.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.core.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.core.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.core.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.snow.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/quill/quill.snow.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.glyph.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.symbol.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/remixicon/remixicon.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/simple-datatables/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/icons/default/icons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/icons/default/icons.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/icons/default/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/license.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/models/dom/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/models/dom/model.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/models/dom/model.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/accordion/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/accordion/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/accordion/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/advlist/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/advlist/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/advlist/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/anchor/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/anchor/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/anchor/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autolink/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autolink/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autolink/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autoresize/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autoresize/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autoresize/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autosave/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autosave/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/autosave/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/charmap/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/charmap/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/charmap/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/code/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/code/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/code/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/codesample/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/codesample/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/codesample/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/directionality/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/directionality/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/directionality/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/js/emojiimages.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/js/emojiimages.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/js/emojis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/js/emojis.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/emoticons/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/fullscreen/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/fullscreen/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/fullscreen/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/bg_BG.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ca.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/cs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/da.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/de.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/el.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/eu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/fa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/fi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/fr_FR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/he_IL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/hi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/hr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/hu_HU.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/id.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/it.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ja.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/kk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ko_KR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/nb_NO.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/nl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/pl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/pt_BR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/pt_PT.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/ru.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/sk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/sl_SI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/sv_SE.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/th_TH.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/tr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/uk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/vi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/zh_CN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/js/i18n/keynav/zh_TW.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/help/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/image/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/image/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/image/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/importcss/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/importcss/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/importcss/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/insertdatetime/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/insertdatetime/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/insertdatetime/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/link/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/link/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/link/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/lists/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/lists/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/lists/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/media/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/media/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/media/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/nonbreaking/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/nonbreaking/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/nonbreaking/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/pagebreak/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/pagebreak/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/pagebreak/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/preview/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/preview/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/preview/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/quickbars/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/quickbars/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/quickbars/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/save/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/save/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/save/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/searchreplace/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/searchreplace/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/searchreplace/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/table/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/table/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/table/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/visualblocks/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/visualblocks/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/visualblocks/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/visualchars/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/visualchars/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/visualchars/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/wordcount/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/wordcount/plugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/plugins/wordcount/plugin.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/dark/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/dark/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/dark/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/default/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/default/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/default/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/document/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/document/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/document/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/tinymce-5-dark/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/tinymce-5-dark/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/tinymce-5-dark/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/tinymce-5/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/tinymce-5/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/tinymce-5/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/writer/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/writer/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/content/writer/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/content.inline.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/content.inline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/content.inline.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/skin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/skin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/skin.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/skin.shadowdom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/skin.shadowdom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide-dark/skin.shadowdom.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/content.inline.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/content.inline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/content.inline.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/skin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/skin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/skin.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/skin.shadowdom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/skin.shadowdom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/oxide/skin.shadowdom.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/content.inline.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/content.inline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/content.inline.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/skin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/skin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/skin.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/content.inline.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/content.inline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/content.inline.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/content.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/skin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/skin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/skin.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/skin.shadowdom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/skin.shadowdom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/skins/ui/tinymce-5/skin.shadowdom.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/themes/silver/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/themes/silver/theme.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/themes/silver/theme.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/tinymce.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/tinymce.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/assets/vendor/tinymce/tinymce.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/charts-apexcharts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/charts-chartjs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/charts-echarts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-accordion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-alerts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-badges.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-breadcrumbs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-buttons.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-cards.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-carousel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-list-group.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-modal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-pagination.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-progress.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-spinners.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-tabs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/components-tooltips.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/forms-editors.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/forms-elements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/forms-layouts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/forms-validation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/forms/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/forms/contact.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/icons-bootstrap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/icons-boxicons.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/icons-remix.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/pages-blank.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/pages-contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/pages-error-404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/pages-faq.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/pages-login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/pages-register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/tables-data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/tables-general.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/NiceAdmin/users-profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/Test/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/Test/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/Test/index.html.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/assets/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/assets/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/database.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/ecommerce.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/images/Handgloves.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/images/Stretchfilm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/images/s3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/images/s4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/sap_integration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/kalika_ecommerce_sample/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/logo_enhanced.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/old_app_with_punchout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/replace_files.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/subcategory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika_projects-main/junk_code/test_punchout.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,16 +681,37 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;KalikaML&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/KalikaML/Kalika_projects.git&quot;,
+    &quot;accountId&quot;: &quot;fc0c571c-4a36-445a-9c4d-90820f321335&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2nZGvCSL6VFCdtB8ibzVQG1SzmA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="TF_FMT" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.db.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/KOMAL/Kalika/Kalika_projects_main&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main\Kalika E-commerce\static\js" />
@@ -72,23 +719,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="Kalika_projects_main" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Kalika_projects_main" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -110,6 +743,7 @@
     </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <module name="Kalika_projects_main" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -121,6 +755,7 @@
     </configuration>
     <configuration default="true" type="docs" factoryName="Docutils task">
       <module name="Kalika_projects_main" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -137,6 +772,7 @@
     </configuration>
     <configuration default="true" type="docs" factoryName="Sphinx task">
       <module name="Kalika_projects_main" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -151,8 +787,24 @@
       <option name="docutils_open_in_browser" value="false" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="Kalika_projects_main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
       <module name="Kalika_projects_main" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -304,7 +956,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New version updated" />
@@ -316,23 +967,12 @@
     <MESSAGE value="Updated with search products" />
     <option name="LAST_COMMIT_MESSAGE" value="Updated with search products" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="413" y="91" key="FileChooserDialogImpl" timestamp="1732518078114">
-      <screen x="0" y="0" width="1280" height="672" />
-    </state>
-    <state x="413" y="91" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1732518078114" />
-    <state x="225" y="56" key="Vcs.Push.Dialog.v2" timestamp="1732296304568">
-      <screen x="0" y="0" width="1280" height="672" />
-    </state>
-    <state x="225" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1732296304568" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Kalika_projects-main/Kalika E-commerce/app.py</url>
-          <line>5</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/Kalika E-commerce/dbtest.py</url>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
