@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 import xml.etree.ElementTree as ET
+from functools import wraps
 from db import get_db_connection
 
 
@@ -126,45 +127,56 @@ def add_to_cart():
 #
 #     return jsonify({'success': True, 'message': 'Checkout successful', 'xml_file': 'punchout.xml'})
 
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            print("User not logged in. Redirecting to login page.")
+            return redirect(url_for('login1.login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @cart1.route('/checkout', methods=['POST'])
+@login_required  # Enforce login check before executing the route
 def checkout():
-    print("in cart checkout ")
+    print("In cart checkout.")
     if 'cart' not in session or not session['cart']:
         return jsonify({'success': False, 'message': 'Cart is empty'})
+    
+    if 'user_id' not in session:
+        print("Error: Attempt to checkout without logging in.")
+        return jsonify({'success': False, 'message': 'You must be logged in to checkout.'}), 403
 
     print("Starting XML generation...")
     punchout_xml = generate_punchout_xml(session['cart'], session.get('user_name'))
-    print('punchout xml type', type(punchout_xml))
-    print('punchout xml', punchout_xml)
-
+    print('Generated PunchOut XML:', punchout_xml)
 
     # Connect to PostgreSQL
     connection = get_db_connection()
     if not connection:
-        print("Failed to connect to the database.")
+        print("Database connection failed.")
         return jsonify({'success': False, 'message': 'Database connection failed'})
-    print("Database connection successful!")
 
     try:
         cursor = connection.cursor()
         query = "INSERT INTO punchout_responses (response) VALUES (%s)"
         cursor.execute(query, (punchout_xml,))
         connection.commit()
-        print("XML response saved successfully!")
+        print("PunchOut XML saved successfully.")
     except Exception as e:
-        print("Error while inserting XML:", e)
-        return jsonify({'success': False, 'message': 'Error saving XML'})
+        print("Error saving XML to database:", e)
+        return jsonify({'success': False, 'message': 'Error saving XML.'})
     finally:
         if cursor:
             cursor.close()
         if connection:
             connection.close()
 
-    print("Checkout and PunchOut completed.")
-
     # Clear the cart after checkout
     session.pop('cart', None)
-
     return jsonify({'success': True, 'message': 'Checkout successful'})
 
 
