@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS -->
+    {% extends "base.html" %}
+    {% block title %}{{ product.name }}{% endblock %}
+    {% block extra_css %}
     <style>
-        * {
+       * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -18,8 +19,16 @@ body {
     color: #333;
 }
 
+.product-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+}
 
-h2 {
+h1 {
     font-size: 1.8em;
 }
 
@@ -33,6 +42,7 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
+    justify-content: center;
 }
 
 .product-card {
@@ -43,18 +53,21 @@ h2 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 20px;
+    max-width: 400px;
+    margin: auto;
 }
 
 .product-image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
     border-bottom: 1px solid #ddd;
     margin-bottom: 15px;
 }
 
 .product_name {
-    font-size: 1.2em;
+    font-size: 1.5em;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
@@ -65,7 +78,7 @@ h2 {
 }
 
 .product_price {
-    font-size: 1.1em;
+    font-size: 1.3em;
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
@@ -83,30 +96,39 @@ h2 {
 }
 
 .add-to-cart:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
     </style>
+    {% endblock %}
 </head>
 <body>
-    <div id="product-details">
-        {% if error %}
-            <h2>Error</h2>
-            <p>{{ error }}</p>
-        {% else %}
-            <h2 id="product-name">{{ name }}</h2>
-            <p id="product-description">{{ description or 'No description available.' }}</p>
-            <p id="product-price">Price: ${{ price }}</p>
-            <p id="product-subcategory">Subcategory: {{ subcategory }}</p>
+    {% block content %}
+<div class="product-grid">
+    <div class="product-card">
+        <img src="/images/{{ product.name.replace(' ', '_')|lower }}.jpg" alt="{{ product.name }}" class="product-image">
+        <div class="product_name">{{ product.name }}</div>
+        <p><strong>Category:</strong> {{ product.subcategory }}</p>
+        <p class="product-description">{{ product.description }}</p>
+        <span class="product_price">Price: Rs.{{ product.price }}</span>
+        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST" class="product-form">
+            <!-- Include CSRF token if CSRF protection is enabled -->
+            {% if csrf_token %}
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            {% endif %}
+            <!-- Pass required product data -->
+            <input type="hidden" name="itemcode" value="{{ product.itemcode }}">
+            <input type="hidden" name="product_name" value="{{ product.name }}">
+            <input type="hidden" name="product_price" value="{{ product.price }}">
             <button type="submit" class="add-to-cart">Add to Cart</button>
-        {% endif %}
+        </form>
     </div>
+</div>
+{% endblock %}
 
-    <script>
-        // Optional: Add JavaScript for handling "Add to Cart" functionality
-        document.getElementById('add-to-cart').addEventListener('click', function() {
-            alert('Product added to cart!');
-            // Implement further logic to handle cart updates
-        });
-    </script>
+
+    {% block extra_js %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
+
 </body>
 </html>

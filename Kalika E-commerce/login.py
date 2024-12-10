@@ -3,10 +3,11 @@ from db import get_db_connection
 
 login1 = Blueprint('login1', __name__)
 
-
 # Login route
 @login1.route('/login', methods=['GET', 'POST'])
 def login():
+    next_url = request.args.get('next', '/')  # Default to home if 'next' not provided
+
     if request.method == 'POST':
         try:
             # Parse input data
@@ -22,7 +23,7 @@ def login():
             connection = get_db_connection()
             cursor = connection.cursor()
 
-            # Fetch user data including name and plain password
+            # Fetch user data
             cursor.execute("SELECT user_id, password_hash, username FROM users WHERE email = %s", (email,))
             user = cursor.fetchone()
 
@@ -31,32 +32,41 @@ def login():
                 return jsonify({'success': False, 'message': 'Invalid email or password!'})
 
             user_id, stored_password, username = user
-            print(f"User found with email: {email}, Stored Password: {stored_password}")
+            print(f"User found: {email}, Stored Password: {stored_password}")
 
-            # Validate the plain text password
+            # Validate the password (plain text comparison)
             if stored_password == password:
-                # Start session and store user information
-                session['user_id'] = user_id  # Store the user ID in session
-                session['user_email'] = email  # Store the user's email in session
-                session['user_name'] = username  # Store the user's name in session
-                session.permanent = True  # Make the session last longer if configured
+                # Start session and store user details
+                session['user_id'] = user_id
+                session['user_email'] = email
+                session['user_name'] = username
+                session.permanent = True
                 print(f"Login successful for user {user_id} - {email}")
-                return jsonify({'success': True, 'message': 'Login successful!'})
+
+                return jsonify({
+                    'success': True,
+                    'message': 'Login successful!',
+                    'redirect_url': next_url  # Redirect to next page or home
+                })
             else:
                 print("Login failed: Incorrect password")
                 return jsonify({'success': False, 'message': 'Invalid email or password!'})
 
         except Exception as e:
+            import traceback
             print(f"Error during login: {e}")
+            traceback.print_exc()
             return jsonify({'success': False, 'message': 'An unexpected error occurred. Please try again.'})
 
     # Render login page for GET requests
-    return render_template('login.html')
+    return render_template('login.html', next=next_url)
+
+    
 
 
 @login1.route('/get_user_info', methods=['GET'])
 def get_user_info():
-    print("userinfo", session)
+    print("userinfo",session)
     if 'user_id' in session:
         return jsonify({
             'success': True,
@@ -86,10 +96,10 @@ def logout():
 
             # Optionally log this event
             print(f"Session data stored for user {user_id} at logout.")
-
+        
         except Exception as e:
             print(f"Error saving session data: {e}")
-
+        
         finally:
             # Close the connection
             cursor.close()

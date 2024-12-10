@@ -53,9 +53,19 @@ app.register_blueprint(punchout)
 # app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
 
 
+@app.context_processor
+def inject_shared_data():
+    """
+    Automatically inject shared data (like categories) into all templates.
+    """
+    return get_shared_data()
+
 def get_shared_data():
+    """
+    Fetch shared data such as categories.
+    """
     return {
-        "categories": fetch_productcatalog_data()
+        "categories": fetch_productcatalog_data()  # Replace this with your actual function to fetch categories
     }
 
 @app.route('/')
@@ -174,11 +184,12 @@ def get_product_details(itemcode):
         WHERE itemcode = %s
     """, (itemcode,))
     result = cur.fetchone()
-    print("results:", result[1])
     cur.close()
+    conn.close()
 
     if result:
-        return jsonify({
+        # Render a detailed product page
+        return render_template('product.html', product={
             "itemcode": result[0],
             "name": result[1],
             "subcategory": result[2],
@@ -186,9 +197,8 @@ def get_product_details(itemcode):
             "description": result[4]
         })
     else:
-        # logging.warning(f"Product not found for itemcode: {itemcode}")
-        return jsonify({"error": "Product not found"}), 404
-
+        # Render a "Product Not Found" page
+        return render_template('product_not_found.html', itemcode=itemcode), 404
 # Route to display products by category
 # @app.route('/<string:maincategory>')
 # def show_category_products(maincategory):
