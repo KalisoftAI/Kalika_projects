@@ -11,16 +11,14 @@ from cart import cart1
 from main import punchout
 from flask_session import Session
 from datetime import timedelta
-from db import get_db_connection
-import csv
-from urllib.parse import quote
-import logging
 from flask_cors import CORS
-
-
 from db import get_db_connection
+import boto3
 
-from flask_session import Session
+# Initialize S3 client
+s3 = boto3.client('s3', region_name='ap-south-1')
+BUCKET_NAME = 'kalikaecom'
+FOLDER_NAME = 'Folder/'  # Folder inside the S3 bucket
 
 # Initialize the Flask application
 app = Flask(__name__, static_folder='static')
@@ -49,8 +47,6 @@ app.register_blueprint(cart1)
 app.register_blueprint(punchout)
 
 
-# # Set a random secret key for session management
-# app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
 
 
 @app.context_processor
@@ -68,6 +64,7 @@ def get_shared_data():
         "categories": fetch_productcatalog_data()  # Replace this with your actual function to fetch categories
     }
 
+
 @app.route('/')
 def home():
     # Fetch main categories and categories for other sections
@@ -80,8 +77,8 @@ def home():
                productname AS product_name, 
                subcategory AS product_description, 
                price AS product_price, 
-               productdescription AS product_image
-        FROM productcatalog
+               image_url AS product_image_key
+        FROM product_catlog_image_url
         ORDER BY RANDOM()
         LIMIT 4;
     """
@@ -94,24 +91,31 @@ def home():
     # Fetch column names
     column_names = [desc[0] for desc in cur.description]
 
-    # Convert tuples to dictionaries
-    random_products = [dict(zip(column_names, row)) for row in cur.fetchall()]
+    # Convert tuples to dictionaries and add pre-signed URLs for images
+    random_products = []
+    for row in cur.fetchall():
+        product = dict(zip(column_names, row))
 
+        # Generate pre-signed URL for the product image
+        s3_key = f"{FOLDER_NAME}{product['product_image_key']}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        product['product_image_url'] = presigned_url  # Add the image URL to the product dictionary
+        random_products.append(product)
+    # print("random_products:::", random_products)
     cur.close()
     conn.close()
 
     return render_template(
-        'index.html', 
+        'index.html',
         maincategory=maincategory,
         categories=categories,
         random_products=random_products
     )
 
-# def dashboard():
-#     print("user",session)
-#     if 'user_id' in session:
-#         return f"Welcome back, {session['user_email']}!"
-#     return redirect(url_for('login1.login'))
 
 
 @app.route('/aboutus')
@@ -143,9 +147,6 @@ def faqs():
 #         return f"Welcome back, {session['user_email']}!"
 #     return redirect(url_for('login1.login'))
 
-
-
-
 @app.route('/search', methods=['GET'])
 def search():
     term = request.args.get('q', '')  # Get the search term from query params
@@ -157,20 +158,35 @@ def search():
 
     # Execute the SQL query to search for products matching the term
     cur.execute("""
-        SELECT itemcode, productname, subcategory, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, image_url
+        FROM product_catlog_image_url
         WHERE productname ILIKE %s
     """, (f"%{term}%",))  # Case-insensitive match
     results = cur.fetchall()
-    # print("results:", results)
+
+    # Process results and add pre-signed URLs for images
+    search_results = []
+    for row in results:
+        # Generate pre-signed URL for the product image
+        s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        search_results.append({
+            "itemcode": row[0],
+            "name": row[1],
+            "subcategory": row[2],
+            "price": row[3],
+            "image_url": presigned_url
+        })
+    print("search_results:::", search_results)
 
     cur.close()
-    return jsonify([{
-        "itemcode": row[0],
-        "name": row[1],
-        "subcategory": row[2],
-        "price": row[3]
-    } for row in results])
+
+    return jsonify(search_results)
+
 
 
 @app.route('/product/<itemcode>', methods=['GET'])
@@ -178,9 +194,11 @@ def get_product_details(itemcode):
     print("Fetching product details")
     conn = get_db_connection()
     cur = conn.cursor()
+
+    # Query to fetch product details along with the image key
     cur.execute("""
-        SELECT itemcode, productname, subcategory, price, productdescription 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, productdescription, image_url 
+        FROM product_catlog_image_url 
         WHERE itemcode = %s
     """, (itemcode,))
     result = cur.fetchone()
@@ -188,76 +206,26 @@ def get_product_details(itemcode):
     conn.close()
 
     if result:
-        # Render a detailed product page
+        # Generate pre-signed URL for the product image
+        s3_key = f"{FOLDER_NAME}{result[5]}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+
+        # Render a detailed product page with the image URL
         return render_template('product.html', product={
             "itemcode": result[0],
             "name": result[1],
             "subcategory": result[2],
             "price": result[3],
-            "description": result[4]
+            "description": result[4],
+            "image_url": presigned_url
         })
     else:
         # Render a "Product Not Found" page
         return render_template('product_not_found.html', itemcode=itemcode), 404
-# Route to display products by category
-# @app.route('/<string:maincategory>')
-# def show_category_products(maincategory):
-#     conn = get_db_connection()
-#     cursor = conn.cursor()
-#
-#     # Fetch products by category
-#     query = """
-#         SELECT itemcode, productname, subcategory, price
-#         FROM productcatalog
-#         WHERE maincategory = %s;
-#     """
-#     cursor.execute(query, (maincategory,))
-#     productcatalog = cursor.fetchall()
-#
-#     # Convert fetched data to a list of dictionaries
-#     product_list = [
-#         {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
-#         for row in productcatalog
-#     ]
-#     # print
-#
-#     cursor.close()
-#     conn.close()
-#
-#     # Render the HTML template with fetched products
-#     return render_template('category.html',
-#                            maincategory=maincategory,
-#                            products=product_list)
-
-# Route to display products by category
-# @app.route('/<string:maincategory>')
-# def show_category_products(maincategory):
-#     product_list = []
-
-#     # Read products from the CSV file
-#     with open('imagedata1.csv', mode='r', encoding='utf-8') as csvfile:
-#         csv_reader = csv.DictReader(csvfile)
-#         # Skip the first row
-#         # next(csv_reader, None)
-
-#         for row in csv_reader:
-#             # Filter products by main category
-#             if row['Main Category'] == maincategory:
-#                 product_list.append({
-#                     'itemcode': row['Item Code'],
-#                     'productname': row['Product Title'],
-#                     'subcategory': row['Sub Categories'],
-#                     'price': float(row['Price']),
-#                     'image_url': url_for('static', filename=f'images/{row["Large Image"]}')
-
-#                 })
-
-#     # print("Product details:", product_list)
-
-#     # Render the HTML template with fetched products
-#     return render_template('category.html',
-#                            maincategory=maincategory,
-#                            products=product_list)
 
 @app.route('/<string:maincategory>')
 def show_category_products(maincategory):
@@ -265,55 +233,76 @@ def show_category_products(maincategory):
     categories = fetch_productcatalog_data()
     cursor = conn.cursor()
 
-    # Fetch products by category
+    # Fetch products by category including S3 image keys
     query = """
-        SELECT itemcode, productname, subcategory, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, image_url
+        FROM product_catlog_image_url 
         WHERE maincategory = %s;
     """
     cursor.execute(query, (maincategory,))
     productcatalog = cursor.fetchall()
 
-    # Convert fetched data to a list of dictionaries
-    product_list = [
-        {'itemcode': row[0],'productname': row[1], 'subcategory': row[2], 'price': row[3]}
-        for row in productcatalog
-    ]
-    #print
+    # Convert fetched data to a list of dictionaries with S3 pre-signed URLs
+    product_list = []
+    for row in productcatalog:
+        s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        product_list.append({
+            'itemcode': row[0],
+            'productname': row[1],
+            'subcategory': row[2],
+            'price': row[3],
+            'image_url': presigned_url
+        })
 
     cursor.close()
     conn.close()
 
     # Render the HTML template with fetched products
-    return render_template('category.html', 
-                           maincategory=maincategory, 
-                           categories=categories,
-                           products=product_list)
+    return render_template(
+        'category.html',
+        maincategory=maincategory,
+        categories=categories,
+        products=product_list
+    )
 
 
-
-
-# Route to display products by subcategory
 @app.route('/<string:maincategory>/<string:subcategory>')
 def show_products(maincategory, subcategory):
     conn = get_db_connection()
     categories = fetch_productcatalog_data()
     cursor = conn.cursor()
 
-    # Fetch products based on category and subcategory
+    # Fetch products including S3 image keys
     query = """
-        SELECT itemcode, productname, productdescription, price 
-        FROM productcatalog 
-        WHERE maincategory = %s AND subcategory = %s;
+         SELECT itemcode, productname, productdescription, price, image_url
+         FROM product_catlog_image_url
+         WHERE maincategory = %s AND subcategory = %s;
     """
     cursor.execute(query, (maincategory, subcategory))
     productcatalog = cursor.fetchall()
 
-    # Convert fetched data to a list of dictionaries
-    product_list = [
-        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3]}
-        for row in productcatalog
-    ]
+    # Convert fetched data to a list of dictionaries with S3 pre-signed URLs
+    product_list = []
+    for row in productcatalog:
+        s3_key = f"{'Folder/'}{row[4]}"
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        product_list.append({
+            'itemcode': row[0],
+            'productname': row[1],
+            'productdescription': row[2],
+            'price': row[3],
+            'image_url': presigned_url
+        })
+    # print("product list:::", product_list)
 
     cursor.close()
     conn.close()
@@ -324,6 +313,8 @@ def show_products(maincategory, subcategory):
                            subcategory=subcategory,
                            categories=categories,
                            products=product_list)
+
+
 
 
 # Close the database connection on app teardown
