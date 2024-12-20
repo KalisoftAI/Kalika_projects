@@ -71,7 +71,7 @@
           {% for product in random_products %}
           <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
               <div class="product-card">
-                  <img src="{{ product.product_image }}" alt="{{ product.product_name }}">
+                  <img src="{{ product.product_image_url }}" alt="{{ product.product_name }}">
                   <div class="product-info">
                       <h3>{{ product.product_name }}</h3>
                       <p>{{ product.product_description }}</p>

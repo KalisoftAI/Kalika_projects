@@ -105,7 +105,7 @@ h1 {
     {% block content %}
 <div class="product-grid">
     <div class="product-card">
-        <img src="/images/{{ product.name.replace(' ', '_')|lower }}.jpg" alt="{{ product.name }}" class="product-image">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
         <div class="product_name">{{ product.name }}</div>
         <p><strong>Category:</strong> {{ product.subcategory }}</p>
         <p class="product-description">{{ product.description }}</p>
