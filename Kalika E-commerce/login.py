@@ -61,6 +61,7 @@ def login():
     # Render login page for GET requests
     return render_template('login.html', next=next_url)
 
+
     
 
 
@@ -105,6 +106,6 @@ def logout():
             cursor.close()
             connection.close()
 
-    # Clear the session
+    # Clear the session and flash a message
     session.clear()
     return jsonify({'success': True, 'message': 'Logged out successfully!'})

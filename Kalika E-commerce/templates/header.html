@@ -3,7 +3,7 @@
         <a href="#" class="btn-categories">
             <div class="all-categories">
                   <i class="fa fa-list"></i> All Categories
-                </div>
+            </div>
 
         </a>
         <ul class="dropdown-menu">
@@ -73,9 +73,12 @@
     </button>
 </div>
 <div id="user-menu" style="display: none;">
-    <ul id="dropdown-list" style="display: none;">
-        <li><span id="username-display"></span></li>
-        <li><a href="#" id="logout-button">Logout</a></li>
+    <ul id="dropdown-list">
+        <li>
+            <a href="#" id="edit-profile-button">Edit Profile</a>
+        </li>
+        <li><a href="#" id="edit-address-button">Edit Address</a></li>
+        <li><a href="{{ url_for('login1.logout') }}" id="logout-button">Logout</a></li>
     </ul>
 </div>
 

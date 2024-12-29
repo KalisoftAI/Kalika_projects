@@ -16,15 +16,23 @@ import csv
 from urllib.parse import quote
 import logging
 from flask_cors import CORS
-
-
 from db import get_db_connection
-
 from flask_session import Session
+import boto3
+
+
+
+# Initialize S3 client
+s3 = boto3.client('s3', region_name='ap-south-1')
+BUCKET_NAME = 'kalikaecom'
+FOLDER_NAME = 'Folder/'  # Folder inside the S3 bucket
+
+
 
 # Initialize the Flask application
 app = Flask(__name__, static_folder='static')
 CORS(app)
+
 
 
 # Flask Session Configuration
@@ -51,7 +59,6 @@ app.register_blueprint(punchout)
 
 # # Set a random secret key for session management
 # app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
-
 
 @app.context_processor
 def inject_shared_data():
@@ -80,8 +87,8 @@ def home():
                productname AS product_name, 
                subcategory AS product_description, 
                price AS product_price, 
-               productdescription AS product_image
-        FROM productcatalog
+               image_url AS product_image_key
+        FROM product_catlog_image_url
         ORDER BY RANDOM()
         LIMIT 4;
     """
@@ -94,14 +101,26 @@ def home():
     # Fetch column names
     column_names = [desc[0] for desc in cur.description]
 
-    # Convert tuples to dictionaries
-    random_products = [dict(zip(column_names, row)) for row in cur.fetchall()]
+    # Convert tuples to dictionaries and add pre-signed URLs for images
+    random_products = []
+    for row in cur.fetchall():
+        product = dict(zip(column_names, row))
 
+        # Generate pre-signed URL for the product image
+        s3_key = f"{FOLDER_NAME}{product['product_image_key']}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        product['product_image_url'] = presigned_url  # Add the image URL to the product dictionary
+        random_products.append(product)
+    # print("random_products:::", random_products)
     cur.close()
     conn.close()
 
     return render_template(
-        'index.html', 
+        'index.html',
         maincategory=maincategory,
         categories=categories,
         random_products=random_products
@@ -157,20 +176,32 @@ def search():
 
     # Execute the SQL query to search for products matching the term
     cur.execute("""
-        SELECT itemcode, productname, subcategory, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, image_url
+        FROM product_catlog_image_url 
         WHERE productname ILIKE %s
     """, (f"%{term}%",))  # Case-insensitive match
     results = cur.fetchall()
+     # Process results and add pre-signed URLs for images
+    search_results = []
+    for row in results:
+        # Generate pre-signed URL for the product image
+        s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        search_results.append({
+            "itemcode": row[0],
+            "name": row[1],
+            "subcategory": row[2],
+            "price": row[3],
+            "image_url": presigned_url
+        })
     # print("results:", results)
 
     cur.close()
-    return jsonify([{
-        "itemcode": row[0],
-        "name": row[1],
-        "subcategory": row[2],
-        "price": row[3]
-    } for row in results])
+    return jsonify(search_results)
 
 
 @app.route('/product/<itemcode>', methods=['GET'])
@@ -179,8 +210,8 @@ def get_product_details(itemcode):
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("""
-        SELECT itemcode, productname, subcategory, price, productdescription 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, productdescription, image_url 
+        FROM product_catlog_image_url 
         WHERE itemcode = %s
     """, (itemcode,))
     result = cur.fetchone()
@@ -188,17 +219,27 @@ def get_product_details(itemcode):
     conn.close()
 
     if result:
+        # Generate pre-signed URL for the product image
+        s3_key = f"{FOLDER_NAME}{result[5]}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
         # Render a detailed product page
         return render_template('product.html', product={
             "itemcode": result[0],
             "name": result[1],
             "subcategory": result[2],
             "price": result[3],
-            "description": result[4]
+            "description": result[4],
+            "image_url": presigned_url
         })
     else:
         # Render a "Product Not Found" page
         return render_template('product_not_found.html', itemcode=itemcode), 404
+    
+    
 # Route to display products by category
 # @app.route('/<string:maincategory>')
 # def show_category_products(maincategory):
@@ -267,18 +308,29 @@ def show_category_products(maincategory):
 
     # Fetch products by category
     query = """
-        SELECT itemcode, productname, subcategory, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, subcategory, price, image_url
+        FROM product_catlog_image_url 
         WHERE maincategory = %s;
     """
     cursor.execute(query, (maincategory,))
     productcatalog = cursor.fetchall()
 
     # Convert fetched data to a list of dictionaries
-    product_list = [
-        {'itemcode': row[0],'productname': row[1], 'subcategory': row[2], 'price': row[3]}
-        for row in productcatalog
-    ]
+    product_list = []
+    for row in productcatalog:
+        s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        product_list.append({
+            'itemcode': row[0],
+            'productname': row[1],
+            'subcategory': row[2],
+            'price': row[3],
+            'image_url': presigned_url
+        })
     #print
 
     cursor.close()
@@ -302,18 +354,29 @@ def show_products(maincategory, subcategory):
 
     # Fetch products based on category and subcategory
     query = """
-        SELECT itemcode, productname, productdescription, price 
-        FROM productcatalog 
+        SELECT itemcode, productname, productdescription, price, image_url
+         FROM product_catlog_image_url 
         WHERE maincategory = %s AND subcategory = %s;
     """
     cursor.execute(query, (maincategory, subcategory))
     productcatalog = cursor.fetchall()
 
     # Convert fetched data to a list of dictionaries
-    product_list = [
-        {'itemcode': row[0], 'productname': row[1], 'productdescription': row[2], 'price': row[3]}
-        for row in productcatalog
-    ]
+    product_list = []
+    for row in productcatalog:
+        s3_key = f"{'Folder/'}{row[4]}"
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        product_list.append({
+            'itemcode': row[0],
+            'productname': row[1],
+            'productdescription': row[2],
+            'price': row[3],
+            'image_url': presigned_url
+        })
 
     cursor.close()
     conn.close()
@@ -335,6 +398,114 @@ def close_connection(exception):
     conn.close()
 
 
+    
+@app.route('/edit_profile/<int:user_id>', methods=['GET', 'POST'])
+def edit_profile(user_id):
+    print(f"Session contents: {session}")  # Debug
+    print(f"Accessing edit_profile for user_id: {user_id}")  # Debug
+    if 'user_id' not in session or session['user_id'] != user_id:
+        flash('Unauthorized access.', 'danger')
+        return redirect(url_for('login'))
+
+    if session['user_id'] != user_id:
+        flash('Unauthorized access.', 'danger')
+        return redirect(url_for('home'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        mobile_number = request.form['mobile_number']
+
+        try:
+            cursor.execute("""
+                UPDATE users
+                SET username = %s, email = %s, mobile_number = %s
+                WHERE user_id = %s
+            """, (username, email, mobile_number, user_id))
+            conn.commit()
+            flash('Profile updated successfully!', 'success')
+        except Exception as e:
+            conn.rollback()
+            flash(f'Error updating profile: {e}', 'danger')
+        finally:
+            cursor.close()
+            conn.close()
+
+        return redirect(url_for('edit_profile', user_id=user_id))
+
+    try:
+        cursor.execute("SELECT username, email, mobile_number FROM users WHERE user_id = %s", (user_id,))
+        user = cursor.fetchone()
+        if not user:
+            flash('User not found.', 'danger')
+            return redirect(url_for('home'))
+    except Exception as e:
+        flash(f'Error fetching user data: {e}', 'danger')
+        return redirect(url_for('home'))
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect(url_for('edit_profile', user_id=session.get('user_id')))
+
+
+
+@app.route('/edit_address/<int:user_id>', methods=['GET', 'POST'])
+def edit_address():
+    # Check if the user is logged in
+    if 'user_id' not in session:
+        flash('You need to log in to access this page.', 'danger')
+        return redirect(url_for('login'))  # Replace 'login' with your actual login route
+
+    user_id = session['user_id']  # Fetch user_id from the session
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        # Get form data
+        address = request.form['address']
+        postal_code = request.form['postal_code']
+
+        # Update address in the database
+        try:
+            cursor.execute("""
+                UPDATE users
+                SET address = %s, postal_code = %s
+                WHERE user_id = %s
+            """, (address, postal_code, user_id))
+            conn.commit()
+            flash('Address updated successfully!', 'success')
+        except Exception as e:
+            conn.rollback()
+            flash(f'Error updating address: {e}', 'danger')
+        finally:
+            cursor.close()
+            conn.close()
+
+        # Redirect to the same edit page
+        return redirect(url_for('edit_address'))
+    
+    # Fetch address information to pre-fill the form
+    try:
+        cursor.execute("SELECT address, postal_code FROM users WHERE user_id = %s", (user_id,))
+        address_data = cursor.fetchone()
+        if not address_data:
+            flash('Address not found.', 'danger')
+            return redirect(url_for('home'))
+    except Exception as e:
+        flash(f'Error fetching address data: {e}', 'danger')
+        return redirect(url_for('home'))
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('edit_address.html', address_data=address_data)
+
+
 def fetch_productcatalog_data():
     """Fetch maincategory and subcategory data from the database."""
     try:
@@ -342,7 +513,7 @@ def fetch_productcatalog_data():
         cursor = connection.cursor()
         cursor.execute("""
             SELECT maincategory, subcategory
-            FROM productcatalog LIMIT 15;
+            FROM product_catlog_image_url LIMIT 15;
         """)
         rows = cursor.fetchall()
 
@@ -373,7 +544,7 @@ def fetch_categories():
         cursor = connection.cursor()
         cursor.execute("SELECT DISTINCT maincategory FROM productcatalog WHERE maincategory != 'Spring-\xa0Air Hammer Drill Gun' LIMIT 12;")
         maincategories = cursor.fetchall()  # Fetch only the main categories
-        print("maincategories", maincategories)
+        # print("maincategories", maincategories)
         cursor.close()
         connection.close()
 

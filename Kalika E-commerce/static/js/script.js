@@ -1,18 +1,26 @@
 // Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize cart and user data from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Initialize variables and get DOM elements
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const errorMessage = document.getElementById('error-message');
     const userElement = document.getElementById('user-personalization');
     const userMenu = document.getElementById('user-menu');
     const userDropdown = document.getElementById('user-dropdown');
+    const editProfileButton = document.getElementById('edit-profile-button');
+    const editAddressButton = document.getElementById('edit-address-button');
+    const editAddressModal = document.getElementById('edit-address-modal');
+    const cancelEditAddressButton = document.getElementById('cancel-edit-address');
+    const editAddressForm = document.getElementById('edit-address-form');
     const userInitial = document.getElementById('user-initial');
     const usernameDisplay = document.getElementById('username-display');
     const loginButton = document.getElementById('login-button');
     const logoutButton = document.getElementById('logout-button');
     const dropdownList = document.getElementById('dropdown-list');
-    
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const popupSearchResults = document.getElementById('popupSearchResults');
+    const cartItemsContainer = document.getElementById('cart-items');
 
     // Function to update cart count
     function updateCartCount() {
@@ -22,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cartCountElement.textContent = totalItems;
         }
     }
+
     // Remove item from the cart
     function removeItemFromCart(index) {
         cart.splice(index, 1);
@@ -29,126 +38,131 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCartCount();
     }
 
+    // Toggle dropdown visibility
+    if (userDropdown) {
+        userDropdown.addEventListener('click', () => {
+            const isMenuVisible = userMenu && userMenu.style.display === 'block';
+            if (userMenu) userMenu.style.display = isMenuVisible ? 'none' : 'block';
+        });
+    }
 
-    // Fetch user info and personalize the page
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (userDropdown && userMenu && !userDropdown.contains(event.target) && !userMenu.contains(event.target)) {
+            userMenu.style.display = 'none';
+        }
+    });
+
+    // Show edit address modal
+    if (editAddressButton) {
+        editAddressButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (editAddressModal) editAddressModal.style.display = 'block';
+        });
+    }
+
+    // Close edit address modal
+    if (cancelEditAddressButton) {
+        cancelEditAddressButton.addEventListener('click', () => {
+            if (editAddressModal) editAddressModal.style.display = 'none';
+        });
+    }
+
+    // Fetch and personalize user info
     async function fetchUserInfo() {
         try {
             const response = await fetch('/get_user_info');
             const result = await response.json();
 
             if (result.success && result.user_name) {
-                // Get first initial of the username
                 const firstInitial = result.user_name.charAt(0).toUpperCase();
-                userInitial.textContent = firstInitial;
-                usernameDisplay.textContent = result.user_name;
+                if (userInitial) userInitial.textContent = firstInitial;
+                if (usernameDisplay) usernameDisplay.textContent = result.user_name;
 
-                // Hide login button and show the dropdown button with the user's initial
-                loginButton.style.display = 'none'; // Hide login button
-                userDropdown.style.display = 'inline-flex'; // Show the dropdown button
-                userMenu.style.display = 'block'; // Show user menu (dropdown content)
+                if (loginButton) loginButton.style.display = 'none';
+                if (userDropdown) userDropdown.style.display = 'inline-flex';
+                if (userMenu) userMenu.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Error fetching user info:', error);
+        }
+    }
+    // Fetch and personalize user info
+    async function fetchUserInfo() {
+        try {
+            const response = await fetch('/get_user_info');
+            const result = await response.json();
+
+            if (result.success && result.user_name) {
+                const firstInitial = result.user_name.charAt(0).toUpperCase();
+                if (userInitial) userInitial.textContent = firstInitial;
+                if (usernameDisplay) usernameDisplay.textContent = result.user_name;
+
+                if (loginButton) loginButton.style.display = 'none';
+                if (userDropdown) userDropdown.style.display = 'inline-flex';
+                if (userMenu) userMenu.style.display = 'none';
             }
         } catch (error) {
             console.error('Error fetching user info:', error);
         }
     }
 
-    // Toggle dropdown menu
-    userDropdown.addEventListener('click', () => {
-        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Logout handler
-    logoutButton.addEventListener('click', async () => {
-        try {
-            const response = await fetch('/logout', { method: 'GET' });
-            const result = await response.json();
-            if (result.success) {
-                alert(result.message);
-                location.reload(); // Reload the page to reset UI
-            }
-        } catch (error) {
-            console.error('Error during logout:', error);
-        }
-    });
-    
-    // Call fetchUserInfo on page load
-    fetchUserInfo();
-    // Function to update cart count from the server
-    function updateCartCountOnIndex() {
-        fetch('/cart/count', {
-            method: 'GET',
-            headers: { 'Accept': 'application/json' }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const cartCountElement = document.querySelector('.cart-count');
-            if (cartCountElement) {
-                cartCountElement.textContent = data.cart_count || 0; // Update the cart count
-            }
-        })
-        .catch(error => console.error('Error fetching cart count:', error));
-    }
-
-    
-    // Logout functionality
-    function logout() {
-        localStorage.removeItem('cart');
-        localStorage.removeItem('userName');
-        alert('You have been logged out.');
-        window.location.href = 'index.html';
-    }
-
-    // Attach logout event listener
-    // const logoutButton = document.getElementById('logout');
-    // if (logoutButton) {
-    //     logoutButton.addEventListener('click', logout);
-    // }
-
-    // Search Functionality
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const popupSearchResults = document.getElementById('popupSearchResults');
-
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value.trim();
-
-            if (!query) {
-                popupSearchResults.style.display = 'none'; // Hide popup if input is empty
-                searchResults.innerHTML = '';
-                return;
-            }
-
-            popupSearchResults.style.display = 'block'; // Show popup
-
-            fetch(`/search?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    searchResults.innerHTML = data.length
-                        ? data.slice(0, 7).map(product => `
-                            <li>
-                                <a href="/product/${product.itemcode}" target="_blank">${product.name}</a>
-                            </li>
-                        `).join('')
-                        : '<li>No products found</li>';
-                })
-                .catch(error => {
-                    console.error('Error fetching search results:', error);
-                    searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
-                });
+    // Redirect to edit profile page
+    if (editProfileButton) {
+        editProfileButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = '/edit_profile';
         });
+    }
 
-        // Hide popup when clicking outside
-        document.addEventListener('click', (event) => {
-            if (!popupSearchResults.contains(event.target) && event.target !== searchInput) {
-                popupSearchResults.style.display = 'none';
+    // Handle address form submission
+    if (editAddressForm) {
+        editAddressForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(editAddressForm);
+            const addressData = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/save_address', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(addressData),
+                });
+
+                if (response.ok) {
+                    alert('Address updated successfully!');
+                    if (editAddressModal) editAddressModal.style.display = 'none';
+                } else {
+                    alert('Failed to update address. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error saving address:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    }
+
+    // Handle logout
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/logout', { method: 'GET' });
+                const result = await response.json();
+                if (result.success) {
+                    alert(result.message);
+                    window.location.href = '/login';  // Redirect to login page after logout
+                } else {
+                    alert('Error: Unable to log out. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
             }
         });
     }
 
     // Function to display cart items
     function displayCart() {
-        const cartItemsContainer = document.getElementById('cart-items');
         if (cartItemsContainer) {
             cartItemsContainer.innerHTML = cart.length
                 ? cart.map((item, index) => `
@@ -164,10 +178,75 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Handle search input
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim();
+
+            if (!query) {
+                if (popupSearchResults) popupSearchResults.style.display = 'none';
+                if (searchResults) searchResults.innerHTML = '';
+                return;
+            }
+
+            if (popupSearchResults) popupSearchResults.style.display = 'block';
+
+            fetch(`/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (searchResults) {
+                        searchResults.innerHTML = data.length
+                            ? data.slice(0, 7).map(product => `
+                                <li>
+                                    <a href="/product/${product.itemcode}" target="_blank">${product.name}</a>
+                                </li>
+                            `).join('')
+                            : '<li>No products found</li>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                    if (searchResults) searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
+                });
+        });
+
+        // Hide search popup when clicking outside
+        document.addEventListener('click', (event) => {
+            if (popupSearchResults && !popupSearchResults.contains(event.target) && event.target !== searchInput) {
+                popupSearchResults.style.display = 'none';
+            }
+        });
+    }
+
+    // Initialize carousel
+    function initializeCarousel() {
+        const slides = [
+            { image: '../static/image/banner1.jpg' },
+            { image: '../static/image/banner2.jpg' },
+            { image: '../static/image/banner3.jpg' },
+        ];
+
+        const indicators = document.querySelector('.carousel-indicators');
+        const inner = document.querySelector('.carousel-inner');
+
+        slides.forEach((slide, index) => {
+            const indicator = document.createElement('li');
+            indicator.dataset.target = '#heroCarousel';
+            indicator.dataset.slideTo = index;
+            if (index === 0) indicator.classList.add('active');
+            if (indicators) indicators.appendChild(indicator);
+
+            const item = document.createElement('div');
+            item.classList.add('item');
+            if (index === 0) item.classList.add('active');
+            item.style.backgroundImage = `url('${slide.image}')`;
+            if (inner) inner.appendChild(item);
+        });
+    }
+
     // Initial calls on page load
     fetchUserInfo();
     updateCartCount();
     displayCart();
-    updateCartCountOnIndex();
-    fetchUserInfo();
+    initializeCarousel();
 });
