@@ -31,10 +31,104 @@
     <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="Updated with recent changes to new">
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/Kalika E-commerce/templates/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/addtocart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/cart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/certificates/gdig2.crt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/certificates/gdig2.crt.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/certificates/gdroot-g2.crt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/certificates/temp.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/checkout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/dbtest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/13373aa849f89403ef307a127ed07bff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/1485ea3053fd05d454443b2e02c90deb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/19f4ca32352a04854e6965493651eb8f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/24943459e84c37b1a7ba44c4bba510f5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/24b4b9e84138cb2af13ebc4f7177d808" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/273153bfdbc8a121ff067a575dab5587" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/2b5ca36f5cd1d420ef5821d8b1ccd66e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/327116367e500c51ba9fdbbcd55ee822" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/4c949110bc2bdc0ad736ae47aedf952f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/52296623b9d8e89ab493f3372e711815" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/63f7d419c169b91129477550052c4f67" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/6e16b05c062dcd4e737fcb1e1b015e5a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/74d2e9880f91b54dc63db8ac08301ba3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/917f625ebb29bf9537b50477f61b068d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/98abd720148f4e2e51c62750b75ffe18" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/a43dc67c56893aa71b27353d08d4934f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/a92dbb3518475f41d898bb5ccb2def0d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/b1d4fce70ccc384560ec2503e9a9f63c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/b3cdb2e1ce7121378d814a506c37f019" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/ba897307f5ae4337ee07e4418106be97" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/cd17a0b09645eb8df723ae7cfb3158d7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/d3bf8b7ca3569d092bc12430be6293c2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/d74a701418cc1fad7cad235730941d7f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/dda5f0cf63bb31d0dc3f1753df303208" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/e9d2bfb5fde88e258ad08a8f2533ba2b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/eedfdcddf28ac031daeb915c77972866" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/flask_session/f1664ded71575646925929e820f0a5c6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/home.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/junk.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/login.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/products.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/punchout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/punchout_order.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/punchoutsetup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/register.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/setup.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Abrasive Paper.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Allen Screw.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Cable &amp; Wire Tools.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Ear Muffs.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Facility Maintenance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Floor Marking Tape.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Gas Flow Meter.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Gasket.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Hinges.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Measuring Jar.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Oil Paint.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Oil Paint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Safety Goggle (Splash).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Spray Painting Gun.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Spring-Air Hammer Drill Gun.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/Transparent Tape.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/logo.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/image/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/js/product.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/static/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/aboutus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/checkout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/contactus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/dash.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/faq.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/index_test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/payment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/product.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/products.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/subcategory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/terms.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/test_cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/templates/testcart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/test_db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/testcart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalika E-commerce/utils/__init__.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +178,8 @@
     "Python.app.executor": "Run",
     "Python.db.executor": "Run",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/KOMAL/KaliSoft/AI_newsletter_new"
+    "last_opened_file_path": "D:/KOMAL/Kalika/Kalika_projects_main",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -346,7 +441,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734715819846</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated with recent changes to new">
+      <option name="closed" value="true" />
+      <created>1735472321774</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1735472321774</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
