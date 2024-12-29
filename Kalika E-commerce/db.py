@@ -48,7 +48,7 @@ def view_tables_and_data():
         # selected_table = input("\nEnter the punchout_responses to view its data: ")
 
         # Query to fetch data from the selected table
-        cursor.execute(f"SELECT * FROM product_catlog_image_url limit 20")  # Limit for safety
+        cursor.execute(f"SELECT * FROM users")  # Limit for safety
         rows = cursor.fetchall()
         colnames = [desc[0] for desc in cursor.description]  # Fetch column names
 

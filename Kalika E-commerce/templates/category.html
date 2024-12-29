@@ -53,10 +53,38 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 20px;
+
+    /* Fixed size */
+    width: 250px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+
+    /* Center content vertically if required */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+
+<!--.product-grid {-->
+<!--    display: grid;-->
+<!--    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));-->
+<!--    gap: 20px;-->
+<!--    padding: 20px;-->
+<!--}-->
+
+<!--.product-card {-->
+<!--    background-color: #fff;-->
+<!--    border: 1px solid #ddd;-->
+<!--    border-radius: 8px;-->
+<!--    overflow: hidden;-->
+<!--    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);-->
+<!--    text-align: center;-->
+<!--    padding: 20px;-->
+<!--}-->
+
 .product-image {
-    width: 100%;
+    width: 100px;
     height: 200px;
     object-fit: cover;
     border-bottom: 1px solid #ddd;

@@ -181,7 +181,7 @@ def search():
             "price": row[3],
             "image_url": presigned_url
         })
-    print("search_results:::", search_results)
+    # print("search_results:::", search_results)
 
     cur.close()
 
