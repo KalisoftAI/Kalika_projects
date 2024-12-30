@@ -1,5 +1,5 @@
 ## Flow with starting thought process 
-<img width="1161" alt="image" src="https://github.com/user-attachments/assets/0bd60387-928b-45f2-949f-49b6c4a7c650" /><img width="1161" alt="image" src="https://github.com/user-attachments/assets/1a8f8fb9-5a2e-4d2b-bddd-4a8c2293db66" />
+<img width="1161" alt="image" src="https://github.com/user-attachments/assets/0bd60387-928b-45f2-949f-49b6c4a7c650" />
 ### Pages 
 ### Categories search and below 1 product 
 login1+ 3 products= punchout xml 
