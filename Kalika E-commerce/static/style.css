@@ -338,7 +338,7 @@ body,html {
   position: relative;
   background-size: cover;
   background-position: center;
-  height: 60vh; /* Adjust height as needed */
+  height: 70vh; /* Adjust height as needed */
 }
 
 .carousel-inner .item.active {
