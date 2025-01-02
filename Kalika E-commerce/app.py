@@ -239,7 +239,44 @@ def get_product_details(itemcode):
         # Render a "Product Not Found" page
         return render_template('product_not_found.html', itemcode=itemcode), 404
     
-    
+
+@app.route('/search/results', methods=['GET'])
+def search_results_page():
+    query = request.args.get('q', '').strip()
+    if not query:
+        return render_template('searchresult.html', products=[], query=query)
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Query for matching products
+    cur.execute("""
+        SELECT itemcode, productname, subcategory, productdescription, price, image_url
+        FROM product_catlog_image_url
+        WHERE productname ILIKE %s
+    """, (f"%{query}%",))
+    results = cur.fetchall()
+
+    search_results = []
+    for row in results:
+        s3_key = f"{FOLDER_NAME}{row[5]}"
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        search_results.append({
+            "itemcode": row[0],
+            "name": row[1],
+            "subcategory": row[2],
+            "description": row[3],
+            "price": row[4],
+            "image_url": presigned_url
+        })
+
+    cur.close()
+    return render_template('searchresult.html', products=search_results, query=query)
+
 # Route to display products by category
 # @app.route('/<string:maincategory>')
 # def show_category_products(maincategory):
