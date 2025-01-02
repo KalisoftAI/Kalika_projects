@@ -31,6 +31,9 @@
     <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="Updated with recent changes to new">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KalikaE-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/punchout.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +362,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735472439857</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Updated with recent changes to new">
+      <option name="closed" value="true" />
+      <created>1735472845674</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1735472845674</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
