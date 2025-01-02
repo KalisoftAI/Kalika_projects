@@ -30,10 +30,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="Updated with recent changes to new">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/flask_session/2029240f6d1128be89ddc32729463129" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/flask_session/2029240f6d1128be89ddc32729463129" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KalikaE-commerce/punchout.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaE-commerce/punchout.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,15 +74,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.app.executor": "Run",
-    "Python.db.executor": "Run",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/KOMAL/Kalika/Kalika_projects_main",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.db.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/KOMAL/Kalika/Kalika_projects_main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="V:\ML_projects\Kalika_projects1\Kalika_projects-main\Kalika E-commerce\static\js" />
@@ -370,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735472845674</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Updated with recent changes to new">
+      <option name="closed" value="true" />
+      <created>1735802096174</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1735802096174</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
