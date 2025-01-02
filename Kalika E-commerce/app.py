@@ -463,7 +463,7 @@ def fetch_productcatalog_data():
 
 # Example usage
 categories = fetch_productcatalog_data()
-# print(categories)
+print(categories)
 
 def fetch_categories():
     """Fetch categories from the database."""
