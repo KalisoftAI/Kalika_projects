@@ -1,0 +1,85 @@
+<ul class="navbar-nav">
+    <li class="dropdown1">
+        <a href="#" class="btn-categories">
+            <div class="all-categories">
+                  <i class="fa fa-list"></i> All Categories
+            </div>
+
+        </a>
+        <ul class="dropdown-menu">
+            {% for maincategory, subcategories in categories.items() %}
+                <li>
+                    <!-- Link to maincategory page -->
+                    <a href="{{ url_for('show_category_products', maincategory=maincategory) }}" target="_blank">
+                        {{ maincategory }}
+                    </a>
+                    <ul class="dropdown-submenu">
+                        {% for subcategory in subcategories %}
+                            <li>
+                                <!-- Link to subcategory page within maincategory -->
+                                <a href="{{ url_for('show_products', maincategory=maincategory, subcategory=subcategory) }}" target="_blank">
+                                    {{ subcategory }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
+  <div class="navbar-logo">
+    <a href="/">
+      <img src="../static/image/logo.png" alt="Industrial eCommerce Logo" class="logo-image">
+    </a>
+  </div>
+  <div class="header-actions">
+    <input
+        type="text"
+        class="search-bar"
+        id="searchInput"
+        placeholder="Search for products..."
+    />
+    <button id="searchBtn">
+        <i class="fa fa-search"></i> Search
+    </button>
+
+    <!-- Popup search results -->
+    <div id="popupSearchResults" class="popup-search-results">
+        <ul id="searchResults"></ul>
+    </div>
+
+    <!-- Product details section (initially hidden) -->
+    <div id="product-details" style="display:none;">
+        <h2 id="product-name"></h2>
+        <p id="product-description"></p>
+        <p id="product-price"></p>
+        <button id="add-to-cart">Add to Cart</button>
+    </div>
+</div>
+
+  <a href="{{ url_for('cart1.cart') }}" class="btn-login">
+    <i class="fa fa-shopping-cart"></i>
+    (<span class="cart-count">0</span>)
+  </a>
+
+  <div id="user-personalization">
+    <a href="{{ url_for('login1.login') }}" class="btn-login" id="login-button">
+        <i class="fa fa-user"></i> Login
+    </a>
+    <button class="btn-user" id="user-dropdown" style="display: none;">
+        <span id="user-initial"></span>
+        <i class="fa fa-user"></i>
+    </button>
+</div>
+<div id="user-menu" style="display: none;">
+    <ul id="dropdown-list">
+        <li>
+            <a href="#" id="edit-profile-button">Edit Profile</a>
+        </li>
+        <li><a href="#" id="edit-address-button">Edit Address</a></li>
+        <li><a href="{{ url_for('login1.logout') }}" id="logout-button">Logout</a></li>
+    </ul>
+</div>
+
+</div>
