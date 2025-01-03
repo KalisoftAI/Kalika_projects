@@ -126,6 +126,11 @@ def home():
         random_products=random_products
     )
 
+# def dashboard():
+#     print("user",session)
+#     if 'user_id' in session:
+#         return f"Welcome back, {session['user_email']}!"
+#     return redirect(url_for('login1.login'))
 
 
 @app.route('/aboutus')
@@ -148,6 +153,15 @@ def termsofservices():
 @app.route('/faqs')
 def faqs():
     return render_template('faq.html')
+
+
+# @app.route('/dashboard')
+# def dashboard():
+#     print("user",session)
+#     if 'user_id' in session:
+#         return f"Welcome back, {session['user_email']}!"
+#     return redirect(url_for('login1.login'))
+
 
 
 
@@ -177,7 +191,6 @@ def search():
             Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
             ExpiresIn=3600
         )
-        # print(presigned_url)
         search_results.append({
             "itemcode": row[0],
             "name": row[1],
@@ -227,6 +240,102 @@ def get_product_details(itemcode):
         return render_template('product_not_found.html', itemcode=itemcode), 404
     
 
+@app.route('/search/results', methods=['GET'])
+def search_results_page():
+    query = request.args.get('q', '').strip()
+    if not query:
+        return render_template('searchresult.html', products=[], query=query)
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Query for matching products
+    cur.execute("""
+        SELECT itemcode, productname, subcategory, productdescription, price, image_url
+        FROM product_catlog_image_url
+        WHERE productname ILIKE %s
+    """, (f"%{query}%",))
+    results = cur.fetchall()
+
+    search_results = []
+    for row in results:
+        s3_key = f"{FOLDER_NAME}{row[5]}"
+        presigned_url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600
+        )
+        search_results.append({
+            "itemcode": row[0],
+            "name": row[1],
+            "subcategory": row[2],
+            "description": row[3],
+            "price": row[4],
+            "image_url": presigned_url
+        })
+
+    cur.close()
+    return render_template('searchresult.html', products=search_results, query=query)
+
+# Route to display products by category
+# @app.route('/<string:maincategory>')
+# def show_category_products(maincategory):
+#     conn = get_db_connection()
+#     cursor = conn.cursor()
+#
+#     # Fetch products by category
+#     query = """
+#         SELECT itemcode, productname, subcategory, price
+#         FROM productcatalog
+#         WHERE maincategory = %s;
+#     """
+#     cursor.execute(query, (maincategory,))
+#     productcatalog = cursor.fetchall()
+#
+#     # Convert fetched data to a list of dictionaries
+#     product_list = [
+#         {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
+#         for row in productcatalog
+#     ]
+#     # print
+#
+#     cursor.close()
+#     conn.close()
+#
+#     # Render the HTML template with fetched products
+#     return render_template('category.html',
+#                            maincategory=maincategory,
+#                            products=product_list)
+
+# Route to display products by category
+# @app.route('/<string:maincategory>')
+# def show_category_products(maincategory):
+#     product_list = []
+
+#     # Read products from the CSV file
+#     with open('imagedata1.csv', mode='r', encoding='utf-8') as csvfile:
+#         csv_reader = csv.DictReader(csvfile)
+#         # Skip the first row
+#         # next(csv_reader, None)
+
+#         for row in csv_reader:
+#             # Filter products by main category
+#             if row['Main Category'] == maincategory:
+#                 product_list.append({
+#                     'itemcode': row['Item Code'],
+#                     'productname': row['Product Title'],
+#                     'subcategory': row['Sub Categories'],
+#                     'price': float(row['Price']),
+#                     'image_url': url_for('static', filename=f'images/{row["Large Image"]}')
+
+#                 })
+
+#     # print("Product details:", product_list)
+
+#     # Render the HTML template with fetched products
+#     return render_template('category.html',
+#                            maincategory=maincategory,
+#                            products=product_list)
 
 @app.route('/<string:maincategory>')
 def show_category_products(maincategory):
@@ -463,7 +572,7 @@ def fetch_productcatalog_data():
 
 # Example usage
 categories = fetch_productcatalog_data()
-print(categories)
+# print(categories)
 
 def fetch_categories():
     """Fetch categories from the database."""
