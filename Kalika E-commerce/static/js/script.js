@@ -24,19 +24,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to update cart count
     function updateCartCount() {
-        const cartCountElement = document.querySelector('.cart-count');
-        if (cartCountElement) {
-            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-            cartCountElement.textContent = totalItems;
-        }
+        fetch('/cart/count')
+            .then(response => response.json())
+            .then(data => {
+                const cartCountElement = document.querySelector('.cart-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = data.cart_count || 0;
+                } else {
+                    console.error("Cart count element not found!");
+                }
+            })
+            .catch(error => console.error("Error fetching cart count:", error));
     }
-
-    // Remove item from the cart
-    function removeItemFromCart(index) {
-        cart.splice(index, 1);
-        updateCart();
-        updateCartCount();
+    
+    function removeItemFromCart(itemcode) {
+        fetch('/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ itemcode: itemcode, action: 'remove' })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Updated cart:", data.cart_items);
+                updateCartCount(); // Update cart count in the header
+            })
+            .catch(error => console.error("Error removing item from cart:", error));
     }
+    
 
     // Toggle dropdown visibility
     if (userDropdown) {
@@ -180,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle search input
     if (searchInput) {
+        // Handle real-time search for the popup
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.trim();
 
@@ -210,10 +227,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
 
-        // Hide search popup when clicking outside
+        // Hide popup when clicking outside
         document.addEventListener('click', (event) => {
             if (popupSearchResults && !popupSearchResults.contains(event.target) && event.target !== searchInput) {
                 popupSearchResults.style.display = 'none';
+            }
+        });
+    }
+
+    if (searchBtn) {
+        // Redirect to the search results page when the button is clicked
+        searchBtn.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `/search/results?q=${encodeURIComponent(query)}`;
             }
         });
     }
