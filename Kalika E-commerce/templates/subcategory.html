@@ -136,6 +136,7 @@ h1 {
                 <input type="hidden" name="itemcode" value="{{ product['itemcode'] }}">
                 <input type="hidden" name="product_name" value="{{ product['productname'] }}">
                 <input type="hidden" name="product_price" value="{{ product.price | round(2) }}">
+                <input type="hidden" name="image_url" value="{{ product.image_url }}">
                 <button type="submit" class="add-to-cart">Add to Cart</button>
             </div>
         </form>
@@ -146,6 +147,28 @@ h1 {
 
     {% block extra_js %}
     <script src="../static/js/script.js"></script>
+    <!-- <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+            const form = this.closest('form');
+            const formData = new FormData(form);
+            const jsonData = Object.fromEntries(formData.entries());
+    
+            fetch('/add_to_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Cart updated:', data);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+    </script> -->
     {% endblock %}
 </body>
 </html>
