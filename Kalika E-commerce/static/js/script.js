@@ -103,25 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching user info:', error);
         }
     }
-    // Fetch and personalize user info
-    async function fetchUserInfo() {
-        try {
-            const response = await fetch('/get_user_info');
-            const result = await response.json();
-
-            if (result.success && result.user_name) {
-                const firstInitial = result.user_name.charAt(0).toUpperCase();
-                if (userInitial) userInitial.textContent = firstInitial;
-                if (usernameDisplay) usernameDisplay.textContent = result.user_name;
-
-                if (loginButton) loginButton.style.display = 'none';
-                if (userDropdown) userDropdown.style.display = 'inline-flex';
-                if (userMenu) userMenu.style.display = 'none';
-            }
-        } catch (error) {
-            console.error('Error fetching user info:', error);
-        }
-    }
 
     // Redirect to edit profile page
     if (editProfileButton) {
@@ -194,56 +175,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Handle search input
-    if (searchInput) {
-        // Handle real-time search for the popup
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value.trim();
-
-            if (!query) {
-                if (popupSearchResults) popupSearchResults.style.display = 'none';
-                if (searchResults) searchResults.innerHTML = '';
-                return;
-            }
-
-            if (popupSearchResults) popupSearchResults.style.display = 'block';
-
-            fetch(`/search?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (searchResults) {
-                        searchResults.innerHTML = data.length
-                            ? data.slice(0, 7).map(product => `
-                                <li>
-                                    <a href="/product/${product.itemcode}" target="_blank">${product.name}</a>
-                                </li>
-                            `).join('')
-                            : '<li>No products found</li>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching search results:', error);
-                    if (searchResults) searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
-                });
+    // Add functionality for "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+            const form = this.closest('form');
+            const formData = new FormData(form);
+            const jsonData = Object.fromEntries(formData.entries());
+    
+            fetch('/add_to_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Cart updated:', data);
+                updateCartCount();
+            })
+            .catch(error => console.error('Error:', error));
         });
-
-        // Hide popup when clicking outside
-        document.addEventListener('click', (event) => {
-            if (popupSearchResults && !popupSearchResults.contains(event.target) && event.target !== searchInput) {
-                popupSearchResults.style.display = 'none';
-            }
-        });
-    }
-
-    if (searchBtn) {
-        // Redirect to the search results page when the button is clicked
-        searchBtn.addEventListener('click', () => {
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `/search/results?q=${encodeURIComponent(query)}`;
-            }
-        });
-    }
+    });
 
     // Initialize carousel
     function initializeCarousel() {
