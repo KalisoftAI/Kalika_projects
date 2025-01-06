@@ -11,14 +11,14 @@ cart1 = Blueprint('cart1', __name__)
 # Route for cart page
 @cart1.route('/cart', methods=['GET', 'POST'])
 def cart():
+    print("Debug: Entered the cart route")
     from app import get_shared_data
     shared_data = get_shared_data()
     categories = shared_data['categories']
     cart_items = session.get('cart', [])
-    print("Debug: Cart items", cart_items)
+    print("Debug: Cart Items",cart_items)
 
     if request.method == 'GET':
-        # Calculate total price for each item
         for item in cart_items:
             item['total_price'] = item['quantity'] * item['price']
         total_amount = sum(item['total_price'] for item in cart_items)
@@ -35,8 +35,7 @@ def cart():
 
         if not itemcode or not action:
             return jsonify({"error": "Invalid request data"}), 400
-        
-        # Process the cart action
+
         for item in cart_items:
             if item['itemcode'] == itemcode:
                 if action == 'increase':
@@ -49,12 +48,11 @@ def cart():
                     cart_items.remove(item)
                 break
 
-        # Update the total price for each item
         for item in cart_items:
             item['total_price'] = item['quantity'] * item['price']
 
         session['cart'] = cart_items
-        session.modified = True  # Ensure session is updated
+        session.modified = True
         total_amount = sum(item['total_price'] for item in cart_items)
 
         return jsonify({"cart_items": cart_items, "total_amount": total_amount})

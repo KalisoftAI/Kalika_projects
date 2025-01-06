@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% extends "base.html" %}
-    {% block title %}{{ product.name }}{% endblock %}
+    {% block title %}Search Product{% endblock %}
     {% block extra_css %}
     <style>
-       * {
+  /* Basic Reset */
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,6 +21,7 @@ body {
     color: #333;
 }
 
+/* Header Section */
 .product-category {
     display: flex;
     justify-content: space-between;
@@ -37,6 +40,26 @@ h1 {
     text-decoration: none;
 }
 
+/* Page Title Section */
+.search-page-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    padding: 20px;
+    color: #041347; /* Dark blue */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #f9f9f9;
+    margin: 0 0 20px;
+}
+
+/* Products Section */
+.products {
+    padding: 40px 20px;
+    background-color: #f9f9f9; /* Matches index page */
+}
+
+/* Product Grid */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -44,6 +67,7 @@ h1 {
     padding: 20px;
 }
 
+/* Product Card */
 .product-card {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -52,53 +76,62 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 20px;
-    width: 250px; /* Fixed width */
-    height: 350px; /* Fixed height */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Align content neatly */
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Wrapper */
 .product-image-wrapper {
-    width: 100%; /* Ensures it scales with the card */
-    aspect-ratio: 1 / 1; /* Sets a fixed aspect ratio (1:1 for a square) */
-    overflow: hidden; /* Hides any overflowing parts of the image */
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .product-image {
-    width: 100px; /* Ensures the image fills the wrapper */
-    height: 100px; /* Ensures the image fills the wrapper */
-    object-fit: cover; /* Ensures the image retains its aspect ratio while filling */
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    
 }
 
+/* Product Details */
 .product_name {
     font-size: 1.2em;
     margin-bottom: 5px;
-    white-space: nowrap; /* Prevent wrapping */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Add ellipsis (...) for overflow text */
-    max-width: 100%; /* Ensure it respects the card's width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .product-description {
     font-size: 0.9em;
     color: #666;
     margin-bottom: 15px;
-    flex-grow: 1; /* Allow it to stretch if needed */
+    flex-grow: 1;
+    line-height: 1.5em;
 }
 
 .product_price {
     font-size: 1.1em;
     font-weight: bold;
-    color: #333;
+    color: #041347; /* Dark blue */
     margin-bottom: 10px;
 }
 
+/* Add to Cart Button */
 .add-to-cart {
     background-color: #007bff;
     color: #fff;
@@ -112,24 +145,26 @@ h1 {
 .add-to-cart:hover {
     background-color: #218838;
 }
+
+
     </style>
     {% endblock %}
 </head>
 <body>
     {% block content %}
+    {% if products %}
 <div class="product-grid">
+    {% for product in products %}
     <div class="product-card">
-        <img src="{{ product.image_url }}" class="product-image">
+        <img src="{{ product.image_url }}" class="product-image" alt="{{ product.name }}">
         <div class="product_name">{{ product.name }}</div>
         <p><strong>Category:</strong> {{ product.subcategory }}</p>
-        <p class="product-description">{{ product.description }}</p>
+        <!-- <p class="product-description">{{ product.description }}</p> -->
         <span class="product_price">Price: Rs.{{ product.price }}</span>
-        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST" class="product-form">
-            <!-- Include CSRF token if CSRF protection is enabled -->
+        <form action="{{ url_for('add_cart.add_to_cart') }}" method="POST">
             {% if csrf_token %}
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             {% endif %}
-            <!-- Pass required product data -->
             <input type="hidden" name="itemcode" value="{{ product.itemcode }}">
             <input type="hidden" name="product_name" value="{{ product.name }}">
             <input type="hidden" name="product_price" value="{{ product.price }}">
@@ -137,7 +172,11 @@ h1 {
             <button type="submit" class="add-to-cart">Add to Cart</button>
         </form>
     </div>
+    {% endfor %}
 </div>
+{% else %}
+<p>No products found for your query.</p>
+{% endif %}
 {% endblock %}
 
 

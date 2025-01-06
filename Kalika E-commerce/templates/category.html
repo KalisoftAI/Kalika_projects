@@ -137,6 +137,7 @@ h1 {
             <input type="hidden" name="itemcode" value="{{ product.itemcode }}">
             <input type="hidden" name="product_name" value="{{ product.productname }}">
             <input type="hidden" name="product_price" value="{{ product.price | round(2) }}">
+            <input type="hidden" name="image_url" value="{{ product.image_url }}">
             <button type="submit" class="add-to-cart">Add to Cart</button>
         </div>
     </form>
@@ -147,6 +148,7 @@ h1 {
 <!--<script src="../static/js/script.js"></script>-->
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 {% endblock %}
 
 </body>
