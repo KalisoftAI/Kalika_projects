@@ -6,7 +6,6 @@ from login import login1
 from register import register1
 from addtocart import add_cart
 from checkout import check
-from products import products1
 from cart import cart1
 from main import punchout
 from flask_session import Session
@@ -15,11 +14,18 @@ from db import get_db_connection
 import csv
 from urllib.parse import quote
 import logging
+from logging.handlers import RotatingFileHandler
 from flask_cors import CORS
 from db import get_db_connection
 from flask_session import Session
 import boto3
 
+
+# Import the centralized logging configuration
+from logging_config import logging_config
+
+# Create a logger specific to this module
+logger = logging.getLogger("app")
 
 
 # Initialize S3 client
@@ -27,7 +33,21 @@ s3 = boto3.client('s3', region_name='ap-south-1')
 BUCKET_NAME = 'kalikaecom'
 FOLDER_NAME = 'Folder/'  # Folder inside the S3 bucket
 
+# Initialize logging
+logging.basicConfig(
+    level=logging.DEBUG,  # Change to logging.INFO or logging.ERROR in production
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        RotatingFileHandler("app.log", maxBytes=5000000, backupCount=5),  # Logs to a file with rotation
+        logging.StreamHandler()  # Logs to the console
+    ]
+)
 
+# Create a logger instance
+logger = logging.getLogger(__name__)
+
+# Example logging in app lifecycle
+logger.info("Starting the Flask application...")
 
 # Initialize the Flask application
 app = Flask(__name__, static_folder='static')
@@ -52,7 +72,6 @@ app.register_blueprint(login1)
 app.register_blueprint(register1)
 app.register_blueprint(add_cart)
 app.register_blueprint(check)
-app.register_blueprint(products1)
 app.register_blueprint(cart1)
 app.register_blueprint(punchout)
 
@@ -77,60 +96,81 @@ def get_shared_data():
 
 @app.route('/')
 def home():
-    # Fetch main categories and categories for other sections
-    maincategory = fetch_categories()  # For the carousel
-    categories = fetch_productcatalog_data()  # For category-subcategory mapping
+    logger.info("Home page requested")
 
-    # Fetch random products from the database
-    random_products_query = """
-        SELECT itemcode AS product_id, 
-               productname AS product_name, 
-               subcategory AS product_description, 
-               price AS product_price, 
-               image_url AS product_image_key
-        FROM product_catlog_image_url
-        ORDER BY RANDOM()
-        LIMIT 4;
-    """
+    try:
+        # Fetch main categories and categories for other sections
+        logger.info("Fetching main categories for carousel")
+        maincategory = fetch_categories()  # For the carousel
+        logger.debug(f"Main categories fetched: {maincategory}")
 
-    # Fetch data using the connection
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute(random_products_query)
+        logger.info("Fetching categories and subcategories")
+        categories = fetch_productcatalog_data()  # For category-subcategory mapping
+        logger.debug(f"Categories fetched: {categories}")
 
-    # Fetch column names
-    column_names = [desc[0] for desc in cur.description]
+        # Fetch random products from the database
+        logger.info("Fetching random products for display")
+        random_products_query = """
+            SELECT itemcode AS product_id, 
+                   productname AS product_name, 
+                   subcategory AS product_description, 
+                   price AS product_price, 
+                   image_url AS product_image_key
+            FROM product_catlog_image_url
+            ORDER BY RANDOM()
+            LIMIT 4;
+        """
 
-    # Convert tuples to dictionaries and add pre-signed URLs for images
-    random_products = []
-    for row in cur.fetchall():
-        product = dict(zip(column_names, row))
+        # Establish database connection
+        conn = get_db_connection()
+        cur = conn.cursor()
+        logger.info("Database connection established")
 
-        # Generate pre-signed URL for the product image
-        s3_key = f"{FOLDER_NAME}{product['product_image_key']}"  # Prefix folder to the key
-        presigned_url = s3.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600
-        )
-        product['product_image_url'] = presigned_url  # Add the image URL to the product dictionary
-        random_products.append(product)
-    # print("random_products:::", random_products)
-    cur.close()
-    conn.close()
+        # Execute query
+        cur.execute(random_products_query)
+        logger.info("Random products query executed successfully")
 
+        # Fetch column names
+        column_names = [desc[0] for desc in cur.description]
+        logger.debug(f"Column names for random products: {column_names}")
+
+        # Convert tuples to dictionaries and generate pre-signed URLs for images
+        random_products = []
+        for row in cur.fetchall():
+            product = dict(zip(column_names, row))
+
+            # Generate pre-signed URL for the product image
+            s3_key = f"{FOLDER_NAME}{product['product_image_key']}"  # Prefix folder to the key
+            presigned_url = s3.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+                ExpiresIn=3600
+            )
+            product['product_image_url'] = presigned_url  # Add the image URL to the product dictionary
+            random_products.append(product)
+
+        logger.debug(f"Random products fetched and processed: {random_products}")
+
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")
+        return render_template('error.html', message="An error occurred while processing your request."), 500
+    finally:
+        # Ensure database connection is properly closed
+        if 'cur' in locals():
+            cur.close()
+            logger.info("Database cursor closed")
+        if 'conn' in locals():
+            conn.close()
+            logger.info("Database connection closed")
+
+    # Render the template
+    logger.info("Rendering the home page with fetched data")
     return render_template(
         'index.html',
         maincategory=maincategory,
         categories=categories,
         random_products=random_products
     )
-
-# def dashboard():
-#     print("user",session)
-#     if 'user_id' in session:
-#         return f"Welcome back, {session['user_email']}!"
-#     return redirect(url_for('login1.login'))
 
 
 @app.route('/aboutus')
@@ -155,87 +195,115 @@ def faqs():
     return render_template('faq.html')
 
 
-# @app.route('/dashboard')
-# def dashboard():
-#     print("user",session)
-#     if 'user_id' in session:
-#         return f"Welcome back, {session['user_email']}!"
-#     return redirect(url_for('login1.login'))
-
 
 
 
 @app.route('/search', methods=['GET'])
 def search():
     term = request.args.get('q', '')  # Get the search term from query params
+    logger.info(f"Search request received with term: {term}")
+    
     if not term:
+        logger.warning("No search term provided; returning empty list")
         return jsonify([])  # Return empty list if no search term is provided
 
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Execute the SQL query to search for products matching the term
-    cur.execute("""
-        SELECT itemcode, productname, subcategory, price, image_url
-        FROM product_catlog_image_url 
-        WHERE productname ILIKE %s
-    """, (f"%{term}%",))  # Case-insensitive match
-    results = cur.fetchall()
-     # Process results and add pre-signed URLs for images
-    search_results = []
-    for row in results:
-        # Generate pre-signed URL for the product image
-        s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
-        presigned_url = s3.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600
-        )
-        search_results.append({
-            "itemcode": row[0],
-            "name": row[1],
-            "subcategory": row[2],
-            "price": row[3],
-            "image_url": presigned_url
-        })
-    # print("results:", results)
+    try:
+        # Execute the SQL query to search for products matching the term
+        logger.info(f"Executing search query for term: {term}")
+        cur.execute("""
+            SELECT itemcode, productname, subcategory, price, image_url
+            FROM product_catlog_image_url 
+            WHERE productname ILIKE %s
+        """, (f"%{term}%",))  # Case-insensitive match
+        results = cur.fetchall()
 
-    cur.close()
-    return jsonify(search_results)
+        # Process results and add pre-signed URLs for images
+        search_results = []
+        for row in results:
+            # Generate pre-signed URL for the product image
+            s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
+            presigned_url = s3.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+                ExpiresIn=3600
+            )
+            search_results.append({
+                "itemcode": row[0],
+                "name": row[1],
+                "subcategory": row[2],
+                "price": row[3],
+                "image_url": presigned_url
+            })
+        
+        logger.debug(f"Search results: {search_results}")
+        return jsonify(search_results)
+    
+    except Exception as e:
+        logger.error(f"Error during search operation: {e}")
+        return jsonify({"error": "An error occurred during the search"}), 500
+    
+    finally:
+        # Ensure the cursor and connection are closed
+        cur.close()
+        conn.close()
+        logger.info("Database connection closed")
 
 
 @app.route('/product/<itemcode>', methods=['GET'])
 def get_product_details(itemcode):
-    print("Fetching product details")
+    logger.info(f"Fetching details for product with itemcode: {itemcode}")
+    
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("""
-        SELECT itemcode, productname, subcategory, price, productdescription, image_url 
-        FROM product_catlog_image_url 
-        WHERE itemcode = %s
-    """, (itemcode,))
-    result = cur.fetchone()
-    cur.close()
-    conn.close()
+    
+    try:
+        logger.info(f"Executing query to fetch product details for itemcode: {itemcode}")
+        cur.execute("""
+            SELECT itemcode, productname, subcategory, price, productdescription, image_url 
+            FROM product_catlog_image_url 
+            WHERE itemcode = %s
+        """, (itemcode,))
+        result = cur.fetchone()
+        logger.debug(f"Query result: {result}")
+
+    except Exception as e:
+        logger.error(f"Error fetching product details for itemcode {itemcode}: {e}")
+        return render_template('error.html', error="An error occurred while fetching product details"), 500
+
+    finally:
+        cur.close()
+        conn.close()
+        logger.info("Database connection closed")
 
     if result:
-        # Generate pre-signed URL for the product image
-        s3_key = f"{FOLDER_NAME}{result[5]}"  # Prefix folder to the key
-        presigned_url = s3.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600
-        )
-        # Render a detailed product page
-        return render_template('product.html', product={
-            "itemcode": result[0],
-            "name": result[1],
-            "subcategory": result[2],
-            "price": result[3],
-            "description": result[4],
-            "image_url": presigned_url
-        })
+        try:
+            # Generate pre-signed URL for the product image
+            s3_key = f"{FOLDER_NAME}{result[5]}"  # Prefix folder to the key
+            presigned_url = s3.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+                ExpiresIn=3600
+            )
+            logger.info(f"Generated presigned URL for itemcode {itemcode}: {presigned_url}")
+
+            # Render a detailed product page
+            return render_template('product.html', product={
+                "itemcode": result[0],
+                "name": result[1],
+                "subcategory": result[2],
+                "price": result[3],
+                "description": result[4],
+                "image_url": presigned_url
+            })
+
+        except Exception as e:
+            logger.error(f"Error generating presigned URL for itemcode {itemcode}: {e}")
+            return render_template('error.html', error="An error occurred while processing product details"), 500
     else:
+        logger.warning(f"Product with itemcode {itemcode} not found")
         # Render a "Product Not Found" page
         return render_template('product_not_found.html', itemcode=itemcode), 404
     
@@ -243,38 +311,59 @@ def get_product_details(itemcode):
 @app.route('/search/results', methods=['GET'])
 def search_results_page():
     query = request.args.get('q', '').strip()
+    logger.info(f"Search query received: '{query}'")
+
     if not query:
+        logger.warning("Empty search query. Returning empty results.")
         return render_template('searchresult.html', products=[], query=query)
 
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Query for matching products
-    cur.execute("""
-        SELECT itemcode, productname, subcategory, productdescription, price, image_url
-        FROM product_catlog_image_url
-        WHERE productname ILIKE %s
-    """, (f"%{query}%",))
-    results = cur.fetchall()
+    try:
+        logger.info(f"Executing search query for: '{query}'")
+        # Query for matching products
+        cur.execute("""
+            SELECT itemcode, productname, subcategory, productdescription, price, image_url
+            FROM product_catlog_image_url
+            WHERE productname ILIKE %s
+        """, (f"%{query}%",))
+        results = cur.fetchall()
+        logger.debug(f"Search query results: {results}")
+
+    except Exception as e:
+        logger.error(f"Error executing search query: {e}")
+        return render_template('error.html', error="An error occurred while fetching search results"), 500
+
+    finally:
+        cur.close()
+        conn.close()
+        logger.info("Database connection closed")
 
     search_results = []
-    for row in results:
-        s3_key = f"{FOLDER_NAME}{row[5]}"
-        presigned_url = s3.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600
-        )
-        search_results.append({
-            "itemcode": row[0],
-            "name": row[1],
-            "subcategory": row[2],
-            "description": row[3],
-            "price": row[4],
-            "image_url": presigned_url
-        })
+    try:
+        for row in results:
+            s3_key = f"{FOLDER_NAME}{row[5]}"
+            presigned_url = s3.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+                ExpiresIn=3600
+            )
+            search_results.append({
+                "itemcode": row[0],
+                "name": row[1],
+                "subcategory": row[2],
+                "description": row[3],
+                "price": row[4],
+                "image_url": presigned_url
+            })
+        logger.info(f"Generated pre-signed URLs for {len(search_results)} products")
 
-    cur.close()
+    except Exception as e:
+        logger.error(f"Error generating pre-signed URLs for search results: {e}")
+        return render_template('error.html', error="An error occurred while processing search results"), 500
+
+    logger.info(f"Rendering search results page with {len(search_results)} products")
     return render_template('searchresult.html', products=search_results, query=query)
 
 # Route to display products by category
@@ -339,45 +428,63 @@ def search_results_page():
 
 @app.route('/<string:maincategory>')
 def show_category_products(maincategory):
-    conn = get_db_connection()
-    categories = fetch_productcatalog_data()
-    cursor = conn.cursor()
+    logger.info(f"Fetching products for category: {maincategory}")
+    
+    try:
+        conn = get_db_connection()
+        logger.info("Database connection established")
+    except Exception as e:
+        logger.error(f"Error establishing database connection: {e}")
+        return "Database connection error", 500
+    
+    try:
+        categories = fetch_productcatalog_data()
+        cursor = conn.cursor()
+        
+        # Fetch products by category
+        query = """
+            SELECT itemcode, productname, subcategory, price, image_url
+            FROM product_catlog_image_url 
+            WHERE maincategory = %s;
+        """
+        logger.debug(f"Executing query: {query}")
+        cursor.execute(query, (maincategory,))
+        productcatalog = cursor.fetchall()
+        
+        # Convert fetched data to a list of dictionaries
+        product_list = []
+        for row in productcatalog:
+            s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
+            try:
+                presigned_url = s3.generate_presigned_url(
+                    'get_object',
+                    Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+                    ExpiresIn=3600
+                )
+                product_list.append({
+                    'itemcode': row[0],
+                    'productname': row[1],
+                    'subcategory': row[2],
+                    'price': row[3],
+                    'image_url': presigned_url
+                })
+            except Exception as e:
+                logger.error(f"Error generating presigned URL for product {row[0]}: {e}")
+        
+        cursor.close()
+        logger.info("Database cursor closed")
+        conn.close()
+        logger.info("Database connection closed")
+        
+        # Render the HTML template with fetched products
+        return render_template('category.html', 
+                               maincategory=maincategory, 
+                               categories=categories,
+                               products=product_list)
 
-    # Fetch products by category
-    query = """
-        SELECT itemcode, productname, subcategory, price, image_url
-        FROM product_catlog_image_url 
-        WHERE maincategory = %s;
-    """
-    cursor.execute(query, (maincategory,))
-    productcatalog = cursor.fetchall()
-
-    # Convert fetched data to a list of dictionaries
-    product_list = []
-    for row in productcatalog:
-        s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
-        presigned_url = s3.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600
-        )
-        product_list.append({
-            'itemcode': row[0],
-            'productname': row[1],
-            'subcategory': row[2],
-            'price': row[3],
-            'image_url': presigned_url
-        })
-    #print
-
-    cursor.close()
-    conn.close()
-
-    # Render the HTML template with fetched products
-    return render_template('category.html', 
-                           maincategory=maincategory, 
-                           categories=categories,
-                           products=product_list)
+    except Exception as e:
+        logger.error(f"Error fetching products for category {maincategory}: {e}")
+        return "Error fetching products", 500
 
 
 
@@ -385,45 +492,64 @@ def show_category_products(maincategory):
 # Route to display products by subcategory
 @app.route('/<string:maincategory>/<string:subcategory>')
 def show_products(maincategory, subcategory):
-    conn = get_db_connection()
-    categories = fetch_productcatalog_data()
-    cursor = conn.cursor()
+    logger.info(f"Fetching products for category: {maincategory} and subcategory: {subcategory}")
+    
+    try:
+        conn = get_db_connection()
+        logger.info("Database connection established")
+    except Exception as e:
+        logger.error(f"Error establishing database connection: {e}")
+        return "Database connection error", 500
+    
+    try:
+        categories = fetch_productcatalog_data()
+        cursor = conn.cursor()
+        
+        # Fetch products based on category and subcategory
+        query = """
+            SELECT itemcode, productname, productdescription, price, image_url
+            FROM product_catlog_image_url 
+            WHERE maincategory = %s AND subcategory = %s;
+        """
+        logger.debug(f"Executing query: {query}")
+        cursor.execute(query, (maincategory, subcategory))
+        productcatalog = cursor.fetchall()
+        
+        # Convert fetched data to a list of dictionaries
+        product_list = []
+        for row in productcatalog:
+            s3_key = f"{'Folder/'}{row[4]}"  # Prefix folder to the key
+            try:
+                presigned_url = s3.generate_presigned_url(
+                    'get_object',
+                    Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+                    ExpiresIn=3600
+                )
+                product_list.append({
+                    'itemcode': row[0],
+                    'productname': row[1],
+                    'productdescription': row[2],
+                    'price': row[3],
+                    'image_url': presigned_url
+                })
+            except Exception as e:
+                logger.error(f"Error generating presigned URL for product {row[0]}: {e}")
+        
+        cursor.close()
+        logger.info("Database cursor closed")
+        conn.close()
+        logger.info("Database connection closed")
+        
+        # Render the HTML template with fetched products
+        return render_template('subcategory.html', 
+                               maincategory=maincategory,
+                               subcategory=subcategory,
+                               categories=categories,
+                               products=product_list)
 
-    # Fetch products based on category and subcategory
-    query = """
-        SELECT itemcode, productname, productdescription, price, image_url
-         FROM product_catlog_image_url 
-        WHERE maincategory = %s AND subcategory = %s;
-    """
-    cursor.execute(query, (maincategory, subcategory))
-    productcatalog = cursor.fetchall()
-
-    # Convert fetched data to a list of dictionaries
-    product_list = []
-    for row in productcatalog:
-        s3_key = f"{'Folder/'}{row[4]}"
-        presigned_url = s3.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600
-        )
-        product_list.append({
-            'itemcode': row[0],
-            'productname': row[1],
-            'productdescription': row[2],
-            'price': row[3],
-            'image_url': presigned_url
-        })
-
-    cursor.close()
-    conn.close()
-
-    # Render the HTML template with the fetched products
-    return render_template('subcategory.html',
-                           maincategory=maincategory,
-                           subcategory=subcategory,
-                           categories=categories,
-                           products=product_list)
+    except Exception as e:
+        logger.error(f"Error fetching products for category {maincategory} and subcategory {subcategory}: {e}")
+        return "Error fetching products", 500
 
 
 # Close the database connection on app teardown
@@ -592,5 +718,6 @@ def fetch_categories():
         return []
 
 if __name__ == "__main__":
+    logger.info("Running the application in debug mode")
     app.run(debug=True)
 
