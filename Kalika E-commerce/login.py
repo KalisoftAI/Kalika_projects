@@ -1,5 +1,12 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
 from db import get_db_connection
+import logging
+
+# Import the centralized logging configuration
+from logging_config import logging_config
+
+# Create a logger specific to this module
+logger = logging.getLogger("login1")
 
 login1 = Blueprint('login1', __name__)
 
@@ -7,6 +14,7 @@ login1 = Blueprint('login1', __name__)
 @login1.route('/login', methods=['GET', 'POST'])
 def login():
     next_url = request.args.get('next', '/')  # Default to home if 'next' not provided
+    logger.info("Login route accessed. Method: %s, Next URL: %s", request.method, next_url)
 
     if request.method == 'POST':
         try:
@@ -15,8 +23,8 @@ def login():
             email = data.get('email')
             password = data.get('password')
 
-            # Validate input
             if not email or not password:
+                logger.warning("Login failed: Missing email or password.")
                 return jsonify({'success': False, 'message': 'Email and password are required!'})
 
             # Connect to the database
@@ -28,46 +36,39 @@ def login():
             user = cursor.fetchone()
 
             if not user:
-                print(f"Login failed: No user found with email {email}")
+                logger.warning("Login failed: No user found with email %s.", email)
                 return jsonify({'success': False, 'message': 'Invalid email or password!'})
 
             user_id, stored_password, username = user
-            print(f"User found: {email}, Stored Password: {stored_password}")
+            logger.info("User found: %s, User ID: %d", email, user_id)
 
             # Validate the password (plain text comparison)
             if stored_password == password:
-                # Start session and store user details
                 session['user_id'] = user_id
                 session['user_email'] = email
                 session['user_name'] = username
                 session.permanent = True
-                print(f"Login successful for user {user_id} - {email}")
+                logger.info("Login successful for user ID %d, Email: %s", user_id, email)
 
                 return jsonify({
                     'success': True,
                     'message': 'Login successful!',
-                    'redirect_url': next_url  # Redirect to next page or home
+                    'redirect_url': next_url
                 })
             else:
-                print("Login failed: Incorrect password")
+                logger.warning("Login failed: Incorrect password for email %s.", email)
                 return jsonify({'success': False, 'message': 'Invalid email or password!'})
 
         except Exception as e:
-            import traceback
-            print(f"Error during login: {e}")
-            traceback.print_exc()
+            logger.error("Error during login: %s", str(e), exc_info=True)
             return jsonify({'success': False, 'message': 'An unexpected error occurred. Please try again.'})
 
-    # Render login page for GET requests
     return render_template('login.html', next=next_url)
 
-
-    
-
-
+# Access User Info 
 @login1.route('/get_user_info', methods=['GET'])
 def get_user_info():
-    print("userinfo",session)
+    logger.info("Accessing user info. Session data: %s", session)
     if 'user_id' in session:
         return jsonify({
             'success': True,
@@ -79,33 +80,29 @@ def get_user_info():
             'user_name': None
         })
 
-
+# Logout Route
 @login1.route('/logout')
 def logout():
-    user_id = session.get('user_id')  # Fetch the current user's ID
+    user_id = session.get('user_id')
     if user_id:
         try:
             connection = get_db_connection()
             cursor = connection.cursor()
 
-            # Save logout details to the database
             cursor.execute(
                 "INSERT INTO session_logs (user_id, logout_time) VALUES (%s, NOW())",
                 (user_id,)
             )
             connection.commit()
+            logger.info("Session data stored for user ID %d at logout.", user_id)
 
-            # Optionally log this event
-            print(f"Session data stored for user {user_id} at logout.")
-        
         except Exception as e:
-            print(f"Error saving session data: {e}")
-        
+            logger.error("Error saving session data for user ID %d: %s", user_id, str(e), exc_info=True)
+
         finally:
-            # Close the connection
             cursor.close()
             connection.close()
 
-    # Clear the session and flash a message
     session.clear()
+    logger.info("User ID %d logged out successfully.", user_id if user_id else "Unknown")
     return jsonify({'success': True, 'message': 'Logged out successfully!'})
