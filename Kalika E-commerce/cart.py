@@ -4,6 +4,13 @@ import xml.etree.ElementTree as ET
 from functools import wraps
 from db import get_db_connection
 
+import logging
+
+# Import the centralized logging configuration
+from logging_config import logging_config
+
+# Create a logger specific to this module
+logger = logging.getLogger("cart1")
 
 cart1 = Blueprint('cart1', __name__)
 
@@ -11,41 +18,57 @@ cart1 = Blueprint('cart1', __name__)
 # Route for cart page
 @cart1.route('/cart', methods=['GET', 'POST'])
 def cart():
-    print("Debug: Entered the cart route")
+    logger.info("Entered the cart route")
     from app import get_shared_data
     shared_data = get_shared_data()
     categories = shared_data['categories']
     cart_items = session.get('cart', [])
-    print("Debug: Cart Items",cart_items)
+    logger.debug(f"Cart items: {cart_items}")
 
     if request.method == 'GET':
+        logger.info("Processing GET request to fetch cart items")
+        
         for item in cart_items:
             item['total_price'] = item['quantity'] * item['price']
+        
         total_amount = sum(item['total_price'] for item in cart_items)
+        logger.debug(f"Total amount calculated: {total_amount}")
 
         if request.headers.get('Accept') == 'application/json':
+            logger.info("Returning cart data as JSON")
             return jsonify({"cart_items": cart_items, "total_amount": total_amount})
         else:
+            logger.info("Rendering cart page with HTML template")
             return render_template('testcart.html', cart_items=cart_items, total_amount=total_amount, categories=categories)
 
     elif request.method == 'POST':
+        logger.info("Processing POST request to update cart items")
+        
         data = request.get_json()
         itemcode = data.get('itemcode')
         action = data.get('action')
 
         if not itemcode or not action:
+            logger.error("Invalid request data received")
             return jsonify({"error": "Invalid request data"}), 400
 
+        # Update cart based on the action
         for item in cart_items:
             if item['itemcode'] == itemcode:
+                logger.info(f"Found item {itemcode} in cart, performing action: {action}")
                 if action == 'increase':
                     item['quantity'] += 1
+                    logger.debug(f"Incremented quantity of item {itemcode} to {item['quantity']}")
                 elif action == 'decrease':
                     item['quantity'] -= 1
                     if item['quantity'] <= 0:
                         cart_items.remove(item)
+                        logger.debug(f"Removed item {itemcode} from cart as quantity reached zero")
+                    else:
+                        logger.debug(f"Decreased quantity of item {itemcode} to {item['quantity']}")
                 elif action == 'remove':
                     cart_items.remove(item)
+                    logger.debug(f"Removed item {itemcode} from cart")
                 break
 
         for item in cart_items:
@@ -54,13 +77,20 @@ def cart():
         session['cart'] = cart_items
         session.modified = True
         total_amount = sum(item['total_price'] for item in cart_items)
+        logger.debug(f"Updated total amount: {total_amount}")
 
         return jsonify({"cart_items": cart_items, "total_amount": total_amount})
     
 @cart1.route('/cart/count', methods=['GET'])
 def cart_count():
+    logger.info("Entered the cart count route")
+    
     cart_items = session.get('cart', [])
+    logger.debug(f"Cart items: {cart_items}")
+    
     total_items = sum(item['quantity'] for item in cart_items)
+    logger.debug(f"Total items in cart: {total_items}")
+    
     return jsonify({"cart_count": total_items})
 
 
@@ -140,22 +170,31 @@ def login_required(f):
 @cart1.route('/checkout', methods=['POST'])
 @login_required  # Enforce login check before executing the route
 def checkout():
-    print("In cart checkout.")
+    logger.info("Entered checkout route")
+
+    # Check if the cart is empty
     if 'cart' not in session or not session['cart']:
+        logger.warning("Cart is empty, cannot proceed with checkout.")
         return jsonify({'success': False, 'message': 'Cart is empty'})
-    
+
+    # Check if the user is logged in
     if 'user_id' not in session:
-        print("Error: Attempt to checkout without logging in.")
+        logger.error("Attempt to checkout without logging in.")
         return jsonify({'success': False, 'message': 'You must be logged in to checkout.'}), 403
 
-    print("Starting XML generation...")
-    punchout_xml = generate_punchout_xml(session['cart'], session.get('user_name'))
-    print('Generated PunchOut XML:', punchout_xml)
+    logger.info("Starting XML generation...")
+    try:
+        punchout_xml = generate_punchout_xml(session['cart'], session.get('user_name'))
+        logger.debug(f'Generated PunchOut XML: {punchout_xml}')
+    except Exception as e:
+        logger.error(f"Error generating PunchOut XML: {e}")
+        return jsonify({'success': False, 'message': 'Error generating PunchOut XML.'})
 
     # Connect to PostgreSQL
+    logger.info("Connecting to database...")
     connection = get_db_connection()
     if not connection:
-        print("Database connection failed.")
+        logger.error("Database connection failed.")
         return jsonify({'success': False, 'message': 'Database connection failed'})
 
     try:
@@ -163,9 +202,9 @@ def checkout():
         query = "INSERT INTO punchout_responses (response) VALUES (%s)"
         cursor.execute(query, (punchout_xml,))
         connection.commit()
-        print("PunchOut XML saved successfully.")
+        logger.info("PunchOut XML saved successfully.")
     except Exception as e:
-        print("Error saving XML to database:", e)
+        logger.error(f"Error saving XML to database: {e}")
         return jsonify({'success': False, 'message': 'Error saving XML.'})
     finally:
         if cursor:
@@ -175,8 +214,9 @@ def checkout():
 
     # Clear the cart after checkout
     session.pop('cart', None)
-    return jsonify({'success': True, 'message': 'Checkout successful'})
+    logger.info("Cart cleared after checkout")
 
+    return jsonify({'success': True, 'message': 'Checkout successful'})
 
 
 def generate_punchout_xml(cart_items, user_name):

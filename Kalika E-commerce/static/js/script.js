@@ -175,6 +175,56 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+     // Handle search input
+     if (searchInput) {
+        // Handle real-time search for the popup
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim();
+
+            if (!query) {
+                if (popupSearchResults) popupSearchResults.style.display = 'none';
+                if (searchResults) searchResults.innerHTML = '';
+                return;
+            }
+
+            if (popupSearchResults) popupSearchResults.style.display = 'block';
+
+            fetch(`/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (searchResults) {
+                        searchResults.innerHTML = data.length
+                            ? data.slice(0, 7).map(product => `
+                                <li>
+                                    <a href="/product/${product.itemcode}" target="_blank">${product.name}</a>
+                                </li>
+                            `).join('')
+                            : '<li>No products found</li>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                    if (searchResults) searchResults.innerHTML = '<li>Error fetching results. Please try again later.</li>';
+                });
+        });
+
+        // Hide popup when clicking outside
+        document.addEventListener('click', (event) => {
+            if (popupSearchResults && !popupSearchResults.contains(event.target) && event.target !== searchInput) {
+                popupSearchResults.style.display = 'none';
+            }
+        });
+    }
+
+    if (searchBtn) {
+        // Redirect to the search results page when the button is clicked
+        searchBtn.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `/search/results?q=${encodeURIComponent(query)}`;
+            }
+        });
+
     // Add functionality for "Add to Cart" buttons
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function () {
@@ -229,4 +279,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCartCount();
     displayCart();
     initializeCarousel();
+}
 });
+
