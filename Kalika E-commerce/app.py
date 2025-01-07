@@ -6,7 +6,6 @@ from login import login1
 from register import register1
 from addtocart import add_cart
 from checkout import check
-from products import products1
 from cart import cart1
 from main import punchout
 from flask_session import Session
@@ -73,7 +72,6 @@ app.register_blueprint(login1)
 app.register_blueprint(register1)
 app.register_blueprint(add_cart)
 app.register_blueprint(check)
-app.register_blueprint(products1)
 app.register_blueprint(cart1)
 app.register_blueprint(punchout)
 
