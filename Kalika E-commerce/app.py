@@ -19,6 +19,7 @@ from flask_cors import CORS
 from db import get_db_connection
 from flask_session import Session
 import boto3
+import redis
 
 
 # Import the centralized logging configuration
@@ -57,15 +58,21 @@ CORS(app)
 
 # Flask Session Configuration
 app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
-app.config['SESSION_TYPE'] = 'filesystem'  # Store session data on the filesystem
-app.config['SESSION_PERMANENT'] = False  # Make sessions non-permanent by default
-app.config['SESSION_USE_SIGNER'] = True  # Sign the session ID for added security
-app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS for cookies in production
-app.config['SESSION_COOKIE_HTTPONLY'] = True  # Prevent JavaScript access to cookies
-app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Mitigate CSRF attacks
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Session expiration time
-Session(app)
+# app.config['SESSION_TYPE'] = 'filesystem'  # Store session data on the filesystem
+# app.config['SESSION_PERMANENT'] = False  # Make sessions non-permanent by default
+# app.config['SESSION_USE_SIGNER'] = True  # Sign the session ID for added security
+# app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS for cookies in production
+# app.config['SESSION_COOKIE_HTTPONLY'] = True  # Prevent JavaScript access to cookies
+# app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Mitigate CSRF attacks
+# app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Session expiration time
+# Session(app)
 
+# Configure Redis session storage
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_KEY_PREFIX'] = 'flask_session:'
+app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 
 app.register_blueprint(login1)
@@ -719,5 +726,5 @@ def fetch_categories():
 
 if __name__ == "__main__":
     logger.info("Running the application in debug mode")
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
