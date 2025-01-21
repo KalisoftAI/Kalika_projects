@@ -1,95 +1,168 @@
-# Website Deployment Guide
+# README: Website Deployment Guide
 
-This document outlines the steps for deploying the website on an EC2 instance using the provided deployment details.
+This document provides a comprehensive guide for deploying a Flask-based website on an EC2 instance, including configurations for Nginx and SSL certificates.
 
 ---
 
 ## Prerequisites
 
-1. **Access Credentials**: Ensure you have the `.pem` key file (`mumbai_ecomm_webserver.pem`) for SSH access.
-2. **Tools Installed**:
-   - SSH client
-   - Python and virtual environment packages
-   - Nginx installed and configured on the EC2 instance
+1. **Access Credentials**: Ensure you have the `.pem` file (e.g., `mumbai_ecomm_webserver.pem`) for SSH access.
+2. **Software Requirements**:
+   - Python 3.x
+   - pip
+   - Git
+   - Nginx
+   - Flask and required Python libraries (specified in `requirements.txt`).
+3. **Domain Configuration**:
+   - Ensure the domain (e.g., `kalisoft.in`) points to the EC2 instance IP (e.g., `35.154.229.59`).
 
 ---
 
 ## Deployment Steps
 
-### Step 1: SSH into the EC2 Instance
-Use the following command to connect to your EC2 instance:
-
+### 1. SSH into the EC2 Instance
 ```bash
 ssh -i "mumbai_ecomm_webserver.pem" ubuntu@ec2-35-154-229-59.ap-south-1.compute.amazonaws.com
 ```
 
-### Step 2: Activate the Virtual Environment
-Activate the virtual environment for the project:
-
+### 2. Update and Install Required Software
 ```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install git python3-pip python3-venv nginx -y
+```
+
+### 3. Clone the Git Repository
+Clone the repository containing the project:
+```bash
+git clone -b <branch_name> https://<username>:<personal_access_token>@github.com/<username>/<repository>.git
+```
+
+### 4. Set Up the Virtual Environment
+Navigate to the project directory and set up the virtual environment:
+```bash
+cd <repository_name>
+python3 -m venv venv
 source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-### Step 3: Restart or Start Nginx
-To ensure Nginx is running, restart the service:
-
+### 5. Configure and Start Nginx
+Edit the Nginx configuration for the domain:
 ```bash
-sudo /etc/init.d/nginx restart
+sudo nano /etc/nginx/sites-available/default
 ```
+Add the following configuration:
+```nginx
+server {
+    listen 80;
+    server_name kalisoft.in www.kalisoft.in;
 
-If Nginx is not running, start it manually:
-
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+Test and reload Nginx:
 ```bash
-sudo /etc/init.d/nginx start
+sudo nginx -t
+sudo systemctl reload nginx
 ```
 
-### Step 4: Configure Firewall Rules
-Allow HTTP traffic on port 80 by adding the following iptables rule:
-
+### 6. Configure SSL with Self-Signed Certificate
+Generate and configure a self-signed SSL certificate:
 ```bash
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+-keyout /etc/ssl/certs/private.pem \
+-out /etc/ssl/certs/kali_certificate.crt
+```
+Update the Nginx configuration for SSL:
+```nginx
+server {
+    listen 443 ssl;
+    server_name kalisoft.in www.kalisoft.in;
+
+    ssl_certificate /etc/ssl/certs/kali_certificate.crt;
+    ssl_certificate_key /etc/ssl/certs/private.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+Reload Nginx:
+```bash
+sudo systemctl reload nginx
 ```
 
----
+### 7. Start the Flask Application
+Run the Flask app using Gunicorn:
+```bash
+sudo apt install gunicorn
+sudo gunicorn --bind 0.0.0.0:5000 app:app
+```
 
-## Punchout Process
+To configure Gunicorn as a service:
+```bash
+sudo nano /etc/systemd/system/gunicorn.service
+```
+Add the following:
+```ini
+[Unit]
+Description=gunicorn daemon for Flask app
+After=network.target
 
-### Code Configuration
-Ensure that the redirect URL is updated in the code for the Punchout process. The redirect URL provided should match the one updated in SAP Ariba for proper buyer redirection.
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/<repository_name>
+Environment="PATH=/home/ubuntu/<repository_name>/venv/bin"
+ExecStart=/home/ubuntu/<repository_name>/venv/bin/gunicorn --bind 0.0.0.0:5000 app:app
 
-- Example configuration:
-  - **Redirect URL**: Ensure the URL specified in the code aligns with the buyer's SAP Ariba configuration.
+[Install]
+WantedBy=multi-user.target
+```
+Start and enable the service:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+```
 
 ---
 
 ## Troubleshooting
 
-1. **Nginx Issues**:
-   - Check Nginx logs for any errors:
+1. **Nginx Errors**:
+   - Check logs: `sudo tail -f /var/log/nginx/error.log`
+
+2. **SSL Issues**:
+   - Verify SSL file permissions:
      ```bash
-     sudo tail -f /var/log/nginx/error.log
+     sudo chmod 600 /etc/ssl/certs/private.pem
+     sudo chmod 644 /etc/ssl/certs/kali_certificate.crt
      ```
 
-2. **SSH Connection Errors**:
-   - Verify that the `.pem` file has the correct permissions:
+3. **Gunicorn Service Errors**:
+   - Check service status:
      ```bash
-     chmod 400 mumbai_ecomm_webserver.pem
-     ```
-
-3. **Virtual Environment Issues**:
-   - Ensure the `venv` directory exists and is properly set up. If not, create and set up the virtual environment:
-     ```bash
-     python3 -m venv venv
-     source venv/bin/activate
+     sudo systemctl status gunicorn
      ```
 
 ---
 
 ## Notes
 
-- Ensure the EC2 instance's security group allows inbound traffic on port 80.
-- Regularly update the `nginx.conf` file to reflect any changes in server configurations.
+- For secure deployment, consider using Let's Encrypt for free SSL certificates.
+- Ensure the security group for your EC2 instance allows traffic on ports 80 and 443.
 
 ---
 
-This document serves as a quick reference for deploying and managing the website. Ensure all configurations are validated before deploying to production.
+This guide covers the deployment of a Flask app with Nginx and self-signed SSL on an EC2 instance. Customize the steps based on your project requirements.
