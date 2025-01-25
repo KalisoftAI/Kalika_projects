@@ -44,6 +44,7 @@ cd <repository_name>
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
 ```
 
 ### 5. Configure and Start Nginx
@@ -70,6 +71,7 @@ Test and reload Nginx:
 ```bash
 sudo nginx -t
 sudo systemctl reload nginx
+sudo /etc/init.d/nginx restart
 ```
 
 ### 6. Configure SSL with Self-Signed Certificate
@@ -142,15 +144,28 @@ sudo systemctl enable gunicorn
 
 1. **Nginx Errors**:
    - Check logs: `sudo tail -f /var/log/nginx/error.log`
+   - sudo tail -f /var/log/nginx/access.log
 
-2. **SSL Issues**:
+2. 
+comands
+   2.1 To check running python process:
+    ```bash
+    ps aux | grep python
+   ```
+   2.2 To Restart The Nginx 
+   ```bash
+   sudo /etc/init.d/nginx restart
+   ```
+   
+
+4. **SSL Issues**:
    - Verify SSL file permissions:
      ```bash
      sudo chmod 600 /etc/ssl/certs/private.pem
      sudo chmod 644 /etc/ssl/certs/kali_certificate.crt
      ```
 
-3. **Gunicorn Service Errors**:
+5. **Gunicorn Service Errors**:
    - Check service status:
      ```bash
      sudo systemctl status gunicorn
