@@ -144,19 +144,19 @@ sudo systemctl enable gunicorn
 
 1. **Nginx Errors**:
    - Check logs: `sudo tail -f /var/log/nginx/error.log`
-   - sudo tail -f /var/log/nginx/access.log
+   - `sudo tail -f /var/log/nginx/access.log`
 
 2. 
 comands
    2.1 To check running python process:
-    ```bash
-    ps aux | grep python
-   ```
+ ```bash
+ ps aux | grep python
+```
    2.2 To Restart The Nginx 
-   ```bash
-   sudo /etc/init.d/nginx restart
-   ```
-   
+```bash
+sudo /etc/init.d/nginx restart
+```
+
 
 4. **SSL Issues**:
    - Verify SSL file permissions:
