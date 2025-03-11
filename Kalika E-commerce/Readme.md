@@ -22,7 +22,7 @@ This document provides a comprehensive guide for deploying a Flask-based website
 
 ### 1. SSH into the EC2 Instance
 ```bash
-ssh -i "mumbai_ecomm_webserver.pem" ubuntu@ec2-35-154-229-59.ap-south-1.compute.amazonaws.com
+ssl link to connect aws 
 ```
 
 ### 2. Update and Install Required Software
