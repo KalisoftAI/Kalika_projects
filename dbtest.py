@@ -112,7 +112,7 @@ def create_products_table():
 
         # Corrected: The CREATE TABLE query was commented out and commit was misplaced
         create_table_query = '''
-        CREATE TABLE IF NOT EXISTS Products (
+        CREATE TABLE IF NOT EXISTS products (
             Item_id SERIAL PRIMARY KEY,
             Main_Category VARCHAR(100) NOT NULL,
             Sub_Categories VARCHAR(100),
@@ -124,10 +124,10 @@ def create_products_table():
         '''
         cursor.execute(create_table_query)
         connection.commit() # Commit after creating the table
-        print("Table 'Products' ensured to exist (or created).")
+        print("Table 'products' ensured to exist (or created).")
 
     except Exception as error:
-        print(f"Error creating/ensuring 'Products' table: {error}")
+        print(f"Error creating/ensuring 'products' table: {error}")
     finally:
         if cursor:
             cursor.close()
@@ -155,7 +155,7 @@ def insert_data_from_csv(file_path):
             # Iterate over each row in the CSV and insert it into the database
             for row in csv_reader:
                 insert_query = '''
-                INSERT INTO Products (Item_id, Main_Category, Sub_Categories, Item_Code, Product_Title, Product_Description, Price)
+                INSERT INTO products (Item_id, Main_Category, Sub_Categories, Item_Code, Product_Title, Product_Description, Price)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (Item_id) DO NOTHING;  -- Prevent duplicate Item_id entries
                 '''
@@ -174,7 +174,7 @@ def insert_data_from_csv(file_path):
 
         # Commit the transaction after all rows are inserted
         connection.commit()
-        print("Data inserted successfully into Products table.")
+        print("Data inserted successfully into products table.")
 
     except Exception as error:
         print(f"Error inserting data: {error}")

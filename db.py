@@ -3,7 +3,7 @@ from tabulate import tabulate
 from datetime import datetime
 
 # Database connection parameters
-db_host = '35.154.229.59'
+db_host = 'localhost'
 db_name = 'ecom_prod_catalog'
 db_user = 'vikas'
 db_password = 'kalika1667'

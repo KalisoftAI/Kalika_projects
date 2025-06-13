@@ -1,7 +1,6 @@
-# from punchout import *
 import secrets
 import psycopg2
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session, send_from_directory, g, Response
 from login import login1
 from register import register1
 from addtocart import add_cart
@@ -10,71 +9,54 @@ from cart import cart1
 from main import punchout
 from flask_session import Session
 from datetime import timedelta
-from db import get_db_connection
 import csv
 from urllib.parse import quote
 import logging
 from logging.handlers import RotatingFileHandler
 from flask_cors import CORS
-from db import get_db_connection
-from flask_session import Session
 import boto3
 import redis
 
+from dotenv import load_dotenv
+import os
 
-# Import the centralized logging configuration
-from logging_config import logging_config
+# Load environment variables from .env file
+load_dotenv()
 
 # Create a logger specific to this module
 logger = logging.getLogger("app")
 
+# Initialize S3 client using environment variables for credentials and region
+s3 = boto3.client('s3', region_name=os.getenv('AWS_DEFAULT_REGION'))
 
-# Initialize S3 client
-s3 = boto3.client('s3', region_name='us-east-1')
-BUCKET_NAME = 'kalika-ecom'
-FOLDER_NAME = 'kalika-images/'  # Folder inside the S3 bucket
+# Get S3 bucket and folder names from environment variables, with fallbacks
+BUCKET_NAME = os.getenv('S3_BUCKET_NAME', 'kalika-ecom')
+FOLDER_NAME = os.getenv('S3_FOLDER_NAME', 'kalika-images/')
 
-# Initialize logging
+# Initialize logging configuration
 logging.basicConfig(
-    level=logging.DEBUG,  # Change to logging.INFO or logging.ERROR in production
+    level=logging.DEBUG,  # Set to logging.INFO or logging.ERROR in production
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        RotatingFileHandler("app.log", maxBytes=5000000, backupCount=5),  # Logs to a file with rotation
-        logging.StreamHandler()  # Logs to the console
+        RotatingFileHandler("app.log", maxBytes=5000000, backupCount=5),  # Logs to a file
+        logging.StreamHandler()  # Logs to console
     ]
 )
 
-# Create a logger instance
-logger = logging.getLogger(__name__)
+app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)  # Generate a random secret key for Flask sessions
 
-# Example logging in app lifecycle
-logger.info("Starting the Flask application...")
-
-# Initialize the Flask application
-app = Flask(__name__, static_folder='static')
-CORS(app)
-
-
-
-# Flask Session Configuration
-app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
-# app.config['SESSION_TYPE'] = 'filesystem'  # Store session data on the filesystem
-# app.config['SESSION_PERMANENT'] = False  # Make sessions non-permanent by default
-# app.config['SESSION_USE_SIGNER'] = True  # Sign the session ID for added security
-# app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS for cookies in production
-# app.config['SESSION_COOKIE_HTTPONLY'] = True  # Prevent JavaScript access to cookies
-# app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Mitigate CSRF attacks
-# app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Session expiration time
-# Session(app)
-
-# Configure Redis session storage
+# Configure Flask-Session
 app.config['SESSION_TYPE'] = 'redis'
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
-app.config['SESSION_KEY_PREFIX'] = 'flask_session:'
-app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379, db=0)
+app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL', 'redis://localhost:6379'))
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
+# Initialize Flask-Session
+Session(app)
 
+# Register blueprints
 app.register_blueprint(login1)
 app.register_blueprint(register1)
 app.register_blueprint(add_cart)
@@ -82,649 +64,311 @@ app.register_blueprint(check)
 app.register_blueprint(cart1)
 app.register_blueprint(punchout)
 
+CORS(app) # Enable CORS for all routes by default
 
-# # Set a random secret key for session management
-# app.secret_key = secrets.token_hex(16)  # Generates a random 32-character hex string
+# Database connection parameters - moved from dbtest.py for completeness here
+db_host = os.getenv('DB_HOST', 'localhost')
+db_name = os.getenv('DB_NAME', 'ecom_prod_catalog')
+db_user = os.getenv('DB_USER', 'vikas')
+db_password = os.getenv('DB_PASSWORD', 'your_password') # Use environment variable for password
+db_port = os.getenv('DB_PORT', '5432')
 
-@app.context_processor
-def inject_shared_data():
-    """
-    Automatically inject shared data (like categories) into all templates.
-    """
-    return get_shared_data()
-
-def get_shared_data():
-    """
-    Fetch shared data such as categories.
-    """
-    return {
-        "categories": fetch_productcatalog_data()  # Replace this with your actual function to fetch categories
-    }
-
-@app.route('/')
-def home():
-    logger.info("Home page requested")
-
-    try:
-        # Fetch main categories and categories for other sections
-        logger.info("Fetching main categories for carousel")
-        maincategory = fetch_categories()  # For the carousel
-        logger.debug(f"Main categories fetched: {maincategory}")
-
-        logger.info("Fetching categories and subcategories")
-        categories = fetch_productcatalog_data()  # For category-subcategory mapping
-        logger.debug(f"Categories fetched: {categories}")
-
-        # Fetch random products from the database
-        logger.info("Fetching random products for display")
-        random_products_query = """
-            SELECT itemcode AS product_id, 
-                   productname AS product_name, 
-                   subcategory AS product_description, 
-                   price AS product_price, 
-                   image_url AS product_image_key
-            FROM product_catlog_image_url
-            ORDER BY RANDOM()
-            LIMIT 4;
-        """
-
-        # Establish database connection
-        conn = get_db_connection()
-        cur = conn.cursor()
-        logger.info("Database connection established")
-
-        # Execute query
-        cur.execute(random_products_query)
-        logger.info("Random products query executed successfully")
-
-        # Fetch column names
-        column_names = [desc[0] for desc in cur.description]
-        logger.debug(f"Column names for random products: {column_names}")
-
-        # Convert tuples to dictionaries and generate pre-signed URLs for images
-        random_products = []
-        for row in cur.fetchall():
-            product = dict(zip(column_names, row))
-
-            # Generate pre-signed URL for the product image
-            s3_key = f"{FOLDER_NAME}{product['product_image_key']}"  # Prefix folder to the key
-            presigned_url = s3.generate_presigned_url(
-                'get_object',
-                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-                ExpiresIn=3600
-            )
-            product['product_image_url'] = presigned_url  # Add the image URL to the product dictionary
-            random_products.append(product)
-
-        logger.debug(f"Random products fetched and processed: {random_products}")
-
-    except Exception as e:
-        logger.error(f"An error occurred: {e}")
-        return render_template('error.html', message="An error occurred while processing your request."), 500
-    finally:
-        # Ensure database connection is properly closed
-        if 'cur' in locals():
-            cur.close()
-            logger.info("Database cursor closed")
-        if 'conn' in locals():
-            conn.close()
-            logger.info("Database connection closed")
-
-    # Render the template
-    logger.info("Rendering the home page with fetched data")
-    return render_template(
-        'index.html',
-        maincategory=maincategory,
-        categories=categories,
-        random_products=random_products
-    )
-
-
-@app.route('/aboutus')
-def aboutus():
-    return render_template('aboutus.html')
-
-
-@app.route('/contactus')
-def contactus():
-    return render_template('contactus.html')
-
-@app.route('/privacypolicy')
-def privacy():
-    return render_template('privacy.html')
-
-@app.route('/termsofservices')
-def termsofservices():
-    return render_template('terms.html')
-
-@app.route('/faqs')
-def faqs():
-    return render_template('faq.html')
-
-
-
-
-
-@app.route('/search', methods=['GET'])
-def search():
-    term = request.args.get('q', '')  # Get the search term from query params
-    logger.info(f"Search request received with term: {term}")
-    
-    if not term:
-        logger.warning("No search term provided; returning empty list")
-        return jsonify([])  # Return empty list if no search term is provided
-
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    try:
-        # Execute the SQL query to search for products matching the term
-        logger.info(f"Executing search query for term: {term}")
-        cur.execute("""
-            SELECT itemcode, productname, subcategory, price, image_url
-            FROM product_catlog_image_url 
-            WHERE productname ILIKE %s
-        """, (f"%{term}%",))  # Case-insensitive match
-        results = cur.fetchall()
-
-        # Process results and add pre-signed URLs for images
-        search_results = []
-        for row in results:
-            # Generate pre-signed URL for the product image
-            s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
-            presigned_url = s3.generate_presigned_url(
-                'get_object',
-                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-                ExpiresIn=3600
-            )
-            search_results.append({
-                "itemcode": row[0],
-                "name": row[1],
-                "subcategory": row[2],
-                "price": row[3],
-                "image_url": presigned_url
-            })
-        
-        logger.debug(f"Search results: {search_results}")
-        return jsonify(search_results)
-    
-    except Exception as e:
-        logger.error(f"Error during search operation: {e}")
-        return jsonify({"error": "An error occurred during the search"}), 500
-    
-    finally:
-        # Ensure the cursor and connection are closed
-        cur.close()
-        conn.close()
-        logger.info("Database connection closed")
-
-
-@app.route('/product/<itemcode>', methods=['GET'])
-def get_product_details(itemcode):
-    logger.info(f"Fetching details for product with itemcode: {itemcode}")
-    
-    conn = get_db_connection()
-    cur = conn.cursor()
-    
-    try:
-        logger.info(f"Executing query to fetch product details for itemcode: {itemcode}")
-        cur.execute("""
-            SELECT itemcode, productname, subcategory, price, productdescription, image_url 
-            FROM product_catlog_image_url 
-            WHERE itemcode = %s
-        """, (itemcode,))
-        result = cur.fetchone()
-        logger.debug(f"Query result: {result}")
-
-    except Exception as e:
-        logger.error(f"Error fetching product details for itemcode {itemcode}: {e}")
-        return render_template('error.html', error="An error occurred while fetching product details"), 500
-
-    finally:
-        cur.close()
-        conn.close()
-        logger.info("Database connection closed")
-
-    if result:
+# --- Database Connection Management (using Flask's g object) ---
+def get_db_connection():
+    """Establishes a new database connection or returns the existing one for the current request."""
+    if 'db' not in g:
         try:
-            # Generate pre-signed URL for the product image
-            s3_key = f"{FOLDER_NAME}{result[5]}"  # Prefix folder to the key
-            presigned_url = s3.generate_presigned_url(
-                'get_object',
-                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-                ExpiresIn=3600
+            g.db = psycopg2.connect(
+                host=db_host,
+                database=db_name,
+                user=db_user,
+                password=db_password,
+                port=db_port
             )
-            logger.info(f"Generated presigned URL for itemcode {itemcode}: {presigned_url}")
-
-            # Render a detailed product page
-            return render_template('product.html', product={
-                "itemcode": result[0],
-                "name": result[1],
-                "subcategory": result[2],
-                "price": result[3],
-                "description": result[4],
-                "image_url": presigned_url
-            })
-
+            g.db.autocommit = False # Important for transactions
+            logger.info("Database connection established successfully.")
         except Exception as e:
-            logger.error(f"Error generating presigned URL for itemcode {itemcode}: {e}")
-            return render_template('error.html', error="An error occurred while processing product details"), 500
-    else:
-        logger.warning(f"Product with itemcode {itemcode} not found")
-        # Render a "Product Not Found" page
-        return render_template('product_not_found.html', itemcode=itemcode), 404
-    
+            logger.error(f"Error connecting to database: {e}")
+            g.db = None # Indicate connection failed
+    return g.db
 
-@app.route('/search/results', methods=['GET'])
-def search_results_page():
-    query = request.args.get('q', '').strip()
-    logger.info(f"Search query received: '{query}'")
+def close_db_connection(e=None):
+    """Closes the database connection at the end of the request."""
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
+        logger.info("Database connection closed during app teardown")
 
-    if not query:
-        logger.warning("Empty search query. Returning empty results.")
-        return render_template('searchresult.html', products=[], query=query)
+# Register the function to close the database connection when the app context tears down
+app.teardown_appcontext(close_db_connection)
 
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    try:
-        logger.info(f"Executing search query for: '{query}'")
-        # Query for matching products
-        cur.execute("""
-            SELECT itemcode, productname, subcategory, productdescription, price, image_url
-            FROM product_catlog_image_url
-            WHERE productname ILIKE %s
-        """, (f"%{query}%",))
-        results = cur.fetchall()
-        logger.debug(f"Search query results: {results}")
-
-    except Exception as e:
-        logger.error(f"Error executing search query: {e}")
-        return render_template('error.html', error="An error occurred while fetching search results"), 500
-
-    finally:
-        cur.close()
-        conn.close()
-        logger.info("Database connection closed")
-
-    search_results = []
-    try:
-        for row in results:
-            s3_key = f"{FOLDER_NAME}{row[5]}"
-            presigned_url = s3.generate_presigned_url(
-                'get_object',
-                Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-                ExpiresIn=3600
-            )
-            search_results.append({
-                "itemcode": row[0],
-                "name": row[1],
-                "subcategory": row[2],
-                "description": row[3],
-                "price": row[4],
-                "image_url": presigned_url
-            })
-        logger.info(f"Generated pre-signed URLs for {len(search_results)} products")
-
-    except Exception as e:
-        logger.error(f"Error generating pre-signed URLs for search results: {e}")
-        return render_template('error.html', error="An error occurred while processing search results"), 500
-
-    logger.info(f"Rendering search results page with {len(search_results)} products")
-    return render_template('searchresult.html', products=search_results, query=query)
-
-# Route to display products by category
-# @app.route('/<string:maincategory>')
-# def show_category_products(maincategory):
-#     conn = get_db_connection()
-#     cursor = conn.cursor()
-#
-#     # Fetch products by category
-#     query = """
-#         SELECT itemcode, productname, subcategory, price
-#         FROM productcatalog
-#         WHERE maincategory = %s;
-#     """
-#     cursor.execute(query, (maincategory,))
-#     productcatalog = cursor.fetchall()
-#
-#     # Convert fetched data to a list of dictionaries
-#     product_list = [
-#         {'itemcode': row[0], 'productname': row[1], 'subcategory': row[2], 'price': row[3]}
-#         for row in productcatalog
-#     ]
-#     # print
-#
-#     cursor.close()
-#     conn.close()
-#
-#     # Render the HTML template with fetched products
-#     return render_template('category.html',
-#                            maincategory=maincategory,
-#                            products=product_list)
-
-# Route to display products by category
-# @app.route('/<string:maincategory>')
-# def show_category_products(maincategory):
-#     product_list = []
-
-#     # Read products from the CSV file
-#     with open('imagedata1.csv', mode='r', encoding='utf-8') as csvfile:
-#         csv_reader = csv.DictReader(csvfile)
-#         # Skip the first row
-#         # next(csv_reader, None)
-
-#         for row in csv_reader:
-#             # Filter products by main category
-#             if row['Main Category'] == maincategory:
-#                 product_list.append({
-#                     'itemcode': row['Item Code'],
-#                     'productname': row['Product Title'],
-#                     'subcategory': row['Sub Categories'],
-#                     'price': float(row['Price']),
-#                     'image_url': url_for('static', filename=f'images/{row["Large Image"]}')
-
-#                 })
-
-#     # print("Product details:", product_list)
-
-#     # Render the HTML template with fetched products
-#     return render_template('category.html',
-#                            maincategory=maincategory,
-#                            products=product_list)
-
-@app.route('/<string:maincategory>')
-def show_category_products(maincategory):
-    logger.info(f"Fetching products for category: {maincategory}")
-    
-    try:
-        conn = get_db_connection()
-        logger.info("Database connection established")
-    except Exception as e:
-        logger.error(f"Error establishing database connection: {e}")
-        return "Database connection error", 500
-    
-    try:
-        categories = fetch_productcatalog_data()
-        cursor = conn.cursor()
-        
-        # Fetch products by category
-        query = """
-            SELECT itemcode, productname, subcategory, price, image_url
-            FROM product_catlog_image_url 
-            WHERE maincategory = %s;
-        """
-        logger.debug(f"Executing query: {query}")
-        cursor.execute(query, (maincategory,))
-        productcatalog = cursor.fetchall()
-        
-        # Convert fetched data to a list of dictionaries
-        product_list = []
-        for row in productcatalog:
-            s3_key = f"{FOLDER_NAME}{row[4]}"  # Prefix folder to the key
-            try:
-                presigned_url = s3.generate_presigned_url(
-                    'get_object',
-                    Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-                    ExpiresIn=3600
-                )
-                product_list.append({
-                    'itemcode': row[0],
-                    'productname': row[1],
-                    'subcategory': row[2],
-                    'price': row[3],
-                    'image_url': presigned_url
-                })
-            except Exception as e:
-                logger.error(f"Error generating presigned URL for product {row[0]}: {e}")
-        
-        cursor.close()
-        logger.info("Database cursor closed")
-        conn.close()
-        logger.info("Database connection closed")
-        
-        # Render the HTML template with fetched products
-        return render_template('category.html', 
-                               maincategory=maincategory, 
-                               categories=categories,
-                               products=product_list)
-
-    except Exception as e:
-        logger.error(f"Error fetching products for category {maincategory}: {e}")
-        return "Error fetching products", 500
-
-
-
-
-# Route to display products by subcategory
-@app.route('/<string:maincategory>/<string:subcategory>')
-def show_products(maincategory, subcategory):
-    logger.info(f"Fetching products for category: {maincategory} and subcategory: {subcategory}")
-    
-    try:
-        conn = get_db_connection()
-        logger.info("Database connection established")
-    except Exception as e:
-        logger.error(f"Error establishing database connection: {e}")
-        return "Database connection error", 500
-    
-    try:
-        categories = fetch_productcatalog_data()
-        cursor = conn.cursor()
-        
-        # Fetch products based on category and subcategory
-        query = """
-            SELECT itemcode, productname, productdescription, price, image_url
-            FROM product_catlog_image_url 
-            WHERE maincategory = %s AND subcategory = %s;
-        """
-        logger.debug(f"Executing query: {query}")
-        cursor.execute(query, (maincategory, subcategory))
-        productcatalog = cursor.fetchall()
-        
-        # Convert fetched data to a list of dictionaries
-        product_list = []
-        for row in productcatalog:
-            s3_key = f"{'Folder/'}{row[4]}"  # Prefix folder to the key
-            try:
-                presigned_url = s3.generate_presigned_url(
-                    'get_object',
-                    Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-                    ExpiresIn=3600
-                )
-                product_list.append({
-                    'itemcode': row[0],
-                    'productname': row[1],
-                    'productdescription': row[2],
-                    'price': row[3],
-                    'image_url': presigned_url
-                })
-            except Exception as e:
-                logger.error(f"Error generating presigned URL for product {row[0]}: {e}")
-        
-        cursor.close()
-        logger.info("Database cursor closed")
-        conn.close()
-        logger.info("Database connection closed")
-        
-        # Render the HTML template with fetched products
-        return render_template('subcategory.html', 
-                               maincategory=maincategory,
-                               subcategory=subcategory,
-                               categories=categories,
-                               products=product_list)
-
-    except Exception as e:
-        logger.error(f"Error fetching products for category {maincategory} and subcategory {subcategory}: {e}")
-        return "Error fetching products", 500
-
-
-# Close the database connection on app teardown
-@app.teardown_appcontext
-def close_connection(exception):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.close()
-    conn.close()
-
-
-    
-@app.route('/edit_profile/<int:user_id>', methods=['GET', 'POST'])
-def edit_profile(user_id):
-    print(f"Session contents: {session}")  # Debug
-    print(f"Accessing edit_profile for user_id: {user_id}")  # Debug
-    if 'user_id' not in session or session['user_id'] != user_id:
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('login'))
-
-    if session['user_id'] != user_id:
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('home'))
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        mobile_number = request.form['mobile_number']
-
-        try:
-            cursor.execute("""
-                UPDATE users
-                SET username = %s, email = %s, mobile_number = %s
-                WHERE user_id = %s
-            """, (username, email, mobile_number, user_id))
-            conn.commit()
-            flash('Profile updated successfully!', 'success')
-        except Exception as e:
-            conn.rollback()
-            flash(f'Error updating profile: {e}', 'danger')
-        finally:
-            cursor.close()
-            conn.close()
-
-        return redirect(url_for('edit_profile', user_id=user_id))
-
-    try:
-        cursor.execute("SELECT username, email, mobile_number FROM users WHERE user_id = %s", (user_id,))
-        user = cursor.fetchone()
-        if not user:
-            flash('User not found.', 'danger')
-            return redirect(url_for('home'))
-    except Exception as e:
-        flash(f'Error fetching user data: {e}', 'danger')
-        return redirect(url_for('home'))
-    finally:
-        cursor.close()
-        conn.close()
-
-    return redirect(url_for('edit_profile', user_id=session.get('user_id')))
-
-
-
-@app.route('/edit_address/<int:user_id>', methods=['GET', 'POST'])
-def edit_address():
-    # Check if the user is logged in
-    if 'user_id' not in session:
-        flash('You need to log in to access this page.', 'danger')
-        return redirect(url_for('login'))  # Replace 'login' with your actual login route
-
-    user_id = session['user_id']  # Fetch user_id from the session
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    if request.method == 'POST':
-        # Get form data
-        address = request.form['address']
-        postal_code = request.form['postal_code']
-
-        # Update address in the database
-        try:
-            cursor.execute("""
-                UPDATE users
-                SET address = %s, postal_code = %s
-                WHERE user_id = %s
-            """, (address, postal_code, user_id))
-            conn.commit()
-            flash('Address updated successfully!', 'success')
-        except Exception as e:
-            conn.rollback()
-            flash(f'Error updating address: {e}', 'danger')
-        finally:
-            cursor.close()
-            conn.close()
-
-        # Redirect to the same edit page
-        return redirect(url_for('edit_address'))
-    
-    # Fetch address information to pre-fill the form
-    try:
-        cursor.execute("SELECT address, postal_code FROM users WHERE user_id = %s", (user_id,))
-        address_data = cursor.fetchone()
-        if not address_data:
-            flash('Address not found.', 'danger')
-            return redirect(url_for('home'))
-    except Exception as e:
-        flash(f'Error fetching address data: {e}', 'danger')
-        return redirect(url_for('home'))
-    finally:
-        cursor.close()
-        conn.close()
-
-    return render_template('edit_address.html', address_data=address_data)
-
+# --- Utility Functions for Database Interactions ---
 
 def fetch_productcatalog_data():
-    """Fetch maincategory and subcategory data from the database."""
-    try:
-        connection = get_db_connection()
-        cursor = connection.cursor()
-        cursor.execute("""
-            SELECT maincategory, subcategory
-            FROM product_catlog_image_url LIMIT 15;
-        """)
-        rows = cursor.fetchall()
+    """Fetches product catalog data, mapping main categories to their subcategories."""
+    connection = get_db_connection()
+    if connection is None:
+        logger.error("Failed to establish database connection in fetch_productcatalog_data()")
+        return {} # Return empty dict on connection failure
 
-        # Create a dictionary mapping main categories to their subcategories
+    cursor = None
+    try:
+        cursor = connection.cursor()
+        # FIX: Changed 'sub_category' to 'sub_categories' as per database hint
+        cursor.execute("SELECT main_category, sub_categories FROM products;")
+        rows = cursor.fetchall()
         category_data = {}
         for maincategory, subcategory in rows:
             if maincategory not in category_data:
                 category_data[maincategory] = []
             if subcategory not in category_data[maincategory]:
                 category_data[maincategory].append(subcategory)
-
-        cursor.close()
-        connection.close()
-
+        logger.debug(f"Categories fetched: {category_data}")
         return category_data
     except Exception as e:
-        print(f"Error fetching product catalog data: {e}")
-        return {}
-
-# Example usage
-categories = fetch_productcatalog_data()
-# print(categories)
+        logger.error(f"Error fetching product catalog data: {e}")
+        return {} # Return empty dict on error
+    finally:
+        if cursor:
+            cursor.close() # Only close the cursor, connection is managed by app.teardown_appcontext
 
 def fetch_categories():
-    """Fetch categories from the database."""
-    try:
-        connection = get_db_connection()
-        cursor = connection.cursor()
-        cursor.execute("SELECT DISTINCT maincategory FROM productcatalog WHERE maincategory != 'Spring-\xa0Air Hammer Drill Gun' LIMIT 12;")
-        maincategories = cursor.fetchall()  # Fetch only the main categories
-        # print("maincategories", maincategories)
-        cursor.close()
-        connection.close()
+    """
+    Fetches distinct main categories from the database.
+    Used for main category listings (e.g., carousel).
+    """
+    connection = get_db_connection()
+    if connection is None:
+        logger.error("Failed to establish database connection in fetch_categories()")
+        return [] # Return empty list on connection failure
 
-        # Add a default image for each category
+    cursor = None
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT DISTINCT main_category FROM products WHERE main_category != 'Spring-\\xa0Air Hammer Drill Gun' LIMIT 12;")
+        maincategories = cursor.fetchall()
+        # Returns a list of dictionaries with category name and a placeholder image
+        logger.debug(f"Main categories fetched: {[{'name': row[0], 'image': 'path/to/default/image.jpg'} for row in maincategories]}")
         return [{'name': row[0], 'image': 'path/to/default/image.jpg'} for row in maincategories]
     except Exception as e:
-        print(f"Error fetching categories: {e}")
-        return []
+        logger.error(f"Error fetching categories: {e}")
+        return [] # Return empty list on error
+    finally:
+        if cursor:
+            cursor.close() # Only close the cursor, connection is managed by app.teardown_appcontext
+
+def fetch_random_products(limit=8):
+    """Fetches a limited number of random products for display on the home page."""
+    connection = get_db_connection()
+    if connection is None:
+        logger.error("Failed to establish database connection in fetch_random_products()")
+        return [] # Return empty list on connection failure
+
+    cursor = None
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT product_id, name, price, image_url FROM products ORDER BY RANDOM() LIMIT %s;", (limit,))
+        products = cursor.fetchall()
+        product_list = []
+        for p_id, name, price, image_url in products:
+            image_s3_url = get_s3_image_url(image_url) if image_url else 'path/to/default/product_image.jpg'
+            product_list.append({
+                'product_id': p_id,
+                'name': name,
+                'price': float(price),
+                'image_url': image_s3_url
+            })
+        logger.debug(f"Random products fetched: {product_list}")
+        return product_list
+    except Exception as e:
+        logger.error(f"Error fetching random products: {e}")
+        return [] # Return empty list on error
+    finally:
+        if cursor:
+            cursor.close() # Only close the cursor
+
+def get_s3_image_url(image_name):
+    """Generates a public URL for an image stored in S3."""
+    if not image_name:
+        return None
+    try:
+        # Construct the S3 key with the folder name
+        s3_key = f"{FOLDER_NAME}{image_name}"
+        # Generate a pre-signed URL for the object
+        url = s3.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
+            ExpiresIn=3600  # URL expires in 1 hour
+        )
+        return url
+    except Exception as e:
+        logger.error(f"Error generating S3 URL for {image_name}: {e}")
+        return None
+
+# --- Routes ---
+
+@app.route('/')
+def home():
+    logger.info("Home page requested")
+    try:
+        main_categories_carousel = fetch_categories()
+        product_catalog_data = fetch_productcatalog_data()
+        random_products = fetch_random_products() # Call the function to fetch random products
+
+        return render_template('index.html',
+                               main_categories_carousel=main_categories_carousel,
+                               category_data=product_catalog_data,
+                               random_products=random_products)
+    except Exception as e:
+        logger.error(f"An error occurred in home(): {e}")
+        # Returning a simple string response instead of rendering error.html
+        return "An internal server error occurred. Please try again later.", 500
+
+
+@app.route('/products/<main_category_name>')
+def products_by_category(main_category_name):
+    logger.info(f"Fetching products for category: {main_category_name}")
+    connection = None
+    cursor = None
+    try:
+        connection = get_db_connection()
+        if connection is None:
+            logger.error("Failed to establish database connection in products_by_category()")
+            # Returning a simple string response instead of rendering error.html
+            return "Database connection failed for products by category. Please try again later.", 500
+
+        cursor = connection.cursor()
+        # Decode the URL-encoded category name
+        decoded_category_name = quote(main_category_name)
+
+        # Fetch products for the given category
+        cursor.execute("SELECT product_id, name, price, image_url, description FROM products WHERE main_category = %s;", (decoded_category_name,))
+        products_raw = cursor.fetchall()
+
+        products = []
+        for p_id, name, price, image_url, description in products_raw:
+            image_s3_url = get_s3_image_url(image_url) if image_url else '/static/default_product_image.jpg'
+            products.append({
+                'product_id': p_id,
+                'name': name,
+                'price': float(price),
+                'image_url': image_s3_url,
+                'description': description
+            })
+
+        main_categories_carousel = fetch_categories()
+        product_catalog_data = fetch_productcatalog_data()
+
+        return render_template('products.html',
+                               main_category_name=main_category_name,
+                               products=products,
+                               main_categories_carousel=main_categories_carousel,
+                               category_data=product_catalog_data)
+    except Exception as e:
+        logger.error(f"Error fetching products for category {main_category_name}: {e}")
+        # Returning a simple string response instead of rendering error.html
+        return "Failed to load products for this category. Please try again later.", 500
+    finally:
+        if cursor:
+            cursor.close()
+
+
+@app.route('/product/<int:product_id>')
+def product_detail(product_id):
+    logger.info(f"Fetching details for product ID: {product_id}")
+    connection = None
+    cursor = None
+    try:
+        connection = get_db_connection()
+        if connection is None:
+            logger.error("Failed to establish database connection in product_detail()")
+            # Returning a simple string response instead of rendering error.html
+            return "Database connection failed for product details. Please try again later.", 500
+
+        cursor = connection.cursor()
+        cursor.execute("SELECT product_id, name, description, price, image_url, stock_quantity FROM products WHERE product_id = %s;", (product_id,))
+        product_data = cursor.fetchone()
+
+        if product_data:
+            p_id, name, description, price, image_url, stock_quantity = product_data
+            image_s3_url = get_s3_image_url(image_url) if image_url else '/static/default_product_image.jpg'
+            product = {
+                'product_id': p_id,
+                'name': name,
+                'description': description,
+                'price': float(price),
+                'image_url': image_s3_url,
+                'stock_quantity': stock_quantity
+            }
+            main_categories_carousel = fetch_categories()
+            product_catalog_data = fetch_productcatalog_data()
+            return render_template('product_detail.html',
+                                   product=product,
+                                   main_categories_carousel=main_categories_carousel,
+                                   category_data=product_catalog_data)
+        else:
+            # Returning a simple string response for product not found
+            return "Product not found.", 404
+    except Exception as e:
+        logger.error(f"Error fetching product detail for ID {product_id}: {e}")
+        # Returning a simple string response instead of rendering error.html
+        return "Failed to load product details. Please try again later.", 500
+    finally:
+        if cursor:
+            cursor.close()
+
+@app.route('/search')
+def search_products():
+    query = request.args.get('query', '').strip()
+    logger.info(f"Searching for products with query: {query}")
+    products = []
+    if query:
+        connection = None
+        cursor = None
+        try:
+            connection = get_db_connection()
+            if connection is None:
+                logger.error("Failed to establish database connection in search_products()")
+                # Keeping flash message for client-side display on search results page
+                flash("Database connection failed for search. Please try again.", "error")
+                return render_template('search_results.html', query=query, products=[], main_categories_carousel=fetch_categories(), category_data=fetch_productcatalog_data())
+
+
+            cursor = connection.cursor()
+            search_pattern = f"%{query}%"
+            cursor.execute("SELECT product_id, name, price, image_url, description FROM products WHERE name ILIKE %s OR description ILIKE %s;", (search_pattern, search_pattern))
+            products_raw = cursor.fetchall()
+
+            for p_id, name, price, image_url, description in products_raw:
+                image_s3_url = get_s3_image_url(image_url) if image_url else '/static/default_product_image.jpg'
+                products.append({
+                    'product_id': p_id,
+                    'name': name,
+                    'price': float(price),
+                    'image_url': image_s3_url,
+                    'description': description
+                })
+        except Exception as e:
+            logger.error(f"Error during product search for query '{query}': {e}")
+            flash("An error occurred during search. Please try again.", "error")
+        finally:
+            if cursor:
+                cursor.close()
+
+    main_categories_carousel = fetch_categories()
+    product_catalog_data = fetch_productcatalog_data()
+    return render_template('search_results.html',
+                           query=query,
+                           products=products,
+                           main_categories_carousel=main_categories_carousel,
+                           category_data=product_catalog_data)
+
+@app.route('/robots.txt')
+def robots_txt():
+    return send_from_directory(app.static_folder, 'robots.txt')
+
 
 if __name__ == "__main__":
+    logger.info("Starting the Flask application...")
     logger.info("Running the application in debug mode")
     app.run(host='0.0.0.0', port=5000, debug=True)
-
