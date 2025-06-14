@@ -1,60 +1,77 @@
-// main.js
-let cart = [];
-let products = [];
+// static/js/main.js
 
-async function fetchProducts() {
-    const response = await fetch('/api/products');
-    products = await response.json();
-    const productList = document.getElementById('productList');
-    productList.innerHTML = '';
-    products.forEach(product => {
-        const productEl = document.createElement('div');
-        productEl.className = 'product';
-        productEl.innerHTML = `
-            <img src="${product.image_url}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>$${product.price.toFixed(2)}</p>
-            <button onclick="addToCart(${product.id})">Add to Cart</button>
-        `;
-        productList.appendChild(productEl);
-    });
-}
-
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    cart.push(product);
-    updateCart();
-}
-
-function updateCart() {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    cartItems.innerHTML = '';
-    let total = 0;
-    cart.forEach(product => {
-        const li = document.createElement('li');
-        li.textContent = `${product.name} - $${product.price.toFixed(2)}`;
-        cartItems.appendChild(li);
-        total += product.price;
-    });
-    cartTotal.textContent = total.toFixed(2);
-}
-
-document.getElementById('checkout').addEventListener('click', async () => {
-    const response = await fetch('/api/punchout/checkout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ items: cart.map(item => item.id) }),
-    });
-    if (response.ok) {
-        const result = await response.json();
-        window.location.href = result.returnUrl;
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we are on a page that has the productList element
+    if (document.getElementById('productList')) {
+        fetchProducts();
     }
+    // Update the cart display on every page load
+    updateCartDisplay();
 });
 
-fetchProducts();
+// Load cart from localStorage or initialize an empty array
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
+async function fetchProducts() {
+    try {
+        const response = await fetch('/api/products');
+        if (!response.ok) throw new Error('Network response was not ok');
 
+        const products = await response.json();
+        const productList = document.getElementById('productList');
+        productList.innerHTML = ''; // Clear loading message
+
+        products.forEach(product => {
+            const productEl = document.createElement('div');
+            productEl.className = 'product-card'; // Use your existing CSS class
+            // Note: The link now goes to the product detail page shell
+            productEl.innerHTML = `
+                <div class="product-image-wrapper">
+                    <a href="/product/${product.id}">
+                        <img src="${product.image_url}" alt="${product.name}" class="product-image">
+                    </a>
+                </div>
+                <h3 class="product_name">${product.name}</h3>
+                <p class="product-description">${product.description.substring(0, 100)}...</p>
+                <span class="product_price">RS. ${product.price.toFixed(2)}</span>
+                <button class="add-to-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image_url}')">Add to Cart</button>
+            `;
+            productList.appendChild(productEl);
+        });
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        document.getElementById('productList').innerHTML = '<p>Error loading products. Please try again later.</p>';
+    }
+}
+
+function addToCart(productId, productName, productPrice, productImageUrl) {
+    const existingItem = cart.find(item => item.id === productId);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: productId,
+            name: productName,
+            price: productPrice,
+            image_url: productImageUrl,
+            quantity: 1
+        });
+    }
+
+    saveCart();
+    updateCartDisplay();
+    alert(`Added ${productName} to cart!`);
+}
+
+function updateCartDisplay() {
+    const cartCountEl = document.querySelector('.cart-count');
+    if (cartCountEl) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountEl.textContent = totalItems;
+    }
+}

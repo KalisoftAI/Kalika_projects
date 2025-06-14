@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Search Results for "{{ query }}"{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center; padding: 20px;">Search Results for: <em>"{{ query }}"</em></h1>
+    <a href="{{ url_for('home') }}" class="back-link" style="display: block; text-align: center; margin-bottom: 20px;">← Back to Home</a>
+    <hr>
+    {% if products %}
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.image_url }}" class="product-image" alt="{{ product.name }}">
+                <div class="product_name">{{ product.name }}</div>
+                <p class="product-description">{{ product.description[:100] }}...</p>
+                <span class="product_price">Price: Rs.{{ product.price | round(2) }}</span>
+                <form action="{{ url_for('cart1.add_to_cart') }}" method="POST">
+                    <input type="hidden" name="itemcode" value="{{ product.itemcode }}">
+                    <input type="hidden" name="product_name" value="{{ product.name }}">
+                    <input type="hidden" name="product_price" value="{{ product.price }}">
+                    <input type="hidden" name="image_url" value="{{ product.image_url }}">
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="text-align: center; font-size: 1.2em; padding: 40px;">No products found for your query.</p>
+    {% endif %}
+</div>
+{% endblock %}

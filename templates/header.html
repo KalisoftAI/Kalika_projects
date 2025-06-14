@@ -1,85 +1,54 @@
-<ul class="navbar-nav">
-    <li class="dropdown1">
-        <a href="#" class="btn-categories">
-            <div class="all-categories">
-                  <i class="fa fa-list"></i> All Categories
-            </div>
+<style>
+    /* Add this CSS to control the dropdown behavior */
+    .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .dropdown1 { position: relative; }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; z-index: 1000; background-color: white; border: 1px solid #ccc; list-style: none; padding: 0; margin-top: 5px; min-width: 220px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .dropdown-submenu { display: none; position: absolute; left: 100%; top: -1px; background-color: white; border: 1px solid #ccc; list-style: none; padding: 0; }
+    .dropdown-menu > li { position: relative; }
+    .dropdown-menu > li:hover > .dropdown-submenu { display: block; }
+</style>
 
-        </a>
-        <ul class="dropdown-menu">
+<div class="navbar-nav">
+    <div class="dropdown1">
+        <button class="btn-categories" id="categories-btn"><i class="fa fa-list"></i> All Categories</button>
+        <ul class="dropdown-menu" id="categories-menu">
             {% for maincategory, subcategories in categories.items() %}
                 <li>
-                    <!-- Link to maincategory page -->
-                    <a href="{{ url_for('show_category_products', maincategory=maincategory) }}" target="_blank">
-                        {{ maincategory }}
-                    </a>
+                    <a href="{{ url_for('products_by_category', main_category_name=maincategory) }}">{{ maincategory }}</a>
+                    {% if subcategories %}
                     <ul class="dropdown-submenu">
                         {% for subcategory in subcategories %}
-                            <li>
-                                <!-- Link to subcategory page within maincategory -->
-                                <a href="{{ url_for('show_products', maincategory=maincategory, subcategory=subcategory) }}" target="_blank">
-                                    {{ subcategory }}
-                                </a>
-                            </li>
+                            <li><a href="{{ url_for('products_by_subcategory', main_category_name=maincategory, sub_category_name=subcategory) }}">{{ subcategory }}</a></li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
-    </li>
-</ul>
-  <div class="navbar-logo">
-    <a href="/">
-      <img src="../static/image/logo.png" alt="Industrial eCommerce Logo" class="logo-image">
-    </a>
-  </div>
-  <div class="header-actions">
-    <input
-        type="text"
-        class="search-bar"
-        id="searchInput"
-        placeholder="Search for products..."
-    />
-    <button id="searchBtn">
-        <i class="fa fa-search"></i> Search
-    </button>
-
-    <!-- Popup search results -->
-    <div id="popupSearchResults" class="popup-search-results">
-        <ul id="searchResults"></ul>
-    </div>
-
-    <!-- Product details section (initially hidden) -->
-    <div id="product-details" style="display:none;">
-        <h2 id="product-name"></h2>
-        <p id="product-description"></p>
-        <p id="product-price"></p>
-        <button id="add-to-cart">Add to Cart</button>
     </div>
 </div>
-
-    <a href="{{ url_for('cart1.cart') }}" class="btn-login">
-        <i class="fa fa-shopping-cart"></i>
-        (<span class="cart-count">0</span>)
-    </a>
-
-  <div id="user-personalization">
-    <a href="{{ url_for('login1.login') }}" class="btn-login" id="login-button">
-        <i class="fa fa-user"></i> Login
-    </a>
-    <button class="btn-user" id="user-dropdown" style="display: none;">
-        <span id="user-initial"></span>
-        <i class="fa fa-user"></i>
-    </button>
+<div class="navbar-logo"><a href="/"><img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" class="logo-image"></a></div>
+<div class="header-actions">
+  <form action="{{ url_for('search_products') }}" method="GET" style="display: flex;">
+      <input type="text" name="query" class="search-bar" placeholder="Search for products..." required />
+      <button type="submit" id="searchBtn"><i class="fa fa-search"></i></button>
+  </form>
 </div>
-<div id="user-menu" style="display: none;">
-    <ul id="dropdown-list">
-        <li>
-            <a href="#" id="edit-profile-button">Edit Profile</a>
-        </li>
-        <li><a href="#" id="edit-address-button">Edit Address</a></li>
-        <li><a href="{{ url_for('login1.logout') }}" id="logout-button">Logout</a></li>
-    </ul>
-</div>
+<a href="{{ url_for('cart1.cart') }}" class="btn-login"><i class="fa fa-shopping-cart"></i> (<span class="cart-count">0</span>)</a>
+<div id="user-personalization"><a href="{{ url_for('login1.login') }}" class="btn-login" id="login-button"><i class="fa fa-user"></i> Login</a></div>
 
-</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoriesBtn = document.getElementById('categories-btn');
+        const categoriesMenu = document.getElementById('categories-menu');
+        if (categoriesBtn) {
+            categoriesBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                categoriesMenu.style.display = (categoriesMenu.style.display === 'block') ? 'none' : 'block';
+            });
+        }
+        document.addEventListener('click', function() {
+            if (categoriesMenu) categoriesMenu.style.display = 'none';
+        });
+    });
+</script>
