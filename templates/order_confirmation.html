@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmed{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center; padding: 50px;">
+    <h2>Thank You For Your Order!</h2>
+    <p>Your order has been placed successfully.</p>
+    <p>Your Order ID is: <strong>{{ request.args.get('order_id') }}</strong></p>
+    <p>We will notify you once your items have been shipped.</p>
+    <a href="{{ url_for('home') }}" class="btn" style="background-color: #007bff; color: white; margin-top: 20px;">Continue Shopping</a>
+</div>
+{% endblock %}

@@ -7,6 +7,8 @@ db_host = "localhost" # Change to your database host if not local
 db_name = 'ecom_prod_catalog'
 db_user = 'vikas'
 db_password = 'kalika1667'
+# db_password = 'kalika1992'
+
 db_port = '5432' # Default PostgreSQL port
 
 def create_users_table():
@@ -228,7 +230,7 @@ if __name__ == "__main__":
     create_products_table() # This was commented out, now it's active
 
     print("\nAttempting to insert product data from CSV...")
-    csv_file_path = 'C:/Users/Admin/Downloads/kalika_catalog_products.csv'
+    csv_file_path = 'V:/ML_projects/Bussiness/Kalika_projects/kalika_catalog_products.csv'
     insert_data_from_csv(csv_file_path)
 
     # Example usage for inserting an order (uncomment if you want to test)

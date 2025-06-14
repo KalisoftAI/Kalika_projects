@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import xml.etree.ElementTree as ET
 from db import get_db_connection
 from datetime import datetime
-from addtocart import add_cart
+from add_cart import add_cart
 from functools import wraps
 
 check = Blueprint('check', __name__)
