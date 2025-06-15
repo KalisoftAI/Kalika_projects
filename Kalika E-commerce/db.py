@@ -1,9 +1,9 @@
 import psycopg2
 from tabulate import tabulate
 from datetime import datetime
-
+from flask import g
 # Database connection parameters
-db_host = '35.154.229.59'
+db_host = 'localhost'
 db_name = 'ecom_prod_catalog'
 db_user = 'vikas'
 db_password = 'kalika1667'
@@ -226,47 +226,53 @@ def create_orders_table():
     #     connection.close()
 
 
-# def initialize_connection():
-        # sample_order = {
-        # "user_id": 1,
-        # "order_date": datetime.now(),
-        # "total_amount": 150.75,
-        # "status": "Pending",
-        # "shipping_address": "1234 Elm Street, Springfield, IL",
-        # "payment_status": "Unpaid",
-        # "created_at": datetime.now(),
-        # "updated_at": datetime.now()
-        # }
-        #
-        # # SQL query to insert data into the orders table
-        # insert_query = """
-        # INSERT INTO orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
-        # VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        # RETURNING order_id;
-        # """
-        #
-        # # Connect to the PostgreSQL database
-        # cursor = connection.cursor()
-        #
-        # # Execute the insert query with the sample data
-        # cursor.execute(insert_query, (
-        #     sample_order["user_id"],
-        #     sample_order["order_date"],
-        #     sample_order["total_amount"],
-        #     sample_order["status"],
-        #     sample_order["shipping_address"],
-        #     sample_order["payment_status"],
-        #     sample_order["created_at"],
-        #     sample_order["updated_at"]
-        # ))
-        #
-        # # Fetch the returned order_id
-        # order_id = cursor.fetchone()[0]
-        # connection.commit()
-        #
-        # print(f"Order inserted successfully with order_id: {order_id}")
+def initialize_connection():
+        sample_order = {
+        "user_id": 1,
+        "order_date": datetime.now(),
+        "total_amount": 150.75,
+        "status": "Pending",
+        "shipping_address": "1234 Elm Street, Springfield, IL",
+        "payment_status": "Unpaid",
+        "created_at": datetime.now(),
+        "updated_at": datetime.now()
+        }
 
+        # SQL query to insert data into the orders table
+        insert_query = """
+        INSERT INTO orders (user_id, order_date, total_amount, status, shipping_address, payment_status, created_at, updated_at)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING order_id;
+        """
 
+        # Connect to the PostgreSQL database
+        cursor = connection.cursor()
+
+        # Execute the insert query with the sample data
+        cursor.execute(insert_query, (
+            sample_order["user_id"],
+            sample_order["order_date"],
+            sample_order["total_amount"],
+            sample_order["status"],
+            sample_order["shipping_address"],
+            sample_order["payment_status"],
+            sample_order["created_at"],
+            sample_order["updated_at"]
+        ))
+
+        # Fetch the returned order_id
+        order_id = cursor.fetchone()[0]
+        connection.commit()
+
+        print(f"Order inserted successfully with order_id: {order_id}")
+
+# This function will be registered with @app.teardown_appcontext in app.py
+def close_db_connection(e=None):
+    """Closes the database connection at the end of the request."""
+    db_conn = g.pop('db_conn', None)
+    if db_conn is not None:
+        db_conn.close()
+        print("Database connection closed")
     
 
 
