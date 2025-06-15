@@ -1,0 +1,259 @@
+[
+    {
+        "label": "psycopg2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "psycopg2",
+        "description": "psycopg2",
+        "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
+        "label": "tabulate",
+        "importPath": "tabulate",
+        "description": "tabulate",
+        "isExtraImport": true,
+        "detail": "tabulate",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "g",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "csv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "get_db_connection",
+        "kind": 2,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "def get_db_connection():\n    \"\"\"\n    Establishes a new database connection for the current request or returns an existing one.\n    Uses Flask's 'g' object for efficiency and safety.\n    \"\"\"\n    if 'db' not in g:\n        try:\n            g.db = psycopg2.connect(\n                host=db_host,\n                database=db_name,",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "close_db_connection",
+        "kind": 2,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "def close_db_connection(e=None):\n    \"\"\"Closes the database connection at the end of the request.\"\"\"\n    db = g.pop('db', None)\n    if db is not None:\n        db.close()\n        logger.info(\"Database connection closed for this request.\")\n# --- YOUR EXISTING UTILITY FUNCTIONS (UNCHANGED) ---\n# These will now use a temporary, direct connection for script execution.\ndef get_direct_db_connection():\n    \"\"\"A direct connection for running this file as a script.\"\"\"",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "get_direct_db_connection",
+        "kind": 2,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "def get_direct_db_connection():\n    \"\"\"A direct connection for running this file as a script.\"\"\"\n    try:\n        connection = psycopg2.connect(\n            host=db_host, database=db_name, user=db_user, password=db_password, port=db_port\n        )\n        return connection\n    except Exception as e:\n        print(f\"Direct database connection error: {e}\")\n        return None",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "view_tables_and_data",
+        "kind": 2,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "def view_tables_and_data():\n    connection = None\n    cursor = None\n    try:\n        connection = get_direct_db_connection()\n        if not connection: return\n        cursor = connection.cursor()\n        cursor.execute(\"SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';\")\n        tables = cursor.fetchall()\n        print(\"Tables in the database:\")",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "create_punchout_table",
+        "kind": 2,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "def create_punchout_table():\n    connection = None\n    cursor = None\n    try:\n        connection = get_direct_db_connection()\n        if not connection: return\n        cursor = connection.cursor()\n        create_table_query = \"\"\"\n        CREATE TABLE IF NOT EXISTS punchout_responses (\n            id SERIAL PRIMARY KEY,",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "logger = logging.getLogger(__name__)\n# --- Database connection parameters ---\n# Using os.getenv to be more flexible, but keeping your defaults\ndb_host = os.getenv('DB_HOST', 'localhost')\ndb_name = os.getenv('DB_NAME', 'ecom_prod_catalog')\ndb_user = os.getenv('DB_USER', 'vikas')\ndb_password = os.getenv('DB_PASSWORD', 'kalika1667')\ndb_port = os.getenv('DB_PORT', '5432')\n# --- NEW FLASK-SAFE CONNECTION MANAGEMENT ---\ndef get_db_connection():",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "db_host",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "db_host = os.getenv('DB_HOST', 'localhost')\ndb_name = os.getenv('DB_NAME', 'ecom_prod_catalog')\ndb_user = os.getenv('DB_USER', 'vikas')\ndb_password = os.getenv('DB_PASSWORD', 'kalika1667')\ndb_port = os.getenv('DB_PORT', '5432')\n# --- NEW FLASK-SAFE CONNECTION MANAGEMENT ---\ndef get_db_connection():\n    \"\"\"\n    Establishes a new database connection for the current request or returns an existing one.\n    Uses Flask's 'g' object for efficiency and safety.",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "db_name",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "db_name = os.getenv('DB_NAME', 'ecom_prod_catalog')\ndb_user = os.getenv('DB_USER', 'vikas')\ndb_password = os.getenv('DB_PASSWORD', 'kalika1667')\ndb_port = os.getenv('DB_PORT', '5432')\n# --- NEW FLASK-SAFE CONNECTION MANAGEMENT ---\ndef get_db_connection():\n    \"\"\"\n    Establishes a new database connection for the current request or returns an existing one.\n    Uses Flask's 'g' object for efficiency and safety.\n    \"\"\"",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "db_user",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "db_user = os.getenv('DB_USER', 'vikas')\ndb_password = os.getenv('DB_PASSWORD', 'kalika1667')\ndb_port = os.getenv('DB_PORT', '5432')\n# --- NEW FLASK-SAFE CONNECTION MANAGEMENT ---\ndef get_db_connection():\n    \"\"\"\n    Establishes a new database connection for the current request or returns an existing one.\n    Uses Flask's 'g' object for efficiency and safety.\n    \"\"\"\n    if 'db' not in g:",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "db_password",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "db_password = os.getenv('DB_PASSWORD', 'kalika1667')\ndb_port = os.getenv('DB_PORT', '5432')\n# --- NEW FLASK-SAFE CONNECTION MANAGEMENT ---\ndef get_db_connection():\n    \"\"\"\n    Establishes a new database connection for the current request or returns an existing one.\n    Uses Flask's 'g' object for efficiency and safety.\n    \"\"\"\n    if 'db' not in g:\n        try:",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "db_port",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "db_port = os.getenv('DB_PORT', '5432')\n# --- NEW FLASK-SAFE CONNECTION MANAGEMENT ---\ndef get_db_connection():\n    \"\"\"\n    Establishes a new database connection for the current request or returns an existing one.\n    Uses Flask's 'g' object for efficiency and safety.\n    \"\"\"\n    if 'db' not in g:\n        try:\n            g.db = psycopg2.connect(",
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "create_users_table",
+        "kind": 2,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "def create_users_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,\n            user=db_user,\n            password=db_password,\n            port=db_port",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "create_orders_table",
+        "kind": 2,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "def create_orders_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,\n            user=db_user,\n            password=db_password,\n            port=db_port",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "create_products_table",
+        "kind": 2,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "def create_products_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,\n            user=db_user,\n            password=db_password,\n            port=db_port",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "insert_data_from_csv",
+        "kind": 2,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "def insert_data_from_csv(file_path):\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,\n            user=db_user,\n            password=db_password,\n            port=db_port",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "insert_order",
+        "kind": 2,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "def insert_order(user_id, total_amount, status, shipping_address, payment_status):\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    order_date = datetime.now()\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,\n            user=db_user,\n            password=db_password,",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "db_host",
+        "kind": 5,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "db_host = \"localhost\" # Change to your database host if not local\ndb_name = 'ecom_prod_catalog'\ndb_user = 'vikas'\ndb_password = 'kalika1667'\n# db_password = 'kalika1992'\ndb_port = '5432' # Default PostgreSQL port\ndef create_users_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "db_name",
+        "kind": 5,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "db_name = 'ecom_prod_catalog'\ndb_user = 'vikas'\ndb_password = 'kalika1667'\n# db_password = 'kalika1992'\ndb_port = '5432' # Default PostgreSQL port\ndef create_users_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "db_user",
+        "kind": 5,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "db_user = 'vikas'\ndb_password = 'kalika1667'\n# db_password = 'kalika1992'\ndb_port = '5432' # Default PostgreSQL port\ndef create_users_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "db_password",
+        "kind": 5,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "db_password = 'kalika1667'\n# db_password = 'kalika1992'\ndb_port = '5432' # Default PostgreSQL port\ndef create_users_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,",
+        "detail": "dbtest",
+        "documentation": {}
+    },
+    {
+        "label": "db_port",
+        "kind": 5,
+        "importPath": "dbtest",
+        "description": "dbtest",
+        "peekOfCode": "db_port = '5432' # Default PostgreSQL port\ndef create_users_table():\n    connection = None # Initialize to None\n    cursor = None     # Initialize to None\n    try:\n        connection = psycopg2.connect(\n            host=db_host,\n            database=db_name,\n            user=db_user,\n            password=db_password,",
+        "detail": "dbtest",
+        "documentation": {}
+    }
+]
