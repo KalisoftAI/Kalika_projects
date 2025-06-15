@@ -1,0 +1,165 @@
+{% load static %}
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #2c3e50;
+        color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .dropdown1 { position: relative; }
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        background-color: white;
+        border: 1px solid #ddd;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        min-width: 220px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        border-radius: 4px;
+        animation: fadeIn 0.3s ease-in;
+    }
+    .dropdown-submenu {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        min-width: 200px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        border-radius: 4px;
+    }
+    .dropdown-menu > li { position: relative; }
+    .dropdown-menu > li:hover > .dropdown-submenu { display: block; }
+    .dropdown-menu > li > a, .dropdown-submenu > li > a {
+        display: block;
+        padding: 12px 15px;
+        color: #333;
+        text-decoration: none;
+        transition: background 0.2s ease;
+    }
+    .dropdown-menu > li > a:hover, .dropdown-submenu > li > a:hover {
+        background-color: #f8f9fa;
+    }
+    .btn-categories {
+        background: #34495e;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s ease;
+    }
+    .btn-categories:hover { background: #3e5f8a; }
+    .navbar-logo img { height: 60px; transition: transform 0.3s ease; }
+    .navbar-logo img:hover { transform: scale(1.1); }
+    .header-actions { display: flex; align-items: center; gap: 15px; }
+    .search-bar {
+        padding: 10px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        width: 250px;
+        transition: width 0.3s ease;
+    }
+    .search-bar:focus { width: 300px; outline: none; }
+    #searchBtn {
+        padding: 10px 15px;
+        border: none;
+        background: #34495e;
+        color: white;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    #searchBtn:hover { background: #3e5f8a; }
+    .btn-login {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+    .btn-login:hover { color: #dfe6e9; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+        .header-actions {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .search-bar {
+            width: 100%;
+        }
+        .btn-login {
+            margin: 10px 0;
+        }
+        .navbar-logo img {
+            height: 40px;
+        }
+    }
+</style>
+
+<div class="navbar">
+    <div class="navbar-nav">
+        <div class="dropdown1">
+            <button class="btn-categories" id="categories-btn"><i class="fa fa-list"></i> All Categories</button>
+            <ul class="dropdown-menu" id="categories-menu">
+                {% if categories %}
+                    {% for maincategory, data in categories.items %}
+                        <li>
+                            <a href="{% url 'catalog:products_by_category' data.key %}">{{ maincategory }}</a>
+                            {% if data.subcategories %}
+                                <ul class="dropdown-submenu">
+                                    {% for subcategory in data.subcategories %}
+                                        <li><a href="{% url 'catalog:products_by_subcategory' data.key subcategory.key %}">{{ subcategory.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li><a href="#">No Categories Available</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="navbar-logo">
+        <a href="{% url 'catalog:home' %}"><img src="{% static 'image/logo.png' %}" alt="Logo" class="logo-image"></a>
+    </div>
+    <div class="header-actions">
+        <form action="{% url 'catalog:search_products' %}" method="GET">
+            <input type="text" name="query" class="search-bar" placeholder="Search for products..." required />
+            <button type="submit" id="searchBtn"><i class="fa fa-search"></i></button>
+        </form>
+        <a href="{% url 'cart:cart' %}" class="btn-login"><i class="fa fa-shopping-cart"></i> (<span class="cart-count">0</span>)</a>
+        <div id="user-personalization">
+            {% if user.is_authenticated %}
+                <a href="{% url 'auth:logout' %}" class="btn-login"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            {% else %}
+                <a href="{% url 'auth:login' %}" class="btn-login" id="login-button"><i class="fa fa-user"></i> Login</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
