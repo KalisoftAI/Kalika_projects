@@ -1,80 +1,89 @@
-from flask import Blueprint, render_template
-from flask import Flask, request, jsonify, session
-import os
-
-app = Flask(__name__)
-
+from flask import Blueprint, request, jsonify, session
+import xml.etree.ElementTree as ET
+from datetime import datetime
+import requests
 
 punchout1 = Blueprint('punchout1', __name__)
 
-url = 'http://127.0.0.1:5000/generate_punchout_order'
-
-# Prepare the cart data
-cart_data = {
-    "cartItems": [
-        {"name": "{{item.name}}", "quantity": "{{item.quantity}}", "price": "{{item.price}}"},
-        {"name": "Item 2", "quantity": 1, "price": 700}
-    ],
-    "totalAmount": 1700
-}
-
-# Send the POST request
-# response = requests.post(url, json=cart_data)
-# Route to handle PunchOutOrderMessage generation
 @punchout1.route('/generate_punchout_order', methods=['POST'])
 def generate_punchout_order():
-    # Read JSON input (sent from the checkout button)
-    cart_data = request.get_json()
+    try:
+        # Check session cart
+        cart_items = session.get('cart', [])
+        if not cart_items:
+            return jsonify({'success': False, 'message': 'Cart is empty.'}), 400
 
-    print(cart_data)
-    # Validate cart data
-    if not cart_data or 'cartItems' not in cart_data or 'totalAmount' not in cart_data:
-        return jsonify({'success': False, 'message': 'Invalid cart data.'}), 400
+        # Calculate total
+        total_amount = sum(item['price'] * item['quantity'] for item in cart_items)
 
-    # Extract cart data
-    cart_items = cart_data['cartItems']
-    total_amount = cart_data['totalAmount']
+        # Get session data
+        buyer_cookie = session.get('buyer_cookie', '123456')
+        buyer_identity = session.get('buyer_identity', 'UnknownBuyer')
+        supplier_identity = session.get('supplier_identity', '651009354')
 
+        # Generate cXML POOM
+        cxml = generate_poom_xml(buyer_cookie, cart_items, total_amount, buyer_identity, supplier_identity)
 
-    # Prepare cXML PunchOutOrderMessage
-    buyer_cookie = '123456'  # Unique identifier for the PunchOut session
-    punchout_order_message = f"""<PunchOutOrderMessage>
-    <BuyerCookie>{buyer_cookie}</BuyerCookie>
-    <PunchOutOrderMessageHeader>
-        <Total>
-            <Money currency="INR">{total_amount}</Money>
-        </Total>
-    </PunchOutOrderMessageHeader>"""
+        # Send to Ariba (replace with actual endpoint)
+        ariba_url = "https://ariba-network-endpoint.com/poom"  # Update with Ariba's endpoint
+        headers = {'Content-Type': 'text/xml'}
+        response = requests.post(ariba_url, data=cxml, headers=headers)
 
-    # Add each item to the cXML message
+        if response.status_code == 200:
+            # Note: Cart is cleared in checkout.py, so no need to clear here
+            return jsonify({
+                'success': True,
+                'redirectURL': 'thankyou.html'
+            })
+        else:
+            print(f"Ariba response error: {response.text}")
+            return jsonify({'success': False, 'message': 'Failed to send POOM to Ariba.'}), 500
+
+    except Exception as e:
+        print(f"Error in generate_punchout_order: {e}")
+        return jsonify({'success': False, 'message': 'Server error.'}), 500
+
+def generate_poom_xml(buyer_cookie, cart_items, total_amount, buyer_identity, supplier_identity):
+    # Create cXML root
+    cxml = ET.Element('cXML', version="1.2.020", 
+                      payloadID=f"poom_{int(datetime.utcnow().timestamp())}",
+                      timestamp=datetime.utcnow().isoformat() + 'Z')
+
+    # Header
+    header = ET.SubElement(cxml, 'Header')
+    from_elem = ET.SubElement(header, 'From')
+    credential_from = ET.SubElement(from_elem, 'Credential', domain="DUNS")
+    ET.SubElement(credential_from, 'Identity').text = buyer_identity
+
+    to_elem = ET.SubElement(header, 'To')
+    credential_to = ET.SubElement(to_elem, 'Credential', domain="DUNS")
+    ET.SubElement(credential_to, 'Identity').text = supplier_identity
+
+    sender_elem = ET.SubElement(header, 'Sender')
+    credential_sender = ET.SubElement(sender_elem, 'Credential', domain="NetworkId")
+    ET.SubElement(credential_sender, 'Identity').text = "AN01052123957"
+    ET.SubElement(sender_elem, 'UserAgent').text = "YourAppName/1.0"
+
+    # Message
+    message = ET.SubElement(cxml, 'Message')
+    punchout_order = ET.SubElement(message, 'PunchOutOrderMessage')
+    ET.SubElement(punchout_order, 'BuyerCookie').text = buyer_cookie
+    header_elem = ET.SubElement(punchout_order, 'PunchOutOrderMessageHeader')
+    total_elem = ET.SubElement(header_elem, 'Total')
+    money_elem = ET.SubElement(total_elem, 'Money', currency="INR")
+    money_elem.text = str(total_amount)
+
+    # Items
     for item in cart_items:
-        punchout_order_message += f"""
-    <ItemIn quantity="{item['quantity']}">
-        <ItemID>
-            <SupplierPartID>{item['name']}</SupplierPartID>
-        </ItemID>
-        <ItemDetail>
-            <UnitPrice>
-                <Money currency="INR">{item['price']}</Money>
-            </UnitPrice>
-        </ItemDetail>
-    </ItemIn>"""
+        item_in = ET.SubElement(punchout_order, 'ItemIn', quantity=str(item['quantity']))
+        item_id = ET.SubElement(item_in, 'ItemID')
+        ET.SubElement(item_id, 'SupplierPartID').text = item.get('code', item['name'])
+        item_detail = ET.SubElement(item_in, 'ItemDetail')
+        unit_price = ET.SubElement(item_detail, 'UnitPrice')
+        money_price = ET.SubElement(unit_price, 'Money', currency="INR")
+        money_price.text = str(item['price'])
+        ET.SubElement(item_detail, 'Description').text = item['name']
 
-    # Close the PunchOutOrderMessage
-    punchout_order_message += "</PunchOutOrderMessage>"
-
-    # Simulate saving the PunchOutOrderMessage (or it could be sent to a server)
-    with open('punchout_order.xml', 'w') as file:
-        file.write(punchout_order_message)
-
-    session.pop('cart', None)
-    print("session",session)
-    # Respond with success and redirect URL
-    return jsonify({
-        'success': True,
-        'redirectURL': 'thankyou.html'  # Redirect to a thank-you page after submission
-    })
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Generate XML
+    xml_str = ET.tostring(cxml, encoding='utf-8', method='xml').decode('utf-8')
+    return f'<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.020/cXML.dtd">{xml_str}'
