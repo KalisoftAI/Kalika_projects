@@ -60,3 +60,26 @@ def search_products(request):
     except Exception as e:
         logger.error(f"Error in search_products view: {e}")
         return render(request, 'catalog/home.html', {'products': [], 'query': query})
+
+# catalog/views.py
+
+from django.shortcuts import render
+from .models import Product # Make sure your Product model is in catalog/models.py
+
+def product_list(request):
+    # Fetch all products from the database
+    # You might want to add filtering later, e.g., for available products
+    products = Product.objects.all()
+
+    # Get the cart for display purposes (optional but good for UI)
+    cart_items = []
+    if request.session.session_key:
+        from cart.models import CartItem
+        cart_items = CartItem.objects.filter(session_key=request.session.session_key)
+
+    context = {
+        'products': products,
+        'cart_item_count': sum(item.quantity for item in cart_items)
+    }
+    # Render the HTML template with the product data
+    return render(request, 'catalog/product_list.html', context)

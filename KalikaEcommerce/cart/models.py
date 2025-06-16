@@ -10,10 +10,11 @@ class CartItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.product_title}"
+        # Corrected this line to match your probable model field name
+        return f"{self.quantity} x {self.product.Product_Title}"
 
     def subtotal(self):
-        return self.quantity * self.product.price
+        return self.quantity * self.product.Price
 
     class Meta:
         indexes = [

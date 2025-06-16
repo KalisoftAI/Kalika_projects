@@ -7,4 +7,6 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('auth/', include('authentication.urls')),
     path('checkout/', include('checkout.urls')),
+    path('punchout/', include('punchout.urls', namespace='punchout')),
+    path('catalog/', include('catalog.urls', namespace='catalog')),
 ]
