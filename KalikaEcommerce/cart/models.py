@@ -14,7 +14,7 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.Product_Title}"
 
     def subtotal(self):
-        return self.quantity * self.product.Price
+        return self.quantity * self.product.price
 
     class Meta:
         indexes = [

@@ -29,10 +29,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a259c414-5671-4a82-a49e-ce5da8045216" name="Default Changelist" comment="Updated with recent changes to new">
-      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/KalikaEcommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/KalikaEcommerce/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/KalikaEcommerce/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/KalikaEcommerce/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/authentication/templates/authentication/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/authentication/templates/authentication/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/authentication/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/authentication/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/authentication/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/authentication/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KalikaEcommerce/cart/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/cart/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/catalog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/catalog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/dbtest_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/dbtest_copy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/cart/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KalikaEcommerce/checkout/templates/checkout/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/KalikaEcommerce/checkout/templates/checkout/checkout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -392,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1749992220886</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Punchout process tested successfully">
+      <created>1750080148237</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1750080148237</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +439,8 @@
     <MESSAGE value="Updated with search products" />
     <MESSAGE value="Updated with recent changes to new" />
     <MESSAGE value="Updated with new changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated with new changes" />
+    <MESSAGE value="Punchout process tested successfully" />
+    <option name="LAST_COMMIT_MESSAGE" value="Punchout process tested successfully" />
   </component>
   <component name="WindowStateProjectService">
     <state x="366" y="137" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1750005007768">
@@ -439,5 +451,9 @@
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="421" y="92" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1749998221912" />
+    <state x="233" y="56" key="Vcs.Push.Dialog.v2" timestamp="1750080149783">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="233" y="56" key="Vcs.Push.Dialog.v2/0.0.1280.672@0.0.1280.672" timestamp="1750080149783" />
   </component>
 </project>
