@@ -93,8 +93,16 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/auth/login'
+LOGIN_REDIRECT_URL = 'catalog:product-list'
+LOGIN_URL = 'auth:login'
+
+# URL to redirect to after a user logs out.
+LOGOUT_REDIRECT_URL = 'auth:login'
+
+
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/auth/login'
+
 
 # Add to the end of settings.py
 LOGGING = {
