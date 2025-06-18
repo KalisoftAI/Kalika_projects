@@ -1,19 +1,35 @@
 {% extends 'catalog/base.html' %}
 {% block title %}{{ subcategory }} - {{ category }} - Kalika Ecommerce{% endblock %}
 {% block content %}
-<h1>Products in {{ subcategory }} ({{ category }})</h1>
-<div class="product-grid">
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold mb-6 text-gray-900">Products in {{ subcategory }} ({{ category }})</h2>
     {% if products %}
-        {% for product in products %}
-            <div class="product-card">
-                <h3>{{ product.product_title }}</h3>
-                <p>{{ product.product_description|truncatewords:20 }}</p>
-                <p><strong>${{ product.price }}</strong></p>
-                <a href="{% url 'cart:add_to_cart' product.item_id %}" class="btn-add-cart">Add to Cart</a>
-            </div>
-        {% endfor %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for product in products %}
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-lg transition-all duration-300 group">
+                    <div class="relative overflow-hidden rounded-md mb-4">
+                        {% if product.s3_image_url %}
+                            <img src="{{ product.s3_image_url }}" alt="{{ product.product_title }}" class="w-[300px] h-[300px] object-cover mx-auto transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        {% else %}
+                            <div class="w-[300px] h-[300px] bg-gray-100 rounded-md flex items-center justify-center border border-gray-200">
+                                <span class="text-gray-500 text-sm">No Image Available</span>
+                            </div>
+                        {% endif %}
+                        <!-- Optional Badge -->
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">New</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 truncate">{{ product.product_title }}</h3>
+                    <p class="text-gray-600 text-sm mt-2 line-clamp-2">{{ product.product_description|truncatewords:12 }}</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <p class="text-green-600 font-bold text-xl">${{ product.price }}</p>
+                        <div class="text-yellow-400 text-sm">★★★★☆ (12)</div>
+                    </div>
+                    <button class="mt-4 w-full bg-yellow-600 text-white py-2 rounded-md hover:bg-yellow-700 transition-colors duration-200">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
-        <p>No products found in this subcategory.</p>
+        <p class="text-red-500 text-lg">No products found in this subcategory.</p>
     {% endif %}
 </div>
 {% endblock %}

@@ -1,5 +1,10 @@
 import os
 from pathlib import Path
+from decouple import config
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -121,3 +126,11 @@ LOGGING = {
         },
     },
 }
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_REGION = os.getenv('AWS_REGION')
+AWS_S3_BUCKET_NAME = os.getenv('AWS_S3_BUCKET_NAME')
+
+# Ensure boto3 uses these credentials
+AWS_STORAGE_BUCKET_NAME = AWS_S3_BUCKET_NAME
+AWS_S3_REGION_NAME = AWS_REGION
