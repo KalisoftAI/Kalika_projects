@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PunchOut Return</title>
+</head>
+<body onload="document.forms[0].submit()">
+    <form method="POST" action="{{ return_url }}">
+        <input type="hidden" name="cxml-urlencoded" value="{{ cxml_cart }}">
+    </form>
+</body>
+</html>
