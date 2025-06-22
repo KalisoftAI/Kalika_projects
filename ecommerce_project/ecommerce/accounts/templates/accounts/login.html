@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Login{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 class="text-3xl font-bold text-center mb-8">Login</h1>
+<div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+    {% if messages %}
+        {% for message in messages %}
+            <p class="text-red-600">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium">Username</label>
+            <input type="text" name="username" id="username" class="w-full p-2 border rounded">
+        </div>
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium">Password</label>
+            <input type="password" name="password" id="password" class="w-full p-2 border rounded">
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700">Login</button>
+    </form>
+    <p class="mt-4 text-center">Don't have an account? <a href="{% url 'accounts:register' %}" class="text-indigo-600 hover:underline">Register</a></p>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-blue-900 mb-6">Your Cart</h1>
+    {% if cart_items %}
+        <div class="space-y-4">
+            {% for item in cart_items %}
+                <div class="flex items-center bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300">
+                    {% if item.item.product.image_url %}
+                        <img src="{{ item.item.product.image_url|default:'https://via.placeholder.com/100' }}" alt="{{ item.item.product.product_title }}" class="w-24 h-24 object-cover rounded-md mr-4">
+                    {% else %}
+                        <img src="https://via.placeholder.com/100" alt="No Image" class="w-24 h-24 object-cover rounded-md mr-4">
+                    {% endif %}
+                    <div class="flex-1">
+                        <h2 class="text-xl font-semibold">{{ item.item.product.product_title }}</h2>
+                        <p class="text-gray-600">Quantity: {{ item.item.quantity }}</p>
+                        <p class="text-gray-600">Price: ${{ item.item.product.price|floatformat:2 }}</p>
+                        <p class="text-gray-600">Subtotal: ${{ item.subtotal|floatformat:2 }}</p>
+                    </div>
+                    <form action="{% url 'cart:remove_from_cart' item.item.id %}" method="post" class="ml-4">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Remove</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="mt-6 text-right">
+            <p class="text-2xl font-bold text-blue-900">Total: ${{ total|floatformat:2 }}</p>
+            <a href="{% url 'catalog:product_list' %}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Continue Shopping</a>
+            <a href="{% url 'cart:proceed_to_checkout' %}" class="mt-4 ml-4 inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <p class="text-gray-600">Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'catalog/base.html' %}
+{% block title %}PunchOut Order{% endblock %}
+{% block content %}
+<h1>PunchOut Order</h1>
+<p>Generated cXML Purchase Order:</p>
+<pre>{{ cxml }}</pre>
+<p>Return URL: {{ return_url }}</p>
+<form method="POST" action="{% url 'punchout:punchout_response' %}">
+    {% csrf_token %}
+    <input type="hidden" name="cxml-urlencoded" value="{{ cxml }}">
+    <button type="submit" class="btn btn-primary">Submit to Response Page</button>
+</form>
+{% endblock %}
