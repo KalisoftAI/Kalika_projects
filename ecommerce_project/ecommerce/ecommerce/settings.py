@@ -18,7 +18,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
     'crispy_forms',
-    'punchout',
+    'crispy_bootstrap4','punchout',
+    
 ]
 
 MIDDLEWARE = [
@@ -45,7 +46,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'catalog.context_processors.categories',
+                'catalog.context_processors.categories','catalog.context_processors.cart_item_count',
             ],
         },
     },
@@ -63,7 +64,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+AUTH_USER_MODEL = 'accounts.CustomUser'
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
