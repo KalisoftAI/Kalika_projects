@@ -6,8 +6,8 @@ from botocore.exceptions import ClientError
 from django.conf import settings
 import logging
 from cart.models import CartItem
+from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
-
 logger = logging.getLogger(__name__)
 
 def get_s3_presigned_url(bucket_name, object_key, expiration=3600):
@@ -53,6 +53,8 @@ def product_detail(request, item_id):
 def products_by_category(request, main_category_name):
     try:
         products = Product.objects.filter(main_category=main_category_name)
+        for product in products:
+            product.s3_image_url = get_s3_presigned_url(settings.AWS_S3_BUCKET_NAME, product.image_url) if product.image_url else None
         return render(request, 'catalog/products_by_category.html', {
             'main_category': main_category_name,
             'products': products

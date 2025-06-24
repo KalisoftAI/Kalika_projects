@@ -1,0 +1,39 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Checkout</h2>
+    {% if cart_items %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.product_title }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.product.price|floatformat:2 }}</td>
+                        <td>${{ item.quantity|multiply:item.product.price|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4>Total: ${{ total|floatformat:2 }}</h4>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Complete Order</button>
+        </form>
+        <a href="{% url 'cart:view_cart' %}" class="btn btn-secondary mt-2">Back to Cart</a>
+    {% else %}
+        <p>Your cart is empty.</p>
+        <a href="{% url 'catalog:home' %}" class="btn btn-primary">Continue Shopping</a>
+    {% endif %}
+</div>
+{% endblock %}

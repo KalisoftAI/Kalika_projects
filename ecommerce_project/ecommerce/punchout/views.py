@@ -1,153 +1,161 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 import xml.etree.ElementTree as ET
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.utils.timezone import now
-from django.views.decorators.csrf import csrf_exempt
+from xml.dom import minidom
+import logging
+import datetime # datetime import karein
+
+# CartItem aur Product models ko import karein, kyunki yeh Punchout logic mein use ho rahe hain.
+# Assuming 'cart' aur 'catalog' apps aapke INSTALLED_APPS mein hain.
 from cart.models import CartItem
 from catalog.models import Product
-import logging
+from django.contrib import messages
+from django.conf import settings # settings ko import karein agar AWS_S3_BUCKET_NAME use ho raha hai
 
 logger = logging.getLogger(__name__)
 
-PUNCHOUT_CREDENTIALS = {
-    'domain': 'NetworkID',
-    'identity': 'AN0123456789',
-    'secret': 'very-secret-password'
-}
-
-def get_user_cart_items(request):
-    if request.session.get('is_punchout', False):
-        if not request.session.session_key:
-            request.session.create()
-        session_key = request.session.session_key
-        cart_items = CartItem.objects.filter(session_key=session_key)
-        logger.info(f"Retrieved {cart_items.count()} cart items for session {session_key}")
-        return cart_items
-    logger.info("No PunchOut session, returning empty cart")
-    return CartItem.objects.none()
-
-@csrf_exempt
-def punchout_setup(request):
-    if request.method == 'POST':
-        cxml_payload = request.body.decode('utf-8')
-        logger.info(f"Received cXML: {cxml_payload}")
-        try:
-            root = ET.fromstring(cxml_payload)
-            header = root.find('.//Header')
-            sender_identity = header.find('.//Sender/Credential/Identity').text
-            sender_secret = header.find('.//Sender/Credential/SharedSecret').text
-
-            if (sender_identity != PUNCHOUT_CREDENTIALS['identity'] or
-                    sender_secret != PUNCHOUT_CREDENTIALS['secret']):
-                logger.error("Authentication failed")
-                return HttpResponse("Authentication failed", status=401)
-
-            browser_post_url = root.find('.//BrowserFormPost/URL').text
-            request.session['is_punchout'] = True
-            request.session['punchout_return_url'] = browser_post_url
-            request.session.modified = True
-
-            if not request.session.session_key:
-                request.session.create()
-            
-            user_email = root.find('.//Extrinsic[@name="UserEmail"]').text
-            request.session['punchout_user'] = user_email
-            request.session.modified = True
-            logger.info(f"PunchOut session started for {user_email}, session: {request.session.session_key}, "
-                        f"return_url: {browser_post_url}")
-            
-            return render(request, 'punchout/punchout_request.html', {'request_xml': cxml_payload})
-        except ET.ParseError as e:
-            logger.error(f"Invalid cXML format: {e}")
-            return HttpResponse(f"Invalid cXML format: {e}", status=400)
-        except Exception as e:
-            logger.error(f"Unexpected error in punchout_setup: {e}")
-            return HttpResponse(f"Server error: {e}", status=500)
-
-    logger.info("Non-POST request to punchout_setup")
-    return HttpResponse("This URL only accepts POST requests.", status=405)
-
-def test_punchout_session(request):
-    request.session['is_punchout'] = True
-    request.session['punchout_return_url'] = 'http://127.0.0.1:8000/punchout/response/'
-    request.session['punchout_user'] = 'test@localhost'
-    request.session.modified = True
+def generate_punchout_order_cxml(request):
+    """
+    Punchout order CXML generate karne ke liye view.
+    Production mein, Punchout flow supplier ke end par shuru hota hai.
+    Yahan hum cart ke items ka use karke CXML banayenge.
+    """
     if not request.session.session_key:
         request.session.create()
-    logger.info(f"Test PunchOut session created: {request.session.session_key}, "
-                f"return_url: {request.session.get('punchout_return_url')}")
-    return redirect('catalog:product_list')
-
-def debug_session(request):
-    session_data = {
-        'session_key': request.session.session_key,
-        'is_punchout': request.session.get('is_punchout', False),
-        'punchout_return_url': request.session.get('punchout_return_url', 'Not set'),
-        'punchout_user': request.session.get('punchout_user', 'Not set')
-    }
-    logger.info(f"Session debug: {session_data}")
-    return HttpResponse(f"Session Data: {session_data}")
-
-def return_cart_to_ariba(request):
     session_key = request.session.session_key
-    is_punchout = request.session.get('is_punchout', False)
-    logger.info(f"Accessing return_to_ariba, session: {session_key}, is_punchout: {is_punchout}")
+    cart_items = CartItem.objects.filter(session_key=session_key)
+
+    if not cart_items.exists():
+        messages.warning(request, "Aapka cart khaali hai, Punchout order generate nahi kiya ja sakta.")
+        return redirect('cart:view_cart')
+
+    # CXML document ka root element
+    # xmlns attributes ko add karna mahatvapoorn hai
+    root = ET.Element("cXML", version="1.2.008", payloadID="{}@punchout-test.com".format(session_key),
+                      timestamp="{}".format(datetime.datetime.now().isoformat()),
+                      attrib={"xmlns:ds": "http://www.w3.org/2000/09/xmldsig#",
+                              "xmlns:xml": "http://www.w3.org/XML/1998/namespace"})
+
+    # Header
+    header = ET.SubElement(root, "Header")
+
+    # From (Sender's credentials)
+    sender = ET.SubElement(header, "From")
+    sender_credential = ET.SubElement(sender, "Credential", domain="NetworkID")
+    ET.SubElement(sender_credential, "Identity").text = "PunchoutTest" # Aapka Network ID
+    ET.SubElement(sender_credential, "SharedSecret").text = "secret" # Aapka Shared Secret
+
+    # To (Receiver's credentials - Supplier)
+    receiver = ET.SubElement(header, "To")
+    receiver_credential = ET.SubElement(receiver, "Credential", domain="NetworkID")
+    ET.SubElement(receiver_credential, "Identity").text = "SupplierNetworkID" # Supplier ka Network ID
+
+    # Sender (User Agent information)
+    user_agent_element = ET.SubElement(header, "Sender")
+    sender_credential_inner = ET.SubElement(user_agent_element, "Credential", domain="NetworkID")
+    ET.SubElement(sender_credential_inner, "Identity").text = "PunchoutTest"
+    ET.SubElement(sender_credential_inner, "SharedSecret").text = "secret"
+    ET.SubElement(user_agent_element, "UserAgent").text = "DjangoPunchoutTestApp"
+
+    # Request
+    request_element = ET.SubElement(root, "Request")
+    punchout_order_message = ET.SubElement(request_element, "PunchOutOrderMessage")
+
+    # BuyerCookie (session key ka use kar sakte hain)
+    ET.SubElement(punchout_order_message, "BuyerCookie").text = session_key
+
+    # PunchOutOrderMessageHeader
+    punchout_order_message_header = ET.SubElement(punchout_order_message, "PunchOutOrderMessageHeader",
+                                                  operationAllowed="create")
+    ET.SubElement(punchout_order_message_header, "Total", currency="USD").text = str(sum(item.quantity * item.product.price for item in cart_items))
     
-    if not is_punchout:
-        logger.error(f"Not a valid PunchOut session for {session_key}")
-        return HttpResponse("This is not a valid PunchOut session.", status=400)
+    # ShipTo (optional, placeholder values)
+    ship_to = ET.SubElement(punchout_order_message_header, "ShipTo")
+    address = ET.SubElement(ship_to, "Address", addressID="123")
+    ET.SubElement(address, "Name", xml_lang="en").text = "Test Company"
+    postal_address = ET.SubElement(address, "PostalAddress")
+    ET.SubElement(postal_address, "Street").text = "123 Test Street"
+    ET.SubElement(postal_address, "City").text = "Test City"
+    ET.SubElement(postal_address, "State").text = "TS"
+    ET.SubElement(postal_address, "PostalCode").text = "12345"
+    ET.SubElement(postal_address, "Country", isoCountryCode="US").text = "United States"
 
-    return_url = request.session.get('punchout_return_url')
-    cart_items = get_user_cart_items(request)
+    # BillTo (optional, placeholder values)
+    bill_to = ET.SubElement(punchout_order_message_header, "BillTo")
+    address = ET.SubElement(bill_to, "Address", addressID="456")
+    ET.SubElement(address, "Name", xml_lang="en").text = "Billing Department"
+    postal_address = ET.SubElement(address, "PostalAddress")
+    ET.SubElement(postal_address, "Street").text = "456 Billing Ave"
+    ET.SubElement(postal_address, "City").text = "Billing City"
+    ET.SubElement(postal_address, "State").text = "BS"
+    ET.SubElement(postal_address, "PostalCode").text = "67890"
+    ET.SubElement(postal_address, "Country", isoCountryCode="US").text = "United States"
 
-    if not return_url or not cart_items:
-        logger.error(f"Empty cart or missing return URL for {session_key}")
-        return HttpResponse("Your cart is empty or the session has expired.", status=400)
-
-    cxml = ET.Element('cXML', payloadID=f"order-{now().timestamp()}", timestamp=now().isoformat())
-    header = ET.SubElement(cxml, 'Header')
-    message = ET.SubElement(cxml, 'Message')
-    punchout_order_message = ET.SubElement(message, 'PunchOutOrderMessage')
-
-    buyer_cookie_elem = ET.SubElement(punchout_order_message, 'BuyerCookie')
-    buyer_cookie_elem.text = "Rcvd_Cookie_12345"
-
+    # ItemOut
+    item_count = 1
     for item in cart_items:
-        try:
-            item_in = ET.SubElement(punchout_order_message, 'ItemIn', quantity=str(item.quantity))
-            item_id = ET.SubElement(item_in, 'ItemID')
-            supplier_part_id = ET.SubElement(item_id, 'SupplierPartID')
-            supplier_part_id.text = item.product.item_code
+        item_out = ET.SubElement(punchout_order_message, "ItemOut", quantity=str(item.quantity),
+                                  lineNumber=str(item_count), operation="new")
+        item_id_element = ET.SubElement(item_out, "ItemID")
+        ET.SubElement(item_id_element, "SupplierPartID").text = str(item.product.item_id)
+        # Agar aapke paas BuyerPartID hai to use bhi add kar sakte hain
+        # ET.SubElement(item_id_element, "BuyerPartID").text = str(item.product.item_id)
 
-            item_detail = ET.SubElement(item_in, 'ItemDetail')
-            unit_price = ET.SubElement(item_detail, 'UnitPrice')
-            money = ET.SubElement(unit_price, 'Money', currency='INR')
-            money.text = str(item.product.price)
+        item_detail = ET.SubElement(item_out, "ItemDetail")
+        ET.SubElement(item_detail, "UnitPrice").text = str(item.product.price)
+        ET.SubElement(item_detail, "Description", xml_lang="en").text = item.product.product_title
+        ET.SubElement(item_detail, "UnitOfMeasure").text = "EA" # Each
+        ET.SubElement(item_detail, "Classification", domain="UNSPSC").text = "44121706" # Example UNSPSC code
+        ET.SubElement(item_detail, "ManufacturerPartID").text = str(item.product.item_id) # Example, if different
 
-            description = ET.SubElement(item_detail, 'Description', {'xml:lang': 'en'})
-            description.text = item.product.product_title
+        item_count += 1
 
-            uom = ET.SubElement(item_detail, 'UnitOfMeasure')
-            uom.text = 'EA'
-        except Product.DoesNotExist:
-            logger.warning(f"Product missing for cart item in session {session_key}")
-            continue
+    # Pretty print the XML
+    rough_string = ET.tostring(root, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    pretty_cxml = reparsed.toprettyxml(indent="  ")
 
-    cxml_string = ET.tostring(cxml, encoding='UTF-8').decode('UTF-8')
-    logger.info(f"Generated cXML for session {session_key}: {cxml_string}")
+    # Dummy Punchout Response URL
+    # Real-world scenario mein, aap CXML ko ek external Punchout URL par POST karenge.
+    # Yahan, hum sirf CXML ko display kar rahe hain aur ek dummy URL par redirect kar rahe hain.
+    
+    # Store CXML and other info in session for debugging
+    request.session['punchout_cxml_data'] = pretty_cxml
+    request.session['punchout_request_url'] = "http://punchout-supplier.com/punchout/process" # Dummy URL
+    request.session['punchout_response_url'] = "http://your-website.com/punchout/punchout-return/" # Dummy return URL
+
+    logger.info(f"Punchout CXML generate kiya gaya, session_key: {session_key}")
+    return redirect('punchout:show_punchout_debug')
+
+def show_punchout_debug(request):
+    """
+    Punchout debug information display karne ke liye view
+    """
+    cxml_data = request.session.get('punchout_cxml_data', 'Koi CXML data nahi mila.')
+    request_url = request.session.get('punchout_request_url', 'Koi request URL nahi mila.')
+    response_url = request.session.get('punchout_response_url', 'Koi response URL nahi mila.')
+
+    # Ek baar dikhane ke baad session se data hata den
+    if 'punchout_cxml_data' in request.session:
+        del request.session['punchout_cxml_data']
+    if 'punchout_request_url' in request.session:
+        del request.session['punchout_request_url']
+    if 'punchout_response_url' in request.session:
+        del request.session['punchout_response_url']
 
     context = {
-        'return_url': return_url,
-        'cxml_cart': cxml_string
+        'cxml_data': cxml_data,
+        'punchout_request_url': request_url,
+        'punchout_response_url': response_url,
     }
-    return render(request, 'punchout/punchout_order.html', context)
+    return render(request, 'punchout/punchout_debug.html', context)
 
-def punchout_response(request):
-    if request.method == 'POST':
-        cxml_received = request.POST.get('cxml-urlencoded', 'No cXML received')
-        logger.info(f"PunchOut response received: {cxml_received}")
-        return render(request, 'punchout/punchout_response.html', {'response_cxml': cxml_received, 'return_url': request.session.get('punchout_return_url')})
-    # Allow GET for debugging, showing a message
-    logger.info(f"GET request to punchout_response, no data submitted")
-    return render(request, 'punchout/punchout_response.html', {'response_cxml': 'No cXML submitted (GET request)', 'return_url': request.session.get('punchout_return_url', 'Not set')})
+# Agar aapko Punchout setup request handling bhi karni hai, to aap iske liye bhi views add kar sakte hain.
+# Jaise ki:
+# def punchout_setup_request(request):
+#     if request.method == 'POST':
+#         cxml_data = request.body.decode('utf-8')
+#         # Yahan CXML parse karein aur session mein store karein Punchout details (e.g., return URL)
+#         # Phir user ko product catalog par redirect karein
+#         return HttpResponse("Punchout Setup Request Received", status=200)
+#     return HttpResponse("Invalid Punchout Setup Request", status=400)

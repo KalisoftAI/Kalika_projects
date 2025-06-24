@@ -6,7 +6,9 @@ from django.contrib import messages
 import os 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-
+from .forms import CustomUserCreationForm
+import logging
+logger = logging.getLogger(__name__)
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -21,16 +23,21 @@ def login_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)  # Use CustomUserCreationForm
         if form.is_valid():
             form.save()
             messages.success(request, 'Registration successful. Please log in.')
-            return redirect('login')
+            return redirect('accounts:login')  # Redirect to login page
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
         form.helper = FormHelper()
         form.helper.add_input(Submit('submit', 'Register'))
-    print("Template dirs:", os.listdir('C:/Kalisoft_project/Kalika_projects/ecommerce_project/ecommerce/catalog/templates/catalog/'))
+    
+    # Debugging line (optional, can be removed later)
+    logger.debug(f"Template dirs: {os.listdir('C:/Kalisoft_project/Kalika_projects/ecommerce_project/ecommerce/catalog/templates/catalog/')}")
+    
     return render(request, 'accounts/register.html', {'form': form})
 
 def logout_view(request):
