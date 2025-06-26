@@ -2,181 +2,193 @@
 {% load static %}
 {% block title %}Aapka Cart{% endblock %}
 {% block content %}
-<h2 class="text-2xl font-bold mb-6">Aapka Shopping Cart</h2>
-{% if cart_items %}
-<table class="cart-table w-full border-collapse bg-white shadow-md rounded-lg">
-    <thead class="bg-gray-100">
-        <tr>
-            <th class="p-4 text-left">Image</th>
-            <th class="p-4 text-left">Product</th>
-            <th class="p-4 text-left">Quantity</th>
-            <th class="p-4 text-left">Price</th>
-            <th class="p-4 text-left">Subtotal</th>
-            <th class="p-4 text-left">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in cart_items %}
-        <tr class="border-t" data-item-id="{{ item.id }}">
-            <td class="p-4">
-                {% if item.product.s3_image_url %}
-                <img src="{{ item.product.s3_image_url }}" alt="{{ item.product.product_title }}" class="w-24 h-24 object-cover rounded-md mr-4">
-                {% else %}
-                <img src="{% static 'images/placeholder.png' %}" alt="No Image" class="w-24 h-24 object-cover rounded-md mr-4">
-                {% endif %}
-            </td>
-            <td class="p-4">{{ item.product.product_title }}</td>
-            <td class="p-4">
-                <div class="flex items-center">
-                    <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-l hover:bg-gray-300" data-action="decrease">-</button>
-                    <input type="number" class="quantity-input w-16 text-center border border-gray-300 py-1" value="{{ item.quantity }}" min="1" data-price="{{ item.product.price|floatformat:2 }}">
-                    <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-r hover:bg-gray-300" data-action="increase">+</button>
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-6">Aapka Shopping Cart</h2>
+
+    {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="bg-{% if message.tags == 'success' %}green{% else %}red{% endif %}-100 border border-{% if message.tags == 'success' %}green{% else %}red{% endif %}-400 text-{% if message.tags == 'success' %}green{% else %}red{% endif %}-700 px-4 py-3 rounded relative" role="alert">
+                    {{ message }}
                 </div>
-            </td>
-            <td class="p-4">${{ item.product.price|floatformat:2 }}</td>
-            <td class="p-4 item-subtotal">${{ item.subtotal|floatformat:2 }}</td>
-            <td class="p-4">
-                <form action="{% url 'cart:remove_from_cart' item.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded">Remove</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<div class="cart-total mt-6 text-right">
-    <h3 class="text-xl font-bold">Total: $<span id="cart-total-display">{{ total|floatformat:2 }}</span></h3>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if cart_items %}
+        <table class="cart-table w-full border-collapse bg-white shadow-md rounded-lg">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="p-4 text-left">Image</th>
+                    <th class="p-4 text-left">Product</th>
+                    <th class="p-4 text-left">Quantity</th>
+                    <th class="p-4 text-left">Price</th>
+                    <th class="p-4 text-left">Subtotal</th>
+                    <th class="p-4 text-left">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr class="border-t" data-item-id="{{ item.id }}">
+                    <td class="p-4">
+                        {% if item.product.s3_image_url %}
+                            <img src="{{ item.product.s3_image_url }}" alt="{{ item.product.product_title }}" class="w-24 h-24 object-cover rounded-md mr-4">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.png' %}" alt="No Image" class="w-24 h-24 object-cover rounded-md mr-4">
+                        {% endif %}
+                    </td>
+                    <td class="p-4">{{ item.product.product_title }}</td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-l hover:bg-gray-300" data-action="decrease">-</button>
+                            <input type="number" class="quantity-input w-16 text-center border border-gray-300 py-1" value="{{ item.quantity }}" min="1" data-price="{{ item.product.price|floatformat:2 }}" data-old-quantity="{{ item.quantity }}">
+                            <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-r hover:bg-gray-300" data-action="increase">+</button>
+                        </div>
+                    </td>
+                    <td class="p-4">₹{{ item.product.price|floatformat:2 }}</td>
+                    <td class="p-4 item-subtotal">₹{{ item.subtotal|floatformat:2 }}</td>
+                    <td class="p-4">
+                        <form action="{% url 'cart:remove_from_cart' item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="cart-total mt-6 text-right">
+            <h3 class="text-xl font-bold">Total: ₹<span id="cart-total-display">{{ total|floatformat:2 }}</span></h3>
+        </div>
+        <div class="cart-actions mt-4 flex justify-between">
+            <a href="{% url 'catalog:home' %}" class="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded">Continue Shopping</a>
+            <div>
+                {% if request.session.is_punchout %}
+                    <form action="{% url 'punchout:return_cart_to_ariba' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="text-white bg-green-600 hover:bg-green-700 px-6 py-3 rounded">Punchout Checkout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'cart:checkout' %}" class="text-white bg-green-600 hover:bg-green-700 px-6 py-3 rounded mr-2">Regular Checkout</a>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <p class="text-gray-600">Your Cart is empty.</p>
+        <a href="{% url 'catalog:home' %}" class="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded">Continue Shopping</a>
+    {% endif %}
 </div>
-<div class="cart-actions mt-4 flex justify-between">
-    <a href="{% url 'catalog:home' %}" class="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded">Continue Shopping </a>
-    <a href="{% url 'punchout:generate_punchout_order_cxml' %}" class="text-white bg-green-600 hover:bg-green-700 px-6 py-3 rounded">Punchout Checkout</a>
-</div>
-{% else %}
-<p class="text-gray-600">Your Cart is empty.</p>
-<a href="{% url 'catalog:home' %}" class="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded">Continue Shopping</a>
-{% endif %}
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const quantityInputs = document.querySelectorAll('.quantity-input');
-        const quantityButtons = document.querySelectorAll('.quantity-btn');
-        const cartTotalDisplay = document.getElementById('cart-total-display');
+document.addEventListener('DOMContentLoaded', function() {
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    const quantityButtons = document.querySelectorAll('.quantity-btn');
+    const cartTotalDisplay = document.getElementById('cart-total-display');
 
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
                 }
             }
-            return cookieValue;
         }
+        return cookieValue;
+    }
 
-        const csrftoken = getCookie('csrftoken');
+    const csrftoken = getCookie('csrftoken');
 
-        function updateCartItem(itemId, newQuantity, inputElement) {
-            console.log('Sending update request for item:', itemId, 'new quantity:', newQuantity); // Debug log
-            fetch("{% url 'cart:update_cart_quantity' %}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify({ item_id: itemId, quantity: newQuantity })
-            })
-            .then(response => {
-                console.log('Received response:', response); // Debug log
-                if (!response.ok) {
-                    // Agar response OK nahi hai (jaise 4xx, 5xx error), toh error throw karein
-                    return response.text().then(text => { // Response ko text ke roop mein padhein content dekhne ke liye
-                        throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
-                    });
-                }
-                return response.json(); // Response ko JSON ke roop mein parse karein
-            })
-            .then(data => {
-                console.log('Received data:', data); // Debug log
-                if (data.success) {
-                    const row = inputElement.closest('tr');
-                    const itemSubtotalElement = row.querySelector('.item-subtotal');
-                    const itemPrice = parseFloat(inputElement.dataset.price);
+    function updateCartItem(itemId, newQuantity, inputElement) {
+        console.log('Sending update request for item:', itemId, 'new quantity:', newQuantity);
+        fetch("{% url 'cart:update_cart_quantity' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({ item_id: itemId, quantity: newQuantity })
+        })
+        .then(response => {
+            console.log('Received response:', response);
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Received data:', data);
+            if (data.success) {
+                const row = inputElement.closest('tr');
+                const itemSubtotalElement = row.querySelector('.item-subtotal');
+                const itemPrice = parseFloat(inputElement.dataset.price);
 
-                    if (data.removed) {
-                        row.remove(); // Item hata dein agar quantity 0 ho gayi
-                    } else {
-                        // Update quantity input
-                        inputElement.value = data.new_quantity;
-                        // Update subtotal for the item
-                        itemSubtotalElement.textContent = '$' + (itemPrice * data.new_quantity).toFixed(2);
+                if (data.removed) {
+                    row.remove();
+                    if (!document.querySelectorAll('.cart-table tbody tr').length) {
+                        window.location.reload();
                     }
-                    // Update overall cart total
-                    cartTotalDisplay.textContent = data.new_total.toFixed(2);
-
-                    // Show success message (optional, agar aap messages framework use kar rahe hain)
-                    // messages.success(data.message || 'Cart updated successfully.');
                 } else {
-                    // Agar server-side se success: false aaya hai
-                    alert('Error updating cart: ' + data.error);
-                    inputElement.value = inputElement.dataset.oldQuantity; // Purani quantity restore karein
+                    inputElement.value = data.new_quantity;
+                    itemSubtotalElement.textContent = `₹${(itemPrice * data.new_quantity).toFixed(2)}`;
                 }
-            })
-            .catch(error => {
-                // Network error, JSON parse error, ya HTTP error!
-                console.error('Fetch error:', error);
-                alert('An error occurred. Please try again. Details: ' + error.message); // Error message ke saath details dikhayein
-                inputElement.value = inputElement.dataset.oldQuantity; // Purani quantity restore karein
-            });
-        }
-
-        quantityButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const itemId = row.dataset.itemId;
-                const inputElement = row.querySelector('.quantity-input');
-                let currentQuantity = parseInt(inputElement.value);
-                
-                // Store current quantity as old quantity in case of failure
-                inputElement.dataset.oldQuantity = currentQuantity;
-
-                if (this.dataset.action === 'increase') {
-                    currentQuantity += 1;
-                } else if (this.dataset.action === 'decrease') {
-                    currentQuantity -= 1;
-                }
-
-                // Minimum quantity 1 (if 0, it means remove item)
-                if (currentQuantity < 0) {
-                    currentQuantity = 0; // Negative quantity na ho
-                }
-
-                updateCartItem(itemId, currentQuantity, inputElement);
-            });
+                cartTotalDisplay.textContent = data.new_total.toFixed(2);
+            } else {
+                alert('Error updating cart: ' + data.error);
+                inputElement.value = inputElement.dataset.oldQuantity;
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            alert('An error occurred. Please try again. Details: ' + error.message);
+            inputElement.value = inputElement.dataset.oldQuantity;
         });
+    }
 
-        quantityInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                const row = this.closest('tr');
-                const itemId = row.dataset.itemId;
-                let newQuantity = parseInt(this.value);
+    quantityButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const itemId = row.dataset.itemId;
+            const inputElement = row.querySelector('.quantity-input');
+            let currentQuantity = parseInt(inputElement.value);
 
-                // Store current quantity as old quantity in case of failure
-                this.dataset.oldQuantity = parseInt(this.value); // Use parsed value as old
+            inputElement.dataset.oldQuantity = currentQuantity;
 
-                if (isNaN(newQuantity) || newQuantity < 0) {
-                    newQuantity = 1; // Default to 1 if invalid or negative
-                    this.value = 1; // Update input field
-                }
+            if (this.dataset.action === 'increase') {
+                currentQuantity += 1;
+            } else if (this.dataset.action === 'decrease') {
+                currentQuantity -= 1;
+            }
 
-                updateCartItem(itemId, newQuantity, this);
-            });
+            if (currentQuantity < 0) {
+                currentQuantity = 0;
+            }
+
+            updateCartItem(itemId, currentQuantity, inputElement);
         });
     });
+
+    quantityInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const row = this.closest('tr');
+            const itemId = row.dataset.itemId;
+            let newQuantity = parseInt(this.value);
+
+            this.dataset.oldQuantity = parseInt(this.value);
+
+            if (isNaN(newQuantity) || newQuantity < 0) {
+                newQuantity = 1;
+                this.value = 1;
+            }
+
+            updateCartItem(itemId, newQuantity, this);
+        });
+    });
+});
 </script>
 {% endblock %}

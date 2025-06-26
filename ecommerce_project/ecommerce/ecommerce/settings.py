@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4','punchout',
     
+    
 ]
 
 MIDDLEWARE = [
@@ -92,3 +93,7 @@ AWS_REGION = 'us-east-1'
 AWS_S3_BUCKET_NAME = 'kalika-ecom'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_SAMESITE = 'Lax'
+
+# ecommerce/settings.py
+ARIBA_NETWORK_ID = 'AN00012345678'
+ARIBA_ENDPOINT = 'https://test.ariba.com/punchout/cxml/setup'
