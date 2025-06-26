@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import CartItem
 from catalog.models import Product
-from django.http import JsonResponse # JsonResponse import karna zaroori hai
+from django.http import JsonResponse
 import json
 import logging
 from catalog.views import get_s3_presigned_url
 from django.conf import settings
 from django.contrib import messages
-from django.http import JsonResponse
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +53,6 @@ def remove_from_cart(request, item_id):
         return redirect('cart:view_cart')
     return redirect('cart:view_cart')
 
-# Naya view function quantity update karne ke liye
 def update_cart_quantity(request):
     if request.method == 'POST':
         try:
@@ -68,12 +66,10 @@ def update_cart_quantity(request):
                 cart_item.quantity = quantity
                 cart_item.save()
                 logger.info(f"CartItem {item_id} ki quantity {quantity} par update ki gayi.")
-                # Cart ka naya total calculate karein
                 updated_cart_items = CartItem.objects.filter(session_key=request.session.session_key)
                 new_total = sum(item.quantity * item.product.price for item in updated_cart_items)
                 return JsonResponse({'success': True, 'new_quantity': quantity, 'new_subtotal': cart_item.quantity * cart_item.product.price, 'new_total': new_total})
             else:
-                # Agar quantity 0 ya usse kam ho, to item ko hata dein
                 cart_item.delete()
                 logger.info(f"CartItem {item_id} ko hata diya gaya kyunki quantity 0 ya usse kam thi.")
                 updated_cart_items = CartItem.objects.filter(session_key=request.session.session_key)
@@ -90,7 +86,6 @@ def update_cart_quantity(request):
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)
 
-
 def checkout(request):
     if not request.session.session_key:
         logger.info("Koi session key nahi, naya session banaya ja raha hai")
@@ -105,7 +100,7 @@ def checkout(request):
     
     if is_punchout:
         logger.info(f"PunchOut session detect kiya gaya, PunchOut return flow ke liye redirect kiya ja raha hai.")
-        return redirect('punchout:show_punchout_debug')
+        return redirect('punchout:return_cart_to_ariba')  # Updated to redirect to return_cart_to_ariba
 
     if not request.user.is_authenticated:
         logger.info(f"User authenticated nahi hai session_key {session_key} ke liye, login par redirect kiya ja raha hai")
@@ -119,10 +114,10 @@ def checkout(request):
         logger.info(f"Checkout POST process kiya ja raha hai session_key {session_key} ke liye")
         cart_items.delete()
         logger.info(f"Checkout complete, cart clear kiya gaya session_key {session_key} ke liye")
-        return redirect('catalog:home')
+        return redirect('cart:thankyou')  # Updated to redirect to thankyou
 
     logger.warning(f"checkout.html render kiya ja raha hai session_key {session_key} ke liye - PunchOut session detect nahi hua")
-    return render(request, 'catalog/checkout.html', {'cart_items': cart_items, 'total': total})
+    return render(request, 'cart/checkout.html', {'cart_items': cart_items, 'total': total})
 
 def thankyou(request):
     logger.info(f"Thank You page access kiya gaya session_key: {request.session.session_key} ke liye")
