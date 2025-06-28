@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'your-secret-key-here'
 DEBUG = True
 # Add your domain here. If accessing via IP or localhost directly, keep them.
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'kalikaindia.com']
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'kalikaindia.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -112,15 +112,27 @@ STATIC_ROOT = BASE_DIR / "staticfiles" # Nginx will serve from here
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "mediafiles" # Nginx will serve from here (create this folder)
 
-# --- SSL Configuration (for Nginx reverse proxy with HTTPS) ---
-# Tells Django that Nginx is handling SSL and forwarding the original protocol
+# # --- SSL Configuration (for Nginx reverse proxy with HTTPS) ---
+# # Tells Django that Nginx is handling SSL and forwarding the original protocol
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# # Set to True for production to redirect HTTP to HTTPS. For local testing, keep False initially.
+# # Once Nginx is configured with SSL, you can try setting this to True.
+# SECURE_SSL_REDIRECT = False
+
+# # Ensure cookies are only sent over HTTPS. Set to True for production.
+# # For local testing with self-signed certs or if issues, keep False initially.
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
+
+# Set DEBUG to False for security
+DEBUG = False
+
+# Add your domain name
+ALLOWED_HOSTS = ['kalikaindia.com', 'www.kalikaindia.com']
+
+# Add settings to trust the Nginx proxy
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Set to True for production to redirect HTTP to HTTPS. For local testing, keep False initially.
-# Once Nginx is configured with SSL, you can try setting this to True.
-SECURE_SSL_REDIRECT = False
-
-# Ensure cookies are only sent over HTTPS. Set to True for production.
-# For local testing with self-signed certs or if issues, keep False initially.
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
