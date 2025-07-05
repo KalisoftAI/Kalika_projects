@@ -11,4 +11,5 @@ urlpatterns = [
     path('thankyou/', views.thankyou, name='thankyou'), 
     path('proceed-to-thankyou/', views.proceed_to_thankyou, name='proceed_to_thankyou'),
     path('update_quantity/', views.update_cart_quantity, name='update_cart_quantity'),
+    
 ]
