@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-6">All Categories</h1>
+
+        {% if categories %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for maincategory, data in categories.items %}
+                    {% if maincategory %}
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <h2 class="text-xl font-semibold mb-2">{{ maincategory }}</h2>
+                            <p class="text-gray-600 mb-4">Online store for {{ maincategory|lower }} products</p>
+                            <a href="{% url 'catalog:products_by_category' main_category_name=maincategory %}" class="text-blue-600 hover:underline">Visit Now</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-600">No categories available.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

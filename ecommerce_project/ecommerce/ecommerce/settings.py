@@ -8,8 +8,8 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'your-secret-key-here'
-DEBUG = True
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = False
 # Add your domain here. If accessing via IP or localhost directly, keep them.
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'kalikaindia.com']
 
@@ -126,7 +126,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles" # Nginx will serve from here (create this f
 # CSRF_COOKIE_SECURE = False
 
 # Set DEBUG to False for security
-DEBUG = False
+DEBUG = True
 
 # Add your domain name
 ALLOWED_HOSTS = ['kalikaindia.com', 'www.kalikaindia.com']

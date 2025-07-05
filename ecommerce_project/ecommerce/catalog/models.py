@@ -16,4 +16,4 @@ class Product(models.Model):
         return self.product_title
 
     class Meta:
-        db_table = 'products'  # Maps to the existing 'products' table
+        db_table = 'products'  # Maps to the existing 'products' Table

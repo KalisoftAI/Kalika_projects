@@ -1,99 +1,61 @@
 {% extends 'catalog/base.html' %}
-{% block title %}Shopping Cart{% endblock %}
+{% load static %}
+
+{% block title %}Your Cart{% endblock %}
+
 {% block content %}
-<!-- Bootstrap CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .blue-theme {
-        background-color: #007bff;
-        color: white;
-    }
-    .table-custom {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .summary-card {
-        background-color: #e9f0ff;
-        border-left: 5px solid #007bff;
-    }
-    .btn-custom {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-    .btn-custom:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-    }
-</style>
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Your Shopping Cart</h1>
 
-<div class="container mt-5">
-    <h1 class="text-center mb-4 blue-theme p-2 rounded">Shopping Cart</h1>
-    
-    {% if cart_items %}
-    <div class="row">
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-custom table-striped table-hover">
-                    <thead class="blue-theme">
-                        <tr>
-                            <th>Image</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in cart_items %}
-                        <tr>
-                            <td>
-                                {% if item.product.image %}
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.product_title }}" class="img-fluid rounded" style="max-width: 100px; max-height: 100px;">
-                                {% else %}
-                                    <p class="text-muted">No image available</p>
-                                {% endif %}
-                            </td>
-                            <td>{{ item.product.product_title }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>$ {{ item.product.price|floatformat:2 }}</td>
-                            <td>$ {{ item.item_total|floatformat:2 }}</td>
-                            <td>
-                                <a href="{% url 'cart:remove_from_cart' item_id=item.product.item_id %}" class="btn btn-custom btn-sm">Remove</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    {% if error %}
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+            {{ error }}
         </div>
-    </div>
+    {% endif %}
 
-    <div class="row mt-4">
-        <div class="col-md-6 offset-md-6">
-            <div class="card p-3 summary-card">
-                <h4 class="card-title">Order Summary</h4>
-                <p class="card-text"><strong>Total Amount:</strong> $ {{ total|floatformat:2 }}</p>
-                <form action="{% url 'cart:checkout' %}" method="get">
-                    <button type="submit" class="btn btn-custom btn-block w-100">Proceed to Checkout</button>
+    {% if cart_items %}
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 p-6 border-b bg-gray-50">
+                <div class="col-span-2 font-semibold text-gray-700">Product</div>
+                <div class="font-semibold text-gray-700 text-center">Quantity</div>
+                <div class="font-semibold text-gray-700 text-center">Price</div>
+                <div class="font-semibold text-gray-700 text-center">Subtotal</div>
+            </div>
+            {% for item in cart_items %}
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 p-6 border-b items-center">
+                    <div class="col-span-2 flex items-center">
+                        {% if item.product.s3_image_url %}
+                            <img src="{{ item.product.s3_image_url }}" alt="{{ item.product.product_title }}" class="w-20 h-20 object-cover rounded mr-4">
+                        {% else %}
+                            <div class="w-20 h-20 flex items-center justify-center bg-gray-200 rounded mr-4 text-gray-500">No Image</div>
+                        {% endif %}
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-800">{{ item.product.product_title }}</h3>
+                            <p class="text-sm text-gray-500">{{ item.product.item_code }}</p>
+                        </div>
+                    </div>
+                    <div class="text-center text-gray-700">{{ item.quantity }}</div>
+                    <div class="text-center text-gray-700">${{ item.product.price|floatformat:2 }}</div>
+                    <div class="text-center text-gray-700">${{ item.item_total|floatformat:2 }}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-2xl font-bold text-gray-800">Total: ${{ total|floatformat:2 }}</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a href="{% url 'catalog:home' %}" class="inline-block bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition">Continue Shopping</a>
+                <form action="{% url 'cart:checkout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="inline-block bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition">Proceed to Checkout</button>
                 </form>
             </div>
         </div>
-    </div>
-
-    <div class="text-center mt-4">
-        <a href="{% url 'catalog:product_list' %}" class="btn btn-outline-primary">Continue Shopping</a>
-    </div>
     {% else %}
-    <div class="alert alert-info text-center" role="alert">
-        Your cart is empty.
-    </div>
-    <div class="text-center mt-3">
-        <a href="{% url 'catalog:product_list' %}" class="btn btn-outline-primary">Continue Shopping</a>
-    </div>
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <p class="text-gray-700 text-lg">Your cart is empty.</p>
+            <a href="{% url 'catalog:home' %}" class="inline-block bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 mt-4 transition">Shop Now</a>
+        </div>
     {% endif %}
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
