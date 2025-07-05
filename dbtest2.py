@@ -211,7 +211,7 @@ if __name__ == "__main__":
     create_products_table()
 
     print("\nAttempting to insert product data from CSV...")
-    csv_file_path = 'C:\\Kalisoft_project\\Kalika_projects\\kalika_catalog_products_s3.csv'
+    csv_file_path ='new1_modified.csv'
     insert_data_from_csv(csv_file_path)
 
     # Example usage for inserting an order (uncomment if you want to test)

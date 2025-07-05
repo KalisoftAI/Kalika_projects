@@ -1,17 +1,231 @@
 {% extends 'catalog/base.html' %}
-{% block title %}Home{% endblock %}
+{% load static %}
+{% block title %}B2B Commerce{% endblock %}
+
 {% block content %}
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    {% for product in products %}
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="{{ product.s3_image_url|default:'https://via.placeholder.com/300' }}" alt="{{ product.product_title }}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-lg font-semibold">{{ product.product_title }}</h3>
-                <p class="text-gray-600">${{ product.price }}</p>
-                <a href="{% url 'catalog:product_detail' product.item_id %}" class="mt-2 inline-block text-indigo-600 hover:text-indigo-800">View Details</a>
-                <a href="{% url 'cart:add_to_cart' product.item_id %}" class="mt-2 inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Add to Cart</a>
-            </div>
-        </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .inline-ad {
+        background: linear-gradient(135deg, #facc15, #14b8a6, #4338ca);
+        color: white;
+        position: relative;
+        border-radius: 1rem;
+        box-shadow: 0 12px 24px rgba(20,184,166,0.4);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        min-width: 18rem;
+        max-width: 18rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .inline-ad:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(20,184,166,0.6);
+    }
+    .inline-ad .ad-tag {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        background: white;
+        color: #4338ca;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .animate__fadeInUp { animation-duration: 0.8s; animation-fill-mode: both; }
+    @media (max-width: 768px) {
+        .inline-ad { min-width: 14rem; max-width: 14rem; padding: 1rem; }
+    }
+    .product-card .add-to-cart-container {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .product-card:hover .add-to-cart-container {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .product-card .cart-icon-container {
+        opacity: 0;
+        transition: opacity 0.3s;
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        z-index: 20;
+    }
+    .product-card:hover .cart-icon-container { opacity: 1; }
+    .product-card { position: relative; }
+    .cart-icon-blue { color: #2563eb; }
+    .category-section-bg-0 { background: #DFDCE3; }
+    .category-section-bg-1 { background: #dfd8c8; }
+    .category-section-bg-2 { background: #dfd8c8; }
+    .category-section-bg-3 { background: #e6dbc9; }
+    .category-section-bg-4 { background: #e6dbc9; }
+    .category-section-bg-5 { background: #f3e8ff; }
+    .category-section-bg { border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(30,41,59,0.06); }
+
+    /* HERO SECTION CHANGES */
+    .hero-section {
+        height: 480px;
+        position: relative;
+    }
+    @media (max-width: 768px) {
+        .hero-section {
+            height: 500px !important;
+        }
+        .hero-bottom-content h1 {
+            font-size: 2rem !important;
+        }
+    }
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        /* Make overlay almost invisible for max video visibility */
+        background: linear-gradient(120deg, rgba(255,255,255,0.03) 0%, rgba(240,240,240,0.01) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .hero-bottom-content {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-bottom-title {
+        color: #dea6af !important;
+        text-shadow: 0 2px 16px rgba(0,0,0,0.13);
+    }
+</style>
+
+<div class="space-y-20">
+
+    <!-- HERO SECTION WITH VIDEO BACKGROUND, TITLE AT BOTTOM, CUSTOM COLOR -->
+    <!-- HERO SECTION WITH VIDEO BACKGROUND, TITLE AT BOTTOM, CUSTOM COLOR -->
+<section class="hero-section w-full flex items-center justify-center rounded-3xl shadow-xl overflow-hidden animate__animated animate__fadeInDown">
+    <!-- Video background -->
+    <video
+        class="absolute inset-0 w-full h-full object-cover"
+        src="{{ hero_video_url|default:'https://source.unsplash.com/400x400/?industrial' }}"
+        autoplay
+        loop
+        muted
+        playsinline
+        poster="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop"
+    ></video>
+    <!-- Much less opaque overlay for more visible video -->
+    <div class="hero-overlay"></div>
+    <!-- Title and Button at Bottom -->
+    <div class="hero-bottom-content">
+        <a href="{% url 'catalog:product_list' %}" class="hero-dark-btn inline-block px-8 py-3 text-lg shadow-lg transition transform hover:scale-105">Explore Products</a>
+    </div>
+</section>
+
+    {% for category, products in products_by_category.items %}
+        {% if products %}
+            <section class="category-section-bg category-section-bg-{{ forloop.counter0 }} shadow-sm" data-aos="fade-up">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">{{ category }}</h2>
+                    <a href="{% url 'catalog:products_by_category' main_category_name=category %}" class="text-teal-600 font-semibold hover:underline">View All</a>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    {% for product in products|slice:":6" %}
+                        <div class="product-card group bg-white rounded-xl shadow-md overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-2">
+                            <a href="{% url 'catalog:product_detail' product.item_id %}" class="block h-full flex flex-col">
+                                <div class="h-36 overflow-hidden relative">
+                                    <img src="{{ product.s3_image_url|default:'https://source.unsplash.com/400x400/?industrial' }}"
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                         alt="{{ product.product_title }}">
+                                    <div class="cart-icon-container">
+                                        <button class="bg-white rounded-full p-1 shadow-lg hover:bg-blue-100 transition" title="Add to Cart">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 cart-icon-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-3 flex flex-col flex-grow">
+                                    <h4 class="font-semibold text-sm text-gray-700 h-10 flex-grow">{{ product.product_title|truncatechars:35 }}</h4>
+                                    <div class="mt-2 flex items-center justify-between">
+                                        <p class="text-md font-bold text-teal-600">₹{{ product.price|floatformat:2 }}</p>
+                                        <div class="add-to-cart-container">
+                                            <button class="bg-teal-500 text-white rounded-full p-2 hover:bg-teal-700 transition" title="Add to Cart">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            {% if forloop.first %}
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-8 items-center" data-aos="fade-up">
+                <div class="md:col-span-3 category-section-bg category-section-bg-0">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Top Deals</h3>
+                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                        {% for product in products_by_category.Safety|slice:":4" %}
+                        <a href="{% url 'catalog:product_detail' product.item_id %}" class="product-card group flex flex-col items-center text-center p-4 bg-white rounded-full shadow-lg transition-transform duration-300 hover:-translate-y-2">
+                            <div class="relative w-24 h-24">
+                                <img src="{{ product.s3_image_url|default:'https://source.unsplash.com/150x150/?safety' }}" alt="{{ product.product_title }}" class="w-24 h-24 rounded-full object-cover border-4 border-gray-100">
+                                <div class="cart-icon-container" style="bottom:8px;right:8px;">
+                                    <button class="bg-white rounded-full p-1 shadow-lg hover:bg-blue-100 transition" title="Add to Cart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 cart-icon-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <h4 class="font-semibold text-gray-700 mt-3 text-sm h-10">{{ product.product_title|truncatechars:30 }}</h4>
+                            <div class="mt-2 flex items-center justify-center space-x-3 w-full">
+                                <p class="text-lg font-bold text-teal-600">₹{{ product.price|floatformat:2 }}</p>
+                                <div class="add-to-cart-container">
+                                     <button class="bg-teal-500 text-white rounded-full p-2 hover:bg-teal-700 transition" title="Add to Cart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="inline-ad animate__animated animate__fadeInUp bg-gradient-to-b from-yellow-400 to-orange-500 text-white rounded-2xl p-6 flex flex-col justify-center text-center shadow-lg h-full">
+                    <span class="ad-tag bg-white text-orange-500">Limited Time</span>
+                    <h3 class="text-2xl font-extrabold my-3">Summer Sale</h3>
+                    <p class="mb-4 text-white">Unbeatable prices on all seasonal equipment!</p>
+                    <a href="#" class="bg-white text-orange-500 px-5 py-2 rounded-full font-semibold shadow hover:bg-gray-100 transition">Shop Now</a>
+                </div>
+            </section>
+            {% endif %}
+
+            {% if forloop.counter == 3 %}
+                <section class="inline-ad animate__animated animate__zoomIn my-12 p-8 rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg text-center flex flex-col justify-center" data-aos="zoom-in">
+                    <span class="ad-tag bg-white text-purple-600">Special Offer</span>
+                    <h3 class="text-3xl font-extrabold mb-2 text-white">Deals on {{ category }}!</h3>
+                    <p class="text-lg mb-4 text-indigo-100">Shop now for exclusive discounts on select items.</p>
+                    <a href="{% url 'catalog:products_by_category' main_category_name=category %}" class="bg-white text-indigo-700 px-6 py-2 rounded-full font-semibold shadow hover:bg-gray-200 transition">Explore Deals</a>
+                </section>
+            {% endif %}
+
+        {% endif %}
     {% endfor %}
+
 </div>
 {% endblock %}
