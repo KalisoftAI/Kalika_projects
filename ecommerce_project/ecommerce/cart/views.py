@@ -113,21 +113,35 @@ def checkout(request):
 
     if is_punchout:
         logger.info(f"PunchOut session detected, redirecting to PunchOut return flow.")
-        return redirect('punchout:return_cart_to_ariba')  # Updated to redirect to return_cart_to_ariba
+        return redirect('punchout:return_cart_to_ariba')
 
     if not request.user.is_authenticated:
         logger.info(f"User not authenticated for session_key {session_key}, redirecting to login.")
         return redirect('accounts:login')
 
     cart_items = CartItem.objects.filter(session_key=session_key)
-    total = sum(item.product.price * item.quantity for item in cart_items)
+    total = 0 # Initialize total
+
+    # --- THIS LOOP IS NOW CORRECTED ---
+    # It now calculates the subtotal AND generates the S3 image URL for each item.
+    for item in cart_items:
+        item.subtotal = item.product.price * item.quantity
+        total += item.subtotal
+        
+        # This line generates the image URL
+        if item.product.image_url:
+            item.product.s3_image_url = get_s3_presigned_url(settings.AWS_S3_BUCKET_NAME, item.product.image_url)
+        else:
+            item.product.s3_image_url = None
+    # --- END OF CORRECTED LOOP ---
+
     logger.info(f"Non-PunchOut checkout for session_key: {session_key}, items: {cart_items.count()}, total: {total}")
 
     if request.method == 'POST':
         logger.info(f"Processing checkout POST for session_key {session_key}")
         cart_items.delete()
         logger.info(f"Checkout complete, cart cleared for session_key {session_key}")
-        return redirect('cart:thankyou')  # Updated to redirect to thankyou
+        return redirect('cart:thankyou')
 
     logger.warning(f"Rendering checkout.html for session_key {session_key} - PunchOut session not detected.")
     return render(request, 'cart/checkout.html', {'cart_items': cart_items, 'total': total})

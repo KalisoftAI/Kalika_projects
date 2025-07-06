@@ -1,29 +1,46 @@
 {% extends 'catalog/base.html' %}
-{% load crispy_forms_tags %}
 {% load static %}
 
+{% block title %}Register{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2 class="text-center mb-4">Register</h2>
-        {% if messages %}
+<div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Create an Account</h1>
+
+    {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="mb-4 text-center p-3 rounded {% if message.tags == 'success' %} bg-green-100 text-green-800 {% else %} bg-red-100 text-red-700 {% endif %}">
+                {{ message }}
+            </div>
         {% endfor %}
-        {% endif %}
-        <form method="post" class="bg-white p-4 rounded shadow">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-        </form>
-        <p class="text-center mt-3">
-            Already have an account? <a href="{% url 'accounts:login' %}" class="text-primary">Log in</a>
-        </p>
-    </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="space-y-4">
+            {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                <div class="mt-1">
+                    {# This is now simple and correct. Django will render the field with the classes we added in forms.py #}
+                    {{ field }}
+                </div>
+                {% if field.help_text %}
+                    <p class="mt-2 text-sm text-gray-500">{{ field.help_text|safe }}</p>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="mt-6 w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300">Register</button>
+    </form>
+
+    <p class="mt-4 text-center">
+        Already have an account? <a href="{% url 'accounts:login' %}" class="text-indigo-600 hover:underline">Log in</a>
+    </p>
 </div>
 {% endblock %}

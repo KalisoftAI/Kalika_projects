@@ -39,7 +39,7 @@
                                 </div>
                             {% endif %}
                             <h3 class="text-lg font-semibold text-gray-800 truncate">{{ product.product_title|truncatechars:35 }}</h3>
-                            <p class="text-gray-600 mt-2 font-bold">${{ product.price|floatformat:2 }}</p>
+                            <p class="text-gray-600 mt-2 font-bold">₹{{ product.price|floatformat:2 }}</p>
                             <form action="{% url 'cart:add_to_cart' item_id=product.item_id %}" method="post" class="mt-4">
                                 {% csrf_token %}
                                 <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300">Add to Cart</button>
