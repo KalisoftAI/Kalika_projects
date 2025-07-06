@@ -1,9 +1,14 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-
+from django.core.exceptions import ImproperlyConfigured
 # Load environment variables from .env file
 load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    raise ImproperlyConfigured("GEMINI_API_KEY not found in environment variables.")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,6 +30,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'punchout',
+    'chatbot',
+    
 ]
 
 MIDDLEWARE = [
