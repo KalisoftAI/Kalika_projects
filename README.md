@@ -1,73 +1,92 @@
+Of course. Here is a revised and more clearly structured version of the documentation for setting up and deploying the E-commerce PunchOut Catalog project.
+
+-----
+
 # 🛒 E-commerce PunchOut Catalog (Django)
 
-A Django-based PunchOut Catalog system with PostgreSQL integration. This project enables suppliers to receive and process PunchOut orders using cXML data, ideal for enterprise e-procurement platforms.
+This project is a Django-based PunchOut Catalog system designed for B2B e-procurement. It enables suppliers to receive and process PunchOut orders from enterprise procurement systems using cXML. The system is built with a PostgreSQL backend, making it a robust solution for production environments.
 
----
+-----
 
 ## 🚀 Features
 
-- Django-based backend  
-- PostgreSQL as the production database  
-- PunchOut order capture and storage  
-- Session-based cXML order tracking  
-- Collectstatic for deployment readiness  
+  - **Django Backend**: A high-level Python web framework for rapid and secure development.
+  - **PostgreSQL Database**: A powerful, open-source object-relational database system.
+  - **cXML PunchOut Support**: Captures and stores PunchOut orders directly from procurement platforms.
+  - **Session-Based Order Tracking**: Manages cXML orders using Django's session framework.
+  - **Deployment Ready**: Includes `collectstatic` for streamlined static file management in production.
 
----
+-----
 
-## 📦 Project Setup
+## 📦 Local Project Setup
 
-### 1. Clone the Repository
+Follow these steps to get the project running on your local machine for development and testing.
+
+### 1\. Clone the Repository
+
+First, clone the project from its GitHub repository to your local machine.
 
 ```bash
 git clone https://github.com/your-username/ecom-punchout-catalog.git
 cd ecom-punchout-catalog
 ```
 
-### 2. Create and Activate a Virtual Environment
+### 2\. Create and Activate a Virtual Environment
+
+It's a best practice to use a virtual environment to manage project-specific dependencies.
 
 ```bash
+# Create the virtual environment
 python -m venv venv
-# Windows
+
+# Activate on Windows
 venv\Scripts\activate
-# macOS/Linux
+
+# Activate on macOS/Linux
 source venv/bin/activate
 ```
 
-### 3. Install Requirements
+### 3\. Install Requirements
+
+Install all the necessary Python packages listed in the `requirements.txt` file.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Django Commands
+### 4\. Configure PostgreSQL
 
-```bash
-python manage.py makemigrations
-python manage.py migrate
-python manage.py collectstatic
-python manage.py runserver
-```
+This project uses PostgreSQL as its database.
 
-### 🗄 PostgreSQL Setup
+#### **Download and Install PostgreSQL**
 
-```bash
-Download PostgreSQL:
- https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
-```
+If you don't have it installed, download it from the official site:
+[PostgreSQL Downloads](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 
-### Postgres Database Configuration
+#### **Create the Database and User**
 
-```bash
--- Create Database and User
+Connect to PostgreSQL and run the following SQL commands to set up the database and a dedicated user.
+
+```sql
+-- Create the database
 CREATE DATABASE ecom_prod_catalog;
+
+-- Create a user with a secure password
 CREATE USER vikas WITH PASSWORD 'kalika1667';
 
--- Grant Privileges
+-- Grant all privileges on the database to the new user
 GRANT ALL PRIVILEGES ON DATABASE ecom_prod_catalog TO vikas;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO vikas;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO vikas;
+```
 
--- Create PunchOut Orders Table
+#### **Create the `punchout_orders` Table**
+
+This table will store the incoming PunchOut cXML data.
+
+```sql
+-- Connect to the newly created database before running this
+\c ecom_prod_catalog
+
+-- Create the table
 CREATE TABLE punchout_orders (
     id BIGSERIAL PRIMARY KEY,
     session_key VARCHAR(40) NOT NULL,
@@ -80,242 +99,251 @@ CREATE TABLE punchout_orders (
     currency VARCHAR(3) DEFAULT 'INR'
 );
 
--- Grant Table Access
+-- Grant table access to the user
 GRANT ALL PRIVILEGES ON TABLE punchout_orders TO vikas;
 ```
 
-### Product file data store to Database table 
-#### first go to dbtest2 file and change the csv file path in that code with you actual csv path
-  file name: kalika_catalog_products_s31.csv
+### 5\. Load Product Data into the Database
+
+A script is provided to load product data from a CSV file into your database.
+
+1.  **Locate the Script**: Open the `dbtest2.py` file in your project.
+
+2.  **Update File Path**: Change the placeholder for the CSV file path to the actual path of your `kalika_catalog_products_s31.csv` file.
+
+3.  **Run the Script**:
+
+    ```bash
+    python dbtest2.py
+    ```
+
+### 6\. Run Django Migrations and Server
+
+With the database configured, apply Django's migrations and start the development server.
+
 ```bash
-  python dbtest2.py
+# Create and apply database migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# Collect static files (for deployment, but good practice)
+python manage.py collectstatic
+
+# Start the development server
+python manage.py runserver
 ```
 
+You can now access the application at `http://127.0.0.1:8000/`.
 
-### **NOTE : - Check environment file (.env) is in .gitignore file before push any code **
+**Important Note**: Before committing and pushing your code, ensure that your `.env` file (containing sensitive credentials) is listed in your `.gitignore` file to prevent it from being exposed.
 
-# Deploying a Django Project on AWS EC2
-This guide provides a clear, step-by-step process for deploying a Django project on an AWS EC2 instance with PostgreSQL, Gunicorn, and Nginx, including SSL configuration. It is designed for developers who want a reliable, production-ready deployment workflow.
+-----
 
----
+# ☁️ Deploying on AWS EC2
 
-# Prerequisites
-AWS account with EC2 access
+This guide outlines the process for deploying your Django project to a production environment on an AWS EC2 instance using Gunicorn as the application server and Nginx as a reverse proxy.
 
-SSH key pair (.pem file)
+## Prerequisites
 
-GitHub repository for your Django project
+  - An active AWS account with permission to manage EC2 instances.
+  - Your EC2 SSH key pair (`.pem` file) for secure access.
+  - A domain name that you can point to your EC2 instance's IP address.
+  - Basic familiarity with the Linux command line.
 
-Domain name (for SSL)
+### 1\. Launch and Connect to EC2
 
-Basic knowledge of Linux command line
+1.  From the AWS Management Console, launch a new **Ubuntu** EC2 instance.
 
-# 1. Launch EC2 Instance and Connect via SSH
+2.  Once the instance is running, select it and click **Connect**.
 
-Launch an Ubuntu EC2 instance from the AWS Console.
+3.  Use the provided SSH command to connect.
 
-Open the EC2 dashboard, select your instance, and click Connect.
+    ```bash
+    # Replace with your actual .pem file and public DNS
+    ssh -i "your-key.pem" ubuntu@ec2-public-dns.compute-1.amazonaws.com
+    ```
 
-Use the SSH client command provided, for example:
+### 2\. (Optional) Fix PEM File Permissions on Windows
 
-bash
-- ssh -i "yt-video.pem" ubuntu@ec2-52-90-110-55.compute-1.amazonaws.com
+If you encounter a "public key" error on Windows, open PowerShell as an Administrator and run these commands to reset permissions.
 
-# 2. Fixing PEM File Permissions (if needed)
-If you encounter public key permission issues on Windows, run these commands in PowerShell as Administrator:
+```powershell
+icacls.exe your-key.pem /reset
+icacls.exe your-key.pem /grant:r "$($env:username):(R)"
+icacls.exe your-key.pem /inheritance:r
+```
 
-powershell
-- icacls.exe kalika_ecom.pem /reset
-- icacls.exe kalika_ecom.pem /grant:r "$($env:username):(R)"
-- icacls.exe kalika_ecom.pem /inheritance:r
+### 3\. Install and Configure PostgreSQL on EC2
 
-# 3. Install and Configure PostgreSQL
-Update packages and install PostgreSQL:
+Update the server's package list and install PostgreSQL.
 
-bash
-- sudo apt update
-- sudo apt install -y curl ca-certificates gnupg
-- curl -sS https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /usr/share/keyrings/postgresql-key.gpg >/dev/null
-- echo "deb [signed-by=/usr/share/keyrings/postgresql-key.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-- sudo apt update
-- sudo apt install -y postgresql-17 postgresql-contrib-17
-- sudo systemctl status postgresql@17-main
-- psql --version
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y postgresql postgresql-contrib
+```
 
-Switch to the postgres user and configure the database:
+Switch to the `postgres` user to configure the database.
 
-bash
--sudo -i -u postgres
--psql
+```bash
+sudo -i -u postgres
+psql
+```
 
-In the psql shell:
+Inside the `psql` shell, execute the following commands.
 
-sql
--\password postgres -- Set password to kalika1667
-- CREATE DATABASE ecom_prod_catalog;
+```sql
+-- Set a password for the default postgres user
+\password postgres -- (e.g., enter 'kalika1667')
 
-- CREATE USER vikas WITH PASSWORD 'kalika1667';
-- GRANT CONNECT ON DATABASE ecom_prod_catalog TO vikas;
-- \c ecom_prod_catalog
+-- Create the application database and user
+CREATE DATABASE ecom_prod_catalog;
+CREATE USER vikas WITH PASSWORD 'kalika1667';
 
-- CREATE TABLE punchout_orders (
-    id BIGSERIAL PRIMARY KEY,
-    session_key VARCHAR(40) NOT NULL,
-    cxml_data TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    supplier_id VARCHAR(255),
-    punchout_request_url VARCHAR(500),
-    punchout_response_url VARCHAR(500),
-    total_amount DECIMAL(10,2) NOT NULL,
-    currency VARCHAR(3) DEFAULT 'INR'
-);
+-- Grant connection privileges
+GRANT CONNECT ON DATABASE ecom_prod_catalog TO vikas;
 
-- GRANT ALL PRIVILEGES ON TABLE punchout_orders TO vikas;
-- \q
-- exit
-- Grant additional privileges:
+-- Connect to the new database to grant further permissions
+\c ecom_prod_catalog
 
-sql
-- GRANT USAGE, CREATE ON SCHEMA public TO vikas;
-- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO vikas;
-- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO vikas;
-- ALTER DEFAULT PRIVILEGES IN SCHEMA public FOR ROLE vikas GRANT ALL PRIVILEGES ON TABLES TO vikas;
-- ALTER DEFAULT PRIVILEGES IN SCHEMA public FOR ROLE vikas GRANT ALL PRIVILEGES ON SEQUENCES TO vikas;
+-- Grant all privileges on future tables and sequences in the public schema
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO vikas;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO vikas;
 
+-- Exit psql and the postgres user session
+\q
+exit
+```
 
-# 4. Clone the Project Repository
-bash
-- git clone --branch Kalika_project_Django https://github.com/KalisoftAI/Kalika_projects.git
+### 4\. Clone Your Project
+
+Clone your project repository onto the EC2 instance.
+
+```bash
+git clone --branch Kalika_project_Django https://github.com/KalisoftAI/Kalika_projects.git
 cd Kalika_projects/
+```
 
-# 5. Install Python and Dependencies
-bash
-- sudo apt update && sudo apt upgrade -y
-- python3 --version
+### 5\. Set Up Python Environment
 
-# If needed, pull the latest code:
+Install `pip` and `venv`, then create and activate a virtual environment.
 
-bash
-- git pull origin Kalika_project_Django
+```bash
+sudo apt install python3-pip python3.12-venv -y
+python3 -m venv env
+source env/bin/activate
+```
 
-# 6. Set Up Virtual Environment
-Install pip and venv:
+### 6\. Install Project Dependencies
 
-bash
-- sudo apt install python3-pip python3.12-venv -y
-- python3 -m venv env
-- source env/bin/activate
+Install the required Python packages into your virtual environment.
 
-# 7. Install Project Requirements
-Edit or create requirements.txt and add your dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-text
-Django==4.2.7
-python-dotenv==1.0.1
-django-crispy-forms==2.4
-crispy-bootstrap4==2025.6
-boto3==1.38.5
-psycopg2-binary==2.9.10
-lxml==5.3.0
-xmltodict==0.14.2
-Install requirements:
+### 7\. Configure Django and Run Migrations
 
-bash
-- pip install -r requirements.txt
+1.  **Environment Variables**: Create a `.env` file and add your database URL and other secrets. Make sure your `settings.py` is configured to read these variables.
+2.  **Run Migrations**: Apply migrations to set up your schema in the PostgreSQL database.
+    ```bash
+    cd ecommerce_project/ecommerce # Navigate to the directory with manage.py
+    python manage.py migrate
+    ```
+3.  **Collect Static Files**: Gather all static files into a single directory for Nginx to serve.
+    ```bash
+    python manage.py collectstatic
+    ```
 
-# 8. Database Setup and Testing
-Edit and run your database test script as needed:
+### 8\. Install and Configure Gunicorn
 
-bash
-- sudo nano dbtest2.py
-- python dbtest2.py
+Gunicorn will serve as the WSGI HTTP server for your Django application.
 
-# 9. Run the Django Application
-Navigate to your Django project directory and start the development server:
+```bash
+pip install gunicorn
+```
 
-bash
-- cd ecommerce_project/ecommerce
-- python manage.py runserver
+Create a `systemd` service file to manage the Gunicorn process.
 
-# 10. SSL Certificate Setup
-Create the SSL directory:
+```bash
+sudo nano /etc/systemd/system/gunicorn.service
+```
 
-bash
-- sudo mkdir -p /etc/nginx/ssl
+Paste the following configuration, **updating the paths** to match your project structure.
 
-# From your local machine, copy the certificate and key files to the EC2 instance:
-
-powershell
-- scp -i C:\kalika-secrets\kalika-ecommerce.pem C:\nginx\ssl\CER_CRT_Files\kalikaindia_com.crt ubuntu@44.211.220.119:~/
-- scp -i C:\kalika-secrets\kalika-ecommerce.pem C:\nginx\ssl\kalikaindia_com.key ubuntu@44.211.220.119:~/
-
-Move and set permissions:
-
-bash
-- sudo mv kalikaindia_com.crt /etc/nginx/ssl/
-- sudo mv kalikaindia_com.key /etc/nginx/ssl/
-- sudo chown -R root:root /etc/nginx/ssl
-- sudo chmod 600 /etc/nginx/ssl/kalikaindia_com.key
-- sudo chmod 644 /etc/nginx/ssl/kalikaindia_com.crt
-
-# 11. Install and Configure Gunicorn
-
-Install Gunicorn:
-
-bash
-- pip install gunicorn
-- Collect static files and apply migrations:
-
-bash
-- python manage.py collectstatic
-- python manage.py migrate
-
-Create and edit the Gunicorn service file:
-
-bash
-- sudo nano /etc/systemd/system/gunicorn.service
-
-Paste the following (update paths as needed):
-
-text
+```ini
 [Unit]
 Description=gunicorn daemon
 After=network.target
+
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/your-project-directory
-ExecStart=/home/ubuntu/your-project-directory/venv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/your-project-directory/your_project.sock your_project.wsgi:application
+WorkingDirectory=/home/ubuntu/Kalika_projects/ecommerce_project/ecommerce
+ExecStart=/home/ubuntu/Kalika_projects/env/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/Kalika_projects/ecommerce_project/ecommerce/ecommerce.sock ecommerce.wsgi:application
+
 [Install]
 WantedBy=multi-user.target
-Enable and start Gunicorn:
+```
 
-bash
-- sudo systemctl start gunicorn
-- sudo systemctl enable gunicorn
+Start and enable the Gunicorn service.
 
-# 12. Install and Configure Nginx
+```bash
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+```
 
-Install Nginx:
+### 9\. Install and Configure Nginx
 
-bash
-- sudo apt update && sudo apt upgrade -y
-- sudo apt install nginx -y
+Nginx will act as a reverse proxy, forwarding client requests to Gunicorn and serving static files.
 
-Edit the Nginx config:
+```bash
+sudo apt install nginx -y
+```
 
-bash
-- sudo nano /etc/nginx/sites-available/default
+#### **Copy SSL Certificates**
 
-Example configuration:
+From your **local machine**, securely copy your SSL certificate and private key to the EC2 instance.
 
-text
+```powershell
+# Replace paths and IP with your own
+scp -i "your-key.pem" "path/to/your_domain.crt" ubuntu@your-ec2-ip:~/
+scp -i "your-key.pem" "path/to/your_domain.key" ubuntu@your-ec2-ip:~/
+```
+
+On the **EC2 instance**, move the certificates to the Nginx directory and set secure permissions.
+
+```bash
+sudo mkdir -p /etc/nginx/ssl
+sudo mv your_domain.crt /etc/nginx/ssl/
+sudo mv your_domain.key /etc/nginx/ssl/
+sudo chown -R root:root /etc/nginx/ssl
+sudo chmod 600 /etc/nginx/ssl/your_domain.key
+sudo chmod 644 /etc/nginx/ssl/your_domain.crt
+```
+
+#### **Create Nginx Server Block**
+
+Edit the default Nginx configuration file.
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+Replace its content with the following server block, **adjusting server\_name, SSL paths, and file paths**.
+
+```nginx
+server {
+    listen 80;
+    server_name your_domain.com www.your_domain.com;
+    return 301 https://$host$request_uri;
+}
+
 server {
     listen 443 ssl http2;
-    server_name kalikaindia.com www.kalikaindia.com;
+    server_name your_domain.com www.your_domain.com;
 
-    ssl_certificate /etc/nginx/ssl/kalikaindia_com.crt;
-    ssl_certificate_key /etc/nginx/ssl/kalikaindia_com.key;
+    ssl_certificate /etc/nginx/ssl/your_domain.crt;
+    ssl_certificate_key /etc/nginx/ssl/your_domain.key;
 
     ssl_session_cache shared:SSL:10m;
     ssl_session_timeout 10m;
@@ -331,25 +359,28 @@ server {
     }
 
     location / {
-        proxy_pass http://app_server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        include proxy_params;
+        proxy_pass http://unix:/home/ubuntu/Kalika_projects/ecommerce_project/ecommerce/ecommerce.sock;
     }
 }
+```
 
-Test and restart Nginx:
+Test the Nginx configuration and restart the service.
 
-bash
-- sudo nginx -t
-- sudo systemctl restart nginx
+```bash
+sudo nginx -t
+sudo systemctl restart nginx
+```
 
-# 13. Final Steps and Verification
-Ensure all services are running: PostgreSQL, Gunicorn, and Nginx.
+### 10\. Final Verification
 
--- Visit your domain (e.g., https://kalikaindia.com) to verify the deployment.
+1.  **Check Service Status**: Ensure PostgreSQL, Gunicorn, and Nginx are all active and running without errors.
+    ```bash
+    sudo systemctl status postgresql
+    sudo systemctl status gunicorn
+    sudo systemctl status nginx
+    ```
+2.  **Adjust Security Group**: In your AWS EC2 console, ensure your instance's security group allows inbound traffic on port 80 (HTTP) and port 443 (HTTPS).
+3.  **Visit Your Domain**: Open your browser and navigate to `https://your_domain.com`.
 
-Check logs for troubleshooting if needed.
-
-Congratulations! Your Django project is now deployed on AWS EC2 with a production-ready stack.
+Congratulations\! Your Django project is now successfully deployed and running in a production environment.
