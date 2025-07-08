@@ -1,5 +1,6 @@
 import time
 from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
 from .models import Product
 from django.db.models import Q
 import boto3
@@ -7,6 +8,8 @@ from botocore.exceptions import ClientError
 from django.conf import settings
 import logging
 from cart.models import CartItem
+from urllib.parse import unquote
+from django.db.models import Q, Count
 
 logger = logging.getLogger(__name__)
 
@@ -25,28 +28,37 @@ SUB_CATEGORY_BLOCKLIST = ["home", "system", "menu1", "shop", ""]
 
 def build_category_context():
     """
-    Builds the nested dictionary for the header menu.
-    This new version is much more efficient, using a single database query.
+    Builds the nested dictionary for the header menu, including products for each subcategory.
+    Uses efficient database queries to fetch main categories, subcategories, and up to 5 products per subcategory.
     """
     category_structure = {main_cat: {'subcategories': {}, 'product_count': 0} for main_cat in DEFINED_MAIN_CATEGORIES}
 
-    # Fetch all relevant product fields in a single query
-    products_for_categories = Product.objects.filter(
-        main_category__in=DEFINED_MAIN_CATEGORIES
-    ).exclude(
-        Q(sub_categories__isnull=True) | Q(sub_categories__exact='') | Q(sub_categories__in=SUB_CATEGORY_BLOCKLIST)
-    ).values('main_category', 'sub_categories').distinct().order_by('main_category', 'sub_categories')
-
-    # Count products per main category and subcategory
+    # Count products per main category and build subcategory structure with products
     for main_cat in DEFINED_MAIN_CATEGORIES:
         category_structure[main_cat]['product_count'] = Product.objects.filter(main_category=main_cat).count()
+        
+        # CORRECTED: Changed lookups to use double underscores (e.g., __isnull)
         subcategories = Product.objects.filter(main_category=main_cat).exclude(
             Q(sub_categories__isnull=True) | Q(sub_categories__exact='') | Q(sub_categories__in=SUB_CATEGORY_BLOCKLIST)
         ).values('sub_categories').distinct()
+        
         for sub_cat in subcategories:
             sub_cat_name = sub_cat['sub_categories']
             product_count = Product.objects.filter(main_category=main_cat, sub_categories=sub_cat_name).count()
-            category_structure[main_cat]['subcategories'][sub_cat_name] = {'name': sub_cat_name, 'product_count': product_count}
+            
+            # Fetch up to 5 products for the subcategory
+            products = Product.objects.filter(
+                main_category=main_cat,
+                sub_categories=sub_cat_name
+            ).exclude(
+                sub_categories__in=SUB_CATEGORY_BLOCKLIST
+            ).values('item_id', 'product_title')[:5]
+            
+            category_structure[main_cat]['subcategories'][sub_cat_name] = {
+                'name': sub_cat_name,
+                'product_count': product_count,
+                'products': list(products)
+            }
 
     # Convert to final format
     final_categories_data = {}
@@ -156,23 +168,53 @@ def product_detail(request, item_id):
     return render(request, 'catalog/product_detail.html', context)
 
 def products_by_category(request, main_category_name):
+    # Get all products for the main category
     products = Product.objects.filter(main_category=main_category_name)
     products_with_urls = add_s3_urls_to_products(products)
+
+    # CORRECTED: Use .annotate() to dynamically count products for each subcategory
+    subcategories_qs = Product.objects.filter(
+        main_category=main_category_name
+    ).exclude(
+        Q(sub_categories__isnull=True) | Q(sub_categories__exact='')
+    ).values('sub_categories').annotate(
+        product_count=Count('item_id')
+    ).order_by('sub_categories')
+
+    # Convert the queryset to the list format the template expects
+    subcategories_list = [
+        {'name': item['sub_categories'], 'product_count': item['product_count']}
+        for item in subcategories_qs
+    ]
 
     context = {
         'main_category': main_category_name,
         'products': products_with_urls,
-        'categories': build_category_context()
+        'subcategories_list': subcategories_list,  # Pass the correctly formatted list
+        'categories': build_category_context()    # For the main header menu
     }
     return render(request, 'catalog/products_by_category.html', context)
 
 def products_by_subcategory(request, main_category_name, sub_category_name):
-    products = Product.objects.filter(main_category=main_category_name, sub_categories__icontains=sub_category_name)
+    # Decode URL-encoded subcategory name
+    decoded_sub_category = unquote(sub_category_name)
+    logger.debug(f"Fetching products for main_category: {main_category_name}, raw sub_categories: {sub_category_name}, decoded sub_categories: {decoded_sub_category}")
+    
+    # Filter products with case-insensitive exact match, excluding blocklisted subcategories
+    products = Product.objects.filter(
+        main_category__iexact=main_category_name,
+        sub_categories__iexact=decoded_sub_category
+    ).exclude(sub_categories__in=SUB_CATEGORY_BLOCKLIST)
+    
+    if not products.exists():
+        logger.warning(f"No products found for main_category: {main_category_name}, sub_categories: {decoded_sub_category}")
+        messages.warning(request, f"No products found for {decoded_sub_category} in {main_category_name}.")
+    
     products_with_urls = add_s3_urls_to_products(products)
 
     context = {
         'main_category': main_category_name,
-        'sub_category': sub_category_name,
+        'sub_category': decoded_sub_category,
         'products': products_with_urls,
         'categories': build_category_context()
     }
