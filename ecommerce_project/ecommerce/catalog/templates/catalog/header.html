@@ -56,11 +56,43 @@
                                             <ul class="py-1">
                                                 {% for subcategory in data.subcategories %}
                                                     {% if subcategory.name %}
-                                                        <li>
+                                                        <li x-data="{ productOpen: false }" @mouseenter="productOpen = true" @mouseleave="productOpen = false" class="relative">
                                                             <a href="{% url 'catalog:products_by_subcategory' main_category_name=maincategory sub_category_name=subcategory.name|lower %}" 
-                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center justify-between">
                                                                 {{ subcategory.name }} ({{ subcategory.product_count|default:0 }})
+                                                                {% if subcategory.products %}
+                                                                    <i data-feather="chevron-right" class="w-4 h-4"></i>
+                                                                {% endif %}
                                                             </a>
+                                                            {% if subcategory.products %}
+                                                                <div x-show="productOpen"
+                                                                     x-transition:enter="transition ease-out duration-100" 
+                                                                     x-transition:enter-start="opacity-0" 
+                                                                     x-transition:enter-end="opacity-100"
+                                                                     x-transition:leave="transition ease-in duration-75" 
+                                                                     x-transition:leave-start="opacity-100" 
+                                                                     x-transition:leave-end="opacity-0"
+                                                                     class="absolute left-full top-0 w-64 -mt-10 ml-1 bg-white rounded-lg shadow-lg z-20 border">
+                                                                    <ul class="py-1">
+                                                                        {% for product in subcategory.products %}
+                                                                            <li>
+                                                                                <a href="{% url 'catalog:product_detail' product.item_id %}" 
+                                                                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 truncate">
+                                                                                    {{ product.product_title }}
+                                                                                </a>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                        {% if subcategory.product_count > 5 %}
+                                                                            <li>
+                                                                                <a href="{% url 'catalog:products_by_subcategory' main_category_name=maincategory sub_category_name=subcategory.name|lower %}" 
+                                                                                   class="block px-4 py-2 text-sm text-teal-600 hover:bg-gray-100 font-medium">
+                                                                                    View all {{ subcategory.product_count }} products
+                                                                                </a>
+                                                                            </li>
+                                                                        {% endif %}
+                                                                    </ul>
+                                                                </div>
+                                                            {% endif %}
                                                         </li>
                                                     {% endif %}
                                                 {% endfor %}

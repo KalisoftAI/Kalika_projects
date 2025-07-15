@@ -8,7 +8,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from .forms import CustomUserCreationForm
 import logging
+
 logger = logging.getLogger(__name__)
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -35,8 +37,7 @@ def register_view(request):
         form.helper = FormHelper()
         form.helper.add_input(Submit('submit', 'Register'))
     
-    # Debugging line (optional, can be removed later)
-    logger.debug(f"Template dirs: {os.listdir('C:/Kalisoft_project/Kalika_projects/ecommerce_project/ecommerce/catalog/templates/catalog/')}")
+    # The problematic debugging line has been removed.
     
     return render(request, 'accounts/register.html', {'form': form})
 
