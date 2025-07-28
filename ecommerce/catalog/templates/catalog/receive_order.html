@@ -1,0 +1,69 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Your Shopping Cart{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Your Shopping Cart</h1>
+
+    {% if error %}
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    {% if cart_items %}
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 p-6 border-b bg-gray-50">
+                <div class="col-span-1 font-semibold text-gray-700">Image</div>
+                <div class="col-span-4 font-semibold text-gray-700">Product</div>
+                <div class="col-span-2 font-semibold text-gray-700 text-center">Quantity</div>
+                <div class="col-span-2 font-semibold text-gray-700 text-center">Price</div>
+                <div class="col-span-2 font-semibold text-gray-700 text-center">Subtotal</div>
+                <div class="col-span-1 font-semibold text-gray-700 text-center">Action</div>
+            </div>
+            {% for item in cart_items %}
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 p-6 border-b items-center">
+                    <div class="col-span-1">
+                        {% if item.product.s3_image_url %}
+                            <img src="{{ item.product.s3_image_url }}" alt="{{ item.product.product_title }}" class="w-16 h-16 object-cover rounded">
+                        {% else %}
+                            <div class="w-16 h-16 flex items-center justify-center bg-gray-200 rounded text-gray-500">No Image</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-span-4">
+                        <h3 class="text-lg font-medium text-gray-800">{{ item.product.product_title }}</h3>
+                        <p class="text-sm text-gray-500">{{ item.product.item_code }}</p>
+                    </div>
+                    <div class="col-span-2 text-center text-gray-700">{{ item.quantity }}</div>
+                    <div class="col-span-2 text-center text-gray-700">₹{{ item.product.price|floatformat:2 }}</div>
+                    <div class="col-span-2 text-center text-gray-700">₹{{ item.subtotal|floatformat:2 }}</div>
+                    <div class="col-span-1 text-center">
+                        <form action="{% url 'cart:remove_from_cart' item_id=item.product.item_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-600 hover:text-red-800">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-2xl font-bold text-gray-800">Total: ₹{{ total|floatformat:2 }}</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a href="{% url 'catalog:home' %}" class="inline-block bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition">Continue Shopping</a>
+                <form action="{% url 'cart:checkout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="inline-block bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition">Proceed to Checkout</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <p class="text-gray-700 text-lg">Your cart is empty.</p>
+            <a href="{% url 'catalog:home' %}" class="inline-block bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 mt-4 transition">Shop Now</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

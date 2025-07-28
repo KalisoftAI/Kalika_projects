@@ -1,0 +1,35 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="products container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center mb-8">{{ main_category }}</h1>
+    {% if products %}
+    <div class="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for product in products %}
+        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+            {% if product.s3_image_url %}
+            <img src="{{ product.s3_image_url }}" alt="{{ product.product_title }}" class="w-full h-48 object-cover">
+            {% else %}
+            <img src="{% static 'images/placeholder.png' %}" alt="No image" class="w-full h-48 object-cover">
+            {% endif %}
+            <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-800">{{ product.product_title|truncatechars:30 }}</h3>
+                <p class="text-blue-600 font-bold mt-2">${{ product.price|floatformat:2 }}</p>
+                <div class="mt-4 flex justify-between">
+                    <a href="{% url 'catalog:product_detail' product.item_id %}" class="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">View Details</a>
+                    <form action="{% url 'cart:add_to_cart' item_id=product.item_id %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.item_id }}">
+                        <button type="submit" class="text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-gray-600">No products found in this category.</p>
+    {% endif %}
+</div>
+{% endblock %}

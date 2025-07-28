@@ -1,0 +1,65 @@
+{% extends 'catalog/base.html' %}
+{% block title %}{{ product.product_title }}{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-lg p-8">
+    <nav class="mb-6 text-sm text-gray-500">
+        <a href="{% url 'catalog:home' %}" class="hover:underline">Home</a>
+        <span class="mx-2">/</span>
+        <a href="{% url 'catalog:product_list' %}" class="hover:underline">Products</a>
+        <span class="mx-2">/</span>
+        <span>{{ product.product_title|truncatechars:30 }}</span>
+    </nav>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+            <img src="{{ product.s3_image_url|default:'https://via.placeholder.com/500x500' }}" alt="{{ product.product_title }}" class="w-full h-auto object-cover rounded-lg shadow-md">
+        </div>
+
+        <div>
+            <h1 class="text-4xl font-bold text-gray-900">{{ product.product_title }}</h1>
+            <p class="text-gray-500 mt-2">Brand: <span class="text-blue-600">BrandName</span></p>
+            
+            <p class="text-3xl font-bold text-blue-600 my-4">₹{{ product.price }}</p>
+
+            <div class="mt-4">
+                <span class="text-green-600 font-semibold">In Stock</span>
+            </div>
+
+            <form action="{% url 'cart:add_to_cart' product.item_id %}" method="post" class="mt-6 flex items-center gap-4">
+                {% csrf_token %}
+                <div class="flex items-center border border-gray-300 rounded-lg">
+                    <button type="button" class="px-3 py-2 text-gray-600" onclick="this.nextElementSibling.stepDown()">-</button>
+                    <input type="number" name="quantity" value="1" min="1" class="w-16 text-center border-l border-r">
+                    <button type="button" class="px-3 py-2 text-gray-600" onclick="this.previousElementSibling.stepUp()">+</button>
+                </div>
+                <button type="submit" class="flex-grow bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center justify-center gap-2">
+                    <i data-feather="shopping-cart" class="w-5 h-5"></i>
+                    <span>Add to Cart</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div x-data="{ tab: 'description' }" class="mt-12">
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <button @click="tab = 'description'" :class="{ 'border-blue-500 text-blue-600': tab === 'description', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'description' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Description
+                </button>
+                <button @click="tab = 'reviews'" :class="{ 'border-blue-500 text-blue-600': tab === 'reviews', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'reviews' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Reviews
+                </button>
+            </nav>
+        </div>
+        <div class="mt-6">
+            <div x-show="tab === 'description'">
+                <p class="text-gray-700 leading-relaxed">{{ product.product_description }}</p>
+            </div>
+            <div x-show="tab === 'reviews'">
+                <p class="text-gray-700">No reviews yet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

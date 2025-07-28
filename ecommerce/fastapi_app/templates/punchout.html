@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Punchout Responses{% endblock %}
+
+{% block content %}
+<div class="card-glass p-6 rounded-xl overflow-x-auto">
+    <h4 class="text-xl font-semibold mb-4 text-text-primary">Punchout Responses List</h4>
+    <table class="min-w-full data-table rounded-lg overflow-hidden">
+        <thead>
+            <tr>
+                <th>Punchout ID</th>
+                <th>Response</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in punchout_list %}
+            <tr>
+                <td>{{ order['id'] }}</td>
+                <td>{{ order['response']}}</td>
+                <td>{{ order['created_at'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+/* Custom animations and overrides */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+nav {
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .nav-links {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,70 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-6">Checkout</h2>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="mb-6 space-y-2">
+            {% for message in messages %}
+                <div class="bg-{% if message.tags == 'success' %}green{% else %}red{% endif %}-100 border border-{% if message.tags == 'success' %}green{% else %}red{% endif %}-400 text-{% if message.tags == 'success' %}green{% else %}red{% endif %}-700 px-4 py-3 rounded relative" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Cart Items -->
+    {% if cart_items %}
+        <div class="overflow-x-auto">
+            <table class="cart-table w-full border-collapse bg-white shadow-md rounded-lg">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="p-4 text-left text-gray-700 font-semibold">Image</th>
+                        <th class="p-4 text-left text-gray-700 font-semibold">Product</th>
+                        <th class="p-4 text-left text-gray-700 font-semibold">Quantity</th>
+                        <th class="p-4 text-left text-gray-700 font-semibold">Price</th>
+                        <th class="p-4 text-left text-gray-700 font-semibold">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr class="border-t">
+                        <td class="p-4">
+                            {% if item.product.s3_image_url %}
+                                <img src="{{ item.product.s3_image_url }}" alt="{{ item.product.product_title }}" class="w-24 h-24 object-cover rounded-md">
+                            {% else %}
+                                <img src="{% static 'images/placeholder.png' %}" alt="No Image" class="w-24 h-24 object-cover rounded-md">
+                            {% endif %}
+                        </td>
+                        <td class="p-4 text-gray-800">{{ item.product.product_title }}</td>
+                        <td class="p-4 text-gray-800">{{ item.quantity }}</td>
+                        <td class="p-4 text-gray-800">₹{{ item.product.price|floatformat:2 }}</td>
+                        <td class="p-4 text-gray-800">₹{{ item.subtotal|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Cart Total -->
+        <div class="cart-total mt-6 text-right">
+            <h3 class="text-xl font-bold text-gray-800">Total: ₹{{ total|floatformat:2 }}</h3>
+        </div>
+
+        <!-- Checkout Form -->
+        <div class="mt-6 flex justify-between items-center">
+            <a href="{% url 'cart:view_cart' %}" class="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded transition">Back to Cart</a>
+            <form action="{% url 'cart:checkout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="text-white bg-green-600 hover:bg-green-700 px-6 py-3 rounded transition">Confirm Order</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="text-gray-600 text-lg">Your cart is empty.</p>
+        <a href="{% url 'catalog:home' %}" class="text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded transition mt-4 inline-block">Continue Shopping</a>
+    {% endif %}
+</div>
+{% endblock %}

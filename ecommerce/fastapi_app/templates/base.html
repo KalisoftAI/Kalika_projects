@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalika Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+  <style>
+    :root {
+        --color-primary-dark: #1A202C;
+        --color-secondary-dark: #2D3748;
+        --color-accent-emerald: #10B981;
+        --color-accent-indigo: #6366F1;
+        --color-accent-sky: #0EA5E9;
+        --color-bg-light: #F8F9FA;
+        --color-text-dark: #2D3748;
+        --color-text-light: #E2E8F0;
+        --color-card-bg-light: #FFFFFF;
+        --color-card-bg-dark: #2D3748;
+        --color-border-light: #E2E8F0;
+        --color-border-dark: #4A5568;
+    }
+
+    html.light {
+        --bg-primary: var(--color-bg-light);
+        --bg-secondary: var(--color-card-bg-light);
+        --text-primary: var(--color-text-dark);
+        --text-secondary: #718096;
+        --header-bg: var(--color-secondary-dark); /* This is the original color, we'll use rgba for blur */
+        --header-text: var(--color-text-light);
+        --sidebar-bg: var(--color-secondary-dark);
+        --sidebar-text: var(--color-text-light);
+        --sidebar-hover-bg: #4A5568;
+        --sidebar-active-bg: var(--color-accent-indigo);
+        --card-bg: var(--color-card-bg-light);
+        --border-color: var(--color-border-light);
+        --chart-grid-color: #E2E8F0;
+        --chart-text-color: #4A5568;
+    }
+
+    html.dark {
+        --bg-primary: #1A202C;
+        --bg-secondary: #2D3748;
+        --text-primary: #E2E8F0;
+        --text-secondary: #A0AEC0;
+        --header-bg: #1A202C; /* This is the original color, we'll use rgba for blur */
+        --header-text: #E2E8F0;
+        --sidebar-bg: #1A202C;
+        --sidebar-text: #E2E8F0;
+        --sidebar-hover-bg: #4A5568;
+        --sidebar-active-bg: var(--color-accent-indigo);
+        --card-bg: #2D3748;
+        --border-color: #4A5568;
+        --chart-grid-color: #4A5568;
+        --chart-text-color: #A0AEC0;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-poppins {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .sidebar {
+        width: 256px;
+        transition: width 0.3s ease-in-out;
+    }
+    .content-area {
+        margin-left: 256px;
+        transition: margin-left 0.3s ease-in-out;
+    }
+    .sidebar.collapsed {
+        width: 80px;
+    }
+    .content-area.collapsed {
+        margin-left: 80px;
+    }
+    .sidebar-link-text {
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .sidebar.collapsed .sidebar-link-text {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+    }
+    .sidebar-logo-full {
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .sidebar.collapsed .sidebar-logo-full {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+    }
+    .sidebar-logo-icon {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+        display: none;
+    }
+    .sidebar.collapsed .sidebar-logo-icon {
+        opacity: 1;
+        width: auto;
+        display: block;
+    }
+
+    .has-submenu {
+        position: relative;
+    }
+    .submenu {
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        background-color: var(--sidebar-bg);
+        transition: max-height 0.3s ease-in-out;
+    }
+    .has-submenu:hover .submenu,
+    .has-submenu.active .submenu {
+        display: block;
+        max-height: 200px; /* This will be overridden by JS for dynamic height */
+    }
+    .sidebar.collapsed .submenu {
+        background-color: var(--sidebar-hover-bg);
+        max-height: 0;
+    }
+    .sidebar.collapsed .has-submenu:hover .submenu {
+        display: block;
+        max-height: 200px; /* This will be overridden by JS for dynamic height */
+    }
+    .submenu-arrow {
+        transition: transform 0.2s ease;
+    }
+    .has-submenu:hover .submenu-arrow,
+    .has-submenu.active .submenu-arrow {
+        transform: rotate(180deg);
+    }
+    .sidebar.collapsed .submenu-arrow {
+        display: none;
+    }
+    .sidebar .mb-2 {
+        margin-bottom: 4px;
+    }
+    .sidebar.collapsed .mb-2 {
+        margin-bottom: 4px;
+    }
+    .sidebar.collapsed .has-submenu > a,
+    .sidebar.collapsed .mb-2 > a {
+        padding: 8px;
+        justify-content: center;
+    }
+    .sidebar.collapsed .fas {
+        margin-right: 0;
+        font-size: 1.5rem;
+    }
+    .card-glass {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+    .card-glass:hover {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: var(--bg-primary);
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-accent-indigo);
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #4A5568;
+    }
+    .data-table thead th {
+        background-color: var(--header-bg);
+        color: var(--header-text);
+        padding: 12px 16px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .data-table tbody tr {
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+    }
+    .data-table tbody tr:nth-child(odd) {
+        background-color: var(--bg-primary);
+    }
+    .dark .data-table tbody tr:nth-child(odd) {
+        background-color: #1A202C;
+    }
+    .data-table tbody tr:hover {
+        background-color: var(--sidebar-hover-bg);
+        color: var(--sidebar-text);
+    }
+    .data-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out forwards;
+    }
+    @keyframes scale-in {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    .animate-scale-in {
+        animation: scale-in 0.3s ease-out forwards;
+    }
+    @keyframes slide-in-right {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    .animate-slide-in-right {
+        animation: slide-in-right 0.3s ease-out forwards;
+    }
+
+    /* Global Loader Styles */
+    .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f3f4f6; /* Match body background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure it's on top of everything */
+        transition: opacity 0.5s ease-out;
+        opacity: 1;
+        visibility: visible;
+    }
+    .loader-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none; /* Allow clicks through once hidden */
+    }
+
+    .loader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Truck Loader Specific Styles (copied from loading.html) */
+    .loader-truck { /* Renamed from .loader to .loader-truck to avoid conflict */
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .truckWrapper {
+        width: 200px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        align-items: center;
+        justify-content: flex-end;
+        overflow-x: hidden;
+        margin-bottom: 20px;
+    }
+    .truckBody {
+        width: 130px;
+        height: fit-content;
+        margin-bottom: 6px;
+        animation: motion 1s linear infinite;
+    }
+    @keyframes motion {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(3px); }
+        100% { transform: translateY(0px); }
+    }
+    .truckTires {
+        width: 130px;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 10px 0px 15px;
+        position: absolute;
+        bottom: 0;
+    }
+    .truckTires svg {
+        width: 24px;
+    }
+    .road {
+        width: 100%;
+        height: 1.5px;
+        background-color: #282828;
+        position: relative;
+        bottom: 0;
+        align-self: flex-end;
+        border-radius: 3px;
+    }
+    .road::before {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 100%;
+        background-color: #282828;
+        right: -50%;
+        border-radius: 3px;
+        animation: roadAnimation 1.4s linear infinite;
+        border-left: 10px solid white;
+    }
+    .road::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 100%;
+        background-color: #282828;
+        right: -65%;
+        border-radius: 3px;
+        animation: roadAnimation 1.4s linear infinite;
+        border-left: 4px solid white;
+    }
+    .lampPost {
+        position: absolute;
+        bottom: 0;
+        right: -90%;
+        height: 90px;
+        animation: roadAnimation 1.4s linear infinite;
+    }
+    @keyframes roadAnimation {
+        0% { transform: translateX(0px); }
+        100% { transform: translateX(-350px); }
+    }
+
+    /* Styling for the text below the loader */
+    /* These styles are kept but the elements are removed from HTML */
+    .loader-text {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-top: 20px;
+    }
+    .loader-subtext {
+        font-size: 1rem;
+        color: #4b5563;
+    }
+
+    /* Theme Switch (NEW STYLES) */
+    /* The switch - the box around the slider */
+    .switch {
+        font-size: 17px;
+        position: relative;
+        display: inline-block;
+        width: 4em;
+        height: 2.2em;
+        border-radius: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #2a2a2a;
+        transition: 0.4s;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 1.2em;
+        width: 1.2em;
+        border-radius: 20px;
+        left: 0.5em;
+        bottom: 0.5em;
+        transition: 0.4s;
+        transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+        box-shadow: inset 8px -4px 0px 0px #fff;
+    }
+
+    .switch input:checked + .slider {
+        background-color: #00a6ff;
+    }
+
+    .switch input:checked + .slider:before {
+        transform: translateX(1.8em);
+        box-shadow: inset 15px -4px 0px 15px #ffcf48;
+    }
+
+    .star {
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        width: 5px;
+        transition: all 0.4s;
+        height: 5px;
+    }
+
+    .star_1 {
+        left: 2.5em;
+        top: 0.5em;
+    }
+
+    .star_2 {
+        left: 2.2em;
+        top: 1.2em;
+    }
+
+    .star_3 {
+        left: 3em;
+        top: 0.9em;
+    }
+
+    .switch input:checked ~ .slider .star {
+        opacity: 0;
+    }
+
+    .cloud {
+        width: 3.5em;
+        position: absolute;
+        bottom: -1.4em;
+        left: -1.1em;
+        opacity: 0;
+        transition: all 0.4s;
+    }
+
+    .switch input:checked ~ .slider .cloud {
+        opacity: 1;
+    }
+
+    /* NEW: Styles for notification/profile dropdown links in light theme */
+    .light #notificationDropdown a,
+    .light #profileDropdown a {
+        color: #000000 !important; /* Force black color for all links in these dropdowns */
+    }
+
+    /* Navbar Blur Effect */
+    .navbar-blur {
+        backdrop-filter: blur(10px); /* Apply the blur effect */
+        -webkit-backdrop-filter: blur(10px); /* For Safari support */
+        /* Semi-transparent background for light theme */
+        background-color: rgba(255, 255, 255, 0.8); /* Lighter background for light theme */
+    }
+
+    /* Dark theme specific background for navbar blur */
+    html.dark .navbar-blur {
+        background-color: rgba(26, 32, 44, 0.8); /* Darker background for dark theme */
+    }
+  </style>
+  <script>
+      tailwind.config = {
+          theme: {
+              extend: {
+                  fontFamily: {
+                      inter: ['Inter', 'sans-serif'],
+                      poppins: ['Poppins', 'sans-serif'],
+                  },
+                  colors: {
+                      'primary-dark': 'var(--color-primary-dark)',
+                      'secondary-dark': 'var(--color-secondary-dark)',
+                      'accent-emerald': 'var(--color-accent-emerald)',
+                      'accent-indigo': 'var(--color-accent-indigo)',
+                      'accent-sky': 'var(--color-accent-sky)',
+                      'bg-light': 'var(--color-bg-light)',
+                      'text-dark': 'var(--color-text-dark)',
+                      'text-light': 'var(--color-text-light)',
+                      'header-bg': 'var(--header-bg)',
+                      'header-text': 'var(--header-text)',
+                      'sidebar-bg': 'var(--sidebar-bg)',
+                      'sidebar-text': 'var(--sidebar-text)',
+                      'sidebar-hover-bg': 'var(--sidebar-hover-bg)',
+                      'sidebar-active-bg': 'var(--sidebar-active-bg)',
+                      'card-bg': 'var(--card-bg)',
+                      'border-color': 'var(--color-border-color)',
+                  }
+              }
+          }
+      }
+  </script>
+</head>
+<body class="bg-bg-primary text-text-primary min-h-screen flex flex-col font-inter">
+
+  <!-- Global Loader Overlay -->
+  <div id="globalLoader" class="loader-overlay">
+      <div class="loader-content">
+          <div class="loader-truck">
+              <div class="truckWrapper">
+                  <div class="truckBody">
+                      <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 198 93"
+                          class="trucksvg"
+                      >
+                          <path
+                              stroke-width="3"
+                              stroke="#282828"
+                              fill="#F83D3D"
+                              d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
+                          ></path>
+                          <path
+                              stroke-width="3"
+                              stroke="#282828"
+                              fill="#7D7C7C"
+                              d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.160 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"
+                          ></path>
+                          <path
+                              stroke-width="2"
+                              stroke="#282828"
+                              fill="#282828"
+                              d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"
+                          ></path>
+                          <rect
+                              stroke-width="2"
+                              stroke="#282828"
+                              fill="#FFFCAB"
+                              rx="1"
+                              height="7"
+                              width="5"
+                              y="63"
+                              x="187"
+                          ></rect>
+                          <rect
+                              stroke-width="2"
+                              stroke="#282828"
+                              fill="#282828"
+                              rx="1"
+                              height="11"
+                              width="4"
+                              y="81"
+                              x="193"
+                          ></rect>
+                          <rect
+                              stroke-width="3"
+                              stroke="#282828"
+                              fill="#DFDFDF"
+                              rx="2.5"
+                              height="90"
+                              width="121"
+                              y="1.5"
+                              x="6.5"
+                          ></rect>
+                          <rect
+                              stroke-width="2"
+                              stroke="#282828"
+                              fill="#DFDFDF"
+                              rx="2"
+                              height="4"
+                              width="6"
+                              y="84"
+                              x="1"
+                          ></rect>
+                      </svg>
+                  </div>
+                  <div class="truckTires">
+                      <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 30 30"
+                          class="tiresvg"
+                      >
+                          <circle
+                              stroke-width="3"
+                              stroke="#282828"
+                              fill="#282828"
+                              r="13.5"
+                              cy="15"
+                              cx="15"
+                          ></circle>
+                          <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                      </svg>
+                      <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 30 30"
+                          class="tiresvg"
+                      >
+                          <circle
+                              stroke-width="3"
+                              stroke="#282828"
+                              fill="#282828"
+                              r="13.5"
+                              cy="15"
+                              cx="15"
+                          ></circle>
+                          <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                      </svg>
+                  </div>
+                  <div class="road"></div>
+
+                  <svg
+                      xml:space="preserve"
+                      viewBox="0 0 453.459 453.459"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns="http://www.w3.org/2000/svg"
+                      id="Capa_1"
+                      version="1.1"
+                      fill="#000000"
+                      class="lampPost"
+                  >
+                      <path
+                          d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993
+c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514
+c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.352-17.204-45.463-19.366v-8.954h-6.149C200.189,38.779,223.924,16,252.882,16
+c29.952,0,54.32,24.368,54.32,54.32c0,28.774-11.078,37.009-25.105,47.437c-17.444,12.968-37.216,27.667-37.216,78.884v113.914
+h-0.797c-5.068,0-9.174,4.108-9.174,9.177c0,2.844,1.293,5.383,3.321,7.066c-3.432,27.933-26.851,95.744-8.226,115.459v11.202h45.75
+v-11.202c18.625-19.715-4.794-87.527-8.227-115.459c2.029-1.683,3.322-4.223,3.322-7.066c0-5.068-4.107-9.177-9.176-9.177h-0.795
+V196.641c0-43.174,14.942-54.283,30.762-66.043c14.793-10.997,31.559-23.461,31.559-60.277C323.202,31.545,291.656,0,252.882,0z
+M232.77,111.694c0,23.442-19.071,42.514-42.514-42.514c-23.442,0-42.514-19.072-42.514-42.514c0-5.531,1.078-10.957,3.141-16.017
+h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
+                          ></path>
+                      </svg>
+                  </div>
+              </div>
+          </div>
+          {# Removed loader-text and loader-subtext from here #}
+      </div>
+  </div>
+
+  {% if request.session.user %}
+  <header class="fixed top-0 left-0 right-0 z-50 bg-header-bg text-header-text shadow-lg py-4 px-6 flex items-center justify-between transition-colors duration-300 navbar-blur">
+      <div class="flex items-center space-x-4">
+          <button id="sidebarToggle" class="text-header-text text-xl focus:outline-none lg:hidden">
+              <i class="fas fa-bars"></i>
+          </button>
+          <div class="text-2xl font-bold font-poppins">Kalika Admin</div>
+          <div class="relative hidden md:block">
+              <input type="text" placeholder="Search anything..." class="bg-secondary-dark text-header-text rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-accent-indigo transition-all duration-200 w-64">
+              <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"></i>
+          </div>
+      </div>
+      <div class="flex items-center space-x-4">
+          <!-- NEW THEME TOGGLE HTML -->
+          <label class="switch">
+            <input id="themeCheckbox" type="checkbox" />
+            <span class="slider">
+              <div class="star star_1"></div>
+              <div class="star star_2"></div>
+              <div class="star star_3"></div>
+              <svg viewBox="0 0 16 16" class="cloud_1 cloud">
+                <path
+                  transform="matrix(.77976 0 0 .78395-299.99-418.63)"
+                  fill="#fff"
+                  d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925"
+                ></path>
+              </svg>
+            </span>
+          </label>
+          <!-- END NEW THEME TOGGLE HTML -->
+
+          <div class="relative">
+              <button id="notificationBtn" class="text-header-text text-xl p-2 rounded-full hover:bg-sidebar-hover-bg transition-colors duration-200 focus:outline-none">
+                  <i class="fas fa-bell"></i>
+                  <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">3</span>
+              </button>
+              <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-card-bg rounded-lg shadow-xl py-2 hidden z-50 transition-all duration-300 transform origin-top-right scale-95 opacity-0">
+                  <div class="px-4 py-2 text-text-primary text-sm font-semibold border-b border-border-color">Notifications</div>
+                  <a href="#" class="block px-4 py-2 text-sm text-text-primary hover:bg-sidebar-hover-bg transition-colors duration-200">New order #1234 received.</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-text-primary hover:bg-sidebar-hover-bg transition-colors duration-200">Product 'Laptop X' low stock.</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-text-primary hover:bg-sidebar-hover-bg transition-colors duration-200">User 'Jane Doe' registered.</a>
+              </div>
+          </div>
+          <div class="relative">
+              <button id="profileBtn" class="flex items-center space-x-2 text-header-text focus:outline-none">
+                  <img src="https://placehold.co/40x40/6366F1/FFFFFF?text=AD" alt="Admin" class="w-10 h-10 rounded-full border-2 border-accent-indigo">
+                  <span class="hidden md:block font-medium">Admin User</span>
+                  <i class="fas fa-chevron-down text-xs ml-1"></i>
+              </button>
+              <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-card-bg rounded-lg shadow-xl py-2 hidden z-50 transition-all duration-300 transform origin-top-right scale-95 opacity-0">
+                  <a href="#" class="block px-4 py-2 text-sm text-text-primary hover:bg-sidebar-hover-bg transition-colors duration-200"><i class="fas fa-user mr-2"></i>Profile</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-text-primary hover:bg-sidebar-hover-bg transition-colors duration-200"><i class="fas fa-cog mr-2"></i>Settings</a>
+                  <div class="border-t border-border-color my-1"></div>
+                  <a href="/admin/logout" class="block px-4 py-2 text-sm text-text-primary hover:bg-red-100 transition-colors duration-200"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+              </div>
+          </div>
+      </div>
+  </header>
+
+  <aside id="sidebar" class="sidebar fixed top-0 left-0 h-screen bg-sidebar-bg text-sidebar-text shadow-xl p-4 pt-20 z-40 flex flex-col transition-all duration-300 ease-in-out">
+      <div class="flex items-center justify-center mb-8 h-10">
+          <div class="sidebar-logo-full text-2xl font-bold font-poppins text-white"></div>
+          <div class="sidebar-logo-icon text-2xl font-bold font-poppins text-white hidden">K</div>
+      </div>
+      <nav class="flex-grow">
+          <ul>
+              <li class="mb-2">
+                  <a href="{{ url_for('dashboard') }}" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'dashboard' %}active-link bg-sidebar-active-bg{% endif %}" aria-current="{% if active_menu == 'dashboard' %}page{% endif %}" title="Dashboard">
+                      <i class="fas fa-tachometer-alt text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Dashboard</span>
+                  </a>
+              </li>
+              <li class="mb-2 has-submenu">
+                  <a href="#" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'catalog' %}active-link bg-sidebar-active-bg{% endif %}" title="Catalog">
+                      <i class="fas fa-book text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Catalog</span>
+                      <i class="fas fa-chevron-down text-sm ml-auto submenu-arrow"></i>
+                  </a>
+                  <div class="submenu {% if active_menu == 'catalog' %}active{% endif %}">
+                      <a href="{{ url_for('items_page') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'items' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Items</span>
+                      </a>
+                      <a href="{{ url_for('import_from_xl_page') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'import_from_xl' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Import from XL</span>
+                      </a>
+                      {# Renamed from Export File to Export to XL #}
+                      <a href="{{ url_for('export_file_page') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'export_file' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Export to XL</span>
+                      </a>
+                      <a href="{{ url_for('categories_page') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'categories' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Categories</span>
+                      </a>
+                      <a href="{{ url_for('item_options_page') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'item_options' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Item Options</span>
+                      </a>
+                      <a href="{{ url_for('inventory_page') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'inventory' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Inventory</span>
+                      </a>
+                  </div>
+              </li>
+              <!-- <li class="mb-2 has-submenu">
+                  <a href="#" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'orders' %}active-link bg-sidebar-active-bg{% endif %}" title="Orders">
+                      <i class="fas fa-shopping-cart text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Orders</span>
+                      <i class="fas fa-chevron-down text-sm ml-auto submenu-arrow"></i>
+                  </a>
+                  <div class="submenu {% if active_menu == 'orders' %}active{% endif %}">
+                      <a href="{{ url_for('pending_orders') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'pending_orders' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Pending Orders</span>
+                      </a>
+                      <a href="{{ url_for('completed_orders') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'completed_orders' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Completed Orders</span>
+                      </a>
+                  </div>
+              </li> -->
+              <li class="mb-2 has-submenu">
+                  <a href="#" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'users' %}active-link bg-sidebar-active-bg{% endif %}" title="Users">
+                      <i class="fas fa-users text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Users</span>
+                      <i class="fas fa-chevron-down text-sm ml-auto submenu-arrow"></i>
+                  </a>
+                  <div class="submenu {% if active_menu == 'users' %}active{% endif %}">
+                      <a href="{{ url_for('user_list') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'user_list' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">User List</span>
+                      </a>
+                      <a href="{{ url_for('add_user_get') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'add_user' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Add User</span>
+                      </a>
+                  </div>
+              </li>
+              <li class="mb-2 has-submenu">
+                  <a href="#" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'punchout' %}active-link bg-sidebar-active-bg{% endif %}" title="Punchout Response">
+                      <i class="fas fa-file-invoice text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Punchout </span>
+                      <i class="fas fa-chevron-down text-sm ml-auto submenu-arrow"></i>
+                  </a>
+                  <div class="submenu {% if active_menu == 'punchout' %}active{% endif %}">
+                      <a href="{{ url_for('punchout_list') }}" class="flex items-center p-2 pl-8 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_sub_menu == 'punchout_list' %}active-sub-link text-accent-indigo{% endif %}">
+                          <span class="sidebar-link-text text-base font-medium whitespace-nowrap">Punchout List</span>
+                      </a>
+                  </div>
+              </li>
+              <li class="mb-2">
+                  <a href="{{ url_for('analytics') }}" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'analytics' %}active-link bg-sidebar-active-bg{% endif %}" title="Analytics">
+                      <i class="fas fa-chart-line text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Analytics</span>
+                  </a>
+              </li>
+              <li class="mb-2">
+                  <a href="{{ url_for('settings') }}" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group {% if active_menu == 'settings' %}active-link bg-sidebar-active-bg{% endif %}" title="Settings">
+                      <i class="fas fa-cogs text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+                      <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Settings</span>
+                  </a>
+              </li>
+          </ul>
+      </nav>
+      <div class="mt-auto pt-4 border-t border-border-color">
+          <a href="{{ url_for('help_page') }}" class="flex items-center p-3 rounded-lg text-sidebar-text hover:bg-sidebar-hover-bg transition-colors duration-200 group" title="Help">
+              <i class="fas fa-question-circle text-xl mr-3 group-[.collapsed]:mr-0 group-[.collapsed]:text-2xl transition-all duration-300"></i>
+              <span class="sidebar-link-text text-lg font-medium whitespace-nowrap">Help</span>
+          </a>
+      </div>
+  </aside>
+  {% endif %}
+  <main id="contentArea" class="content-area ml-64 p-6 pt-20 flex-grow transition-all duration-300 ease-in-out">
+      <nav class="mb-6 text-text-secondary" aria-label="breadcrumb">
+          <ol class="flex space-x-2">
+              {% for item in breadcrumb %}
+                  {% if loop.last %}
+                      <li class="text-text-primary font-medium">{{ item.name }}</li>
+                  {% else %}
+                      <li><a href="{{ item.url }}" class="hover:text-accent-indigo transition-colors duration-200">{{ item.name }}</a></li>
+                      <li class="text-text-secondary">/</li>
+                  {% endif %}
+              {% endfor %}
+          </ol>
+      </nav>
+      {% if flash_messages %}
+          <div id="flashMessage" class="bg-accent-emerald/20 text-accent-emerald border border-accent-emerald px-4 py-3 rounded-lg mb-6 flex items-center justify-between animate-fade-in transition-all duration-300">
+              <span><i class="fas fa-check-circle mr-2"></i>{{ flash_messages[0] }}</span>
+              <button class="text-accent-emerald hover:text-accent-emerald/80 focus:outline-none" onclick="document.getElementById('flashMessage').classList.add('hidden')">
+                  <i class="fas fa-times"></i>
+              </button>
+          </div>
+      {% endif %}
+      <div class="container-fluid mt-4">
+          {% block content %}{% endblock %}
+      </div>
+  </main>
+  <footer class="content-area ml-64 p-6 text-center text-text-secondary text-sm border-t border-border-color transition-all duration-300 ease-in-out">
+      © 2025 Kalika Admin. All rights reserved. | Designed with <i class="fas fa-heart text-red-500"></i> by Team Kalika
+  </footer>
+  <div id="successModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-[100] animate-fade-in">
+      <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-sm w-full text-center transform scale-95 animate-scale-in">
+          <i class="fas fa-check-circle text-accent-emerald text-6xl mb-4"></i>
+          <h3 class="text-2xl font-bold mb-2 text-text-primary">Success!</h3>
+          <p class="text-text-secondary mb-6" id="successModalMessage">Your action was completed successfully.</p>
+          <button class="bg-accent-indigo text-white px-6 py-2 rounded-md hover:bg-accent-indigo/80 transition-colors duration-200" onclick="document.getElementById('successModal').classList.add('hidden')">Close</button>
+      </div>
+  </div>
+  <div id="errorToast" class="fixed bottom-6 right-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-xl hidden z-[100] animate-slide-in-right">
+      <div class="flex items-center">
+          <i class="fas fa-exclamation-circle mr-3"></i>
+          <span id="errorToastMessage">An error occurred. Please try again.</span>
+          <button class="ml-auto text-white/80 hover:text-white focus:outline-none" onclick="document.getElementById('errorToast').classList.add('hidden')">
+              <i class="fas fa-times"></i>
+          </button>
+      </div>
+  </div>
+  <script>
+      // Show loader immediately when a link is clicked
+      document.querySelectorAll('a[href^="/"]').forEach(link => {
+          link.addEventListener('click', (event) => {
+              // Only show loader for internal links that are not just hash links or mailto
+              if (link.hostname === window.location.hostname || link.hostname === '') {
+                  const loader = document.getElementById('globalLoader');
+                  if (loader) {
+                      loader.classList.remove('hidden');
+                  }
+              }
+          });
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+          // Hide loader once the DOM is fully loaded
+          const loader = document.getElementById('globalLoader');
+          if (loader) {
+              // Add a slight delay to ensure content is painted and animation is visible
+              setTimeout(() => {
+                  loader.classList.add('hidden');
+              }, 300); // Adjust this delay as needed
+          }
+
+          const htmlElement = document.documentElement;
+          const sidebar = document.getElementById('sidebar');
+          const contentArea = document.getElementById('contentArea');
+          const sidebarToggle = document.getElementById('sidebarToggle');
+          const themeCheckbox = document.getElementById('themeCheckbox');
+          const profileBtn = document.getElementById('profileBtn');
+          const profileDropdown = document.getElementById('profileDropdown');
+          const notificationBtn = document.getElementById('notificationBtn');
+          const notificationDropdown = document.getElementById('notificationDropdown');
+
+          window.showSuccessModal = (message) => {
+              document.getElementById('successModalMessage').textContent = message;
+              document.getElementById('successModal').classList.remove('hidden');
+          };
+          window.showErrorToast = (message) => {
+              document.getElementById('errorToastMessage').textContent = message;
+              document.getElementById('errorToast').classList.remove('hidden');
+              setTimeout(() => {
+                  document.getElementById('errorToast').classList.add('hidden');
+              }, 5000);
+          };
+
+          // Initialize theme based on localStorage or system preference
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme) {
+              htmlElement.className = savedTheme;
+              themeCheckbox.checked = (savedTheme === 'dark');
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              htmlElement.className = 'dark';
+              themeCheckbox.checked = true;
+          } else {
+              htmlElement.className = 'light';
+              themeCheckbox.checked = false;
+          }
+
+          // Event listener for the new theme checkbox
+          themeCheckbox.addEventListener('change', () => {
+              if (themeCheckbox.checked) {
+                  htmlElement.classList.remove('light');
+                  htmlElement.classList.add('dark');
+                  localStorage.setItem('theme', 'dark');
+              } else {
+                  htmlElement.classList.remove('dark');
+                  htmlElement.classList.add('light');
+                  localStorage.setItem('theme', 'light');
+              }
+              if (typeof initCharts === 'function') {
+                  initCharts();
+              }
+          });
+
+          sidebarToggle.addEventListener('click', () => {
+              sidebar.classList.toggle('-translate-x-full');
+              const overlay = document.getElementById('sidebar-overlay');
+              if (overlay) {
+                  overlay.classList.toggle('hidden');
+              }
+          });
+
+          const desktopSidebarToggle = document.createElement('button');
+          desktopSidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+          desktopSidebarToggle.className = 'hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 bg-accent-indigo text-white p-2 rounded-full shadow-lg focus:outline-none transition-all duration-300 hover:scale-110';
+          sidebar.appendChild(desktopSidebarToggle);
+          desktopSidebarToggle.addEventListener('click', () => {
+              sidebar.classList.toggle('collapsed');
+              contentArea.classList.toggle('collapsed');
+              desktopSidebarToggle.querySelector('i').classList.toggle('fa-chevron-right');
+              desktopSidebarToggle.querySelector('i').classList.toggle('fa-chevron-left');
+              document.querySelectorAll('.submenu').forEach(submenu => {
+                  submenu.classList.remove('active');
+                  submenu.style.maxHeight = '0';
+              });
+              if (typeof initCharts === 'function') {
+                  setTimeout(initCharts, 300);
+              }
+          });
+
+          function setSidebarInitialState() {
+              if (window.innerWidth < 1024) {
+                  sidebar.classList.add('-translate-x-full');
+                  contentArea.classList.add('ml-0');
+                  contentArea.classList.remove('ml-64');
+                  desktopSidebarToggle.classList.add('hidden');
+                  if (!document.getElementById('sidebar-overlay')) {
+                      const overlay = document.createElement('div');
+                      overlay.id = 'sidebar-overlay';
+                      overlay.className = 'fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden lg:hidden';
+                      document.body.appendChild(overlay);
+                      overlay.addEventListener('click', () => {
+                          sidebar.classList.add('-translate-x-full');
+                          overlay.classList.add('hidden');
+                      });
+                  }
+              } else {
+                  sidebar.classList.remove('-translate-x-full');
+                  contentArea.classList.remove('ml-0');
+                  contentArea.classList.add('ml-64');
+                  desktopSidebarToggle.classList.remove('hidden');
+                  const overlay = document.getElementById('sidebar-overlay');
+                  if (overlay) {
+                      overlay.remove();
+                  }
+              }
+          }
+          setSidebarInitialState();
+          window.addEventListener('resize', setSidebarInitialState);
+
+          function toggleDropdown(button, dropdown) {
+              const isHidden = dropdown.classList.contains('hidden');
+              document.querySelectorAll('[id$="Dropdown"]').forEach(dd => {
+                  if (dd !== dropdown && !dd.classList.contains('hidden')) {
+                      dd.classList.add('hidden', 'scale-95', 'opacity-0');
+                      dd.classList.remove('scale-100', 'opacity-100');
+                  }
+              });
+              if (isHidden) {
+                  dropdown.classList.remove('hidden', 'scale-95', 'opacity-0');
+                  dropdown.classList.add('scale-100', 'opacity-100');
+              } else {
+                  dropdown.classList.add('hidden', 'scale-95', 'opacity-0');
+                  dropdown.classList.remove('scale-100', 'opacity-100');
+              }
+          }
+          profileBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              toggleDropdown(profileBtn, profileDropdown);
+          });
+          notificationBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              toggleDropdown(notificationBtn, notificationDropdown);
+          });
+          document.addEventListener('click', (e) => {
+              if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+                  profileDropdown.classList.add('hidden', 'scale-95', 'opacity-0');
+                  profileDropdown.classList.remove('scale-100', 'opacity-100');
+              }
+              if (!notificationDropdown.contains(e.target) && !notificationBtn.contains(e.target)) {
+                  notificationDropdown.classList.add('hidden', 'scale-95', 'opacity-0');
+                  notificationDropdown.classList.remove('scale-100', 'opacity-100');
+              }
+          });
+
+          function toggleSubmenu(menuItem) {
+              const submenu = menuItem.querySelector('.submenu');
+              const isActive = submenu.classList.contains('active');
+              document.querySelectorAll('.has-submenu .submenu').forEach(sm => {
+                  if (sm !== submenu) {
+                      sm.classList.remove('active');
+                      sm.style.maxHeight = '0';
+                  }
+              });
+              if (!isActive) {
+                  submenu.classList.add('active');
+                  submenu.style.maxHeight = submenu.scrollHeight + 'px';
+              } else {
+                  submenu.classList.remove('active');
+                  submenu.style.maxHeight = '0';
+              }
+          }
+
+          document.querySelectorAll('.has-submenu > a').forEach(menu => {
+              menu.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  toggleSubmenu(menu.parentElement);
+              });
+              menu.addEventListener('mouseenter', () => {
+                  const submenu = menu.parentElement.querySelector('.submenu');
+                  document.querySelectorAll('.has-submenu .submenu').forEach(sm => {
+                      if (sm !== submenu) {
+                          sm.classList.remove('active');
+                          sm.style.maxHeight = '0';
+                      }
+                  });
+                  submenu.classList.add('active');
+                  submenu.style.maxHeight = submenu.scrollHeight + 'px';
+              });
+              menu.parentElement.addEventListener('mouseleave', () => {
+                  const submenu = menu.parentElement.querySelector('.submenu');
+                  if (!submenu.classList.contains('active') || !menu.parentElement.classList.contains('has-submenu')) {
+                      submenu.style.maxHeight = '0';
+                  }
+              });
+          });
+
+          document.querySelectorAll('.has-submenu').forEach(menu => {
+              const submenu = menu.querySelector('.submenu');
+              if (submenu && submenu.classList.contains('active')) {
+                  submenu.style.maxHeight = submenu.scrollHeight + 'px';
+              }
+          });
+      });
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

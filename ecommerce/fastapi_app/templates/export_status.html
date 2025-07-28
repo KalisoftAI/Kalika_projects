@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Export Status{% endblock %}
+
+{% block content %}
+<div class="card-glass mt-4 p-6 rounded-xl">
+    <div class="card-header bg-secondary-dark text-white p-4 rounded-t-lg -mx-6 -mt-6 mb-6">
+        <h5 class="text-xl font-semibold">Export Status</h5>
+    </div>
+    <div class="card-body">
+        <div id="alertContainer" class="mt-4"></div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-transparent border-collapse">
+                <thead class="bg-gray-700 text-white">
+                    <tr>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Task Name</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Information</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Admin Name</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Start Time</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Task Type</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Thread</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+                        <th class="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="exportStatusTableBody" class="divide-y divide-gray-600">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer');
+        if (alertContainer) {
+            alertContainer.innerHTML = `
+                <div class="p-3 mb-4 rounded-md text-sm ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                    ${message}
+                </div>
+            `;
+            alertContainer.classList.remove('hidden');
+            setTimeout(() => {
+                alertContainer.classList.add('hidden');
+                alertContainer.innerHTML = '';
+            }, 5000);
+        }
+    }
+
+    async function fetchExportStatus() {
+        try {
+            const response = await fetch('/admin/admin/api/export-status');
+            const jobs = await response.json();
+            const tableBody = document.getElementById('exportStatusTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            jobs.forEach(job => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-700/50 transition-colors duration-200';
+
+                let actionHtml = 'Waiting';
+                if (job.status === 'Success') {
+                    actionHtml = `<a href="${job.download_url}" class="text-accent-indigo hover:underline" download>Download</a>`;
+                }
+
+                row.innerHTML = `
+                    <td class="py-3 px-4 text-sm text-text-primary">${job.task_name}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary">${job.information}</td>
+                    <td class="py-3 px-4 text-sm text-text-primary">${job.admin_name}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary">${new Date(job.start_time).toLocaleString()}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary">${job.task_type}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary">${job.thread}</td>
+                    <td class="py-3 px-4 text-sm text-text-primary">${job.status_message}</td>
+                    <td class="py-3 px-4 text-sm">${actionHtml}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error fetching export status:', error);
+            showAlert('Failed to fetch export status.', 'error');
+        }
+    }
+
+    // Fetch status every 5 seconds
+    setInterval(fetchExportStatus, 5000);
+
+    // Initial fetch on page load
+    document.addEventListener('DOMContentLoaded', fetchExportStatus);
+</script>
+{% endblock %}

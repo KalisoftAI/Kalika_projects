@@ -1,0 +1,74 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}{{ main_category }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Subcategories Section -->
+    <section class="mb-12">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Explore {{ main_category }}</h2>
+            <p class="text-gray-600 mb-6">Discover subcategories and products in {{ main_category }}.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {% for subcategory in categories.main_category.subcategories %}
+                    <a href="{% url 'catalog:products_by_subcategory' main_category_name=main_category sub_category_name=subcategory.name %}" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition duration-300 text-center text-blue-600 font-semibold">
+                        {{ subcategory.name }} <span class="text-gray-500">({{ subcategory.product_count|default:0 }})</span>
+                    </a>
+                {% empty %}
+                    <p class="text-gray-600 col-span-full text-center">No subcategories available.</p>
+                {% endfor %}
+            </div>
+            <a href="{% url 'catalog:all_categories' %}" class="inline-block mt-6 text-blue-600 hover:underline font-semibold">← Back to All Categories</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section>
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">All Products in {{ main_category }}</h2>
+            {% if products %}
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {% for product in products %}
+                        <div class="bg-gray-50 rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300">
+                            {% if product.s3_image_url %}
+                                <img src="{{ product.s3_image_url }}" alt="{{ product.product_title }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                            {% else %}
+                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-lg mb-4">
+                                    <span class="text-gray-500">No Image</span>
+                                </div>
+                            {% endif %}
+                            <h3 class="text-lg font-semibold text-gray-800 truncate">{{ product.product_title|truncatechars:35 }}</h3>
+                            <p class="text-gray-600 mt-2 font-bold">₹{{ product.price|floatformat:2 }}</p>
+                            <form action="{% url 'cart:add_to_cart' item_id=product.item_id %}" method="post" class="mt-4">
+                                {% csrf_token %}
+                                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300">Add to Cart</button>
+                            </form>
+                            <a href="{% url 'catalog:product_detail' item_id=product.item_id %}" class="block mt-2 text-blue-600 hover:underline text-center">View Details</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-8">
+                    <h3 class="text-xl font-semibold text-gray-800">No Products Found</h3>
+                    <p class="text-gray-600 mt-2">There are currently no products available in the "{{ main_category }}" category.</p>
+                    <a href="{% url 'catalog:home' %}" class="inline-block mt-4 text-blue-600 hover:underline">Explore Other Categories</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Promotional Banner (Inspired by home.html) -->
+    {% if products %}
+        <section class="mt-12">
+            <div class="bg-blue-600 text-white rounded-lg p-8 flex flex-col md:flex-row items-center justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold">Special Offer in {{ main_category }}!</h3>
+                    <p class="mt-2">Shop now for exclusive discounts on select items.</p>
+                </div>
+                <a href="{% url 'catalog:products_by_category' main_category_name=main_category %}" class="mt-4 md:mt-0 bg-white text-blue-600 py-2 px-6 rounded-lg hover:bg-gray-100 transition duration-300">Explore Deals</a>
+            </div>
+        </section>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom Tailwind Configuration (for colors and fonts) */
+    :root {
+        --color-primary-dark: #1A202C; /* Charcoal */
+        --color-secondary-dark: #2D3748; /* Deep Navy */
+        --color-accent-emerald: #10B981; /* Emerald */
+        --color-accent-indigo: #6366F1; /* Soft Indigo */
+        --color-accent-sky: #0EA5E9; /* Sky Blue */
+        --color-bg-light: #F8F9FA; /* Soft white */
+        --color-text-dark: #2D3748; /* Dark gray */
+        --color-text-light: #E2E8F0; /* Light gray for dark backgrounds */
+        --color-card-bg-light: #FFFFFF;
+        --color-card-bg-dark: #2D3748;
+        --color-border-light: #E2E8F0;
+        --color-border-dark: #4A5568;
+    }
+
+    body {
+      background-color: var(--color-bg-light); /* Light Gray */
+      font-family: 'Inter', sans-serif;
+      color: var(--color-text-dark);
+    }
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Use min-height for better responsiveness */
+      padding: 20px; /* Add some padding for mobile */
+    }
+    .login-box {
+      background-color: var(--color-card-bg-light);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 100%; /* Full width on small screens */
+      max-width: 400px; /* Max width for larger screens */
+      transition: all 0.3s ease; /* Smooth transitions for hover/focus */
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--color-secondary-dark); /* Dark Blue */
+      font-family: 'Poppins', sans-serif; /* Use Poppins for headings */
+      font-weight: 600;
+    }
+    .form-control {
+      border-radius: 5px;
+      border: 1px solid var(--color-border-light);
+      padding: 10px 12px;
+      width: 100%;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-dark);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-accent-indigo);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); /* Soft indigo shadow */
+    }
+    .btn-primary {
+      background-color: var(--color-accent-indigo);
+      border-color: var(--color-accent-indigo);
+      width: 100%;
+      border-radius: 5px;
+      padding: 10px 15px;
+      color: white;
+      font-weight: 500;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+    .btn-primary:hover {
+      background-color: #5356D2; /* Darker Indigo */
+      border-color: #5356D2;
+      transform: translateY(-1px); /* Slight lift on hover */
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    .flash-message {
+      background-color: #FEE2E2; /* Red-100 */
+      color: #EF4444; /* Red-500 */
+      border: 1px solid #FCA5A5; /* Red-300 */
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.875rem; /* sm */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Admin Login</h2>
+
+      <!-- Flash Messages -->
+      {% if flash_messages %}
+        <div class="flash-message">
+          <ul>
+            {% for message in flash_messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <!-- Login Form -->
+      <form method="POST" action="/admin/login">
+        <div class="mb-3">
+          <label for="username" class="block text-text-primary text-sm font-bold mb-2">Username</label>
+          <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-text-primary text-sm font-bold mb-2">Password</label>
+          <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Note: Bootstrap JS is not strictly needed for this login page as it's simple HTML/CSS.
+       If you plan to add Bootstrap components here, include its CDN. -->
+</body>
+</html>

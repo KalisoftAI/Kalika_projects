@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 w-full">
+    <div class="card-glass p-6 rounded-xl">
+        <h4 class="text-xl font-semibold mb-4 text-text-primary">Sales Trends (Monthly)</h4>
+        <div class="chart-container">
+            <canvas id="salesTrendsChart"></canvas>
+        </div>
+    </div>
+    <div class="card-glass p-6 rounded-xl">
+        <h4 class="text-xl font-semibold mb-4 text-text-primary">User Registration Growth</h4>
+        <div class="chart-container">
+            <canvas id="userGrowthChart"></canvas>
+        </div>
+    </div>
+    <div class="card-glass p-6 rounded-xl lg:col-span-2">
+        <h4 class="text-xl font-semibold mb-4 text-text-primary">Product Categories Distribution</h4>
+        <div class="chart-container max-w-xl mx-auto">
+            <canvas id="productCategoriesChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let salesTrendsChart, userGrowthChart, productCategoriesChart;
+
+    function initAnalyticsCharts() {
+        // Destroy existing charts if they exist
+        if (salesTrendsChart) salesTrendsChart.destroy();
+        if (userGrowthChart) userGrowthChart.destroy();
+        if (productCategoriesChart) productCategoriesChart.destroy();
+
+        const htmlElement = document.documentElement;
+        const chartTextColor = getComputedStyle(htmlElement).getPropertyValue('--chart-text-color');
+        const chartGridColor = getComputedStyle(htmlElement).getPropertyValue('--chart-grid-color');
+        const accentIndigo = getComputedStyle(htmlElement).getPropertyValue('--color-accent-indigo');
+        const accentEmerald = getComputedStyle(htmlElement).getPropertyValue('--color-accent-emerald');
+        const accentSky = getComputedStyle(htmlElement).getPropertyValue('--color-accent-sky');
+        const orange500 = 'rgb(255, 159, 64)';
+        const red500 = 'rgb(239, 68, 68)';
+        const purple = 'rgb(153, 102, 255)';
+
+        // Sales Trends Chart (Line Chart)
+        const salesCtx = document.getElementById('salesTrendsChart').getContext('2d');
+        salesTrendsChart = new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Revenue ($)',
+                    data: [7500, 6800, 9200, 8800, 7000, 7800, 8500], // Example data
+                    borderColor: accentIndigo,
+                    backgroundColor: accentIndigo + '33',
+                    tension: 0.3,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: chartTextColor, font: { family: 'Inter' } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + context.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
+                        grid: { color: chartGridColor, drawBorder: false }
+                    },
+                    x: {
+                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
+                        grid: { color: chartGridColor, drawBorder: false }
+                    }
+                }
+            }
+        });
+
+        // User Registration Growth (Bar Chart)
+        const userCtx = document.getElementById('userGrowthChart').getContext('2d');
+        userGrowthChart = new Chart(userCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'New Users',
+                    data: [50, 75, 60, 90], // Example data
+                    backgroundColor: accentEmerald,
+                    borderRadius: 5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: chartTextColor, font: { family: 'Inter' } }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
+                        grid: { color: chartGridColor, drawBorder: false }
+                    },
+                    x: {
+                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
+                        grid: { color: chartGridColor, drawBorder: false }
+                    }
+                }
+            }
+        });
+
+        // Product Categories Distribution (Pie Chart) - Dynamic data from backend
+        // Ensure category_data is passed from the backend
+        const categoryData = JSON.parse('{{ category_data | tojson }}');
+        
+        const labels = categoryData.map(item => item.category);
+        const counts = categoryData.map(item => item.count);
+
+        const categoryCtx = document.getElementById('productCategoriesChart').getContext('2d');
+        productCategoriesChart = new Chart(categoryCtx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: [
+                        accentIndigo,
+                        accentEmerald,
+                        accentSky,
+                        orange500,
+                        red500,
+                        purple
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: chartTextColor, font: { family: 'Inter' } }
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize charts when the DOM is ready and after theme changes
+    document.addEventListener('DOMContentLoaded', initAnalyticsCharts);
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initAnalyticsCharts, 250);
+    });
+</script>
+{% endblock %}

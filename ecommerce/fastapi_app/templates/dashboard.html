@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 w-full">
+    <!-- Total Sales Card -->
+    <div class="card-glass p-6 rounded-xl flex items-center justify-between">
+        <div>
+            <p class="text-text-secondary text-sm mb-1">Total Sales</p>
+            <h3 class="text-3xl font-bold text-accent-indigo">${{ "%.2f"|format(total_sales) }}</h3>
+            <p class="text-text-secondary text-xs mt-1"><span class="text-accent-emerald"><i class="fas fa-arrow-up mr-1"></i>12%</span> last month</p> {# Placeholder for trend #}
+        </div>
+        <div class="text-accent-indigo text-4xl opacity-70">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+    </div>
+
+    <!-- Total Products Card -->
+    <div class="card-glass p-6 rounded-xl flex items-center justify-between">
+        <div>
+            <p class="text-text-secondary text-sm mb-1">Total Products</p>
+            <h3 class="text-3xl font-bold text-accent-emerald">{{ total_products }}</h3>
+            <p class="text-text-secondary text-xs mt-1"><span class="text-red-500"><i class="fas fa-arrow-down mr-1"></i>3%</span> low stock</p> {# Placeholder for trend #}
+        </div>
+        <div class="text-accent-emerald text-4xl opacity-70">
+            <i class="fas fa-boxes"></i>
+        </div>
+    </div>
+
+    <!-- Total Users Card -->
+    <div class="card-glass p-6 rounded-xl flex items-center justify-between">
+        <div>
+            <p class="text-text-secondary text-sm mb-1">Total Users</p>
+            <h3 class="text-3xl font-bold text-accent-sky">{{ total_users }}</h3>
+            <p class="text-text-secondary text-xs mt-1"><span class="text-accent-emerald"><i class="fas fa-arrow-up mr-1"></i>8%</span> this week</p> {# Placeholder for trend #}
+        </div>
+        <div class="text-accent-sky text-4xl opacity-70">
+            <i class="fas fa-user-plus"></i>
+        </div>
+    </div>
+
+    <!-- Pending Orders Card -->
+    <div class="card-glass p-6 rounded-xl flex items-center justify-between">
+        <div>
+            <p class="text-text-secondary text-sm mb-1">Pending Orders</p>
+            <h3 class="text-3xl font-bold text-orange-500">{{ pending_orders_count }}</h3>
+            <p class="text-text-secondary text-xs mt-1"><span class="text-red-500"><i class="fas fa-exclamation-triangle mr-1"></i>Urgent</span> attention needed</p> {# Placeholder for trend #}
+        </div>
+        <div class="text-orange-500 text-4xl opacity-70">
+            <i class="fas fa-hourglass-half"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 w-full">
+    <div class="card-glass p-6 rounded-xl">
+        <h4 class="text-xl font-semibold mb-4 text-text-primary">Sales Overview</h4>
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+    <div class="card-glass p-6 rounded-xl">
+        <h4 class="text-xl font-semibold mb-4 text-text-primary">User Registrations</h4>
+        <div class="chart-container">
+            <canvas id="usersChart"></canvas>
+        </div>
+    </div>
+    <div class="card-glass p-6 rounded-xl lg:col-span-2">
+        <h4 class="text-xl font-semibold mb-4 text-text-primary">Product Categories</h4>
+        <div class="chart-container max-w-xl mx-auto">
+            <canvas id="categoriesChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Orders Table -->
+<div class="card-glass p-6 rounded-xl overflow-x-auto w-full">
+    <h4 class="text-xl font-semibold mb-4 text-text-primary">Recent Orders</h4>
+    <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0 md:space-x-4">
+        <input type="text" id="recentOrdersSearch" placeholder="Search orders..." class="flex-grow bg-bg-primary text-text-primary rounded-lg py-2 px-4 border border-border-color focus:outline-none focus:ring-2 focus:ring-accent-indigo transition-all duration-200">
+        <div class="flex items-center space-x-2">
+            <label for="recentOrdersRowsPerPage" class="text-text-secondary">Rows per page:</label>
+            <select id="recentOrdersRowsPerPage" class="bg-bg-primary text-text-primary rounded-lg py-2 px-4 border border-border-color focus:outline-none focus:ring-2 focus:ring-accent-indigo transition-all duration-200">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+    </div>
+    <table id="recentOrdersTable" class="min-w-full data-table rounded-lg overflow-hidden"> {# Added unique ID #}
+        <thead>
+            <tr>
+                <th class="py-3 px-4 text-left font-medium">Order ID</th>
+                <th class="py-3 px-4 text-left font-medium">Customer</th>
+                <th class="py-3 px-4 text-left font-medium">Status</th>
+                <th class="py-3 px-4 text-left font-medium">Date</th>
+                <th class="py-3 px-4 text-left font-medium">Total</th>
+                <th class="py-3 px-4 text-left font-medium">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in recent_orders %} {# Loop through dynamic recent_orders #}
+            <tr>
+                <td class="py-3 px-4">#{{ order.order_id }}</td>
+                <td class="py-3 px-4">{{ order.customer_name }}</td>
+                <td class="py-3 px-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold
+                        {% if order.status == 'Completed' %}bg-accent-emerald/20 text-accent-emerald
+                        {% elif order.status == 'Pending' %}bg-orange-500/20 text-orange-500
+                        {% else %}bg-red-500/20 text-red-500{% endif %}">
+                        {{ order.status|title }}
+                    </span>
+                </td>
+                <td class="py-3 px-4">{{ order.order_date.strftime('%Y-%m-%d') }}</td>
+                <td class="py-3 px-4">${{ "%.2f"|format(order.total_amount) }}</td>
+                <td class="py-3 px-4">
+                    <button class="bg-accent-indigo text-white px-3 py-1 rounded-md text-sm hover:bg-accent-indigo/80 transition-colors duration-200">View</button>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="py-3 px-4 text-center text-text-secondary">No recent orders found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="flex justify-end items-center mt-4 space-x-2 text-text-secondary">
+        {# DataTables will handle pagination, so these buttons are illustrative or can be replaced by DataTables' own pagination controls #}
+        <button class="px-3 py-1 rounded-md bg-secondary-dark text-header-text hover:bg-sidebar-hover-bg transition-colors duration-200 focus:outline-none">Previous</button>
+        <span class="px-3 py-1 rounded-md bg-accent-indigo text-white">1</span>
+        <button class="px-3 py-1 rounded-md bg-secondary-dark text-header-text hover:bg-sidebar-hover-bg transition-colors duration-200 focus:outline-none">2</button>
+        <button class="px-3 py-1 rounded-md bg-secondary-dark text-header-text hover:bg-sidebar-hover-bg transition-colors duration-200 focus:outline-none">Next</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Chart.js Initialization for Dashboard
+    let salesChart, usersChart, categoriesChart;
+
+    function initCharts() {
+        // Destroy existing charts if they exist to prevent duplicates on re-render
+        if (salesChart) salesChart.destroy();
+        if (usersChart) usersChart.destroy();
+        if (categoriesChart) categoriesChart.destroy();
+
+        // Get computed styles for dynamic chart colors
+        const htmlElement = document.documentElement;
+        const chartTextColor = getComputedStyle(htmlElement).getPropertyValue('--chart-text-color');
+        const chartGridColor = getComputedStyle(htmlElement).getPropertyValue('--chart-grid-color');
+        const accentIndigo = getComputedStyle(htmlElement).getPropertyValue('--color-accent-indigo');
+        const accentEmerald = getComputedStyle(htmlElement).getPropertyValue('--color-accent-emerald');
+        const accentSky = getComputedStyle(htmlElement).getPropertyValue('--color-accent-sky');
+
+        // Sales Chart (Line Chart) - Placeholder data for now
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        salesChart = new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Monthly Sales ($)',
+                    data: [6500, 5900, 8000, 8100, 5600, 5500, 4000], // Example data
+                    borderColor: accentIndigo,
+                    backgroundColor: accentIndigo + '33', /* 20% opacity */
+                    tension: 0.3,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + context.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
+                    }
+                }
+            }
+        });
+
+        // Users Chart (Bar Chart) - Placeholder data for now
+        const usersCtx = document.getElementById('usersChart').getContext('2d');
+        usersChart = new Chart(usersCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'New Users',
+                    data: [120, 150, 90, 180, 200, 100, 70], // Example data
+                    backgroundColor: accentEmerald,
+                    borderRadius: 5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
+                    }
+                }
+            }
+        });
+
+        // Categories Chart (Pie Chart) - Dynamic data
+        const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
+        categoriesChart = new Chart(categoriesCtx, {
+            type: 'pie',
+            data: {
+                labels: [
+                    {% for item in category_data %}'{{ item.category }}'{% if not loop.last %},{% endif %}{% endfor %}
+                ],
+                datasets: [{
+                    data: [
+                        {% for item in category_data %}{{ item.count }}{% if not loop.last %},{% endif %}{% endfor %}
+                    ],
+                    backgroundColor: [
+                        accentIndigo,
+                        accentEmerald,
+                        accentSky,
+                        'rgb(251, 191, 36)', // yellow-500
+                        'rgb(239, 68, 68)', // red-500
+                        'rgb(153, 102, 255)' // purple
+                    ],
+                    hoverOffset:4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize charts when the DOM is ready and also after theme changes
+    document.addEventListener('DOMContentLoaded', initCharts);
+
+    // Re-initialize charts on window resize with a debounce for performance
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initCharts, 250);
+    });
+
+    // DataTables initialization for Recent Orders table
+    $(document).ready(function() {
+        // Destroy existing DataTable instance if it exists before re-initializing
+        if ($.fn.DataTable.isDataTable('#recentOrdersTable')) {
+            $('#recentOrdersTable').DataTable().destroy();
+        }
+        const recentOrdersTable = $('#recentOrdersTable').DataTable({
+            "paging": true,
+            "searching": true,
+            "info": false,
+            "lengthChange": false, // Hide "Show X entries" dropdown
+            "pageLength": 5, // Default rows per page
+            "dom": 'rtip', // Only show table, pagination, info (search and length hidden by custom elements)
+            "language": {
+                "paginate": {
+                    "previous": "Previous",
+                    "next": "Next"
+                }
+            }
+        });
+
+        // Custom search input
+        $('#recentOrdersSearch').on('keyup', function() {
+            recentOrdersTable.search(this.value).draw();
+        });
+
+        // Custom rows per page select
+        $('#recentOrdersRowsPerPage').on('change', function() {
+            recentOrdersTable.page.len(this.value).draw();
+        });
+    });
+</script>
+{% endblock %}
