@@ -1,0 +1,673 @@
+{% extends 'base.html' %}
+
+{% block title %}Advance Edit Product{% endblock %}
+
+{% block content %}
+<div class="card-glass mt-4 p-6 rounded-xl">
+    <div class="card-header bg-secondary-dark text-white p-4 rounded-t-lg -mx-6 -mt-6 mb-6">
+        <h5 class="text-xl font-semibold">Advance Product Edit</h5>
+    </div>
+    <div class="card-body">
+        <div id="alertContainer" class="mt-4"></div>
+
+        <div class="mb-6">
+            <button id="productionDataBtn" class="px-6 py-2 rounded-md bg-accent-indigo text-white hover:bg-accent-indigo/80 transition-colors duration-200 mr-2">Production Data</button>
+            <button id="propertiesBtn" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Properties</button>
+        </div>
+
+        <div id="productionDataSection">
+            <h6 class="text-lg font-semibold mb-4 text-text-primary">Production Data</h6>
+            <form id="productionDataForm" onsubmit="event.preventDefault(); submitProductionData();">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="prodItemCode" class="block text-sm font-medium text-text-secondary mb-1">Item Code</label>
+                        <input type="text" id="prodItemCode" name="prodItemCode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" readonly>
+                    </div>
+                    <div>
+                        <label for="workflowState" class="block text-sm font-medium text-text-secondary mb-1">Workflow State (Status)</label>
+                        <select id="workflowState" name="workflowState" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                            <option value="New">New</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Archived">Archived</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="prodBarcode" class="block text-sm font-medium text-text-secondary mb-1">UNSPSC Code</label>
+                    <input type="text" id="prodBarcode" name="prodBarcode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                </div>
+
+                <div class="mb-6">
+                    <label for="largeImage" class="block text-sm font-medium text-text-secondary mb-1">Large Image</label>
+                    <input type="file" id="largeImage" name="largeImage" accept="image/*" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" onchange="previewImage(event, 'largeImagePreview', 'largeImagePathText')">
+                    <div id="largeImagePreviewContainer" class="mt-2 hidden">
+                        <img id="largeImagePreview" src="#" alt="Large Image Preview" class="max-w-md h-auto rounded-md shadow-md">
+                        <span id="largeImagePathText" class="text-sm text-gray-500 hidden mt-1"></span>
+                        <button type="button" onclick="removeImage('largeImage', 'largeImagePreview', 'largeImagePathText')" class="text-red-500 hover:text-red-700 text-sm mt-1">Remove Image</button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-text-secondary">First &lt; Previous 1 Next &gt; Last</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-bg-primary rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-secondary-dark text-white text-left">
+                            <th class="py-2 px-4 border-b border-border-color">List Price</th>
+                            <th class="py-2 px-4 border-b border-border-color">Price</th>
+                            <th class="py-2 px-4 border-b border-border-color">Map</th>
+                            <th class="py-2 px-4 border-b border-border-color">Setup Charge</th>
+                            <th class="py-2 px-4 border-b border-border-color">Currency</th>
+                            <th class="py-2 px-4 border-b border-border-color">Points</th>
+                            <th class="py-2 px-4 border-b border-border-color">Shopper Group</th>
+                            <th class="py-2 px-4 border-b border-border-color">Offer Code</th>
+                            <th class="py-2 px-4 border-b border-border-color">Priority</th>
+                            <th class="py-2 px-4 border-b border-border-color">Default</th>
+                            <th class="py-2 px-4 border-b border-border-color">On Sale</th>
+                            <th class="py-2 px-4 border-b border-border-color">Start</th>
+                            <th class="py-2 px-4 border-b border-border-color">End</th>
+                            <th class="py-2 px-4 border-b border-border-color">Dist Code</th>
+                            <th class="py-2 px-4 border-b border-border-color">Cost</th>
+                            <th class="py-2 px-4 border-b border-border-color">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="priceTableBody">
+                        {# This row will be dynamically populated by JavaScript #}
+                    </tbody>
+                </table>
+            </div>
+                <div class="flex justify-end gap-3">
+                    <button type="submit" class="px-6 py-2 rounded-md bg-accent-indigo text-white hover:bg-accent-indigo/80 transition-colors duration-200">Save Production Data</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="propertiesSection" class="hidden">
+            <h6 class="text-lg font-semibold mb-4 text-text-primary">Properties</h6>
+            <form id="propertiesForm" onsubmit="event.preventDefault(); submitPropertiesData();">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="propItemCode" class="block text-sm font-medium text-text-secondary mb-1">Item Code</label>
+                        <input type="text" id="propItemCode" name="propItemCode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" readonly>
+                    </div>
+                    <div>
+                        <label for="propUpc" class="block text-sm font-medium text-text-secondary mb-1">UNSPSC Code</label>
+                        <input type="text" id="propUpc" name="propUpc" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="propUnitOfMeasure" class="block text-sm font-medium text-text-secondary mb-1">Unit of Measurement</label>
+                    <select id="propUnitOfMeasure" name="propUnitOfMeasure" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                        <option value="">Select Unit</option>
+                        <option value="EA">EA (Each)</option>
+                        <option value="MTR">MTR (Meter)</option>
+                        <option value="LTR">LTR (Liter)</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" onclick="showSection('production')" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Back</button>
+                    <button type="submit" class="px-6 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors duration-200">Update Properties</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="onSaleModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-sm w-full text-text-primary animate-scale-in">
+        <h4 class="text-xl font-semibold mb-4 text-center">Set On Sale Price</h4>
+        <div class="mb-4">
+            <label for="onSalePrice" class="block text-sm font-medium text-text-secondary mb-1">Price:</label>
+            <input type="number" id="onSalePrice" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" placeholder="Enter sale price">
+        </div>
+        <div class="flex justify-end gap-3">
+            <button type="button" onclick="closeOnSaleModal()" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Cancel</button>
+            <button type="button" onclick="submitOnSalePrice()" class="px-6 py-2 rounded-md bg-accent-indigo text-white hover:bg-accent-indigo/80 transition-colors duration-200">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div id="propertyEditModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-md w-full text-text-primary animate-scale-in">
+        <h4 class="text-xl font-semibold mb-4 text-center">Edit Property Details</h4>
+        <form id="propertyEditForm" onsubmit="event.preventDefault(); submitPropertyEdit();">
+            <div class="mb-4">
+                <label for="editItemCode" class="block text-sm font-medium text-text-secondary mb-1">Item Code</label>
+                <input type="text" id="editItemCode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary" readonly>
+            </div>
+            <div class="mb-4">
+                <label for="editListPrice" class="block text-sm font-medium text-text-secondary mb-1">List Price (MSRP)</label>
+                <input type="number" id="editListPrice" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+            </div>
+            <div class="mb-4">
+                <label for="editItemPrice" class="block text-sm font-medium text-text-secondary mb-1">Item Price</label>
+                <input type="number" id="editItemPrice" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+            </div>
+            <div class="mb-4">
+                <label for="editCurrency" class="block text-sm font-medium text-text-secondary mb-1">Limit to Currency</label>
+                <select id="editCurrency" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                    <option value="INR">INR [ Indian Rupees ]</option>
+                    <option value="USD">USD [ United States Dollar ]</option>
+                    </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-text-secondary mb-1">Use as Default</label>
+                <div class="flex items-center space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="useAsDefault" value="Yes" class="form-radio text-accent-indigo">
+                        <span class="ml-2">Yes</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="useAsDefault" value="No" class="form-radio text-accent-indigo">
+                        <span class="ml-2">No</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" onclick="closePropertyEditModal()" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Back</button>
+                <button type="submit" class="px-6 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors duration-200">Update</button>
+                <button type="button" onclick="advanceEditFromPropertyModal()" class="px-6 py-2 rounded-md bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-200">Advance</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Initial setup to show Production Data section
+        showSection('production');
+
+        // Event Listeners for section buttons
+        document.getElementById('productionDataBtn').addEventListener('click', () => showSection('production'));
+        document.getElementById('propertiesBtn').addEventListener('click', () => showSection('properties'));
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemId = urlParams.get('item_id');
+
+        if (itemId) {
+            const product = await fetchProductDetails(itemId);
+            if (product) {
+                populateAdvanceEditForm(product);
+            } else {
+                showAlert(`Product not found with Item ID: ${itemId}`, 'error');
+            }
+        } else {
+            showAlert('No Item ID provided for advance editing.', 'error');
+            console.error('No Item ID found in URL for advance_edit.html');
+        }
+    });
+
+    function showSection(section) {
+        const productionDataSection = document.getElementById('productionDataSection');
+        const propertiesSection = document.getElementById('propertiesSection');
+        const productionDataBtn = document.getElementById('productionDataBtn');
+        const propertiesBtn = document.getElementById('propertiesBtn');
+
+        if (section === 'production') {
+            productionDataSection.classList.remove('hidden');
+            propertiesSection.classList.add('hidden');
+            productionDataBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
+            productionDataBtn.classList.add('bg-accent-indigo', 'hover:bg-accent-indigo/80');
+            propertiesBtn.classList.remove('bg-accent-indigo', 'hover:bg-accent-indigo/80');
+            propertiesBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
+        } else if (section === 'properties') {
+            productionDataSection.classList.add('hidden');
+            propertiesSection.classList.remove('hidden');
+            propertiesBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
+            propertiesBtn.classList.add('bg-accent-indigo', 'hover:bg-accent-indigo/80');
+            productionDataBtn.classList.remove('bg-accent-indigo', 'hover:bg-accent-indigo/80');
+            productionDataBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
+        }
+    }
+
+    // Fetches product details via POST to /api/product-details
+    async function fetchProductDetails(itemId) {
+        try {
+            const response = await fetch('/admin/api/product-details', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ item_id: itemId }) // Send item_id in the body
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const product = await response.json();
+            if (product.item_id) { // Check if a valid product was returned
+                return product;
+            } else {
+                return null; // Product not found
+            }
+        } catch (error) {
+            console.error('Error fetching product details:', error);
+            showAlert('Failed to load product details.', 'error');
+            return null;
+        }
+    }
+
+    function populateAdvanceEditForm(product) {
+        document.getElementById('prodItemCode').value = product.item_code || '';
+        document.getElementById('prodBarcode').value = product.upc || ''; // Use 'upc' from product data
+        document.getElementById('workflowState').value = product.status || 'New'; // Use 'status' from product data
+
+        // Populate properties section fields
+        document.getElementById('propItemCode').value = product.item_code || '';
+        document.getElementById('propUpc').value = product.upc || '';
+        
+        // Set the selected option for Unit of Measurement
+        const propUnitOfMeasureSelect = document.getElementById('propUnitOfMeasure');
+        if (propUnitOfMeasureSelect) {
+            propUnitOfMeasureSelect.value = product.unit_of_measure || '';
+        }
+
+        // Populate List Price and Price in the table dynamically
+        const priceTableBody = document.getElementById('priceTableBody');
+        priceTableBody.innerHTML = ''; // Clear existing rows
+
+        const newRow = document.createElement('tr');
+        newRow.className = 'hover:bg-bg-secondary';
+
+        // List Price
+        const listPriceCell = document.createElement('td');
+        listPriceCell.className = 'py-2 px-4 border-b border-border-color';
+        listPriceCell.textContent = (product.list_price !== null && product.list_price !== undefined) ? parseFloat(product.list_price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00';
+        newRow.appendChild(listPriceCell);
+
+        // Price
+        const priceCell = document.createElement('td');
+        priceCell.className = 'py-2 px-4 border-b border-border-color';
+        priceCell.textContent = (product.price !== null && product.price !== undefined) ? parseFloat(product.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00';
+        newRow.appendChild(priceCell);
+
+        // Other static cells (Map, Setup Charge, Currency, Points, Shopper Group, Offer Code, Priority, Default, On Sale, Start, End, Dist Code, Cost)
+        // These are currently not fetched from the backend, so they remain static placeholders.
+        const staticCellsData = [
+            '0.00', // Map
+            '0.00', // Setup Charge
+            'INR',  // Currency - You might want to make this dynamic if your product data includes currency
+            '0',    // Points
+            '1000', // Shopper Group
+            'Y',    // Offer Code
+            '1',    // Priority
+            'Yes',  // Default
+        ];
+
+        staticCellsData.forEach(data => {
+            const cell = document.createElement('td');
+            cell.className = 'py-2 px-4 border-b border-border-color';
+            cell.textContent = data;
+            newRow.appendChild(cell);
+        });
+
+        // On Sale dropdown
+        const onSaleCell = document.createElement('td');
+        onSaleCell.className = 'py-2 px-4 border-b border-border-color';
+        const onSaleSelect = document.createElement('select');
+        onSaleSelect.className = 'bg-bg-primary border border-border-color rounded px-2 py-1';
+        onSaleSelect.onchange = function() { handleOnSaleChange(this); };
+        onSaleSelect.innerHTML = `
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        `;
+        // Set selected value based on product data if available, otherwise default to 'No'
+        if (product.on_sale !== null && product.on_sale !== undefined) { // Assuming 'on_sale' field exists in product
+            onSaleSelect.value = product.on_sale ? 'Yes' : 'No';
+        } else {
+            onSaleSelect.value = 'No';
+        }
+        onSaleCell.appendChild(onSaleSelect);
+        newRow.appendChild(onSaleCell);
+
+        // Start and End Date Placeholders
+        const startDateCell = document.createElement('td');
+        startDateCell.className = 'py-2 px-4 border-b border-border-color';
+        startDateCell.textContent = 'N/A';
+        newRow.appendChild(startDateCell);
+
+        const endDateCell = document.createElement('td');
+        endDateCell.className = 'py-2 px-4 border-b border-border-color';
+        endDateCell.textContent = 'N/A';
+        newRow.appendChild(endDateCell);
+
+        // Dist Code and Cost Placeholders
+        const distCodeCell = document.createElement('td');
+        distCodeCell.className = 'py-2 px-4 border-b border-border-color';
+        distCodeCell.textContent = '0.00';
+        newRow.appendChild(distCodeCell);
+
+        const costCell = document.createElement('td');
+        costCell.className = 'py-2 px-4 border-b border-border-color';
+        costCell.textContent = '0.00';
+        newRow.appendChild(costCell);
+
+
+        // Edit button
+        const editCell = document.createElement('td');
+        editCell.className = 'py-2 px-4 border-b border-border-color';
+        const editButton = document.createElement('button');
+        editButton.className = 'px-3 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 text-sm';
+        editButton.textContent = 'Edit';
+        // Pass actual product data to the modal
+        editButton.onclick = function() {
+            openPropertyEditModal(
+                product.item_id, // Pass item_id for the modal
+                product.list_price !== null && product.list_price !== undefined ? product.list_price : 0.00,
+                product.price !== null && product.price !== undefined ? product.price : 0.00,
+                'INR', // Default currency, as it's not in product data from backend
+                true // Default 'Use as Default' to true, as it's not in product data
+            );
+        };
+        editCell.appendChild(editButton);
+        newRow.appendChild(editCell);
+
+        priceTableBody.appendChild(newRow);
+
+
+        const largeImagePreview = document.getElementById('largeImagePreview');
+        const largeImagePreviewContainer = document.getElementById('largeImagePreviewContainer');
+        const largeImagePathText = document.getElementById('largeImagePathText');
+
+        if (product.large_image) {
+            largeImagePreview.src = product.large_image;
+            largeImagePreviewContainer.classList.remove('hidden');
+            largeImagePathText.classList.add('hidden');
+
+            largeImagePreview.onerror = () => {
+                largeImagePreview.classList.add('hidden');
+                largeImagePathText.textContent = `Image Path: ${product.large_image}`;
+                largeImagePathText.classList.remove('hidden');
+            };
+            largeImagePreview.onload = () => {
+                largeImagePreview.classList.remove('hidden');
+                largeImagePathText.classList.add('hidden');
+            };
+        } else {
+            largeImagePreviewContainer.classList.add('hidden');
+            largeImagePathText.classList.add('hidden');
+            largeImagePreview.src = '#';
+        }
+    }
+
+    function previewImage(event, previewId, pathTextId) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const preview = document.getElementById(previewId);
+            const container = document.getElementById(previewId + 'Container');
+            const pathText = document.getElementById(pathTextId);
+
+            if (preview && container) {
+                preview.src = reader.result;
+                container.classList.remove('hidden');
+                pathText.classList.add('hidden'); // Hide path text when image is loaded
+
+                preview.onerror = () => {
+                    preview.classList.add('hidden');
+                    pathText.textContent = `Image Path: ${event.target.files[0].name}`; // Use file name as path
+                    pathText.classList.remove('hidden');
+                };
+                preview.onload = () => {
+                    preview.classList.remove('hidden');
+                    pathText.classList.add('hidden');
+                };
+            }
+        };
+        if (event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        } else {
+            document.getElementById(previewId + 'Container').classList.add('hidden');
+            document.getElementById(previewId).src = '#';
+            document.getElementById(pathTextId).classList.add('hidden');
+            document.getElementById(pathTextId).textContent = '';
+        }
+    }
+
+    function removeImage(inputId, previewId, pathTextId) {
+        document.getElementById(inputId).value = ''; // Clear file input
+        document.getElementById(previewId + 'Container').classList.add('hidden');
+        document.getElementById(previewId).src = '#';
+        document.getElementById(pathTextId).classList.add('hidden');
+        document.getElementById(pathTextId).textContent = '';
+        // You might need to send an API request to delete the image from the server if it's an existing one
+    }
+
+    async function submitProductionData() {
+        const form = document.getElementById('productionDataForm');
+        const formData = new FormData(); // Create new FormData to control what's sent
+        const itemId = new URLSearchParams(window.location.search).get('item_id'); // Get item_id from URL
+
+        // Append fields that are part of the main product update
+        formData.append('itemId', itemId);
+        formData.append('itemCode', document.getElementById('prodItemCode').value);
+        formData.append('barcode', document.getElementById('prodBarcode').value);
+        formData.append('status', document.getElementById('workflowState').value);
+
+        // For image upload, check if a new file is selected
+        const largeImageFile = document.getElementById('largeImage').files[0];
+        if (largeImageFile) {
+            formData.append('imageFile', largeImageFile);
+        } else {
+            // If no new file, but there was an existing image, we need to tell the backend to keep it.
+            // This assumes the backend's /products/update handles 'imageUrl' or fetches existing if 'imageFile' is empty.
+            // For now, we'll rely on the backend's logic to retain existing image if no new file is provided.
+            // If the backend requires explicit imageUrl, you'd fetch currentProductData and append its large_image.
+        }
+        
+        // Include other fields from the main product form that might be relevant for a full update
+        // These are examples; you should add all fields that can be updated via this form
+        // You'll need to fetch the full product data first to get all current values if you're not updating them.
+        // For simplicity in this example, we'll only send the fields explicitly present in this form.
+        // A more robust solution would fetch the full product data, update relevant fields, and then send the whole object.
+        const currentProduct = await fetchProductDetails(itemId);
+        if (currentProduct) {
+            formData.append('productName', currentProduct.product_title || '');
+            formData.append('productCategory', currentProduct.main_category || '');
+            formData.append('productSubCategory', currentProduct.sub_categories || '');
+            formData.append('productDescription', currentProduct.product_description || '');
+            formData.append('price', currentProduct.price || 0);
+            formData.append('listPrice', currentProduct.list_price || 0);
+            formData.append('inventory', currentProduct.inventory || 0);
+            formData.append('minOrderQty', currentProduct.min_order_qty || 0);
+            formData.append('available', currentProduct.available || '');
+            formData.append('leadTime', currentProduct.lead_time || '');
+            formData.append('length', currentProduct.length || '');
+            formData.append('materialType', currentProduct.material_type || '');
+            formData.append('sysNumImages', currentProduct.sys_num_images || '');
+            formData.append('sysProductType', currentProduct.sys_product_type || '');
+            formData.append('unitOfMeasure', currentProduct.unit_of_measure || '');
+            formData.append('unspsc', currentProduct.unspsc || '');
+            formData.append('brand', currentProduct.brand || '');
+            formData.append('department', currentProduct.department || '');
+            formData.append('type', currentProduct.type || '');
+            formData.append('tag', currentProduct.tag || '');
+            // If no new image file, send the existing image URL to retain it
+            if (!largeImageFile && currentProduct.large_image) {
+                formData.append('imageUrl', currentProduct.large_image);
+            }
+        }
+
+
+        try {
+            const response = await fetch(`/admin/products/update`, {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            if (response.ok) {
+                showAlert(result.message || 'Production data updated successfully!', 'success');
+                // Re-fetch product details to update the form with fresh data
+                const updatedProduct = await fetchProductDetails(itemId);
+                if (updatedProduct) {
+                    populateAdvanceEditForm(updatedProduct);
+                }
+            } else {
+                showAlert(result.message || result.detail || 'Failed to update production data.', 'error');
+            }
+        } catch (error) {
+            console.error('Error submitting production data:', error);
+            showAlert('An unexpected error occurred while updating production data.', 'error');
+        }
+    }
+
+    async function submitPropertiesData() {
+        const form = document.getElementById('propertiesForm');
+        const formData = new FormData(form);
+        const itemId = new URLSearchParams(window.location.search).get('item_id'); // Get item_id from URL
+
+        formData.append('item_id', itemId);
+        formData.append('upc', document.getElementById('propUpc').value); // Ensure correct field name
+        formData.append('unit_of_measure', document.getElementById('propUnitOfMeasure').value); // Ensure correct field name
+        // Assuming sys_num_images is not directly editable in this section,
+        // but if it were, you'd add it here. For now, we'll omit it as per the new schema.
+
+        try {
+            const response = await fetch(`/admin/products/update_properties`, {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            if (response.ok) {
+                showAlert(result.message || 'Properties updated successfully!', 'success');
+                // Re-fetch product details to update the form with fresh data
+                const updatedProduct = await fetchProductDetails(itemId);
+                if (updatedProduct) {
+                    populateAdvanceEditForm(updatedProduct);
+                }
+            } else {
+                showAlert(result.message || result.detail || 'Failed to update properties.', 'error');
+            }
+        } catch (error) {
+            console.error('Error submitting properties data:', error);
+            showAlert('An unexpected error occurred while updating properties.', 'error');
+        }
+    }
+
+
+    // On Sale Modal Logic
+    const onSaleModal = document.getElementById('onSaleModal');
+    let currentOnSaleSelectElement = null; // To keep track of which select triggered the modal
+
+    function handleOnSaleChange(selectElement) {
+        if (selectElement.value === 'Yes') {
+            currentOnSaleSelectElement = selectElement;
+            onSaleModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            document.getElementById('onSalePrice').value = ''; // Clear previous value
+        } else {
+            // Handle 'No' case, maybe clear a previously set sale price
+            // This would require backend interaction to unset sale status
+            showAlert('Sale status set to No. (Backend update needed)', 'info');
+        }
+    }
+
+    function closeOnSaleModal() {
+        onSaleModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+        // Reset the select option if user cancels and doesn't want 'Yes'
+        if (currentOnSaleSelectElement) {
+            currentOnSaleSelectElement.value = 'No';
+        }
+    }
+
+    async function submitOnSalePrice() {
+        const price = document.getElementById('onSalePrice').value;
+        if (!price || isNaN(parseFloat(price))) {
+            showAlert('Please enter a valid price.', 'error');
+            return;
+        }
+        // Here you would send an API request to update the product's sale price
+        // You'd need the item_id associated with the row where 'On Sale' was clicked.
+        // For this example, we'll just log and close.
+        console.log(`Setting On Sale Price to: ${price} for product in current row.`);
+        showAlert(`Sale price updated to ${price}! (Backend update needed)`, 'success');
+        closeOnSaleModal();
+    }
+
+
+    // Property Edit Modal Logic
+    const propertyEditModal = document.getElementById('propertyEditModal');
+    let currentEditingPropertyItemId = null; // To store the item ID of the property being edited
+
+    function openPropertyEditModal(itemId, listPrice, itemPrice, currency, isDefault) {
+        currentEditingPropertyItemId = itemId; // Store item ID
+        document.getElementById('editItemCode').value = itemId;
+        document.getElementById('editListPrice').value = parseFloat(listPrice); // Use parseFloat directly
+        document.getElementById('editItemPrice').value = parseFloat(itemPrice); // Use parseFloat directly
+        document.getElementById('editCurrency').value = currency;
+        document.querySelector(`input[name="useAsDefault"][value="${isDefault ? 'Yes' : 'No'}"]`).checked = true;
+
+        propertyEditModal.classList.remove('hidden');
+        document.body.style.overflow = ''; // Prevent scrolling background
+    }
+
+    function closePropertyEditModal() {
+        propertyEditModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+        currentEditingPropertyItemId = null; // Clear item ID
+    }
+
+    async function submitPropertyEdit() {
+        const form = document.getElementById('propertyEditForm');
+        const formData = new FormData(form);
+
+        // Add the item ID to the form data
+        formData.append('item_id', currentEditingPropertyItemId);
+        formData.append('list_price_msrp', document.getElementById('editListPrice').value); // Use specific names for clarity
+        formData.append('item_price', document.getElementById('editItemPrice').value);
+        formData.append('currency_limit', document.getElementById('editCurrency').value);
+        formData.append('use_as_default', document.querySelector('input[name="useAsDefault"]:checked').value === 'Yes');
+
+
+        try {
+            // Replace with your actual API endpoint for updating product properties.
+            // This might be a more specific endpoint like /api/products/properties/update
+            // or an extension of your /products/update endpoint to handle these specific fields.
+            const response = await fetch(`/admin/api/products/${currentEditingPropertyItemId}/properties`, { // Example URL
+                method: 'POST', // or PATCH/PUT
+                body: formData,
+            });
+            const result = await response.json();
+            if (response.ok) {
+                showAlert(result.message || 'Property updated successfully!', 'success');
+                closePropertyEditModal();
+                // Optionally refresh the properties table
+            } else {
+                showAlert(result.message || result.detail || 'Failed to update property.', 'error');
+            }
+        } catch (error) {
+            console.error('Error submitting property edit:', error);
+            showAlert('An unexpected error occurred while updating property.', 'error');
+        }
+    }
+
+    function advanceEditFromPropertyModal() {
+        // This function would typically close the current modal and then perhaps
+        // redirect to another advanced editing page or open another specific modal.
+        showAlert('Navigating to an even more advanced edit for this property!', 'info');
+        closePropertyEditModal();
+        // Example: window.location.href = `/some-other-advanced-property-edit-page?item_id=${currentEditingPropertyItemId}`;
+    }
+
+    // Common alert/toast functions (assuming they are in base.html or a common JS file)
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer');
+        alertContainer.innerHTML = `
+            <div class="p-3 mb-4 rounded-md text-sm ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                ${message}
+            </div>
+        `;
+        alertContainer.classList.remove('hidden');
+        setTimeout(() => {
+            alertContainer.classList.add('hidden');
+            alertContainer.innerHTML = '';
+        }, 5000);
+    }
+</script>
+{% endblock %}

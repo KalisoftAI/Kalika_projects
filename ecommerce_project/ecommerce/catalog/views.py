@@ -10,6 +10,7 @@ import logging
 from cart.models import CartItem
 from urllib.parse import unquote
 from django.db.models import Q, Count
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -95,15 +96,38 @@ def get_s3_presigned_url(bucket_name, object_key, expiration=3600):
         return None
 
 def add_s3_urls_to_products(products):
+    print("\n--- Running add_s3_urls_to_products ---")  # Debug print
+    default_image_url = f"{settings.STATIC_URL}images/noimage.jpg"
+
     for product in products:
-        if product.image_url:
-            image_key = product.image_url.lstrip('/')
-            product.s3_image_url = get_s3_presigned_url(
+        # Print the product ID and the image path stored in the database
+        print(f"Processing product ID: {product.item_id}, DB large_image: '{product.large_image}'")
+
+        # Check if the database contains a valid image path
+        if product.large_image and 'noimage.jpg' not in product.large_image:
+            image_key = product.large_image.lstrip('/')
+            print(f"  Attempting to get S3 URL for key: '{image_key}'")
+            
+            # Try to generate the secure S3 URL
+            presigned_url = get_s3_presigned_url(
                 settings.AWS_S3_BUCKET_NAME,
                 image_key
             )
+
+            # Check if the S3 URL was created successfully
+            if presigned_url:
+                print("  SUCCESS: Got S3 URL.")
+                product.s3_image_url = presigned_url
+            else:
+                print("  FAILED: S3 URL generation failed. Using default image.")
+                product.s3_image_url = default_image_url
         else:
-            product.s3_image_url = None
+            # Use the default image if the database path is empty or a placeholder
+            print("  Condition failed (no image or placeholder). Using default image.")
+            product.s3_image_url = default_image_url
+        
+        print(f"  Final image URL set to: {product.s3_image_url}\n")
+        
     return products
 
 def home(request):
@@ -114,7 +138,7 @@ def home(request):
         # MODIFICATION: Changed to a case-insensitive "contains" filter for more reliability.
         all_products = Product.objects.filter(
             main_category__icontains=category.split(" ")[0]
-        ).exclude(image_url__icontains='noimage.jpg')
+        ).exclude(large_image__icontains='noimage.jpg')
         
         total = all_products.count()
         offset = ((current_minute // 9) * 9) % max(1, total)  # avoid division by zero
@@ -156,8 +180,8 @@ def product_list(request):
 
 def product_detail(request, item_id):
     product = get_object_or_404(Product, item_id=item_id)
-    if product.image_url:
-        product.s3_image_url = get_s3_presigned_url(settings.AWS_S3_BUCKET_NAME, product.image_url.lstrip('/'))
+    if product.large_image:
+        product.s3_image_url = get_s3_presigned_url(settings.AWS_S3_BUCKET_NAME, product.large_image.lstrip('/'))
     else:
         product.s3_image_url = None
 
@@ -218,7 +242,7 @@ def products_by_subcategory(request, main_category_name, sub_category_name):
         'products': products_with_urls,
         'categories': build_category_context()
     }
-    return render(request, 'catalog/product_by_subcategory.html', context)
+    return render(request, 'catalog/products_by_subcategory.html', context)
 
 def all_categories(request):
     categories_data = {}

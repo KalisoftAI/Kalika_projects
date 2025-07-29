@@ -1,0 +1,451 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+<div class="card-glass mt-4 p-6 rounded-xl">
+    <div class="card-header bg-secondary-dark text-white p-4 rounded-t-lg -mx-6 -mt-6 mb-6">
+        <h5 class="text-xl font-semibold">Edit Product Details</h5>
+    </div>
+    <div class="card-body">
+        <div id="alertContainer" class="mt-4"></div>
+
+        <form id="editProductForm" enctype="multipart/form-data" onsubmit="event.preventDefault(); submitEditProductForm();">
+            <h6 class="text-lg font-semibold mb-4 text-text-primary">Product Information</h6>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="itemCode" class="block text-sm font-medium text-text-secondary mb-1">Item Code (SKU)</label>
+                    {# Removed 'readonly' attribute to make it editable #}
+                    <input type="text" id="itemCode" name="itemCode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                </div>
+                <div>
+                    <label for="barcode" class="block text-sm font-medium text-text-secondary mb-1">UNSPSC Code</label>
+                    <input type="text" id="barcode" name="barcode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="productTitle" class="block text-sm font-medium text-text-secondary mb-1">Title</label>
+                <input type="text" id="productTitle" name="productTitle" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="productDescription" class="block text-sm font-medium text-text-secondary mb-1">Description</label>
+                <textarea id="productDescription" name="productDescription" rows="4" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="mainCategory" class="block text-sm font-medium text-text-secondary mb-1">Category</label>
+                    <select id="mainCategory" name="mainCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                        <option value="">Select Category</option>
+                        </select>
+                </div>
+                <div>
+                    <label for="subCategory" class="block text-sm font-medium text-text-secondary mb-1">Subcategories</label>
+                    <select id="subCategory" name="subCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                        <option value="">Select Subcategory</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="price" class="block text-sm font-medium text-text-secondary mb-1">Price</label>
+                    <input type="number" id="price" name="price" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                </div>
+                <div>
+                    <label for="listPrice" class="block text-sm font-medium text-text-secondary mb-1">List Price</label>
+                    <input type="number" id="listPrice" name="listPrice" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                </div>
+                <div>
+                    <label for="inventory" class="block text-sm font-medium text-text-secondary mb-1">Inventory</label>
+                    <input type="number" id="inventory" name="inventory" step="1" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="mainImage" class="block text-sm font-medium text-text-secondary mb-1">Upload Main Image</label>
+                <input type="file" id="mainImage" name="imageFile" accept="image/*" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" onchange="previewImage(event, 'mainImagePreview', 'mainImagePathText', 'imagePathUrl')">
+                
+                <label for="imagePathUrl" class="block text-sm font-medium text-text-secondary mt-3 mb-1">Or Paste Image URL</label>
+                <input type="text" id="imagePathUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" oninput="previewImageUrl(this.value, 'mainImagePreview', 'mainImagePathText')">
+
+                <div id="mainImagePreviewContainer" class="mt-2 hidden">
+                    <img id="mainImagePreview" src="#" alt="Main Image Preview" class="max-w-xs h-auto rounded-md shadow-md">
+                    <span id="mainImagePathText" class="text-sm text-gray-500 hidden mt-1"></span>
+                    <button type="button" onclick="removeImage('mainImage', 'mainImagePreview', 'mainImagePathText', 'imagePathUrl')" class="text-red-500 hover:text-red-700 text-sm mt-1">Remove Image</button>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label for="additionalImages" class="block text-sm font-medium text-text-secondary mb-1">Additional Images</label>
+                <input type="file" id="additionalImages" name="additionalImages" accept="image/*" multiple class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" onchange="previewMultipleImages(event, 'additionalImagesPreviewContainer')">
+                <div id="additionalImagesPreviewContainer" class="mt-2 flex flex-wrap gap-2">
+                    </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button type="button" onclick="window.history.back()" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Back</button>
+                <button type="submit" class="px-6 py-2 rounded-md bg-accent-indigo text-white hover:bg-accent-indigo/80 transition-colors duration-200">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allCategories = {}; // To store fetched categories for dropdowns
+    let currentProductData = {}; // Global variable to store the fetched product data
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemId = urlParams.get('item_id'); // Get item_id from URL query parameter
+
+        if (itemId) {
+            await fetchCategories(); // Fetch categories for dropdowns
+            const product = await fetchProductDetails(itemId); // Fetch product data to populate form
+            if (product) {
+                currentProductData = product; // Store fetched product data globally
+                populateEditForm(product);
+            } else {
+                showAlert(`Product not found with Item ID: ${itemId}`, 'error');
+            }
+        } else {
+            // Handle case where item_id is not in URL, maybe redirect or show error
+            showAlert('No Item ID provided for editing.', 'error');
+            console.error('No Item ID found in URL for edit_product.html');
+        }
+    });
+
+    async function fetchCategories() {
+        try {
+            const response = await fetch('/admin/api/categories');
+            if (response.ok) {
+                allCategories = await response.json();
+                populateMainCategories(document.getElementById('mainCategory'));
+            } else {
+                console.error('Failed to fetch categories:', await response.text());
+                showAlert('Failed to load categories.', 'error');
+            }
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+            showAlert('Error connecting to category service.', 'error');
+        }
+    }
+
+    function populateMainCategories(selectElement) {
+        selectElement.innerHTML = '<option value="">Select Category</option>';
+        for (const mainCat in allCategories) {
+            const option = document.createElement('option');
+            option.value = mainCat;
+            option.textContent = mainCat;
+            selectElement.appendChild(option);
+        }
+    }
+
+    function populateSubCategories(selectElement, selectedMainCategory) {
+        selectElement.innerHTML = '<option value="">Select Subcategory</option>';
+        if (selectedMainCategory && allCategories[selectedMainCategory]) {
+            allCategories[selectedMainCategory].forEach(subCat => {
+                const option = document.createElement('option');
+                option.value = subCat;
+                option.textContent = subCat;
+                selectElement.appendChild(option);
+            });
+        }
+    }
+
+    // Event listener for main category change
+    document.getElementById('mainCategory').addEventListener('change', (event) => {
+        populateSubCategories(document.getElementById('subCategory'), event.target.value);
+    });
+
+    // Fetches product details via POST to /api/product-details
+    async function fetchProductDetails(itemId) {
+        try {
+            const response = await fetch('/admin/api/product-details', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ item_id: parseInt(itemId) }) // Send item_id in the body as integer
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const product = await response.json();
+            if (product.item_id) { // Check if a valid product was returned
+                return product;
+            } else {
+                return null; // Product not found
+            }
+        } catch (error) {
+            console.error('Error fetching product details:', error);
+            showAlert('Failed to load product details.', 'error');
+            return null;
+        }
+    }
+
+    function populateEditForm(product) {
+        document.getElementById('itemCode').value = product.item_code || '';
+        // Populate barcode field with UPC value from product data
+        document.getElementById('barcode').value = product.upc || ''; 
+        document.getElementById('productTitle').value = product.product_title || '';
+        document.getElementById('productDescription').value = product.product_description || '';
+        document.getElementById('price').value = product.price || '';
+        document.getElementById('listPrice').value = product.list_price || ''; // Assuming product has list_price
+        document.getElementById('inventory').value = product.inventory || ''; // Assuming product has inventory
+
+        // Populate Categories/Subcategories
+        const mainCatSelect = document.getElementById('mainCategory');
+        const subCatSelect = document.getElementById('subCategory');
+
+        populateMainCategories(mainCatSelect); // First, populate main categories
+        if (product.main_category) {
+            mainCatSelect.value = product.main_category;
+            populateSubCategories(subCatSelect, product.main_category); // Then populate subcategories
+            if (product.sub_categories) { // Assuming sub_categories is a string or array, adjust if needed
+                subCatSelect.value = product.sub_categories;
+            }
+        }
+
+        // Image Preview (Main Image)
+        const mainImagePreview = document.getElementById('mainImagePreview');
+        const mainImagePreviewContainer = document.getElementById('mainImagePreviewContainer');
+        const mainImagePathText = document.getElementById('mainImagePathText');
+        const imagePathUrlInput = document.getElementById('imagePathUrl'); // Get the new URL input
+
+        if (product.large_image) { 
+            mainImagePreview.src = product.large_image;
+            imagePathUrlInput.value = product.large_image; // Populate the URL input field
+            mainImagePreviewContainer.classList.remove('hidden');
+            mainImagePathText.classList.add('hidden'); 
+
+            mainImagePreview.onerror = () => {
+                mainImagePreview.classList.add('hidden'); 
+                mainImagePathText.textContent = `Image Path: ${product.large_image}`;
+                mainImagePathText.classList.remove('hidden'); 
+            };
+            mainImagePreview.onload = () => {
+                mainImagePreview.classList.remove('hidden');
+                mainImagePathText.classList.add('hidden');
+            };
+
+        } else {
+            mainImagePreviewContainer.classList.add('hidden');
+            mainImagePathText.classList.add('hidden');
+            mainImagePreview.src = '#'; 
+            imagePathUrlInput.value = ''; // Clear URL input
+        }
+
+        // Additional Images - This would require 'product.additional_image_urls' from backend
+        const additionalImagesPreviewContainer = document.getElementById('additionalImagesPreviewContainer');
+        additionalImagesPreviewContainer.innerHTML = ''; // Clear existing previews
+        if (product.additional_image_urls && Array.isArray(product.additional_image_urls)) {
+            product.additional_image_urls.forEach(url => {
+                const imgDiv = document.createElement('div');
+                imgDiv.className = 'relative';
+                imgDiv.innerHTML = `
+                    <img src="${url}" class="w-24 h-24 object-cover rounded-md shadow-md" onerror="this.nextElementSibling.classList.remove('hidden'); this.classList.add('hidden');">
+                    <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-gray-500 hidden">Path: ${url}</span>
+                    <button type="button" class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center -mt-2 -mr-2"
+                        onclick="removeExistingImage('${url}', this)">
+                        &times;
+                    </button>
+                `;
+                additionalImagesPreviewContainer.appendChild(imgDiv);
+            });
+        }
+    }
+
+    // Function to preview image from file input
+    function previewImage(event, previewId, pathTextId, urlInputId) {
+        const fileInput = event.target;
+        const urlInput = document.getElementById(urlInputId);
+        const preview = document.getElementById(previewId);
+        const container = document.getElementById(previewId + 'Container');
+        const pathText = document.getElementById(pathTextId);
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                preview.src = reader.result;
+                container.classList.remove('hidden');
+                pathText.classList.add('hidden'); // Hide path text when image is loaded
+                urlInput.value = ''; // Clear URL input if file is selected
+
+                preview.onerror = () => {
+                    preview.classList.add('hidden');
+                    pathText.textContent = `File: ${fileInput.files[0].name}`; // Use file name as path
+                    pathText.classList.remove('hidden');
+                };
+                preview.onload = () => {
+                    preview.classList.remove('hidden');
+                    pathText.classList.add('hidden');
+                };
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            // If no file is selected, check if there's a URL in the input
+            if (urlInput.value) {
+                previewImageUrl(urlInput.value, previewId, pathTextId);
+            } else {
+                container.classList.add('hidden');
+                preview.src = '#';
+                pathText.classList.add('hidden');
+                pathText.textContent = '';
+            }
+        }
+    }
+
+    // Function to preview image from URL input
+    function previewImageUrl(url, previewId, pathTextId) {
+        const preview = document.getElementById(previewId);
+        const container = document.getElementById(previewId + 'Container');
+        const pathText = document.getElementById(pathTextId);
+        const fileInput = document.getElementById('mainImage'); // Get the file input
+
+        // Clear file input if URL is being used for preview
+        fileInput.value = '';
+
+        if (url) {
+            preview.src = url;
+            container.classList.remove('hidden');
+            pathText.classList.add('hidden'); // Hide path text when image is loaded
+
+            preview.onerror = () => {
+                preview.classList.add('hidden');
+                pathText.textContent = `URL: ${url}`;
+                pathText.classList.remove('hidden');
+            };
+            preview.onload = () => {
+                preview.classList.remove('hidden');
+                pathText.classList.add('hidden');
+            };
+        } else {
+            container.classList.add('hidden');
+            preview.src = '#';
+            pathText.classList.add('hidden');
+            pathText.textContent = '';
+        }
+    }
+
+
+    function removeImage(fileInputId, previewId, pathTextId, urlInputId) {
+        document.getElementById(fileInputId).value = ''; // Clear file input
+        document.getElementById(urlInputId).value = ''; // Clear URL input
+        document.getElementById(previewId + 'Container').classList.add('hidden');
+        document.getElementById(previewId).src = '#';
+        document.getElementById(pathTextId).classList.add('hidden');
+        document.getElementById(pathTextId).textContent = '';
+        // You might need to send an API request to delete the image from the server if it's an existing one
+    }
+
+    function previewMultipleImages(event, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = ''; // Clear previous previews
+
+        if (event.target.files) {
+            Array.from(event.target.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgDiv = document.createElement('div');
+                    imgDiv.className = 'relative group w-24 h-24'; // Added group for hover effect
+                    imgDiv.innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-full object-cover rounded-md shadow-md" onerror="this.nextElementSibling.nextElementSibling.classList.remove('hidden'); this.classList.add('hidden');">
+                        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-gray-500 hidden">Path: ${file.name}</span>
+                        <button type="button" class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center -mt-2 -mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                            onclick="this.parentElement.remove()">
+                            &times;
+                        </button>
+                    `;
+                    container.appendChild(imgDiv);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+
+    function removeExistingImage(imageUrl, buttonElement) {
+        if (confirm('Are you sure you want to remove this image? This change will be applied when you update the product.')) {
+            console.log('Marking image for removal:', imageUrl);
+            // Instead of deleting directly, you might add this URL to a hidden input
+            // to tell the backend which images to remove upon form submission.
+            // For now, just remove from UI.
+            buttonElement.parentElement.remove();
+            showAlert('Image marked for removal on update. Click Update to save changes.', 'info');
+        }
+    }
+
+
+    async function submitEditProductForm() {
+        const form = document.getElementById('editProductForm');
+        const formData = new FormData(form); // Use the form directly
+        
+        // Get item_id from URL and add to formData
+        const itemId = new URLSearchParams(window.location.search).get('item_id');
+        formData.append('itemId', itemId); // Must match backend expectation
+        
+        // Rename fields to match backend expectations
+        formData.append('productName', document.getElementById('productTitle').value);
+        formData.append('productCategory', document.getElementById('mainCategory').value);
+        formData.append('productSubCategory', document.getElementById('subCategory').value || '');
+        formData.append('itemCode', document.getElementById('itemCode').value);
+        formData.append('productDescription', document.getElementById('productDescription').value || '');
+        formData.append('price', document.getElementById('price').value);
+        formData.append('barcode', document.getElementById('barcode').value || '');
+        
+        // Image handling
+        const imageFile = document.getElementById('mainImage').files[0];
+        const imageUrl = document.getElementById('imagePathUrl').value;
+        
+        if (imageFile) {
+            formData.append('imageFile', imageFile);
+        } else if (imageUrl) {
+            formData.append('imageUrl', imageUrl);
+        } else if (currentProductData.large_image) {
+            formData.append('imageUrl', currentProductData.large_image);
+        }
+
+        try {
+            const response = await fetch(`/admin/products/update`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                showAlert(result.message || 'Product updated successfully!', 'success');
+                // Refresh product data
+                const updatedProduct = await fetchProductDetails(itemId);
+                if (updatedProduct) {
+                    currentProductData = updatedProduct;
+                    populateEditForm(updatedProduct);
+                }
+            } else {
+                showAlert(result.message || 'Failed to update product', 'error');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            showAlert('An unexpected error occurred while updating the product.', 'error');
+        }
+    }
+    // Common alert/toast functions (assuming they are in base.html or a common JS file)
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer');
+        alertContainer.innerHTML = `
+            <div class="p-3 mb-4 rounded-md text-sm ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                ${message}
+            </div>
+        `;
+        alertContainer.classList.remove('hidden');
+        setTimeout(() => {
+            alertContainer.classList.add('hidden');
+            alertContainer.innerHTML = '';
+        }, 5000);
+    }
+</script>
+{% endblock %}

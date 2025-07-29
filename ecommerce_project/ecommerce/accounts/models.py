@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30, blank=True)  # The problematic field
+    last_name = models.CharField(max_length=30, blank=True)
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='customuser_set',

@@ -158,7 +158,9 @@
                         <div class="product-card group bg-white rounded-xl shadow-md overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-2">
                              <a href="{% url 'catalog:product_detail' product.item_id %}" class="block h-full flex flex-col">
                                 <div class="h-36 overflow-hidden relative">
-                                    <img src="{{ product.s3_image_url|default:'https://source.unsplash.com/400x400/?industrial' }}"
+                                   <img src="{{ product.s3_image_url }}"
+     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+     alt="{{ product.product_title }}">
                                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                          alt="{{ product.product_title }}">
                                     <div class="cart-icon-container">
@@ -487,3 +489,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 {% endblock %}
+

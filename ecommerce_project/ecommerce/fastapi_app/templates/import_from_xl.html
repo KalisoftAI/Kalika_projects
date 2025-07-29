@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% block title %}Bulk Product Modification{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-end mb-4 gap-2">
+    <a href="/admin/items" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors duration-200 flex items-center">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Products
+    </a>
+</div>
+
+<!-- =========== GLOBAL MODIFICATION TYPE DROPDOWN =========== -->
+<div class="card-glass p-6 rounded-xl overflow-x-auto mb-8">
+    <h4 class="text-xl font-semibold mb-4 text-text-primary">Step 1: Choose an Operation</h4>
+    <div class="mb-4">
+        <label for="modificationType" class="block text-sm font-medium text-text-secondary mb-2">Modification Type</label>
+        <select id="modificationType" name="modification_type" class="w-full p-2 border border-border-color rounded-md bg-card-bg text-text-primary" required>
+            <option value="">Select an operation for both sections</option>
+            <option value="add">Add or Update Products</option>
+            <option value="update_price">Update Product Prices (Section 1 Only)</option>
+            <option value="update_description">Update Product Descriptions (Section 1 Only)</option>
+            <option value="delete">Delete Products</option>
+        </select>
+        <p class="text-xs text-text-secondary mt-2">This choice applies to whichever upload section you use below.</p>
+    </div>
+</div>
+
+
+<!-- =========== SECTION 1: Standard CSV Upload =========== -->
+<div class="card-glass p-6 rounded-xl overflow-x-auto mb-8">
+    <h4 class="text-xl font-semibold mb-4 text-text-primary">Step 2 (Option A): Upload Standard CSV</h4>
+    <p class="text-text-secondary mb-4 text-sm">
+        Use this for CSVs with headers that match the database columns (e.g., `item_id`, `price`).
+    </p>
+
+    <form id="standardImportForm" onsubmit="event.preventDefault(); submitForm('standard');">
+        <div id="uploadSectionStandard" class="border-2 border-dashed border-border-color rounded-lg p-6 cursor-pointer transition-colors duration-200 hover:bg-hover-bg-light mb-4 flex flex-col items-center" onclick="document.getElementById('csvFileStandard').click()">
+            <input type="file" id="csvFileStandard" name="file" accept=".csv" class="hidden" onchange="handleFileSelect(event, 'standard')">
+            <p class="text-text-secondary mb-4">Drag & drop your Standard CSV here</p>
+            <button type="button" class="bulk-modify-btn">
+                <i class="fas fa-folder-open mr-2"></i> Browse File
+            </button>
+        </div>
+        
+        <div id="fileInfoStandard" class="hidden mb-4 p-4 border rounded-md bg-card-bg">
+            <p><strong>Selected File:</strong> <span id="fileNameStandard"></span></p>
+        </div>
+        
+        <div id="previewSectionStandard" class="hidden mb-4">
+            <h5 class="text-lg font-semibold mb-2 text-text-primary">CSV Preview</h5>
+            <div class="overflow-x-auto border border-border-color rounded-md">
+                <table id="csvPreviewTableStandard" class="min-w-full bg-input-bg text-text-primary">
+                    <thead><tr></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="alertContainerStandard" class="mt-4"></div>
+
+        <button type="submit" id="submitStandard" class="bulk-modify-btn flex items-center justify-center" disabled>
+            <i class="fas fa-upload mr-2"></i> Perform Modification
+        </button>
+    </form>
+</div>
+
+
+<!-- =========== SECTION 2: "Item Properties" CSV Upload =========== -->
+<div class="card-glass p-6 rounded-xl overflow-x-auto">
+    <h4 class="text-xl font-semibold mb-4 text-text-primary">Step 2 (Option B): Upload "Item Properties" CSV</h4>
+    <p class="text-text-secondary mb-4 text-sm">
+        Use this for CSVs with user-friendly headers and a special <strong>`Item Properties`</strong> column.
+    </p>
+
+    <form id="propertiesImportForm" onsubmit="event.preventDefault(); submitForm('properties');">
+        <div id="uploadSectionProperties" class="border-2 border-dashed border-border-color rounded-lg p-6 cursor-pointer transition-colors duration-200 hover:bg-hover-bg-light mb-4 flex flex-col items-center" onclick="document.getElementById('csvFileProperties').click()">
+            <input type="file" id="csvFileProperties" name="file" accept=".csv" class="hidden" onchange="handleFileSelect(event, 'properties')">
+            <p class="text-text-secondary mb-4">Drag & drop your 'Item Properties' CSV here</p>
+            <button type="button" class="bulk-modify-btn">
+                <i class="fas fa-folder-open mr-2"></i> Browse File
+            </button>
+        </div>
+
+        <div id="fileInfoProperties" class="hidden mb-4 p-4 border rounded-md bg-card-bg">
+            <p><strong>Selected File:</strong> <span id="fileNameProperties"></span></p>
+        </div>
+
+        <div id="previewSectionProperties" class="hidden mb-4">
+            <h5 class="text-lg font-semibold mb-2 text-text-primary">CSV Preview</h5>
+            <div class="overflow-x-auto border border-border-color rounded-md">
+                <table id="csvPreviewTableProperties" class="min-w-full bg-input-bg text-text-primary">
+                    <thead><tr></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="alertContainerProperties" class="mt-4"></div>
+
+        <button type="submit" id="submitProperties" class="bulk-modify-btn flex items-center justify-center" disabled>
+            <i class="fas fa-upload mr-2"></i> Upload Properties CSV
+        </button>
+    </form>
+</div>
+
+<div id="globalLoader" class="loader-overlay hidden">
+    <div class="loader-content"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function handleFileSelect(event, formType) {
+        const file = event.target.files[0];
+        const ucFormType = formType.charAt(0).toUpperCase() + formType.slice(1);
+        const fileNameEl = document.getElementById(`fileName${ucFormType}`);
+        const fileInfoEl = document.getElementById(`fileInfo${ucFormType}`);
+        const submitBtn = document.getElementById(`submit${ucFormType}`);
+        const previewSection = document.getElementById(`previewSection${ucFormType}`);
+
+        if (file && file.type === 'text/csv') {
+            fileNameEl.textContent = file.name;
+            fileInfoEl.classList.remove('hidden');
+            submitBtn.disabled = false;
+            parseCSVForPreview(file, formType);
+        } else {
+            showAlert('Please select a valid CSV file.', 'error', formType);
+            fileInfoEl.classList.add('hidden');
+            previewSection.classList.add('hidden');
+            submitBtn.disabled = true;
+        }
+    }
+
+    function parseCSVForPreview(file, formType) {
+        const ucFormType = formType.charAt(0).toUpperCase() + formType.slice(1);
+        const previewSection = document.getElementById(`previewSection${ucFormType}`);
+        const tableHead = document.querySelector(`#csvPreviewTable${ucFormType} thead tr`);
+        const tableBody = document.querySelector(`#csvPreviewTable${ucFormType} tbody`);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            tableHead.innerHTML = '';
+            tableBody.innerHTML = '';
+            const text = e.target.result;
+            const rows = text.split('\n').filter(row => row.trim() !== '');
+
+            if (rows.length > 0) {
+                const headers = rows[0].split(',').map(h => h.trim());
+                headers.forEach(header => {
+                    const th = document.createElement('th');
+                    th.className = 'py-2 px-4 border-b border-border-color text-left';
+                    th.textContent = header;
+                    tableHead.appendChild(th);
+                });
+
+                const previewRowCount = Math.min(rows.length, 6);
+                for (let i = 1; i < previewRowCount; i++) {
+                    const tr = document.createElement('tr');
+                    const data = rows[i].split(',');
+                    data.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.className = 'py-2 px-4 border-b border-border-color';
+                        td.textContent = cell.trim();
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                }
+                previewSection.classList.remove('hidden');
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    async function submitForm(formType) {
+        const modificationType = document.getElementById('modificationType').value;
+        if (!modificationType) {
+            showAlert('Please choose an operation from the Step 1 dropdown.', 'error', formType);
+            return;
+        }
+
+        let url;
+        const ucFormType = formType.charAt(0).toUpperCase() + formType.slice(1);
+        const formElement = document.getElementById(`${formType}ImportForm`);
+        const fileInput = formElement.querySelector('input[type="file"]');
+        const submitBtn = document.getElementById(`submit${ucFormType}`);
+
+        if (!fileInput.files || fileInput.files.length === 0) {
+            showAlert('Please select a file to upload.', 'error', formType);
+            return;
+        }
+
+        document.getElementById('globalLoader')?.classList.remove('hidden');
+        submitBtn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('modification_type', modificationType); // Append the global dropdown value
+
+        if (formType === 'standard') {
+            url = '/admin/bulk-modify';
+        } else {
+            url = '/admin/bulk-modify-properties-column';
+        }
+
+        try {
+            const response = await fetch(url, { method: 'POST', body: formData });
+            const result = await response.json();
+            let message = result.message || 'An unknown error occurred.';
+
+            if (result.errors && result.errors.length > 0) {
+                message += ` Details: ${result.errors.join('; ')}`;
+            }
+
+            if (response.ok && (!result.errors || result.errors.length === 0)) {
+                showAlert(message + " Redirecting to item list...", 'success', formType);
+                setTimeout(() => { window.location.href = '/admin/items'; }, 2500);
+            } else {
+                showAlert(message, 'error', formType);
+                submitBtn.disabled = false;
+                document.getElementById('globalLoader')?.classList.add('hidden');
+            }
+        } catch (error) {
+            showAlert('A network error occurred. Please try again.', 'error', formType);
+            submitBtn.disabled = false;
+            document.getElementById('globalLoader')?.classList.add('hidden');
+        }
+    }
+
+    function showAlert(message, type, formType) {
+        const ucFormType = formType.charAt(0).toUpperCase() + formType.slice(1);
+        const container = document.getElementById(`alertContainer${ucFormType}`);
+        const alertClass = type === 'error' ? 'bg-red-100 border-red-400 text-red-700' : 'bg-green-100 border-green-400 text-green-700';
+        container.innerHTML = `<div class="p-4 mb-4 text-sm rounded-lg ${alertClass}" role="alert">${message}</div>`;
+    }
+</script>
+<style>
+    .bulk-modify-btn {
+        padding: 15px 25px; border: unset; border-radius: 15px; color: #212121;
+        z-index: 1; background: #e8e8e8; position: relative; font-weight: 1000;
+        font-size: 15px; box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms; overflow: hidden; display: flex; align-items: center;
+        justify-content: center; text-decoration: none; cursor: pointer;
+    }
+    .bulk-modify-btn::before {
+        content: ""; position: absolute; top: 0; left: 0; height: 100%; width: 0;
+        border-radius: 15px; background-color: #212121; z-index: -1;
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); transition: all 250ms;
+    }
+    .bulk-modify-btn:hover { color: #e8e8e8; }
+    .bulk-modify-btn:hover::before { width: 100%; }
+    .bulk-modify-btn:disabled {
+        background-color: #d1d5db; color: #6b7280; cursor: not-allowed; box-shadow: none;
+    }
+    .bulk-modify-btn:disabled:hover::before { width: 0; }
+</style>
+{% endblock %}
