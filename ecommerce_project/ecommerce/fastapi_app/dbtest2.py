@@ -1,16 +1,16 @@
 import psycopg2
-import csv
+import os
 from datetime import datetime
-import os # Import os for path manipulation
-from tabulate import tabulate # For printing table schemas
+from tabulate import tabulate
+import pandas as pd  # Added pandas
 
-# Database connection parameters
-# It's highly recommended to use environment variables for sensitive data like passwords
+# Database connection parameters - same as before
 db_host = os.getenv("DB_HOST", "localhost")
 db_name = os.getenv("DB_NAME", "ecom_prod_catalog")
 db_user = os.getenv("DB_USER", "vikas")
 db_password = os.getenv("DB_PASSWORD", "kalika1667")
 db_port = os.getenv("DB_PORT", "5432")
+
 
 def get_db_connection():
     """Establishes a connection to the PostgreSQL database."""
@@ -28,18 +28,14 @@ def get_db_connection():
         print(f"Database connection error: {e}")
         return None
 
+
 def create_users_table():
-    """
-    Creates the 'users' table if it doesn't already exist.
-    This table stores user authentication and role information.
-    """
     connection = None
     cursor = None
     try:
         connection = get_db_connection()
         if not connection:
             return
-
         cursor = connection.cursor()
         create_table_query = """
             CREATE TABLE IF NOT EXISTS users (
@@ -63,26 +59,22 @@ def create_users_table():
         if connection:
             connection.close()
 
+
 def create_orders_table():
-    """
-    Creates the 'orders' table if it doesn't already exist.
-    This table stores order details, linking to users and products.
-    """
     connection = None
     cursor = None
     try:
         connection = get_db_connection()
         if not connection:
             return
-
         cursor = connection.cursor()
 
-        cursor.execute("DROP TABLE IF EXISTS orders CASCADE;") 
+        cursor.execute("DROP TABLE IF EXISTS orders CASCADE;")
         connection.commit()
         print("Existing 'orders' table dropped (if it existed).")
 
         create_table_query = """
-            CREATE TABLE orders ( 
+            CREATE TABLE orders (
                 order_id SERIAL PRIMARY KEY,
                 user_id INT NOT NULL,
                 order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -107,26 +99,20 @@ def create_orders_table():
         if connection:
             connection.close()
 
+
 def create_products_table():
-    """
-    Drops the existing 'products' table and recreates it with the schema
-    that matches the 'filtered-products.csv' file, including the expanded
-    item properties as separate columns.
-    """
     connection = None
     cursor = None
     try:
         connection = get_db_connection()
         if not connection:
             return
-
         cursor = connection.cursor()
 
         cursor.execute("DROP TABLE IF EXISTS products CASCADE;")
         connection.commit()
         print("Existing 'products' table dropped.")
 
-        # MODIFIED: Changed item_id to INTEGER PRIMARY KEY to use the value from the CSV.
         create_table_query = '''
         CREATE TABLE products (
             action TEXT,
@@ -150,7 +136,7 @@ def create_products_table():
             additional_images TEXT,
             status VARCHAR(50) DEFAULT 'New',
             last_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            
+
             -- Columns expanded from 'Item Properties'
             lead_time VARCHAR(255),
             length VARCHAR(255),
@@ -176,8 +162,8 @@ def create_products_table():
         if connection:
             connection.close()
 
+
 def verify_table_schema(table_name):
-    """Prints the schema of a given table."""
     connection = None
     cursor = None
     try:
@@ -205,114 +191,112 @@ def verify_table_schema(table_name):
         if connection:
             connection.close()
 
+
 def parse_item_properties(properties_string):
-    """
-    Parses the 'Item Properties' string into a dictionary of key-value pairs.
-    Keys are cleaned to match database column names (lowercase, no spaces).
-    """
     properties_dict = {}
     if not properties_string or not isinstance(properties_string, str):
         return properties_dict
-        
-    # Split by comma, then process each key-value pair
+
     parts = properties_string.split(',')
     for part in parts:
         if ' - ' in part:
             key, value = part.split(' - ', 1)
-            # Clean the key: lowercase and replace spaces with underscores
             clean_key = key.strip().lower().replace(' ', '_')
             properties_dict[clean_key] = value.strip()
     return properties_dict
 
-def insert_data_from_csv(file_path):
-    """
-    Inserts data from the CSV into the 'products' table. It now parses
-    the 'Item Properties' column and inserts the data into separate columns.
-    """
+
+def insert_data_from_excel(file_path):
     connection = None
     cursor = None
     try:
+        # Read Excel file with pandas, all columns as string initially
+        df = pd.read_excel(file_path, dtype=str)
+
+        # Clean column names for consistency
+        df.columns = [col.strip().lower().replace(' ', '_') for col in df.columns]
+
+        # Connect to database
         connection = get_db_connection()
         if not connection:
             return
-
         cursor = connection.cursor()
 
-        with open(file_path, mode='r', encoding='utf-8-sig') as csvfile:
-            csv_reader = csv.DictReader(csvfile)
-            
-            # Clean original CSV headers to be lowercase and use underscores
-            original_headers = csv_reader.fieldnames
-            cleaned_headers = [h.strip().replace(' ', '_').replace('\ufeff', '').lower() for h in original_headers]
-            csv_reader.fieldnames = cleaned_headers
+        db_columns = [
+            "item_id", "action", "main_category", "sub_categories", "item_code",
+            "product_title", "product_description", "upc", "brand", "department",
+            "type", "tag", "list_price", "price", "inventory", "min_order_qty",
+            "available", "large_image", "additional_images", "status", "last_modified",
+            "lead_time", "length", "material_type", "sys_discount_group", "sys_num_images",
+            "sys_product_type", "unit_of_measure", "unspsc"
+        ]
 
-            # MODIFIED: Added 'item_id' to the list of columns to insert.
-            db_columns = [
-                "item_id", "action", "main_category", "sub_categories", "item_code",
-                "product_title", "product_description", "upc", "brand", "department",
-                "type", "tag", "list_price", "price", "inventory", "min_order_qty",
-                "available", "large_image", "additional_images", "status", "last_modified",
-                "lead_time", "length", "material_type", "sys_discount_group", "sys_num_images", 
-                "sys_product_type", "unit_of_measure", "unspsc"
-            ]
-            
-            # Create the INSERT statement template
-            placeholders = ', '.join(['%s'] * len(db_columns))
-            insert_query = f"INSERT INTO products ({', '.join(db_columns)}) VALUES ({placeholders})"
+        placeholders = ', '.join(['%s'] * len(db_columns))
+        insert_query = f"INSERT INTO products ({', '.join(db_columns)}) VALUES ({placeholders})"
 
-            for row in csv_reader:
-                # 1. Parse the item_properties string from the current row
-                properties_dict = parse_item_properties(row.get('item_properties', ''))
-                
-                # 2. Build the list of values to insert, in the correct order
-                data_to_insert = [
-                    int(row['item_id']) if row.get('item_id') else None, # MODIFIED: Get item_id from CSV
-                    row.get('action'),
-                    row.get('main_category'),
-                    row.get('sub_categories'),
-                    row.get('item_code'),
-                    row.get('product_title'),
-                    row.get('product_description'),
-                    row.get('upc'),
-                    row.get('brand'),
-                    row.get('department'),
-                    row.get('type'),
-                    row.get('tag'),
-                    float(row['list_price']) if row.get('list_price') else None,
-                    float(row['price']) if row.get('price') else None,
-                    int(row['inventory']) if row.get('inventory') else None,
-                    int(row.get('min_order_qty')) if row.get('min_order_qty') else None,
-                    row.get('available'),
-                    row.get('large_image'),
-                    row.get('additional_images'),
-                    'New', # Default status
-                    datetime.now(), # last_modified
-                    
-                    # Get values from the parsed dictionary
-                    properties_dict.get('lead_time'),
-                    properties_dict.get('length'),
-                    properties_dict.get('material_type'),
-                    properties_dict.get('sys_discount_group'),
-                    properties_dict.get('sys_num_images'),
-                    properties_dict.get('sys_product_type'),
-                    properties_dict.get('unit_of_measure'),
-                    properties_dict.get('unspsc'),
-                ]
-                
+        for idx, row in df.iterrows():
+            # Parse item_properties if present, else empty dict
+            properties_dict = parse_item_properties(row.get('item_properties', '') or '')
+
+            # Safely convert numeric fields (handle scientific notation)
+            def parse_int_safe(val):
                 try:
-                    cursor.execute(insert_query, tuple(data_to_insert))
-                except psycopg2.IntegrityError as ie:
-                    print(f"Skipping duplicate item_code or item_id: {row.get('item_code')}. Error: {ie}")
-                    connection.rollback()
-                except Exception as row_error:
-                    print(f"Error inserting row for item_code {row.get('item_code')}: {row_error}")
-                    connection.rollback()
+                    return int(float(val)) if val and val.strip() != '' else None
+                except:
+                    return None
+
+            def parse_float_safe(val):
+                try:
+                    return float(val) if val and val.strip() != '' else None
+                except:
+                    return None
+
+            data_to_insert = [
+                parse_int_safe(row.get('item_id')),
+                row.get('action'),
+                row.get('main_category'),
+                row.get('sub_categories'),
+                row.get('item_code'),
+                row.get('product_title'),
+                row.get('product_description'),
+                row.get('upc'),
+                row.get('brand'),
+                row.get('department'),
+                row.get('type'),
+                row.get('tag'),
+                parse_float_safe(row.get('list_price')),
+                parse_float_safe(row.get('price')),
+                parse_int_safe(row.get('inventory')),
+                parse_int_safe(row.get('min_order_qty')),
+                row.get('available'),
+                row.get('large_image'),
+                row.get('additional_images'),
+                'New',  # default status
+                datetime.now(),
+                properties_dict.get('lead_time'),
+                properties_dict.get('length'),
+                properties_dict.get('material_type'),
+                properties_dict.get('sys_discount_group'),
+                properties_dict.get('sys_num_images'),
+                properties_dict.get('sys_product_type'),
+                properties_dict.get('unit_of_measure'),
+                properties_dict.get('unspsc'),
+            ]
+
+            try:
+                cursor.execute(insert_query, tuple(data_to_insert))
+            except psycopg2.IntegrityError as ie:
+                print(f"Skipping duplicate or invalid row with item_code {row.get('item_code')}: {ie}")
+                connection.rollback()
+            except Exception as e:
+                print(f"Error inserting row with item_code {row.get('item_code')}: {e}")
+                connection.rollback()
 
         connection.commit()
-        print("Data insertion process completed.")
+        print("Data insertion from Excel file completed.")
 
     except FileNotFoundError:
-        print(f"Error: CSV file not found at '{file_path}'")
+        print(f"Error: Excel file not found at '{file_path}'")
     except Exception as error:
         print(f"An error occurred: {error}")
         if connection:
@@ -325,23 +309,19 @@ def insert_data_from_csv(file_path):
 
 
 if __name__ == "__main__":
-    # IMPORTANT: Update this path to the correct location of your CSV file.
-    csv_file_path = 'filtered-products.csv'
+    excel_file_path = '/home/ubuntu/Kalika_projects/ecommerce_project/ecommerce/fastapi_app/filtered-products-new.xlsx'  # Update this path to your Excel file
 
     print("Attempting to create/ensure database tables...")
     create_users_table()
-    
-    # This function now creates the table with the new, separate columns
+
     create_products_table()
-    
     verify_table_schema('products')
 
     create_orders_table()
     verify_table_schema('orders')
 
-    print(f"\nAttempting to insert product data from CSV: '{csv_file_path}'...")
-    # This function now handles parsing and inserting into the new columns
-    insert_data_from_csv(csv_file_path)
+    print(f"\nAttempting to insert product data from Excel file: '{excel_file_path}'...")
+    insert_data_from_excel(excel_file_path)
 
     # Final check of product count
     connection = None
@@ -356,5 +336,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error checking product count: {e}")
     finally:
-        if cursor: cursor.close()
-        if connection: connection.close()
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
