@@ -465,48 +465,90 @@ def get_pending_orders_count():
         if connection:
             connection.close()
 
-def get_recent_orders(limit=5):
-    connection = None
-    cursor = None
-    recent_orders = []
+# def get_recent_orders(limit=5):
+#     connection = None
+#     cursor = None
+#     recent_orders = []
+#     try:
+#         connection = get_db_connection()
+#         if not connection:
+#             return []
+#         cursor = connection.cursor()
+#         # Fetch order details and customer username
+#         cursor.execute("""
+#             SELECT
+#                 o.order_id,
+#                 au.username AS customer_name,
+#                 o.status,
+#                 o.order_date,
+#                 (o.price * o.quantity) AS total_amount
+#             FROM
+#                 orders o
+#             JOIN
+#                 accounts_customuser au ON o.customer_id = au.id
+#             ORDER BY
+#                 o.order_date DESC
+#             LIMIT %s;
+#         """, (limit,))
+#         for row in cursor.fetchall():
+#             recent_orders.append({
+#                 "order_id": row[0],
+#                 "customer_name": row[1],
+#                 "status": row[2],
+#                 "order_date": row[3],
+#                 "total_amount": row[4]
+#             })
+#         return recent_orders
+#     except Exception as e:
+#         logger.error(f"Error fetching recent orders: {e}")
+#         return []
+#     finally:
+#         if cursor:
+#             cursor.close()
+#         if connection:
+#             connection.close()
+
+def get_recent_orders():
+    """Fetches the 5 most recent orders with data matching the dashboard template."""
+    conn = None
+    recent_orders_list = []
     try:
-        connection = get_db_connection()
-        if not connection:
-            return []
-        cursor = connection.cursor()
-        # Fetch order details and customer username
-        cursor.execute("""
-            SELECT
-                o.order_id,
-                au.username AS customer_name,
-                o.status,
-                o.order_date,
-                (o.price * o.quantity) AS total_amount
-            FROM
-                orders o
-            JOIN
-                accounts_customuser au ON o.customer_id = au.id
-            ORDER BY
-                o.order_date DESC
-            LIMIT %s;
-        """, (limit,))
-        for row in cursor.fetchall():
-            recent_orders.append({
-                "order_id": row[0],
-                "customer_name": row[1],
-                "status": row[2],
-                "order_date": row[3],
-                "total_amount": row[4]
-            })
-        return recent_orders
+        conn = get_db_connection()
+        if not conn: return []
+        with conn.cursor() as cursor:
+            # CORRECTED: Provides all 6 columns the HTML table expects.
+            cursor.execute("""
+                SELECT
+                    o.order_id,
+                    au.username,
+                    p.product_title,
+                    o.item_price,
+                    o.status,
+                    o.order_date,
+                    (o.quantity * o.item_price) as total_amount
+                FROM orders o
+                JOIN accounts_customuser au ON o.user_id = au.id
+                JOIN products p ON o.product_id = p.item_id
+                ORDER BY o.order_date DESC
+                LIMIT 5;
+            """)
+            orders = cursor.fetchall()
+            for order in orders:
+                recent_orders_list.append({
+                    "order_id": order[0],
+                    "customer_name": order[1],
+                    "product_title": order[2],
+                    "price": float(order[3]),
+                    "status": order[4],
+                    "order_date": order[5],
+                    "total_amount": float(order[6])
+                })
+            return recent_orders_list
     except Exception as e:
-        logger.error(f"Error fetching recent orders: {e}")
+        logger.error(f"Error fetching recent orders: {e}", exc_info=True)
         return []
     finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
+        if conn: conn.close()
 
 def get_product_category_counts():
     connection = None

@@ -1389,7 +1389,7 @@ async def bulk_modify_post(
                         error_count += 1
                         error_messages.append(f"Failed to update price for item_id {item_id} from row {row_num} (Product not found or update failed).")
 
-                elif modification_type == 'update_description':
+                elif modification_type == 'update_description': 
                     item_id_str = processed_row.get('item_id')
                     new_description = processed_row.get('product_description')
                     if not item_id_str:
