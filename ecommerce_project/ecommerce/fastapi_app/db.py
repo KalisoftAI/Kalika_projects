@@ -162,35 +162,54 @@ def create_accounts_customuser_table():
             connection.close()
 
 def create_products_table():
+    """Creates the 'products' table with item_id as a SERIAL PRIMARY KEY."""
     connection = None
     cursor = None
     try:
         connection = get_db_connection()
-        if not connection:
-            return
+        if not connection: return
         cursor = connection.cursor()
         create_table_query = '''
         CREATE TABLE IF NOT EXISTS products (
-            item_id SERIAL PRIMARY KEY,
-            main_category VARCHAR(255) NOT NULL,
-            sub_categories VARCHAR(255),
-            item_code VARCHAR(100),
-            product_title VARCHAR(255) NOT NULL,
+            item_id SERIAL PRIMARY KEY,  -- Changed from INTEGER to SERIAL
+            action TEXT,
+            main_category TEXT NOT NULL,
+            sub_categories TEXT,
+            item_code VARCHAR(50) UNIQUE NOT NULL,
+            product_title TEXT NOT NULL,
             product_description TEXT,
+            upc TEXT,
+            brand TEXT,
+            department TEXT,
+            type TEXT,
+            tag TEXT,
+            list_price DECIMAL(10, 2),
             price DECIMAL(10, 2) NOT NULL,
-            image_url TEXT
+            inventory BIGINT,
+            min_order_qty BIGINT,
+            available TEXT,
+            large_image TEXT,
+            additional_images TEXT,
+            status VARCHAR(50) DEFAULT 'New',
+            last_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            lead_time VARCHAR(255),
+            length VARCHAR(255),
+            material_type VARCHAR(255),
+            sys_discount_group VARCHAR(255),
+            sys_num_images VARCHAR(255),
+            sys_product_type VARCHAR(255),
+            unit_of_measure VARCHAR(255),
+            unspsc VARCHAR(255)
         );
         '''
         cursor.execute(create_table_query)
         connection.commit()
-        logger.info("Table 'products' created successfully")
-    except Exception as e:
-        logger.error(f"Error creating table 'products': {e}")
+        logger.info("Table 'products' with auto-incrementing item_id ensured to exist.")
+    except Exception as error:
+        logger.error(f"Error creating 'products' table: {error}")
     finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
+        if cursor: cursor.close()
+        if connection: connection.close()
 
 def create_punchout_table():
     create_table_query = """
@@ -465,90 +484,48 @@ def get_pending_orders_count():
         if connection:
             connection.close()
 
-# def get_recent_orders(limit=5):
-#     connection = None
-#     cursor = None
-#     recent_orders = []
-#     try:
-#         connection = get_db_connection()
-#         if not connection:
-#             return []
-#         cursor = connection.cursor()
-#         # Fetch order details and customer username
-#         cursor.execute("""
-#             SELECT
-#                 o.order_id,
-#                 au.username AS customer_name,
-#                 o.status,
-#                 o.order_date,
-#                 (o.price * o.quantity) AS total_amount
-#             FROM
-#                 orders o
-#             JOIN
-#                 accounts_customuser au ON o.customer_id = au.id
-#             ORDER BY
-#                 o.order_date DESC
-#             LIMIT %s;
-#         """, (limit,))
-#         for row in cursor.fetchall():
-#             recent_orders.append({
-#                 "order_id": row[0],
-#                 "customer_name": row[1],
-#                 "status": row[2],
-#                 "order_date": row[3],
-#                 "total_amount": row[4]
-#             })
-#         return recent_orders
-#     except Exception as e:
-#         logger.error(f"Error fetching recent orders: {e}")
-#         return []
-#     finally:
-#         if cursor:
-#             cursor.close()
-#         if connection:
-#             connection.close()
-
-def get_recent_orders():
-    """Fetches the 5 most recent orders with data matching the dashboard template."""
-    conn = None
-    recent_orders_list = []
+def get_recent_orders(limit=5):
+    connection = None
+    cursor = None
+    recent_orders = []
     try:
-        conn = get_db_connection()
-        if not conn: return []
-        with conn.cursor() as cursor:
-            # CORRECTED: Provides all 6 columns the HTML table expects.
-            cursor.execute("""
-                SELECT
-                    o.order_id,
-                    au.username,
-                    p.product_title,
-                    o.item_price,
-                    o.status,
-                    o.order_date,
-                    (o.quantity * o.item_price) as total_amount
-                FROM orders o
-                JOIN accounts_customuser au ON o.user_id = au.id
-                JOIN products p ON o.product_id = p.item_id
-                ORDER BY o.order_date DESC
-                LIMIT 5;
-            """)
-            orders = cursor.fetchall()
-            for order in orders:
-                recent_orders_list.append({
-                    "order_id": order[0],
-                    "customer_name": order[1],
-                    "product_title": order[2],
-                    "price": float(order[3]),
-                    "status": order[4],
-                    "order_date": order[5],
-                    "total_amount": float(order[6])
-                })
-            return recent_orders_list
+        connection = get_db_connection()
+        if not connection:
+            return []
+        cursor = connection.cursor()
+        # Fetch order details and customer username
+        cursor.execute("""
+            SELECT
+                o.order_id,
+                au.username AS customer_name,
+                o.status,
+                o.order_date,
+                (o.price * o.quantity) AS total_amount
+            FROM
+                orders o
+            JOIN
+                accounts_customuser au ON o.customer_id = au.id
+            ORDER BY
+                o.order_date DESC
+            LIMIT %s;
+        """, (limit,))
+        for row in cursor.fetchall():
+            recent_orders.append({
+                "order_id": row[0],
+                "customer_name": row[1],
+                "status": row[2],
+                "order_date": row[3],
+                "total_amount": row[4]
+            })
+        return recent_orders
     except Exception as e:
-        logger.error(f"Error fetching recent orders: {e}", exc_info=True)
+        logger.error(f"Error fetching recent orders: {e}")
         return []
     finally:
-        if conn: conn.close()
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
 
 def get_product_category_counts():
     connection = None

@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 w-full">
+    <!-- Total Sales Card -->
     <div class="card-glass p-6 rounded-xl flex items-center justify-between">
         <div>
             <p class="text-text-secondary text-sm mb-1">Total Sales</p>
@@ -15,6 +16,7 @@
         </div>
     </div>
 
+    <!-- Total Products Card -->
     <div class="card-glass p-6 rounded-xl flex items-center justify-between">
         <div>
             <p class="text-text-secondary text-sm mb-1">Total Products</p>
@@ -26,6 +28,7 @@
         </div>
     </div>
 
+    <!-- Total Users Card -->
     <div class="card-glass p-6 rounded-xl flex items-center justify-between">
         <div>
             <p class="text-text-secondary text-sm mb-1">Total Users</p>
@@ -37,6 +40,7 @@
         </div>
     </div>
 
+    <!-- Pending Orders Card -->
     <div class="card-glass p-6 rounded-xl flex items-center justify-between">
         <div>
             <p class="text-text-secondary text-sm mb-1">Pending Orders</p>
@@ -49,6 +53,7 @@
     </div>
 </div>
 
+<!-- Charts Section -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 w-full">
     <div class="card-glass p-6 rounded-xl">
         <h4 class="text-xl font-semibold mb-4 text-text-primary">Sales Overview</h4>
@@ -70,6 +75,7 @@
     </div>
 </div>
 
+<!-- Recent Orders Table -->
 <div class="card-glass p-6 rounded-xl overflow-x-auto w-full">
     <h4 class="text-xl font-semibold mb-4 text-text-primary">Recent Orders</h4>
     <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0 md:space-x-4">
@@ -83,12 +89,11 @@
             </select>
         </div>
     </div>
-    <table id="recentOrdersTable" class="min-w-full data-table rounded-lg overflow-hidden">
+    <table id="recentOrdersTable" class="min-w-full data-table rounded-lg overflow-hidden"> {# Added unique ID #}
         <thead>
             <tr>
                 <th class="py-3 px-4 text-left font-medium">Order ID</th>
                 <th class="py-3 px-4 text-left font-medium">Customer</th>
-                <th class="py-3 px-4 text-left font-medium">Product</th>
                 <th class="py-3 px-4 text-left font-medium">Status</th>
                 <th class="py-3 px-4 text-left font-medium">Date</th>
                 <th class="py-3 px-4 text-left font-medium">Total</th>
@@ -96,11 +101,10 @@
             </tr>
         </thead>
         <tbody>
-            {% for order in recent_orders %}
+            {% for order in recent_orders %} {# Loop through dynamic recent_orders #}
             <tr>
                 <td class="py-3 px-4">#{{ order.order_id }}</td>
                 <td class="py-3 px-4">{{ order.customer_name }}</td>
-                <td class="py-3 px-4">{{ order.product_title }}</td>
                 <td class="py-3 px-4">
                     <span class="px-3 py-1 rounded-full text-xs font-semibold
                         {% if order.status == 'Completed' %}bg-accent-emerald/20 text-accent-emerald
@@ -117,12 +121,13 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="7" class="py-3 px-4 text-center text-text-secondary">No recent orders found.</td>
+                <td colspan="6" class="py-3 px-4 text-center text-text-secondary">No recent orders found.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="flex justify-end items-center mt-4 space-x-2 text-text-secondary">
+        {# DataTables will handle pagination, so these buttons are illustrative or can be replaced by DataTables' own pagination controls #}
         <button class="px-3 py-1 rounded-md bg-secondary-dark text-header-text hover:bg-sidebar-hover-bg transition-colors duration-200 focus:outline-none">Previous</button>
         <span class="px-3 py-1 rounded-md bg-accent-indigo text-white">1</span>
         <button class="px-3 py-1 rounded-md bg-secondary-dark text-header-text hover:bg-sidebar-hover-bg transition-colors duration-200 focus:outline-none">2</button>
@@ -171,7 +176,12 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { color: chartTextColor, font: { family: 'Inter' } }
+                        labels: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        }
                     },
                     tooltip: {
                         callbacks: {
@@ -184,12 +194,28 @@
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
-                        grid: { color: chartGridColor, drawBorder: false, }
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
                     },
                     x: {
-                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
-                        grid: { color: chartGridColor, drawBorder: false, }
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
                     }
                 }
             }
@@ -214,18 +240,39 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { color: chartTextColor, font: { family: 'Inter' } }
+                        labels: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        }
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
-                        grid: { color: chartGridColor, drawBorder: false, }
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
                     },
                     x: {
-                        ticks: { color: chartTextColor, font: { family: 'Inter' } },
-                        grid: { color: chartGridColor, drawBorder: false, }
+                        ticks: {
+                            color: chartTextColor,
+                            font: {
+                                family: 'Inter',
+                            }
+                        },
+                        grid: {
+                            color: chartGridColor,
+                            drawBorder: false,
+                        }
                     }
                 }
             }
@@ -237,8 +284,7 @@
             type: 'pie',
             data: {
                 labels: [
-                    // CORRECTED: Use 'item.name' to match the data structure from your backend API
-                    {% for item in category_data %}'{{ item.name }}'{% if not loop.last %},{% endif %}{% endfor %}
+                    {% for item in category_data %}'{{ item.category }}'{% if not loop.last %},{% endif %}{% endfor %}
                 ],
                 datasets: [{
                     data: [
@@ -252,7 +298,7 @@
                         'rgb(239, 68, 68)', // red-500
                         'rgb(153, 102, 255)' // purple
                     ],
-                    hoverOffset: 4
+                    hoverOffset:4
                 }]
             },
             options: {
@@ -263,7 +309,9 @@
                         position: 'right',
                         labels: {
                             color: chartTextColor,
-                            font: { family: 'Inter' }
+                            font: {
+                                family: 'Inter',
+                            }
                         }
                     }
                 }
@@ -283,6 +331,7 @@
 
     // DataTables initialization for Recent Orders table
     $(document).ready(function() {
+        // Destroy existing DataTable instance if it exists before re-initializing
         if ($.fn.DataTable.isDataTable('#recentOrdersTable')) {
             $('#recentOrdersTable').DataTable().destroy();
         }
@@ -290,9 +339,9 @@
             "paging": true,
             "searching": true,
             "info": false,
-            "lengthChange": false,
-            "pageLength": 5,
-            "dom": 'rtip',
+            "lengthChange": false, // Hide "Show X entries" dropdown
+            "pageLength": 5, // Default rows per page
+            "dom": 'rtip', // Only show table, pagination, info (search and length hidden by custom elements)
             "language": {
                 "paginate": {
                     "previous": "Previous",

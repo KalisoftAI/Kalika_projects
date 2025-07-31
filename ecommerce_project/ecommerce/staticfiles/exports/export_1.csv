@@ -88,6 +88,7 @@ edit,201669,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-5X50",N51EG-012-0249,"Impeccable fi
 edit,201670,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-5X90",N31EG-012-0729,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201671,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-6X10",N31EG-012-0730,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201672,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-6X180",N51EG-012-0239,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
+edit,202281,Cloth Tape Double Sided Adhesive (2 Inch) 50mm,N71-DOUBLETAPE2,
 edit,201673,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-6X16",N31EG-012-0732,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201674,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-6X20",N51EG-012-0203,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201675,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-6X25",N51EG-012-0204,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
@@ -109,6 +110,7 @@ edit,201690,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X30",N31EG-012-0428,"Impeccable f
 edit,201691,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X35",N31EG-012-0444,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201692,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X40",N51EG-012-0001,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201693,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X45",N51EG-012-0002,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
+edit,202314,KIT BAG WITH LOGO PRINTING FOR APOLLO GENSET,N50KITBAGAPOLLO,
 edit,201694,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X50",N51EG-012-0003,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201695,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X60",N51EG-012-0004,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
 edit,201696,"ALLEN SCREW,MAKE-UNBRAKO , SIZE-10X70",N51EG-012-0005,"Impeccable finish,Rigid design,Corrosion resistance,Steel body,Stainless finish,Rust free"
@@ -246,7 +248,6 @@ edit,201783,PAINT BRUSH 50MM,N35EG-012-0036,"Easy to use,Superior quality,Advanc
 edit,201784,PAINT BRUSH 25MM,N35EG-009-0631,"Easy to use,Superior quality,Advanced and reliable"
 edit,201785,PAINT BRUSH 75MM,N35EG-012-0314,"Easy to use,Superior quality,Advanced and reliable"
 edit,201786,PAINT BRUSH 7 NO.,N35EG-012-0035,"Easy to use,Superior quality,Advanced and reliable"
-edit,201830,INTERNAL CIRCLIP 12MM,N36-INTCIRCLIP-12MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
 edit,201787,TACK RAG (FOR PAINTING),N69PC-001-0094,"This is a tough multipurpose cream that builds a protective sheath wound hands that work with certain acids, alkalies, resins, paints, adhesives, industrial mineral oils etc"
 edit,201788,SPRAY PAINTING GUN,N31EG-017-0002,"Gun distance from work piece mm(inch) : 228.6 (9),Fluid nozzle orifice dia.(mm) : 1.6, Required pressure (kgs/sq.cm) : 2.8-4.2, Air consumption of rated pressure lit/min(c.f.m) : 225-300(8-10)"
 edit,201789,"PAPER PAINT STRAINER (400 MESH), CODE-AS-PS",N36-PAINTMESHFILTER,"<div>
@@ -292,7 +293,6 @@ edit,201809,GLASS TEST TUBE 18X150,N35EG-012-0050,"Available with us in a variet
 edit,201810,BATTERY ACID,N37EM-016-0029,"Longer shelf life
 Effective
 Soluble in water"
-edit,201829,INTERNAL CIRCLIP 10MM,N36-INTCIRCLIP-10MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
 edit,201811,BATTERY DISTILLED WATER,N56EM-021-0022,"It improves battery life, maintain a life of coil in steam press work, for electro plating, for good shine in ornaments rhodium, precise lab testing in patho Lab, ceramic industry, gives the best result for the chemical industry, pharma industry and cosmetic industry."
 edit,201813,BONFIGLIOLI GEAR BOX OIL,N56EM-021-0032,BONFIGLIOLI GEAR BOX OIL
 edit,201814,"SAE 68 OIL,(SERVO/HP)",N56EM-021-0035,"<div>
@@ -333,6 +333,9 @@ edit,201826,HOOK UP WIRE  in Kilogram,N50-GIWIRECUT,"<div>
 </div>"
 edit,201827,EXTERNAL CIRCLIP SET (10 NOS EACH) 4MM TO 50MM,N40EG-012-0496,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
 edit,201828,INTERNAL CIRCLIP SET (10 NOS EACH) 4MM TO 500MM,N36-D161175,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
+edit,201829,INTERNAL CIRCLIP 10MM,N36-INTCIRCLIP-10MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
+edit,201830,INTERNAL CIRCLIP 12MM,N36-INTCIRCLIP-12MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
+edit,202352,ROTOR FOR CP 780,N31-G6PEPNCP780SCR07,ROTOR FOR CP 780
 edit,201831,INTERNAL CIRCLIP 14MM,N36-INTCIRCLIP-14MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
 edit,201832,INTERNAL CIRCLIP 16MM,N36-INTCIRCLIP-16MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
 edit,201833,EXTERNAL CIRCLIP 10MM,N36-EXTCIRCLIP-10MM,"Prevent lateral movement of assemblies,Permit rotation of assemblies,Longer functional life"
@@ -350,6 +353,7 @@ edit,201846,"INTERNAL CIRCLIP PLIER, BENT NOSE, SIZE-9&quot;",N40EG-001-0138,"Co
 edit,201847,"EXTERNAL CIRCLIP PLIER, BENT NOSE, MAKE- STANLEY, SIZE-5&quot;",N40EG-012-0489,"Compact design,Easy usage,Lightweight,Strong construction,Durability,High performance,Comfortable gripMaterial: high carbon steel,Handle: double plastic,anti-skid,Surface: antirust blackening,Designed for holes"
 edit,201848,"EXTERNAL CIRCLIP PLIER, BENT NOSE, MAKE- STANLEY, SIZE-7&quot;",N40EG-014-0087,"Compact design,Easy usage,Lightweight,Strong construction,Durability,High performance,Comfortable gripMaterial: high carbon steel,Handle: double plastic,anti-skid,Surface: antirust blackening,Designed for holes"
 edit,201849,"EXTERNAL CIRCLIP PLIER, BENT NOSE, MAKE- STANLEY, SIZE-9&quot;",N40EG-001-0160,"Compact design,Easy usage,Lightweight,Strong construction,Durability,High performance,Comfortable gripMaterial: high carbon steel,Handle: double plastic,anti-skid,Surface: antirust blackening,Designed for holes"
+edit,202710,"CENTRE DRL,BS3(3/32X1/4INS)",N56M0001INDIRECT2951,
 edit,201850,"EXTRA LONG NOSE PLIER,MAGADH",N31EG-012-0039,"<div>
 <p>Long, flat jaws and serrated gripping surfaces,Special hardened and tempered steel, chrome-plated</p>
 </div>"
@@ -398,7 +402,6 @@ edit,201869,COPPER LUG 400SQMM,N39-COPPERLUG400,"Long lasting
 International standard
 Best grade materials"
 edit,201870,1.5SQMM X 6 CORE JIB CRANE PENDENT CABLE (WITH INBUILT WIRE ROPE),N37EM-043-0098,1.5SQMM X 6 CORE JIB CRANE PENDENT CABLE (WITH INBUILT WIRE ROPE)
-edit,201887,"SPANNER,6-7, TAPARIA",N31EG-016-0004,"It is made from high grade steel,forged and accurately machined.Hardened and tempered to give long trouble free service. Provide with appropriate surface protection for rust prevention."
 edit,201871,PU MALLET SM-0,N31EG-012-0027,"<div><p>Protects workmen from injuries,Low noise level makes for a more conducive work environment,Special mallet head design for greater impact without renounces,Dent free &amp; scratch free working protects work piece,No spark due to Polyurethane covering,Longer life span,cost-effective</p></div>"
 edit,201872,PU MALLET SM-1,N31EG-012-0028,"<div><p>Protects workmen from injuries,Low noise level makes for a more conducive work environment,Special mallet head design for greater impact without renounces,Dent free &amp; scratch free working protects work piece,No spark due to Polyurethane covering,Longer life span,cost-effective</p></div>"
 edit,201873,PU MALLET SM-2,N31EG-012-0029,"<div>
@@ -421,6 +424,8 @@ edit,201884,FILE SQUARE 10 INCH SMOOTH(JK MAKE),N31EG-012-0608,"<div>
 </div>"
 edit,201885,FILE SQUARE 8 INCH SMOOTH (JK MAKE),N31EG-012-0403,"<div><p>Square files are used to enlarge square and rectangular openings, filing slots, key ways &amp; other similar contours. They are double cut files enabling faster stock removal. These files are designed for use on thick workpieces.</p></div>"
 edit,201886,FILE SQURE 6 INCH SMOOTH (JK MAKE),N31EG-012-0016,"<div><p>Square files are used to enlarge square and rectangular openings, filing slots, key ways &amp; other similar contours. They are double cut files enabling faster stock removal. These files are designed for use on thick workpieces.</p></div>"
+edit,201887,"SPANNER,6-7, TAPARIA",N31EG-016-0004,"It is made from high grade steel,forged and accurately machined.Hardened and tempered to give long trouble free service. Provide with appropriate surface protection for rust prevention."
+edit,202353,BLADE SET-ROTOR (5) FOR CP 780,N31-G6PEPNCP780SCR08,BLADE SET-ROTOR (5) FOR CP 780
 edit,201888,"SPANNER,8-9, TAPARIA",N31EG-016-0005,"It is made from high grade steel,forged and accurately machined.Hardened and tempered to give long trouble free service. Provide with appropriate surface protection for rust prevention."
 edit,201889,"SPANNER,10-11,TAPARIA",N31EG-016-0006,"It is made from high grade steel,forged and accurately machined.Hardened and tempered to give long trouble free service. Provide with appropriate surface protection for rust prevention."
 edit,201891,"SPANNER,14-15,TAPARIA",N31EG-016-0017,"It is made from high grade steel,forged and accurately machined.Hardened and tempered to give long trouble free service. Provide with appropriate surface protection for rust prevention."
@@ -443,6 +448,7 @@ edit,201903,"PART NO.AT355-7, BALL BEARING",N40EM-016-0355,"<div><p>PART NO.AT35
 edit,201904,"PART NO. AT360-5, FRONT PLATE",N36EG-015-0014,"<div><p>PART NO. AT360-5, FRONT PLATE</p></div>"
 edit,201905,"PART NO. AT360-7, ROTOR BLADE SET",N31-PARTAT360-7,"<div><p>PART NO. AT360-7, ROTOR BLADE SET</p></div>"
 edit,201906,"PART NO.AT360-9,  REAR PLATE",N35EG-015-0015,"<div><p>PART NO.AT360-9, REAR PLATE</p></div>"
+edit,202354,LINER FOR CP 780,N31-G6PEPNCP780SCR09,LINER FOR CP 780
 edit,201907,"PART NO. AT300-8, BALL BEARING",N36-D180271,"<div><p>PART NO. AT300-8, BALL BEARING</p></div>"
 edit,201908,PART NO. AT360-16 COMPRESSION FITTING,N35EG-014-0121,<div><p>PART NO. AT360-16 COMPRESSION FITTING</p></div>
 edit,201909,"PART NO. AT360-17, TWIN ANVIL ASSY",N31-PARTAT300-17,"<div><p>PART NO. AT360-17, TWIN ANVIL ASSY</p></div>"
@@ -477,7 +483,7 @@ edit,201922,"ANGLE (Ratchets) WRENCH , MODEL NO. CP825",N35EG-014-0017,"<div><p>
 edit,201923,"Pneumatic Die Grinder, MODEL NO. CP 876",N37EG-014-0025,"<div>
 <p>Built-in air regulator. General maintenance applications Operator comfort and control 2-fingered steady grip throttle Rubber handle grip Exhaust throug handle Includes 1/4"" and 6 mm collet</p>
 </div>"
-edit,202306,PVC GUMMING SHEET FOR SKIN PACKAGING,N50KALPVCPAC,
+edit,201966,"DRILL 13, IT",N31EG-006-039,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201925,"DIE SANDER, MODEL NO. CP9778",N35EG-014-0014,"<div>
 <p>Standard-duty hi-speed sander with 5"" (125 mm) pad. General maintenance pistol sander Excellent for paint removal, smoothing and rust removal in limited space applications. Built-in air regulator and variable speed throttle Rugged, energy efficient 0.5 hp(375 W) motor Low vibration</p>
 </div>"
@@ -487,6 +493,7 @@ edit,201928,"DIE SANDER (CP778) NUT RETAINING , PART NO. KF137218",N31EG-014-008
 edit,201929," Air Hammer Drill GUN, MODEL NO. CP7150",N31EG-014-0026,<div><p>Standard .401 round shank. Excellent power / weight ratio Fast action and withstands rugged use Ideal tool for heavy-duty application Most powerful hammer in its class Longer piston stroke for more power Integral muffler minimizes exhaust sound</p></div>
 edit,201930,SPRING FOR Air Hammer Drill Gun CP 715,N35EM-016-0415,SPRING FOR Air Hammer Drill Gun CP 715
 edit,201932,SPRING FOR Air Hammer Drill Gun CP 717,N35EG-014-0044,<div><p>SPRING FOR Air Hammer Drill Gun CP 717</p></div>
+edit,201933," Air DRILL GUN, MODEL NO. CP785/9285C",N31EG-014-0004,"<div><p>3/8"" (10 mm) pistol drill. Industrial maintenance duty and designed for smooth operation and extended tool life Ideal tool for all types of maintenance work. Powerful energy efficient motor resists stalls Handle exhaust</p></div>"
 edit,201934,HOT AIR GUN 1400W - 230V (HL 1400S),N31EG-001-0102,"Easy installation
 Available in various capacities
 Long lasting performance
@@ -512,8 +519,7 @@ edit,201940,PUSH TYPE BRASS CONNECTOR MAKE- LUDECKE,N35EG-014-0213,PUSH TYPE BRA
 edit,201941,Festo 153033 QS-8 Push-in Connector STRAIGHT JOINT Connector  8MMX8MM,N36-PUCONNECTOR8,"<div>
 <p>Maximum flexibility for each pneumatic fitting &bull; Effortless, quick and simple push-in installation &bull; Tube to tube (hose) connection style for use in pneumatic applications &bull; Wide operating temperature range of -10 to +80&deg;C &bull; Air pressure ranges of up to 14 bar &bull; Available with a variety of different diameter connector sizes &bull; Strong and durable thermoplastic (PBT) &bull; Connectors are available with or without a push in sleeve</p>
 </div>"
-edit,202307,PET STRAP ( GREEN STRIP ROLL) 15mm width 2000 mtr/roll,N50GREENSTRIP,
-edit,202308,PET PACKING SEAL ( GREEN STRIP CLIP ) 15mm width,N50-G6-001-101334,
+edit,201964,"DRILL 10.2 , IT",N31EG-006-010,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201942,Festo Make Straight Joint Connector 10mm x 10 mm,N35EG-014-0232,"<div>
 <p>Maximum flexibility for each pneumatic fitting &bull; Effortless, quick and simple push-in installation &bull; Tube to tube (hose) connection style for use in pneumatic applications &bull; Wide operating temperature range of -10 to +80&deg;C &bull; Air pressure ranges of up to 14 bar &bull; Available with a variety of different diameter connector sizes &bull; Strong and durable thermoplastic (PBT) &bull; Connectors are available with or without a push in sleeve</p>
 </div>"
@@ -551,7 +557,9 @@ edit,201948,T-Connetcor 10MM,N35EG-016-0257,"Maximum flexibility for each pneuma
 • Available with a variety of different diameter connector sizes
 • Strong and durable thermoplastic (PBT)
 • Mini size push-in fitting, ideal for confined spaces"
-edit,201964,"DRILL 10.2 , IT",N31EG-006-010,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
+edit,201965,"DRILL 12 , IT",N31EG-006-011,"<div>
+<p>Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters.</p>
+</div>"
 edit,201949,T-Connetcor 12MM,N35EG-016-0263,"Maximum flexibility for each pneumatic fitting
 • Effortless, quick and simple push-in installation
 • Tube to tube (hose) connection style for use in pneumatic applications
@@ -594,10 +602,6 @@ edit,201960,"DRILL 06.8 , IT",N31EG-006-006,"Normally supplied for RH cutting, w
 edit,201961,"DRILL 08.5 , IT",N31EG-006-007,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201962,"DRILL 08.5 (EXTRA LONG),  IT, 200MM",N31EG-006-008,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201963,"DRILL 10,  IT",N31EG-006-009,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
-edit,201965,"DRILL 12 , IT",N31EG-006-011,"<div>
-<p>Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters.</p>
-</div>"
-edit,201966,"DRILL 13, IT",N31EG-006-039,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201967,"DRILL T.S. 12, IT",N31EG-006-013,"<div><p>Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters.</p></div>"
 edit,201968,"DRILL 14, IT",N31EG-006-053,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201969,"DRILL 14, IT",N31EG-006-054,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
@@ -610,12 +614,8 @@ edit,201975,"DRILL 18,  IT",N31-DRILL18MM,"Normally supplied for RH cutting, wit
 edit,201976,"DRILL 19,  IT",N31EG-006-059,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201977,"DRILL 20,  IT",N31-DRILL20MM,"Normally supplied for RH cutting, with tool type N, HSS twist drills have a point angle ground to 118o and a lip clearance angle of minimum 8o for smooth cutting operarions. Manufactured in different grades of High Speed Steels, the drills are available in various diameters."
 edit,201978,"CONCRETE DRILL 14MM X 216MM, HILTI",N31EG-006-075,"<div><p>New solid carbide head for less wear and more holes with the accuracy required for setting anchors Innovative solid carbide head featuring gradient technology for easy drilling through steel rebars Quadruple helix and optimum head geometry for consistently fast drilling progress over the entire life of the drill bit The indicator mark at the head verifies suitability for setting anchors as long as the mark is visible In the unlikely event of breakage, the drill bit will be considered for replacement as long as the wear mark on the helix is still visible</p></div>"
-edit,202237,RUBBER GASKET (WASHER)  3/4 INCH,N35HYFT1000012,"<div>
-<p><b>Abrasion resistance </b></p>
-<p><b>Easy installation </b></p>
-<p><b>High durability</b></p>
-</div>"
 edit,201979,"CONCRETE DRILL 18MM X 250MM , HILTI",N31EG-006-077,"<div><p>New solid carbide head for less wear and more holes with the accuracy required for setting anchors Innovative solid carbide head featuring gradient technology for easy drilling through steel rebars Quadruple helix and optimum head geometry for consistently fast drilling progress over the entire life of the drill bit The indicator mark at the head verifies suitability for setting anchors as long as the mark is visible In the unlikely event of breakage, the drill bit will be considered for replacement as long as the wear mark on the helix is still visible</p></div>"
+edit,201992,"TAP, M5III,",N31EG-018-0065,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201980,"CONCRETE DRILL 10MM X 160MM ,HILTI",N31EG-006-051,"<div>
 <p>New solid carbide head for less wear and more holes with the accuracy required for setting anchors Innovative solid carbide head featuring gradient technology for easy drilling through steel rebars Quadruple helix and optimum head geometry for consistently fast drilling progress over the entire life of the drill bit The indicator mark at the head verifies suitability for setting anchors as long as the mark is visible In the unlikely event of breakage, the drill bit will be considered for replacement as long as the wear mark on the helix is still visible</p>
 </div>"
@@ -634,10 +634,8 @@ edit,201986,"TAP, M6II,",N51EG-018-0003,"Hollow Taps  general purpose taps which
 edit,201987,"TAP, M8II,",N51EG-018-0034,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201988,"TAP, M10II,",N51EG-018-0005,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201989,"TAP, M12II,",N51EG-018-0006,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
-edit,202347,WASHER  FOR CP 780,N31-G6PEPNCP780SCR02,WASHER  FOR CP 780
 edit,201990,"TAP, M14II,",N51EG-018-0009,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201991,"TAP, M4III,",N31-TAPM4III,"<div><p>Hollow Taps general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads.</p></div>"
-edit,201992,"TAP, M5III,",N31EG-018-0065,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201993,"TAP, M6III,",N31EG-018-0066,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201994,"TAP, M8III,",N31EG-018-0067,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
 edit,201995,"TAP, M10III,",N31EG-018-0068,"Hollow Taps  general purpose taps which can be used for both machine or hand tapping. The most economical tool for use on production runs, but are best on materials that produce chips, or where the swarf breaks readily. Where deep holes are to be tapped, in materials which produce stringy swarf, other types of taps may be needed, especially for coarse threads."
@@ -656,6 +654,10 @@ edit,202005,WELDING MASK (VENUS 425),N69WELDINGMASK,"<div>
 edit,202006,MEASURING JAR 1000ML,N34EGQA-021-0136,"The Measuring Jugs, molded in Polypropylene are clear, autoclavable and have good chemical resistance. The Measuring Jugs are provided with a handle for easy & convenient lifting and have raise graduations for easy reading. Adding to the existing range of Polylab Jugs, these short form transparent jugs, made of polypropylene are autoclavable and have non-drip spout."
 edit,202007,MEASURING JAR 500ML,N34EGQA-021-0253,"The Measuring Jugs, molded in Polypropylene are clear, autoclavable and have good chemical resistance. The Measuring Jugs are provided with a handle for easy & convenient lifting and have raise graduations for easy reading. Adding to the existing range of Polylab Jugs, these short form transparent jugs, made of polypropylene are autoclavable and have non-drip spout."
 edit,202008,V-BELT A40,N40-VBELTA40,V-BELT A40
+edit,202122,O RING FOR SOLENOID VALVE 12X1.5MM,N36-ORINGVALVE12X1.5,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
+edit,202156,OIL SEAL TC 75 ×100 ×13,N36-OILSLTC75X100X13,"<div>
+<p>A oil seal is a device that helps join systems or mechanisms together by preventing leakage</p>
+</div>"
 edit,202009,V-BELT A41,N40-VBELTA41,"<div>
 <h3 id=""product-key_features"" class=""f-size-16 pad-tb-10 text-uppercase no-margin mar-t-20 text-500""><b>KEY FEATURES</b></h3>
 <div class=""row center-block-xs pad-b-15 wp-xs-99 pad-lr-15"">
@@ -704,7 +706,9 @@ edit,202118,O RING FOR SOLENOID VALVE 10X1MM,N36-ORINGVALVE10X1,"An O-ring, als
 edit,202119,O RING FOR SOLENOID VALVE 10X1.5MM,N36-ORINGVALVE10X1.5,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202120,O RING FOR SOLENOID VALVE 10X2MM,N36-ORINGVALVE10X2,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202121,O RING FOR SOLENOID VALVE12X1MM,N36-ORINGVALVE12X1,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
-edit,202122,O RING FOR SOLENOID VALVE 12X1.5MM,N36-ORINGVALVE12X1.5,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
+edit,202155,SHOE COVER PLASTIC ABOVE 50 MICRON,N69SHOECOVER,"<div>
+<p>The disposable polypropylene shoe covers protect carpets and floors. Fitting shoes up to size 10, these covers are made of polypropylene non woven fabric</p>
+</div>"
 edit,202123,O RING FOR SOLENOID VALVE 12X2MM,N36-ORINGVALVE12X2,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202124,"O RING-(ID-8,OD-12,THK-2)MM",N36-ORING8MM,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202125,"O RING-(ID-6,OD-10,THK-2)MM",N36-ORING6MM,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
@@ -755,19 +759,9 @@ edit,202150,ISOFlEX TOPAS  NB 52 Grease Make KLUBER,N44MAIN9500192,SOFLEX TOPAS
 edit,202151,KLUBER GREASE NLGI CLASS 000 ( CENTOPLEX  GLP 200-000).,N56GRES0140017,"<div>
 <p>Good pressure absorbtion capacity.</p>
 </div>"
-edit,202238,RUBBER GASKET (WASHER)  1 INCH,N35HYFT1000013,"<div>
-<p><b>Abrasion resistance</b></p>
-<p><b> Easy installation </b></p>
-<p><b>High durability</b></p>
-</div>"
 edit,202153,VEEDOL MAKE ALITHEX 20 GREASE ( NLGI 2) MOQ - 20 KG,N56RUMB5226001,"<div><p>Lithium based grease with extreme pressure additive having high load carrying capacity, rust inhibition properties, oxidation stability and heat stability. Available in NLGI consistencies 1 and 2. Meets IS 7623 : 1993 (Reaf firmed 2006) specification</p></div>"
 edit,202154,DISTILLED WATER ISO3696,N55DIWATERISO3696,"<div><p>Distilled water is water that has been boiled into vapor and condensed back into liquid in a separate container. Impurities in the original water that do not boil below or near the boiling point of water remain in the original container. Thus, distilled water is one type of purified water.</p></div>"
-edit,202155,SHOE COVER PLASTIC ABOVE 50 MICRON,N69SHOECOVER,"<div>
-<p>The disposable polypropylene shoe covers protect carpets and floors. Fitting shoes up to size 10, these covers are made of polypropylene non woven fabric</p>
-</div>"
-edit,202156,OIL SEAL TC 75 ×100 ×13,N36-OILSLTC75X100X13,"<div>
-<p>A oil seal is a device that helps join systems or mechanisms together by preventing leakage</p>
-</div>"
+edit,202355,SCREW FOR CP 780,N31-G6PEPNCP780SCR10,SCREW FOR CP 780
 edit,202157,O RING 20 × 2.4,N36-ORING20X2.4,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202158,O RING 16 × 2.4,N36-ORING16X2.4,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202159,O RING 75 × 3.1,N36-ORING75X3.1,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
@@ -779,10 +773,13 @@ edit,202164,O RING 14×2.4,N36-ORING14X2.4,"An O-ring, also known as a packing,
 edit,202165,O RING 24×2.4,N36-ORING24X2.4,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202166,O RING 100  × 3.1,N36-ORING100X3.1,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202167,O RING 100  ×5.7,N36-ORING100X5.7,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
-edit,202309,HDPE BLACK TAPE 50 mm width x length 50 mtr used for Packaging,N50-G6-001-1403,
 edit,202168,BOLT M14 ×30,N36-BLTM14X30,"<div>
 <p>Reliability: Once tightened, Bolts will remain tight and maintain the permanent strength of the joint, Absence of heavy stress concentration due to absence of bearing between bolts and plates. Economy: Fewer high strength bolts are required than M.S. bolts and rivets. Drilling of close holes is not required. Overall weight the structure will be very light. Simplicity: A minimum of skill is required in tightening and the operators need only to follow a few simple rules. Convenience: Whether in the workshop or at site, H.S.S bolts enable joints to be made easily. Welding of site splices can be eliminated, avoiding difficulties of welding in adverse weather conditions. Absence of pneumatic, hammers used in riveted joints reduce noise level considerably.</p>
 </div>"
+edit,202184,2 Inch BELLOW HYDRAULIC HOSE WITH MS FITTING LONG 1300MM,N36HOSE3003-002,"<div>
+<p>Parker offers the widest range of specialty, industrial, hybrid and hydraulic hose in the industry. Low pressure, medium pressure and high pressure pneumatic and hydraulic hose that is heat, ozone and weather resistant, chemical resistant, oil and flame resistant, UV resistant and abrasion resistant is available from Parker. Parker&rsquo;s pneumatic and hydraulic hose is manufactured to meet or exceed industrial specification requirements of SAE, DOT, USCG, ISO, DNV, EN, MSHA, German Lloyd, ABS, CARB, FDA, NFPA, CSA, NGV, ANSI and UL-21 LPG standards</p>
+</div>"
+edit,202356,BUTTON-THROTTLE FOR CP 780,N31-G6PEPNCP780SCR11,BUTTON-THROTTLE FOR CP 780
 edit,202169,V BELT A64,N40-VBELTA64,"<div><h3 id=""product-key_features"" class=""f-size-16 pad-tb-10 text-uppercase no-margin mar-t-20 text-500""><b>KEY FEATURES</b></h3>
 <div class=""row center-block-xs pad-b-15 wp-xs-99 pad-lr-15"">
 <div class=""col-sm-12 pad-lr-xs-0"">
@@ -867,11 +864,9 @@ edit,202180,RUST LICK 631,N36EQUP3000395,"<div class=""dtlsec1"">
 </div>"
 edit,202181,"TOOLFLEX COUPLING, ROTEX MAKE, SIZE -38, DRG NO.YSR M35 X 1.5P, PART NO.554106",N36GUDEL7005163,"TOOLFLEX COUPLING, ROTEX MAKE, SIZE -38, DRG NO.YSR M35 X 1.5P, PART NO.554106"
 edit,202182,COUPLING GS 24 ( 24) ROTEX,N36GUDEL7005151,<div><p>Rotex Coupling&nbsp;shaft couplings are the originally curved jaw coupling. Superior vibration dampening and torque transmission characteristics result in an excellent running quality and service life.</p></div>
-edit,202298,POLYESTER CORDED COMPOSITE STRAP 32 MM (FOR PACKING) with Printing of EPR and 350 mtr roll and overall length of 700 mtr,N50KALSTR32,
 edit,202183,HYDRAULIC HOSE 3/4 HOUSE 800MM 3/4&quot; ONE SIDE 1&quot; BSP ONE SIDE ADAPTOR AEROQUIP,N36HOSE6002-001,<div><p>We are one of the major manufacturers and suppliers of Hydraulic Hoses. The offered hoses are made using sophisticated PVC and allied raw materials coupled with novel technology in compliance with set industry standards.</p></div>
-edit,202184,2 Inch BELLOW HYDRAULIC HOSE WITH MS FITTING LONG 1300MM,N36HOSE3003-002,"<div>
-<p>Parker offers the widest range of specialty, industrial, hybrid and hydraulic hose in the industry. Low pressure, medium pressure and high pressure pneumatic and hydraulic hose that is heat, ozone and weather resistant, chemical resistant, oil and flame resistant, UV resistant and abrasion resistant is available from Parker. Parker&rsquo;s pneumatic and hydraulic hose is manufactured to meet or exceed industrial specification requirements of SAE, DOT, USCG, ISO, DNV, EN, MSHA, German Lloyd, ABS, CARB, FDA, NFPA, CSA, NGV, ANSI and UL-21 LPG standards</p>
-</div>"
+edit,202198,INDUCTION MOTOR 0.75 KW WITH BRAKE (544222 DRG - BN80 B4 FDR) BONFIGLIOLI,N37GUDEL7005152,"<div><p>Flange Mounted Geared Motor that are widely used in industries for various applications. In addition, this Motors are also used for centrifugal and non-clog pumps.&nbsp;</p></div>"
+edit,202357,THROTTLE-VALVE SPRING FOR CP 780,N31-G6PEPNCP780SCR12,THROTTLE-VALVE SPRING FOR CP 780
 edit,202185,1/2 inch 4SH HYDRAULIC HOSE PIPE PARKER MAKE FITTING M22 LONG -1.200 m,N36HOSE1001-003,"<div>
 <p>Parker offers the widest range of specialty, industrial, hybrid and hydraulic hose in the industry. Low pressure, medium pressure and high pressure pneumatic and hydraulic hose that is heat, ozone and weather resistant, chemical resistant, oil and flame resistant, UV resistant and abrasion resistant is available from Parker. Parker&rsquo;s pneumatic and hydraulic hose is manufactured to meet or exceed industrial specification requirements of SAE, DOT, USCG, ISO, DNV, EN, MSHA, German Lloyd, ABS, CARB, FDA, NFPA, CSA, NGV, ANSI and UL-21 LPG standards</p>
 </div>"
@@ -903,8 +898,6 @@ edit,202194,1/2 INCH HYDRAULIC HOSE PIPE MAKE AEROQUIP FITTING LONG-2MTR,N36HOSE
 <p>Supreme strength Based on hydraulic force.</p>
 <p>Light weight</p>
 </div>"
-edit,202299,BUCKLES SIZE  16MM  (FOR PACKING),N50KALBUCK16,
-edit,202310,PACKING SEAL,N50EG-012-0357,
 edit,202195,GEARED INDUCTION MOTOR (552075 DRG - W110 U64P90B5B3-BN90S4) BONFIGLIOLI,N37GUDEL7005135,<div><p>Cost effective solution - Low noise - High peak load capacity - Minimized mounting space - Long operating life - High reliability - High number of possible configuration - Wide output speed selection range - Wide output torque selection range</p></div>
 edit,202196,"GEARED INDUCTION MOTOR, POWER =0.75KW,RATIO=45 (553014 DRG -W63U45P80B5B3+BN80B4B5FD) BONFIGLIOLI",N37GUDEL7005136,"Cost effective solution
 - Low noise
@@ -918,7 +911,7 @@ edit,202196,"GEARED INDUCTION MOTOR, POWER =0.75KW,RATIO=45 (553014 DRG -W63U45P
 edit,202197,"GEARED INDUCTION MOTOR ( 0.75 KW, I-100 ) (554092 DRG - W110U100P80B5B3+BN80B4FDR) BONFIGLIOLI",N37GUDEL7005150,"<div>
 <p>Cost effective solution - Low noise - High peak load capacity - Minimized mounting space - Long operating life - High reliability - High number of possible configuration - Wide output speed selection range - Wide output torque selection range</p>
 </div>"
-edit,202198,INDUCTION MOTOR 0.75 KW WITH BRAKE (544222 DRG - BN80 B4 FDR) BONFIGLIOLI,N37GUDEL7005152,"<div><p>Flange Mounted Geared Motor that are widely used in industries for various applications. In addition, this Motors are also used for centrifugal and non-clog pumps.&nbsp;</p></div>"
+edit,202278,BALL VALVE FEMALE THREADING  1 INCH,N35EM-022-0394,
 edit,202199,"MOTOR WITH BRAKE-1.85 KW, 3 PH,1440 RPM (559778 DRG - BN90LB4 FDR) BONFIGLIOLI",N37GUDEL7005166,"<div>
 <p>Cost effective solution - Low noise - High peak load capacity - Minimized mounting space - Long operating life - High reliability - High number of possible configuration - Wide output speed selection range - Wide output torque selection range</p>
 </div>"
@@ -953,6 +946,7 @@ edit,202209,HYDRAULIC CONNECTORS STRAIGHT THREADED 1/2 INCH X 1/4 INCH,N35HYFT10
 edit,202210,HYDRAULIC CONNECTORS STRAIGHT THREADED 3/4 INCH X  1/2 INCH,N35HYFT1000002,"<div>
 <p>Connector are designed and manufactured to meet the requirements for a wide range of applications in chemical, petro-chemical, power generation, ship-building, pulp and paper, food, dairy, beverage, pharmaceutical, and many other high-purity industries. JIC fittings feature a 37&deg; Flare design that can be used with seamless tubing or to adapt to JIC Hose Assemblies.</p>
 </div>"
+edit,202279,BALL VALVE FEMALE THREADING  ¼ INCH,N35EM-022-0145,
 edit,202211,HYDRAULIC CONNECTORS STRAIGHT THREADED 1/4 INCH X 1/4 INCH,N35HYFT1000003,"<div>
 <p>Connector are designed and manufactured to meet the requirements for a wide range of applications in chemical, petro-chemical, power generation, ship-building, pulp and paper, food, dairy, beverage, pharmaceutical, and many other high-purity industries. JIC fittings feature a 37&deg; Flare design that can be used with seamless tubing or to adapt to JIC Hose Assemblies.</p>
 </div>"
@@ -982,7 +976,6 @@ edit,202220,MASKING TAPE 2 INCH X 60 MTR. PAPER.,N50MASKINGTAPE2,"<div>
 <p><b>High Durability.&nbsp;</b></p>
 </div>"
 edit,202221,FUJIFILM (LLW) FOR PRESCALE APPLICATION,N71FUJJIFILMLLW,"<div><b>Pressure measurement film indicates applied pressure differences as red color density variations. From dentistry to industry, this Fujifilm technology finds wide application.</b></div>"
-edit,202300,BUCKLES SIZE 32 MM (FOR PACKING),N50KALBUCK32,
 edit,202222,FUJI FILM (LW) FOR PRE SCALE APPLICATION,N71FUJJIFILMLW,"<div>
 <p><b>Easy visual check of distribution/uniformity for contact pressure<br />Contact pressure shown with differing concentrations of color can even be converted into numbers.<br />Lower cost with no special devices or equipment required<br />Quick measurement gives an at-a-glance picture.</b></p>
 <p>&nbsp;</p>
@@ -1039,12 +1032,23 @@ edit,202236,RUBBER GASKET (WASHER)  1/2 INCH,N35HYFT1000011,"<div>
 <p><b> Easy installation </b></p>
 <p><b>High durability</b></p>
 </div>"
+edit,202237,RUBBER GASKET (WASHER)  3/4 INCH,N35HYFT1000012,"<div>
+<p><b>Abrasion resistance </b></p>
+<p><b>Easy installation </b></p>
+<p><b>High durability</b></p>
+</div>"
+edit,202238,RUBBER GASKET (WASHER)  1 INCH,N35HYFT1000013,"<div>
+<p><b>Abrasion resistance</b></p>
+<p><b> Easy installation </b></p>
+<p><b>High durability</b></p>
+</div>"
 edit,202239,SPIDER FOR COUPLING L-276,N36SPIDERL276,"<div>
 <p><b>With its unique wrap around Nitrile rubber connecting element, the Snap Wrap coupling eliminates the need for dismantling the connected equipment while inspecting or replacing the element &ndash; a major benefit when down-time on machinery can run into huge amount Combined with a range of prebored hubs, a modular hub design and a spacer option, the Snap Wrap coupling is unsurpassed for quality, flexibility, speed for installation and maintenance.</b></p>
 </div>"
 edit,202240,SPIDER FOR COUPLING L-225,N36SPIDERL255,"<div>
 <p><b>With its unique wrap around Nitrile rubber connecting element, the Snap Wrap coupling eliminates the need for dismantling the connected equipment while inspecting or replacing the element &ndash; a major benefit when down-time on machinery can run into huge amount Combined with a range of prebored hubs, a modular hub design and a spacer option, the Snap Wrap coupling is unsurpassed for quality, flexibility, speed for installation and maintenance.</b></p>
 </div>"
+edit,202280,Cloth Tape Double Sided Adhesive (1 Inch) 25mm,N71-DOUBLETAPE1,
 edit,202241,SPIDER FOR COUPLING L-110,N36SPIDERL110,"<div>
 <p><b>With its unique wrap around Nitrile rubber connecting element, the Snap Wrap coupling eliminates the need for dismantling the connected equipment while inspecting or replacing the element &ndash; a major benefit when down-time on machinery can run into huge amount Combined with a range of prebored hubs, a modular hub design and a spacer option, the Snap Wrap coupling is unsurpassed for quality, flexibility, speed for installation and maintenance.</b></p>
 </div>"
@@ -1062,8 +1066,6 @@ edit,202246,SPIDER FOR COUPLING SW-110,N36SPIDERSW110,"<div><p><b>With its uniqu
 edit,202247,"REXROTH MAKE VALVE, PART NO.:- R983038189, MODEL NO. ZDR 6DP 2-4X/75YM",N36NAGEL1501-010,<div><p><b>Models ZDR are 3-way direct operated pressure reducing -relieving valves. They maintain a &ldquo;reduced&rdquo; pressure in a branch circuit and permit &ldquo;relieving&rdquo; pressure spike occurrences in the reduced branch circuit. Options for pressure ranges and operator adjustment options are within the scope of the modular reducing valve portfolio.</b></p></div>
 edit,202248,"REXROTH MAKE VALVE, PART NO.:- R983031005, MODEL NO. 4WE 10 J 3X/C G24 N9K4",N36NAGEL1501-011,<div><p><b>Models ZDR are 3-way direct operated pressure reducing -relieving valves. They maintain a &ldquo;reduced&rdquo; pressure in a branch circuit and permit &ldquo;relieving&rdquo; pressure spike occurrences in the reduced branch circuit. Options for pressure ranges and operator adjustment options are within the scope of the modular reducing valve portfolio.</b></p></div>
 edit,202249,"REXROTH MAKE VALVE, PART NO.:- R983031147, MODEL NO. 4WE 6 J 6X /E G24 N9K4",N36NAGEL1501-001,<div><p><b>Models ZDR are 3-way direct operated pressure reducing -relieving valves. They maintain a &ldquo;reduced&rdquo; pressure in a branch circuit and permit &ldquo;relieving&rdquo; pressure spike occurrences in the reduced branch circuit. Options for pressure ranges and operator adjustment options are within the scope of the modular reducing valve portfolio.</b></p></div>
-edit,202301,CORD STRAP TENSIONER (SIZE - 32MM) (FOR PACKING),N50KALCST32,
-edit,202655,KNITTED RUBY GLOVES PU GHF -001-S_SMALL (SEZ),N53K0001INDIRECT1236,
 edit,202250,"REXROTH MAKE VALVE,PART NO.:- R983030682 , MODEL NO. Z2S 6-1-6X",N36NAGEL1501-012,<div><p><b>Models ZDR are 3-way direct operated pressure reducing -relieving valves. They maintain a &ldquo;reduced&rdquo; pressure in a branch circuit and permit &ldquo;relieving&rdquo; pressure spike occurrences in the reduced branch circuit. Options for pressure ranges and operator adjustment options are within the scope of the modular reducing valve portfolio.</b></p></div>
 edit,202251,"REXROTH MAKE VALVE,PART NO.:- R983032428 , MODEL NO. Z2FS 6-2-4X/2QV",N36NAGEL1501-004,<div><p><b>Models ZDR are 3-way direct operated pressure reducing -relieving valves. They maintain a &ldquo;reduced&rdquo; pressure in a branch circuit and permit &ldquo;relieving&rdquo; pressure spike occurrences in the reduced branch circuit. Options for pressure ranges and operator adjustment options are within the scope of the modular reducing valve portfolio.</b></p></div>
 edit,202252,"REXROTH MAKE VALVE,PART NO.:- R983030696, MODEL NO. Z2S 10-1-3X",N36NAGEL1501-005,<div><p><b>Models ZDR are 3-way direct operated pressure reducing -relieving valves. They maintain a &ldquo;reduced&rdquo; pressure in a branch circuit and permit &ldquo;relieving&rdquo; pressure spike occurrences in the reduced branch circuit. Options for pressure ranges and operator adjustment options are within the scope of the modular reducing valve portfolio.</b></p></div>
@@ -1110,10 +1112,6 @@ Skin friendliness
 
 Exquisite design                                                                                      100% cotton yellow dusters used for cleaning automobiles , etc 
 Available in all sizes and quality"
-edit,202302,LASHING BELT 32 MM BREAK LOAD CAPACITY 2000KG (STRAP),N50KALBUCK001,
-edit,202303,LASHING BUCKLE 32 MM (STRAP),N50KALBUCK002,
-edit,202304,LASHING BELT 40 MM BREAK LOAD CAPACITY 5000KG (STRAP),N50KALBUCK003,
-edit,202305,LASHING BUCKLE 40 MM (FORGED) (STRAP),N50KALBUCK004,
 edit,202273,BEICO MAKE INSULATION PAPER,N35EM-037-0100,"<div><p><b>This specification covers electrically insulating, unbleached sulfate paper and paperboard used as layer insulation in coils, transformers, and other similar apparatus. The materials may also be used as turn insulation, slot liners, wedges, phase insulation, and separator papers in stranded wire/cable constructions. This specification does not include tissue for manufacture of capacitors. Other commonly used terms for the materials include soft coil wrap, dense coil wrap, kraft coil insulation, dry-finished kraft, and water-finished kraft. The materials covered in this specification are classified into four types according to density range and nominal thickness and should conform to the required values of ash content, alcohol-soluble material content, aqueous extract conductivity, water-soluble chloride content, fiber composition, moisture content, hydrogen ion concentration, pH, tensile strength, dielectric breakdown voltage, and conducting paths.</b></p></div>"
 edit,202274,PLASTIC CORNER,N50PLASTIC_CORNER,"<div>
 <p><b>Fine finish anti slip surface Good dimensional stability and flatness High strength for heavy metals Easy to use and maintainHigh Strength Durable Protects The Corners</b></p>
@@ -1121,10 +1119,6 @@ edit,202274,PLASTIC CORNER,N50PLASTIC_CORNER,"<div>
 edit,202275,"NUT DRIVER SIZE 8 MM, LENGTH – 125MM.",N31EG-013-0008,"Dual colour, ergonomic cushion grip handles for maximum comfort. The handle is molded directly onto the blade for permanent bonding. Heavy duty deep head blades, hardened for maximum torque and wear resistance. Precision heads for accurate fastener fit, chrome plated anti corrosion finish. Handle end comes with screw type mark for easy identification."
 edit,202276,"NUT DRIVER SIZE 10 MM, LENGTH – 125MM",N31EG-013-0026,"Dual colour, ergonomic cushion grip handles for maximum comfort. The handle is molded directly onto the blade for permanent bonding. Heavy duty deep head blades, hardened for maximum torque and wear resistance. Precision heads for accurate fastener fit, chrome plated anti corrosion finish. Handle end comes with screw type mark for easy identification."
 edit,202277,BALL VALVE FEMALE THREADING  half INCH,N35EM-022-0006,
-edit,202278,BALL VALVE FEMALE THREADING  1 INCH,N35EM-022-0394,
-edit,202279,BALL VALVE FEMALE THREADING  ¼ INCH,N35EM-022-0145,
-edit,202280,Cloth Tape Double Sided Adhesive (1 Inch) 25mm,N71-DOUBLETAPE1,
-edit,202281,Cloth Tape Double Sided Adhesive (2 Inch) 50mm,N71-DOUBLETAPE2,
 edit,202282,TARPAULIN 100 GSM WITH EYELETS - RATE PER SQFT,N50TARPAULIN100,"<div class=""banner_sec"">
 <div id=""wowslider-container1"">
 <div class=""ws_bullets"">
@@ -1182,10 +1176,22 @@ edit,202294,"BROWN TAPE/Transparent Tape 48 x 65 mtr, 55 micron recycle symbol p
 edit,202295,"BROWN TAPE/Transparent Tape 72 mm x 65 mtr, 55 micron recycle symbol printed on tape as per norm",N50_KALIKA_BOP72,
 edit,202296,HDPE PLASTIC BAG (24X36) WITH LAMINATION,N35EG-012-0350,
 edit,202297,POLYESTER CORDED STRAP 16 MM WIDTH (FOR PACKING) with Printing of EPR and Roll of 850 mtr and One Box Consist of 2 rolls,N50KALSTR16,
+edit,202298,POLYESTER CORDED COMPOSITE STRAP 32 MM (FOR PACKING) with Printing of EPR and 350 mtr roll and overall length of 700 mtr,N50KALSTR32,
+edit,202299,BUCKLES SIZE  16MM  (FOR PACKING),N50KALBUCK16,
+edit,202300,BUCKLES SIZE 32 MM (FOR PACKING),N50KALBUCK32,
+edit,202301,CORD STRAP TENSIONER (SIZE - 32MM) (FOR PACKING),N50KALCST32,
+edit,202302,LASHING BELT 32 MM BREAK LOAD CAPACITY 2000KG (STRAP),N50KALBUCK001,
+edit,202303,LASHING BUCKLE 32 MM (STRAP),N50KALBUCK002,
+edit,202304,LASHING BELT 40 MM BREAK LOAD CAPACITY 5000KG (STRAP),N50KALBUCK003,
+edit,202305,LASHING BUCKLE 40 MM (FORGED) (STRAP),N50KALBUCK004,
+edit,202306,PVC GUMMING SHEET FOR SKIN PACKAGING,N50KALPVCPAC,
+edit,202307,PET STRAP ( GREEN STRIP ROLL) 15mm width 2000 mtr/roll,N50GREENSTRIP,
+edit,202308,PET PACKING SEAL ( GREEN STRIP CLIP ) 15mm width,N50-G6-001-101334,
+edit,202309,HDPE BLACK TAPE 50 mm width x length 50 mtr used for Packaging,N50-G6-001-1403,
+edit,202310,PACKING SEAL,N50EG-012-0357,
 edit,202311,"SHRINK FILM ROLL =12” HEIGHT X 19MIC THICKNESS, CENTRE FOLDED 01 ROLL=1067M",N50SHRINKFILM01,
 edit,202312,"SHRINK FILM ROLL=16” HEIGHT X 19MIC THICKNESS, CENTRE FOLDED= 01 ROLL=1067M",N50SHRINKFILM02,
 edit,202313,"SHRINK FILM ROLL=22” HEIGHT X 19MIC THICKNESS, CENTRE FOLDED=01 ROLL=1067 M",N50SHRINKFILM03,
-edit,202314,KIT BAG WITH LOGO PRINTING FOR APOLLO GENSET,N50KITBAGAPOLLO,
 edit,202316,BRASS FITTING ¼  INCH X 8MM,N35EG-014-0096,"<div>
 <h1 style=""text-align: center;""><b>&nbsp; &nbsp; &nbsp; &nbsp; Features</b></h1>
 <p><b>Corrosion resistance </b></p>
@@ -1274,16 +1280,11 @@ edit,202343,END PLATE KIT  FOR CP 2780,N31G6PEPNCP2780SCR06,END PLATE KIT  FOR C
 edit,202344,CLUTCH KIT  FOR CP 2780,N31G6PEPNCP2780SCR07,CLUTCH KIT  FOR CP 2780
 edit,202345,TUNE UP KIT  FOR CP 2780,N31G6PEPNCP2780SCR08,TUNE UP KIT  FOR CP 2780
 edit,202346,RING-RETAINING  FOR CP 780,N31-G6PEPNCP780SCR01,RING-RETAINING  FOR CP 780
+edit,202347,WASHER  FOR CP 780,N31-G6PEPNCP780SCR02,WASHER  FOR CP 780
 edit,202348,SPRING FOR CP 780,N31-G6PEPNCP780SCR03,SPRING FOR CP 780
 edit,202349,RETAINER-BALL FOR CP 780,N31-G6PEPNCP780SCR04,RETAINER-BALL FOR CP 780
 edit,202350,BEARING-BALL FOR CP 780,N31-G6PEPNCP780SCR05,BEARING-BALL FOR CP 780
 edit,202351,PLATE-REAR END FOR CP 780,N31-G6PEPNCP780SCR06,PLATE-REAR END FOR CP 780
-edit,202352,ROTOR FOR CP 780,N31-G6PEPNCP780SCR07,ROTOR FOR CP 780
-edit,202353,BLADE SET-ROTOR (5) FOR CP 780,N31-G6PEPNCP780SCR08,BLADE SET-ROTOR (5) FOR CP 780
-edit,202354,LINER FOR CP 780,N31-G6PEPNCP780SCR09,LINER FOR CP 780
-edit,202355,SCREW FOR CP 780,N31-G6PEPNCP780SCR10,SCREW FOR CP 780
-edit,202356,BUTTON-THROTTLE FOR CP 780,N31-G6PEPNCP780SCR11,BUTTON-THROTTLE FOR CP 780
-edit,202357,THROTTLE-VALVE SPRING FOR CP 780,N31-G6PEPNCP780SCR12,THROTTLE-VALVE SPRING FOR CP 780
 edit,202358,LEVER-REVERSE FOR CP 780,N31-G6PEPNCP780SCR13,LEVER-REVERSE FOR CP 780
 edit,202359,CUSHION-RUBBER FOR CP 780,N31-G6PEPNCP780SCR14,CUSHION-RUBBER FOR CP 780
 edit,202360,BALL-STEEL FOR CP 780,N31-G6PEPNCP780SCR15,BALL-STEEL FOR CP 780
@@ -1321,10 +1322,6 @@ perpendicular support groove
 > single and double-acting variants"
 edit,202373,"VH201-N02, HAND VALVE, MAKE- SMC",N36MAZK1008154,"Description
 Series VH rotary hand valve's compact design and variety of flow rates make it ideal for a wide range of applications requiring manual directional control. The slide ring design makes the VH valve easy to operate while offering a high tolerance to contamination with its ""self-cleaning, wiping action""."
-edit,202410,DURACELL TYPE C TYPE -  MEDIUM,N39-DURACELLC,"<div>
-<p>PRODUCT INFORMATION Enjoy long usage durations as the Duracell batteries provide you a long-lasting performance and come with the Duralock technology to store the battery for a long period of time. The C sized cells are suitable for cordless power tools drills Medical equipment products.</p>
-</div>"
-edit,202446,LOCTITE 352 - 50ML+D701,N52LOCTITE352,
 edit,202386,DYMAX-6-621-T ADHESIVE,N52ADHDYMAX6621,"<div>
 <p><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Multi-Cure&reg; 6-621-T adhesive forms hard, clear bonds to phenolic plastics, metal, glass, ceramic, polyamide (filled/unfilled), and other substrates. The material cures &ldquo;on demand&rdquo; in seconds with <a title=""UV/Visible light-curing equipment systems"" href=""https://dymax.com/light-curing-equipment/"" target=""_blank"" rel=""noopener"">UV/Visible light</a>, heat, or pre-applied&nbsp;<a href=""https://dymax.com/light-curable-materials/activators/"">activator</a>. 6-621-T structural adhesive can also cure with heat in applications where shadow areas exist.&nbsp;Common applications include metal-to-glass bonding, coil winding, and potting.</b></p>
 <p><b>&nbsp; &nbsp; &nbsp; </b></p>
@@ -1421,7 +1418,6 @@ Features/Benefits:
 
 Applications:
 • Replacement o-rings, seals and retaining rings for fitting and adapters in hydraulic fluid and gas handling connections"
-edit,202444,"GRUB SCREWMAKE-UNBRAKO , SIZE-6X6",N51-GRUBSCREW6X6,
 edit,202401,O RING KIT NBR 6 PARKER MAKE,N36PARKERORING002,"Parker offers a full line of high quality replacement O-rings, Seals and Retaining Rings for industrial fittings and adapters. 
 
 Markets:
@@ -1466,6 +1462,16 @@ Features/Benefits:
 
 Applications:
 • Replacement o-rings, seals and retaining rings for fitting and adapters in hydraulic fluid and gas handling connections"
+edit,202416,UNIVERSAL SOCKET-24MM1/2Sq.Dr,N31UNISOCKET24MM,"Product description
+The advantage with this socket is that the more pressure you put on the socket, the more it will grip the nut or bolt. These are very handy for using on worn or rusty nuts and bolts.
+
+
+Manufactured from high grade chrome vanadium steel. 
+
+Great for replacing those lost or worn down sockets in your existing socket set."
+edit,202420,PACKING NAILCOIL 38MM,N50NAILCOILC1,"<div>
+<p>Features Premium quality. Various sizes.</p>
+</div>"
 edit,202403,O RING KIT NBR 7 PARKER MAKE,N36PARKERORING005,"Parker offers a full line of high quality replacement O-rings, Seals and Retaining Rings for industrial fittings and adapters. 
 
 Markets:
@@ -1533,7 +1539,9 @@ Offices"
 edit,202409,DURACELL TYPE D TYPE   BIG SIZE,N39-DURACELLD,"<div>
 <p>DISCOVER DURACELL PLUS POWER D Duracell Plus Power D batteries &ndash; long lasting power guaranteed. These multi-purpose batteries are ideal for reliably powering everyday devices. Duracell Plus Power batteries give you the freedom to enjoy the use of your appliances by giving you a product you can rely on. The Duracell Plus Power batteries are best used when you are looking for reliable, long-lasting power in your every-day devices such as motorized toys, flashlights, portable games consoles, remote controls, CD players, etc. Duralock technology keeps unused Duracell batteries fresh and powered for up to 10 years in ambient storage. Features: Reliable performance Extremely powerful Lightweight</p>
 </div>"
-edit,202445,"GRUB SCREWMAKE-UNBRAKO , SIZE-6X16",N51-GRUBSCREW6X16,
+edit,202410,DURACELL TYPE C TYPE -  MEDIUM,N39-DURACELLC,"<div>
+<p>PRODUCT INFORMATION Enjoy long usage durations as the Duracell batteries provide you a long-lasting performance and come with the Duralock technology to store the battery for a long period of time. The C sized cells are suitable for cordless power tools drills Medical equipment products.</p>
+</div>"
 edit,202411,"DHARA OIL , 1 LTRS. PACK.",N56-DHARAOIL,"<div>
 <p><b>Dhara Health Refined Sunflower Oil comes with the goodness of unique Low Absorb Technology which means that the food cooked in it absorbs less oil. It also contains the goodness of Vitamin A, D & E. Dhara Health is a good source of polyunsaturated fatty acid (PUFA) and contains high amount of Omega 6, the Essential Fatty Acid (EFA) which cannot be synthesized in the body and has to be consumed from external sources.</b></p>
 </div>"
@@ -1554,16 +1562,6 @@ Precision 7-brass levers locking mechanism with three brass keys.
 Rivetless machine pressed clinch joints increase construction strength.
 Rust resistant internal components.Hardened electroplated shackle resists hacksaw cutting and rusting under normal atmosphereic conditions."
 edit,202415,CHEMICAL MET L GARD RP405S FOR RUSTREMOVAL,N55METLGARDRP405S,
-edit,202416,UNIVERSAL SOCKET-24MM1/2Sq.Dr,N31UNISOCKET24MM,"Product description
-The advantage with this socket is that the more pressure you put on the socket, the more it will grip the nut or bolt. These are very handy for using on worn or rusty nuts and bolts.
-
-
-Manufactured from high grade chrome vanadium steel. 
-
-Great for replacing those lost or worn down sockets in your existing socket set."
-edit,202420,PACKING NAILCOIL 38MM,N50NAILCOILC1,"<div>
-<p>Features Premium quality. Various sizes.</p>
-</div>"
 edit,202421,PACKING NAILCOIL 45MM,N50NAILCOILC2,"<div>
 <p>Features Premium quality. Various sizes.</p>
 </div>"
@@ -1602,6 +1600,9 @@ edit,202440,"GRUB SCREWMAKE-UNBRAKO , SIZE-4X16",N51-GRUBSCREW4X16,
 edit,202441,"GRUB SCREWMAKE-UNBRAKO , SIZE-5X5",N51-GRUBSCREW5X5,
 edit,202442,"GRUB SCREWMAKE-UNBRAKO , SIZE-5X10",N51-GRUBSCREW5X10,
 edit,202443,"GRUB SCREWMAKE-UNBRAKO , SIZE-5X16",N51-GRUBSCREW5X16,
+edit,202444,"GRUB SCREWMAKE-UNBRAKO , SIZE-6X6",N51-GRUBSCREW6X6,
+edit,202445,"GRUB SCREWMAKE-UNBRAKO , SIZE-6X16",N51-GRUBSCREW6X16,
+edit,202446,LOCTITE 352 - 50ML+D701,N52LOCTITE352,
 edit,202447,WIRE SPOOL K 439 STAINLESS STEEL MIG WIRE GRADE 439 T DIAMETER 1.2 MM PACK SIZE 100 KG KISWEL MAKE,N36WIRESPOOLK439K001,
 edit,202448,WIRE SPOOL K 439 STAINLESS STEEL MIG WIRE GRADE 439 T DIAMETER 1.2 MM PACK SIZE 15 KG KISWEL MAKE,N36WIRESPOOLK439K002,
 edit,202449,BUFFING WHEEL DISC 120 GRADE FOR SS MATERIAL SIZE 4 INCH MAKE CUMI,N36BUFFWHEEL120SS001,
@@ -1649,20 +1650,6 @@ edit,202476,SS WIRE ROPE  1MM (20 MTR) WITH TEST CERTIFICATE,N71KALSSWIREROPE1,"
 <p><b>Floating cranes Tower cranes</b></p>
 <p><b>T</b><b>ruck mounted cranes Pickup cranes</b></p>
 <p><b>Crawler cranes EOT/Overhead cranes Piling rigs</b></p></div>"
-edit,202485,SANWA DENKI PRESSURE SWITCH TYPE-SPS-8WP,N36SWITCHSPS-8WP,
-edit,202486,"3M  Ear Plugs 1110 Corded Foam, Noise Reduction",N69PC-001-0005,"<div>
-<ul>
-<li><span class=""a-list-item"">For Ear Protection, Travel noise reduction, Meditation, Sleeping Earplugs</span></li>
-<li><span class=""a-list-item"">Corded for convenience and to prevent loss of earplugs</span></li>
-<li><span class=""a-list-item"">Smooth, dirt resistant surface for hygiene</span></li>
-<li><span class=""a-list-item"">Comfortable for a wide range of ear canal sizes</span></li>
-<li><span class=""a-list-item"">Noise Reducing Rating: 29 decibels</span></li>
-</ul>
-</div>"
-edit,202499,Maxell CR2032 220mAh 3V Lithium (LiMNO2) Coin Cell Battery,N38-HMI2032,"<div><p><b>Approx. 2.5V operating voltage </b></p>
-<p><b>Superior charge/discharge characteristics </b></p>
-<p><b>Low self-discharge&nbsp; </b></p>
-<p><b>S</b><b>uperior leakage resistance</b></p></div>"
 edit,202477,SS WIRE ROPE  2MM (20 MTR) WITH TEST CERTIFICATE,N71KALSSWIREROPE2,"<div class=""tab-section-body col-md-12"">
 <div class=""tab-content"">
 <div id=""home"" class=""tab-pane fade in active"">
@@ -1697,6 +1684,10 @@ edit,202478,SS WIRE ROPE  4MM (20 MTR) WITH TEST CERTIFICATE,N71KALSSWIREROPE4,"
 </div>
 </div>
 </div>"
+edit,202492,Knoll Screw Pump 25-38-T Type: KTS 25-38-T Material no.: 14032 Pump with free shaft end,N36LMKTS25-38-6PUMP,"<div>
+<p><a title=""Knoll pump TDS"" href=""https://www.knoll-mb.de/fileadmin/Home/Pumpen/Schraubenspindelpumpe_KTS/KNOLL-Data-sheet-Pumps-Screw-pump-KTS-EN.pdf"" target=""_blank"" rel=""noopener"">knoll pumps tds</a></p>
+</div>"
+edit,202493,LEISTER MAKE HOT AIR BLOWER OF VULCAN SYSTEM 3X400 /11kW (ITEM CODE 140.463),N37EM-037-0007,
 edit,202479,SS WIRE ROPE  6MM (20 MTR) WITH TEST CERTIFICATE,N71KALSSWIREROPE6,"<div class=""tab-section-body col-md-12"">
 <div class=""tab-content"">
 <div id=""home"" class=""tab-pane fade in active"">
@@ -1747,7 +1738,16 @@ edit,202483,SS WIRE ROPE CLAMP 8MM,N71KALSSWIRECLAMP8,"<div><p><b>Features:</b><
 <p><b> Accurate in size </b></p>
 <p><b>Steel body </b></p>
 <p><b>Strong and robust finish</b></p></div>"
-edit,202589,STAMPED BRACKET FOR SHIPPING CLONE SET (FOR PACKING),N83FP65397019,
+edit,202485,SANWA DENKI PRESSURE SWITCH TYPE-SPS-8WP,N36SWITCHSPS-8WP,
+edit,202486,"3M  Ear Plugs 1110 Corded Foam, Noise Reduction",N69PC-001-0005,"<div>
+<ul>
+<li><span class=""a-list-item"">For Ear Protection, Travel noise reduction, Meditation, Sleeping Earplugs</span></li>
+<li><span class=""a-list-item"">Corded for convenience and to prevent loss of earplugs</span></li>
+<li><span class=""a-list-item"">Smooth, dirt resistant surface for hygiene</span></li>
+<li><span class=""a-list-item"">Comfortable for a wide range of ear canal sizes</span></li>
+<li><span class=""a-list-item"">Noise Reducing Rating: 29 decibels</span></li>
+</ul>
+</div>"
 edit,202487,SEALANT RTV DOW CORNING 732 (300 ML),N52-SEALANT-DOW732,"<div>
 <ul class=""m_1927357845455649470gmail-a-unordered-list m_1927357845455649470gmail-a-vertical m_1927357845455649470gmail-a-spacing-none"">
 <li><b><span class=""m_1927357845455649470gmail-a-list-item"">RTV silicone sealant</span></b></li>
@@ -1768,10 +1768,7 @@ edit,202488,SEALANT RTV DOW CORNING 732 (300 ML),N39MISC9991525,"<div>
 </div>"
 edit,202489,Needle Grinding Wheel Tip CXY220K7V104 (72) 570 X 55 X 254,N3112SHI201005,
 edit,202491,Needle Grinding wheel Match CXY220K7V104 (72) 570 X 32 X 254,N3112SHI201004,
-edit,202492,Knoll Screw Pump 25-38-T Type: KTS 25-38-T Material no.: 14032 Pump with free shaft end,N36LMKTS25-38-6PUMP,"<div>
-<p><a title=""Knoll pump TDS"" href=""https://www.knoll-mb.de/fileadmin/Home/Pumpen/Schraubenspindelpumpe_KTS/KNOLL-Data-sheet-Pumps-Screw-pump-KTS-EN.pdf"" target=""_blank"" rel=""noopener"">knoll pumps tds</a></p>
-</div>"
-edit,202493,LEISTER MAKE HOT AIR BLOWER OF VULCAN SYSTEM 3X400 /11kW (ITEM CODE 140.463),N37EM-037-0007,
+edit,202558,SHRINK FILM ROLL 16 INCH HEIGHT X 60MIC THICKNESS,N50SHRINK_FILMROLL16,
 edit,202495,"BASSO MAKE COIL NAILER GUN, MODEL - C 33/90-A3",N35-C3390-A3,"<div class=""title"">Specification</div>
 <div class=""txt""><br />
 <div class=""list_box"">
@@ -1858,7 +1855,10 @@ edit,202498,Ss Bearing Ball 8mm,N40EG-003-0070,"<div><table width=""301"">
 </tr>
 </tbody>
 </table></div>"
-edit,202659,Cable Tie (Size : 100 x 3.2),N31K0001INDIRECT0158,
+edit,202499,Maxell CR2032 220mAh 3V Lithium (LiMNO2) Coin Cell Battery,N38-HMI2032,"<div><p><b>Approx. 2.5V operating voltage </b></p>
+<p><b>Superior charge/discharge characteristics </b></p>
+<p><b>Low self-discharge&nbsp; </b></p>
+<p><b>S</b><b>uperior leakage resistance</b></p></div>"
 edit,202500,"Hybrid bearings with ceramic balls, HY S 61904 CTA ABEC7 DUL, make - GMN",N40SKSK1490001,"<div><p>&nbsp;</p>
 <table class=""product-table"">
 <tbody>
@@ -1933,6 +1933,7 @@ edit,202502,Siemens make CONTROL CARD 6SN1118-0DM33-0AA2,N38SHW010184,"<div>
 <p><b>Basic version with sinusoidal voltage signals and the possibility of connecting absolute encoders with EnDat interface.</b></p>
 <p><b>Additionally with evaluation for 2 direct measuring systems with sinusoidal</b><br /><b>voltage signals and the possibility of connecting absolute encoders with</b><br /><b>EnDat interface and SSI interface</b></p>
 </div>"
+edit,202532,"Exhaust Fan: Low Noise Make: Any Size: 150 MM with safety cage, BCH",N39EXFAN150MM,
 edit,202503,Fanuc make axis servo amplifier for Pegard 1 machine.Type:A06B-6058-H101,N38FNUK50S01,"<div>
 <h3><b>Key Features</b></h3>
 <p>&nbsp;</p>
@@ -1983,14 +1984,6 @@ edit,202511,TVS Make 12 x 40 nut bolts with washer,N51TVSBLTNUT001,"<div>
 </tr>
 </tbody>
 </table>
-</div>"
-edit,202538,1/2 INCH DR.DEEP SOCKET 18mm 6PT CHROME 77mmL Make: King Tony,N31HANDTOOLS-001,"<div>
-<p><b>1/2&Prime; Metric Long 6-Point Socket 18mm<br /></b></p>
-<ul>
-<li style=""text-align: left;""><b>&nbsp;Chrome vanadium alloy steel</b></li>
-<li style=""text-align: left;""><b>&nbsp;polished, chrome plated</b></li>
-<li style=""text-align: left;""><b>&nbsp;4 ball retaining grooves</b></li>
-</ul>
 </div>"
 edit,202512,TVS Make 12 x 60 nut bolts with washer,N51TVSBLTNUT002,"<div>
 <table class=""properties-table table-detail"">
@@ -2052,6 +2045,22 @@ edit,202513,TVS Make 14 x 40 nut bolts with washer,N51TVSBLTNUT003,"<div>
 </tbody>
 </table>
 </div>"
+edit,202525,SS HINGES 4 Inch,N36SSHINGES004,"<div><table border=""0"" width=""223"" cellspacing=""0"" cellpadding=""0"">
+<tbody>
+<tr>
+<td class=""xl65"" height=""22"">
+<p><b>Features</b></p>
+<p><b>Abrasion Resistance</b></p>
+</td>
+</tr>
+<tr>
+<td class=""xl65"" height=""22""><b>&nbsp;Durable</b></td>
+</tr>
+<tr>
+<td class=""xl65"" height=""22""><b>Fine finished</b></td>
+</tr>
+</tbody>
+</table></div>"
 edit,202514,TVS Make 14 x 60 nut bolts with washer,N51TVSBLTNUT004,"<div>
 <table class=""properties-table table-detail"">
 <tbody class=""Detail-Legth"">
@@ -2188,7 +2197,6 @@ edit,202517,2 inch Ring Gasket asbestos free 3mm.,N51RINGGASF007,"<div><table cl
 <li><b>High quality</b></li>
 <li><b>Fine finish</b></li>
 </ul></div>"
-edit,202660,Cable Tie (Size : 150 x 3.2),N31K0001INDIRECT0159,
 edit,202518,2.5 inch Ring Gasket asbestos  free 3mm.,N51RINGGASF008,"<div><table class=""properties-table table-detail"">
 <tbody class=""Detail-Legth"">
 <tr class=""detail-tr-main"">
@@ -2223,6 +2231,20 @@ edit,202518,2.5 inch Ring Gasket asbestos  free 3mm.,N51RINGGASF008,"<div><tabl
 <li><b>High quality</b></li>
 <li><b>Fine finish</b></li>
 </ul></div>"
+edit,202526,"HALF CYLINDRICAL LUKAS ABRASIVE CAP - SKWR 1319 NK,GRIT - 80 FOR OIL HOLE POLISHING OF CON ROD QSK23/60 (PRODUCT CODE - A21000132080)",N31QSKMIS00343,"<div><ul class=""on-list"">
+<li><b>offered at a significantly better price compared to milling tools and diamond cutters</b><br /><br /></li>
+<li><b>available in a variety of sizes, shapes and qualities</b><br /><br /></li>
+<li><b>hygienic single-use prevents contamination</b><br /><br /></li>
+<li><b>treatments are faster and more precise</b></li>
+</ul></div>"
+edit,202527,CONICAL ABRASIVE CAP SKWK 1319 NK 80 FOR OIL HOLE POLISHING OF CONNECTING ROD QSK78/95 (LUKAS CODE - A21000133080),N31QSKMIS00351,"<div>
+<ul class=""on-list"">
+<li><b>offered at a significantly better price compared to milling tools and diamond cutters</b><br /><br /></li>
+<li><b>available in a variety of sizes, shapes and qualities</b><br /><br /></li>
+<li><b>hygienic single-use prevents contamination</b><br /><br /></li>
+<li><b>treatments are faster and more precise</b></li>
+</ul>
+</div>"
 edit,202519,HILTI MAKE MECHANICAL FASTENER M12 X120,N35-HILTIM12,"<div>
 <p><b>Made from cold-formed carbon steel, zinc-plated to 5&micro;m Two embedment depths for a wide range of fastening thicknesses Setting mark for easy checking of correct installation depth Raised impact section prevents thread damage during installation Pre-assembled to save time.&nbsp;</b></p>
 <table width=""412"">
@@ -2417,15 +2439,6 @@ edit,202522,SS HINGES 1Inch,N36SSHINGES001,"<div><table style=""border-collapse:
 </tbody>
 </table>
 <p>&nbsp;</p></div>"
-edit,202539,1/2 INCH DR.DEEP SOCKET 20mm 6PT CHROME 77mmL Make: King Tony,N31HANDTOOLS-002,"<div>
-<p><b>1/2&Prime; Metric Long 6-Point Socket 20mm</b></p>
-<ul>
-<li><b>&nbsp;Chrome vanadium alloy steel</b></li>
-<li><b>&nbsp;polished, chrome plated</b></li>
-<li><b>&nbsp;4 ball retaining grooves</b></li>
-</ul>
-</div>"
-edit,202661,Cable Tie (Size : 200 x 3.2),N31K0001INDIRECT0161,
 edit,202523,SS HINGES 2 Inch,N36SSHINGES002,"<div><table style=""height: 183px;"" border=""0"" width=""223"" cellspacing=""0"" cellpadding=""0"">
 <tbody>
 <tr style=""height: 108px;"">
@@ -2459,38 +2472,7 @@ edit,202524,SS HINGES 3 Inch,N36SSHINGES003,"<div><table style=""height: 140px;"
 </tr>
 </tbody>
 </table></div>"
-edit,202525,SS HINGES 4 Inch,N36SSHINGES004,"<div><table border=""0"" width=""223"" cellspacing=""0"" cellpadding=""0"">
-<tbody>
-<tr>
-<td class=""xl65"" height=""22"">
-<p><b>Features</b></p>
-<p><b>Abrasion Resistance</b></p>
-</td>
-</tr>
-<tr>
-<td class=""xl65"" height=""22""><b>&nbsp;Durable</b></td>
-</tr>
-<tr>
-<td class=""xl65"" height=""22""><b>Fine finished</b></td>
-</tr>
-</tbody>
-</table></div>"
-edit,202526,"HALF CYLINDRICAL LUKAS ABRASIVE CAP - SKWR 1319 NK,GRIT - 80 FOR OIL HOLE POLISHING OF CON ROD QSK23/60 (PRODUCT CODE - A21000132080)",N31QSKMIS00343,"<div><ul class=""on-list"">
-<li><b>offered at a significantly better price compared to milling tools and diamond cutters</b><br /><br /></li>
-<li><b>available in a variety of sizes, shapes and qualities</b><br /><br /></li>
-<li><b>hygienic single-use prevents contamination</b><br /><br /></li>
-<li><b>treatments are faster and more precise</b></li>
-</ul></div>"
-edit,202527,CONICAL ABRASIVE CAP SKWK 1319 NK 80 FOR OIL HOLE POLISHING OF CONNECTING ROD QSK78/95 (LUKAS CODE - A21000133080),N31QSKMIS00351,"<div>
-<ul class=""on-list"">
-<li><b>offered at a significantly better price compared to milling tools and diamond cutters</b><br /><br /></li>
-<li><b>available in a variety of sizes, shapes and qualities</b><br /><br /></li>
-<li><b>hygienic single-use prevents contamination</b><br /><br /></li>
-<li><b>treatments are faster and more precise</b></li>
-</ul>
-</div>"
 edit,202528,POLISHING WHEEL SFM 05030.06 A 106/150 MOUNTED FLAP FOR CON ROD QSK23/60/78 (LUKAS CODE - A2204050306106),N31QSKMIS00353,
-edit,202532,"Exhaust Fan: Low Noise Make: Any Size: 150 MM with safety cage, BCH",N39EXFAN150MM,
 edit,202533,1 Pole ELCB Enclosure Box Make: Legrand-507791,N37ELESPARES-085,"<div class=""large-2 col pb-0 mb-0"">
 <h5 class=""uppercase mt"">DESCRIPTION</h5>
 </div>
@@ -2531,7 +2513,22 @@ edit,202537,Legrand Industrial Sockets Face Plates. Model No. 57717 1 Socket,N37
 <p>057717 &ndash; FACE PLATE 125X220MM WITHOUT SOCKET FOR 1X63A UPTO SOCKET</p>
 </div>
 </div>"
-edit,202588,"AIR HOSE REEL, 8 MTR LENGTH, 12MM X 8MM",N35EG-014-0066,
+edit,202538,1/2 INCH DR.DEEP SOCKET 18mm 6PT CHROME 77mmL Make: King Tony,N31HANDTOOLS-001,"<div>
+<p><b>1/2&Prime; Metric Long 6-Point Socket 18mm<br /></b></p>
+<ul>
+<li style=""text-align: left;""><b>&nbsp;Chrome vanadium alloy steel</b></li>
+<li style=""text-align: left;""><b>&nbsp;polished, chrome plated</b></li>
+<li style=""text-align: left;""><b>&nbsp;4 ball retaining grooves</b></li>
+</ul>
+</div>"
+edit,202539,1/2 INCH DR.DEEP SOCKET 20mm 6PT CHROME 77mmL Make: King Tony,N31HANDTOOLS-002,"<div>
+<p><b>1/2&Prime; Metric Long 6-Point Socket 20mm</b></p>
+<ul>
+<li><b>&nbsp;Chrome vanadium alloy steel</b></li>
+<li><b>&nbsp;polished, chrome plated</b></li>
+<li><b>&nbsp;4 ball retaining grooves</b></li>
+</ul>
+</div>"
 edit,202540,1/2 INCH DR.SOCKET 38mm 6PT CHROME Make: King Tony,N31HANDTOOLS-003,"<div>
 <p><b>1/2&Prime; Metric Long 6-Point Socket 38mm</b></p>
 <ul>
@@ -2551,6 +2548,7 @@ edit,202545,1/2 inchDR.HEX BIT SOCKET 3/16 inch 60MM CHROME Make: King Tony,N31H
 <li style=""text-align: left;""><b>Polished, chrome plated</b></li>
 <li style=""text-align: left;""><b>HEXAGON head</b></li>
 </ul></div>"
+edit,202557,SHRINK FILM ROLL 12 INCH HEIGHT X 60MIC THICKNESS,N50SHRINK_FILMROLL12,
 edit,202546,1/2 INCH DR.HEX BIT SOCKET H5 60MM CHROE Make: King Tony,N31HANDTOOLS-009,"<div>
 <p><b>1/2&Prime; 6-Point Bit Socket H5</b></p>
 <ul>
@@ -2631,7 +2629,6 @@ edit,202549,Miranada HSS ST SH Drill 20mm,N31HANDTOOLS-012,"<div>
 </div>"
 edit,202550,Metal wire cutting cutter Make:STANLEY  Model:-STHT84105-8-Diagonal-Cutting-Plier,N31HANDTOOLS-015,
 edit,202552,Ethylene Glycol,N55-ETHYLENEGLYCOL,
-edit,202568,O RING 16 × 2.4,N36-ORING16X24,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202553,"Battery Operated Auto Shut Off Tool Range 30-120NM 1/2 Inch Drive Model NOSIWP12050,2400RPM With 2 Batteries",N3120632110380,"<div>
 <p><b>FEATURES AND BENEFITS</b><br /><b>&bull; Brushless motor provides longer motor life and increased efficiency</b><br /><b>&bull; Easy-to-read process information lights</b><br /><b>&bull; Advanced shut-off system</b><br /><b>&bull; LED light for work-area illumination</b><br /><b>&bull; Programmable buttons for easy operation</b><br /><b>&bull; Li-Ion battery provides long battery life</b><br /><b>&bull; Mini USB port for connection to optional programmer (SPC-2PGM)</b></p>
 </div>"
@@ -2768,8 +2765,7 @@ edit,202556,"M18 RETROREFLECTIVE SENSOR METALLIC HOUSING OBS4000-18GM60-E5-V1, M
 </tbody>
 </table>
 </div>"
-edit,202557,SHRINK FILM ROLL 12 INCH HEIGHT X 60MIC THICKNESS,N50SHRINK_FILMROLL12,
-edit,202558,SHRINK FILM ROLL 16 INCH HEIGHT X 60MIC THICKNESS,N50SHRINK_FILMROLL16,
+edit,202675,Universal Magnetic Base.GROZ MB/80,N31M0001INDIRECT2775,
 edit,202559,SHRINK FILM ROLL  22 Inch  HEIGHT X 60MIC THICKNESS,N50SHRINK_FILMROLL22,
 edit,202560,FACE SHEILD,N69-FACESHILD,
 edit,202561,COTTON APRON (HALF),N69-APPRONHALF,
@@ -2786,6 +2782,7 @@ edit,202564,O RING 100  × 3.1,N36-ORING100X31,"An O-ring, also known as a pac
 edit,202565,O RING 100  ×5.7,N36-ORING100X57,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202566,"O RING-(ID-8.5,OD-13.5,THK-2.5)MM",N36-ORING135MM,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202567,O RING 14×2.4,N36-ORING14X24,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
+edit,202568,O RING 16 × 2.4,N36-ORING16X24,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202569,"O RING-(ID-8.5,OD-11.5,THK-1.5)MM",N36-ORING25MM,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202570,O RING 20 × 2.4,N36-ORING20X24,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202571,O RING 24×2.4,N36-ORING24X24,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
@@ -2794,6 +2791,7 @@ edit,202573,O RING 48 ×3.5,N36-ORING48X35,"An O-ring, also known as a packing,
 edit,202574,O RING 50 × 3.5,N36-ORING50X35,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202575,O RING 70 × 5.7,N36-ORING70X57,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202576,O RING 75 × 3.1,N36-ORING75X31,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
+edit,202676,CUTTER Seal Cutting Cutter SNAPON 87ACF,N56M0001INDIRECT2957,
 edit,202577,"O RING-(ID-8.5,OD-13.5,THK-2)MM",N36-ORING85MM,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202578,O RING FOR SOLENOID VALVE 10X1.5MM,N36-ORINGVALVE10X15,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
 edit,202579,O RING FOR SOLENOID VALVE 12X1.5MM,N36-ORINGVALVE12X15,"An O-ring, also known as a packing, or a toric joint, is a mechanical gasket in the shape of a torus; it is a loop of elastomer with a round cross-section, designed to be seated in a groove and compressed during assembly between two or more parts, creating a seal at the interface."
@@ -2811,7 +2809,8 @@ edit,202586,Dura Turf Door Mat 1 Mtrs. X 10 Mtrs. Long Hard,N69-DURAHARD0001,"<d
 </table>
 </div>"
 edit,202587,FILTER COTTON,N43-CLOTH,
-edit,202859,REDUCTION SLEEVE MT 4-5,N51V0001INDIRECT2605,
+edit,202588,"AIR HOSE REEL, 8 MTR LENGTH, 12MM X 8MM",N35EG-014-0066,
+edit,202589,STAMPED BRACKET FOR SHIPPING CLONE SET (FOR PACKING),N83FP65397019,
 edit,202590,DCB OIL CLEANER (FOR NAGAR ONLY),N53EM-023-0045,
 edit,202591,"REMOTE CELLS AAA, MAKE-EVEREADY",N35EG-022-0076,"<div><p><b>Zinc Carbon Batteries 912</b></p>
 <div class=""btrContNW"">
@@ -2845,6 +2844,8 @@ edit,202593,"IMPACT SOCKET EXTENSION 10&quot;, MAKE : TAPARIA",N51EG-013-0031,
 edit,202594,"IMPACT SOCKET EXTENSION 4&quot;, MAKE : TAPARIA",N51EG-013-0040,
 edit,202595,"MIXER HIT-M1 ASSLY PART NO 68156, HILTI MAKE",N31EG-007-0039,
 edit,202596,"PRESSURE GAUGE, MODEL-  ADD2: D.2.2BM, RANGE- 0 TO 400KG/CM2, MAKE-BAUMER",N35EM-003-0038,
+edit,202635,DOOR OPENER BRACKET - FOOT OPERATED,N79DOOROPENBRACKET01,
+edit,202709,T.S.CORE DRILL 23 MM DIA,N56M0001INDIRECT2994,
 edit,202598,ACRYLIC SHEET-2.5 MM THICK (6inch X 4inch),N36ASHT0030060,"<div>
 <ul class=""a-unordered-list a-vertical a-spacing-none"">
 <li><b><span class=""a-list-item"">Suitable for DIY Projects.</span></b></li>
@@ -2891,8 +2892,6 @@ edit,202603,ACRYLIC SHEET  6 INCH X 4 INCH  - 8 MM THK,N40ASHT0030064,"<div><ul 
 <li><b><span class=""a-list-item"">Size Of Sheet 6' x 4'&nbsp;</span></b></li>
 <li><b><span class=""a-list-item"">Thickness 8 mm.</span></b></li>
 </ul></div>"
-edit,202625,Plastic Mug,N43PLASTICMUG01,
-edit,202626,Blanket,N43BLANKET01,
 edit,202604,TEA THERMOS TEA KETTLE- LID TYPE-1LITERS MAKE- MILTON .,N70EG-022-0103,"<div><h4><b>Features</b></h4>
 <ul class=""features"">
 <li><b>Lid with press button to pour drinks easily</b></li>
@@ -2912,6 +2911,9 @@ edit,202608,TEA THERMOS TEA KETTLE- LID TYPE-1.5 LITERS MAKE- MILTON,N70EG-021-0
 <li><b>Keeps drinks hot or cold for hours</b></li>
 </ul></div>"
 edit,202609,TEA THERMOS TEA KETTLE- LID TYPE-2.5 LITERS MAKE- CAMEL.,N70EG-021-01002,
+edit,202671,SPANNAR STD. 28 OPE MM EVEREST/TAPARIYA/JK MAKE FOR EP2,N56M0001INDIRECT3050,
+edit,202672,HACKSAW BLADE MIRANDA MAKE SIZE 24X1.1/2X6TPIX14G THROUGH PROMPT TRADIING CO. USED FOR CUTTING OPERATION IN TOOL ROOM.BA(APR-15),N56M0001INDIRECT2982,
+edit,202673,ADJUSTABLE SPANNER 6 &quot;-MAKE,N56M0001INDIRECT3014,
 edit,202610,HAND SANITIZER 5 LTR JAR MAKE HAPPY HANDS/REVA MOQ 5 NO'S,N43HANDSANITISER02,"<div>
 <p class=""pm-woocom-item-title"">PREMIUM HAND SANITIZER<br />Clean Mate - 7404</p>
 <div class=""pm-woocom-item-short-description"">
@@ -2944,13 +2946,15 @@ edit,202621,Bed cover Single,N43BEDCOVER01,
 edit,202622,Pillow One Single,N43PILLOW01,
 edit,202623,N43PILLOWCOVER01,N43PILLOWCOVER01,
 edit,202624,Plastic Bucket 16 Litre,N43PLASTICBUCKET01,
+edit,202625,Plastic Mug,N43PLASTICMUG01,
+edit,202626,Blanket,N43BLANKET01,
 edit,202627,Towel,N43TOWEL01,
 edit,202628,PESTICIDE SPRAYER 16L/14L BATTERY OPERATED MAKE,N70SPRAYER16L14L,
 edit,202629,AUTOMATIC MIST BASED SANITIZER DISPENSING UNIT MAKE RIOT LABZ MODEL OAKMIST,N43SANITIZERSTAND04,
 edit,202630,AUTOMATIC SOAP DISPENSING UNIT MAKE ESENSE,N43SANITIZERSTAND05,
 edit,202631,Surgical Gown suitable for COVID-19,N69SURGICALGOWN,
 edit,202634,TOUCHLESS TAP FAUCET ATTACHMENT - BATTERY OPERATED - INFRARED SENSOR - MAKE GRAVITY,N70FAUCETATTACHMENT1,
-edit,202635,DOOR OPENER BRACKET - FOOT OPERATED,N79DOOROPENBRACKET01,
+edit,202674,ADJUSTABLE SPANNER 4&quot;-MAKE,N55M0001INDIRECT2935,
 edit,202636,Surgical Gloves Powder free Make VWR/  RUBBEREX in Malaysia,N69GLOVESVWR001,"<div class=""logoAndPictos""><img class=""picto"" src=""https://in.vwr.com/stibo/thumb/std.lang.all/32/73/12233273.jpg"" />&nbsp;<img class=""picto"" src=""https://in.vwr.com/stibo/thumb/std.lang.all/32/78/12233278.jpg"" />&nbsp;<img class=""picto"" src=""https://in.vwr.com/stibo/thumb/std.lang.all/32/79/12233279.jpg"" /></div>
 <div class=""textBodyText expander"" data-linkify=""this"" data-linkify-target=""_self"">
 <div class=""textBodyText"">For laboratory use in pharmaceutical, industrial and medical applications, and also in the food industry. These ambidextrous gloves provide extra protection, particularly for sensitive skin.</div>
@@ -3023,18 +3027,16 @@ edit,202652,HANDGLOVES -COTTON KNITTED HANDGLOVES,N38K0001INDIRECT1043,"<div><ta
 </table></div>"
 edit,202653,HANDGLOVES -ULTRANITRILE 485 - EQUIVALENT TO SOLVEX,N38K0001INDIRECT1041,
 edit,202654,HEAT RESISTANCE HAND GLOVES. MODEL NO- 42-474.,N39K0001INDIRECT1070,
+edit,202655,KNITTED RUBY GLOVES PU GHF -001-S_SMALL (SEZ),N53K0001INDIRECT1236,
+edit,202659,Cable Tie (Size : 100 x 3.2),N31K0001INDIRECT0158,
+edit,202660,Cable Tie (Size : 150 x 3.2),N31K0001INDIRECT0159,
+edit,202661,Cable Tie (Size : 200 x 3.2),N31K0001INDIRECT0161,
 edit,202665,"Panduit CABLE TIE INTERMED 40LB 5.6&quot;, Black, Locking, Free-Hanging P. N. 298-1043-ND",N55K0001INDIRECT1283,
 edit,202666,CONSUMABLE.MISC.MISC.SUMMER CAP WITH SPONGE,N56M0001INDIRECT2952,
 edit,202667,EXTENSION STD. 3/8  SQ X 3/8 X 250 OAL INCH KINGTONY MAKE FOR BU-08,N56M0001INDIRECT3008,
 edit,202668,EXTENSION STD. 1/2 SQ X 5&quot;OAL INCH KINGTONY MAKE FOR BU-09,N56M0001INDIRECT3009,
 edit,202669,SPANNAR STD. 16 X 17 RING MM EVEREST/TAPARIYA/JK MAKE FOR EP3,N56M0001INDIRECT3037,
 edit,202670,SPANNAR STD. 22 OPE MM EVEREST/TAPARIYA/JK MAKE FOR EP2,N56M0001INDIRECT3043,
-edit,202671,SPANNAR STD. 28 OPE MM EVEREST/TAPARIYA/JK MAKE FOR EP2,N56M0001INDIRECT3050,
-edit,202672,HACKSAW BLADE MIRANDA MAKE SIZE 24X1.1/2X6TPIX14G THROUGH PROMPT TRADIING CO. USED FOR CUTTING OPERATION IN TOOL ROOM.BA(APR-15),N56M0001INDIRECT2982,
-edit,202673,ADJUSTABLE SPANNER 6 &quot;-MAKE,N56M0001INDIRECT3014,
-edit,202674,ADJUSTABLE SPANNER 4&quot;-MAKE,N55M0001INDIRECT2935,
-edit,202675,Universal Magnetic Base.GROZ MB/80,N31M0001INDIRECT2775,
-edit,202676,CUTTER Seal Cutting Cutter SNAPON 87ACF,N56M0001INDIRECT2957,
 edit,202677,3M BACK-UP PAD DIA 3&quot; USED AS SUPPORT FOR ROLOC SCOTCH BRITE DISC REQUIRED IN AW & AU SECTION(JULY'14),N69M0001INDIRECT3073,
 edit,202678,"Unbrako Durlok Nuts, Size- M12, 404918",N31M0001INDIRECT2759,
 edit,202679,"Kingtony 1/2&quot; Square Drive, Impact Socket, Bi-Hexagonal, Size 11/16&quot;, OAL 3 inch",N56M0001INDIRECT3019,
@@ -3066,8 +3068,6 @@ edit,202705,"T.S.DRILL 29/64&quot;DIA. X 170 MM FL X 250 MM OAL X MT1,WEB- 25%",
 edit,202706,T S DRILL 15/32IN DIAX 250MM OAL (WEB 25%),N56M0001INDIRECT2997,
 edit,202707,T.S.CORE DRILL 7/16IN DIA,N56M0001INDIRECT2996,
 edit,202708,T.S.CORE DRILL 15.5 MM DIA,N56M0001INDIRECT2995,
-edit,202709,T.S.CORE DRILL 23 MM DIA,N56M0001INDIRECT2994,
-edit,202710,"CENTRE DRL,BS3(3/32X1/4INS)",N56M0001INDIRECT2951,
 edit,202711,HAND REAMER 5/16&quot;X75 MM IN LENGTH,N56M0001INDIRECT2989,
 edit,202712,HSS SLITINGSAW 10X1/8 X1.1/4,N56M0001INDIRECT2993,
 edit,202713,(ACCESSORY)TORX KEY SIZE T/15 FOR WIHA MAKE TORQUE SCREW DRIVER,N56M0001INDIRECT2979,
@@ -3211,6 +3211,7 @@ edit,202854,"Kingtony 1/2&quot; Square Drive, Bi-hexagonal, Size 1-1/8&quot;",N5
 edit,202855,"Kingtony 1/2&quot; Square Drive, Impact Socket, Hex, Size 16 A/F, OAL 110 mm",N56V0001INDIRECT2667,
 edit,202856,CLAMP METER - FLUKE ONLY 400A,N56V0001INDIRECT2664,
 edit,202858,Lamination sheet A3(120 micron)- Pack of 100 Nos,N37V0001INDIRECT2524,
+edit,202859,REDUCTION SLEEVE MT 4-5,N51V0001INDIRECT2605,
 edit,202860,T.S.DRILL 19/32IN DIA,N56V0001INDIRECT2663,
 edit,202861,T.S.CORE DRILL 1.1/2IN DIA,N56V0001INDIRECT2662,
 edit,202862,T.S.DRILL 53/64IN DIA,N56V0001INDIRECT2656,
@@ -3368,7 +3369,6 @@ edit,203028,"SEAL KIT FOR REXROTH MAKE VALVE, PART NO.:- R983031147, MODEL NO. 4
 edit,203030,"SEAL KIT FOR REXROTH MAKE VALVE,PART NO.:- R983030696, MODEL NO. Z2S 10-1-3X",N55K0001INDIRECT1289,
 edit,203032,"SEAL KIT FOR REXROTH MAKE VALVE, 4WE 6 D 6X/E G24 N9K4, PART CODE- R983031130",N56K0001INDIRECT1425,
 edit,203033,4 MM ALLEN BOLT LENGTH 20 MM,N56K0001INDIRECT1427,
-edit,203066,SPANNER BOX 6.5MMSIZE - 6.5 X 150 TAPARIA,N56K0001INDIRECT1482,
 edit,203034,"ATC ARM INDUCTION MOTOR WITH BRAKE, MAKE:- I-TAMACHINERY CO. LTD., HP:- 1.5, 4 POLES, RPM:- 1450, 50 HZ, AMP.:- 4.76 / 2.38, VOLTS:- 208/415 V, PHASE INDUCTION MOTOR WITH BRAKE",N56K0001INDIRECT1428,
 edit,203035,6 MM ALLEN BOLT LENGTH 20 MM,N56K0001INDIRECT1447,
 edit,203036,PNEUMATIC DRILL GUN CP785MODEL - CP785/9285C,N36K0001INDIRECT0998,
@@ -3401,6 +3401,7 @@ edit,203062,ALLEN SOCKET 14 MM14MM X 1/2&quot; SQ DRIVE KING TONY,N31K0001INDIRE
 edit,203063,ALLEN SOCKET 17 MM17MM X 1/2&quot; SQ DRIVE KING TONY,N31K0001INDIRECT0295,
 edit,203064,ALLEN SOCKET 19 MM19MM X 1/2&quot; SQ DRIVE KING TONY,N71K0001INDIRECT1884,
 edit,203065,SPANNER BOX 5MMSIZE - 5 X 150 TAPARIA,N71K0001INDIRECT1885,
+edit,203066,SPANNER BOX 6.5MMSIZE - 6.5 X 150 TAPARIA,N56K0001INDIRECT1482,
 edit,203067,SPANNER BOX 6MMSIZE - 6 X 150 TAPARIA,N31K0001INDIRECT0296,
 edit,203068,CUT OFF WHEEL (HAND GRINDER)PART NO 702140 (SIZE-100X2X16 HITACHI,N50K0001INDIRECT1184,
 edit,203069,RATCHET 1/4&quot;1/4&quot; DRIVE X 6 INCH LONGTAPARIA,N50K0001INDIRECT1187,
@@ -3569,6 +3570,7 @@ edit,203232,SNAP-ON MAKE SC ST.#60 SOCKET 1/2 SQUARE DRIVE 10MM STAR SOCKET LENG
 edit,203233,SNAP-ON MAKE MR ST.#70 OFFLINE LONG SOCKET 3/8 SQUARE DRIVE 13MM HEXAGONAL LENGTH 54MM,N35K0001INDIRECT0941,
 edit,203234,SNAP-ON MAKE LD ST.#4 LONG SOCKET 3/8 SQUARE DRIVE 10 MM (STAR SOCKET) LENGTH 32MM,N56K0001INDIRECT1549,
 edit,203235,SNAP-ON MAKE LD ST.#4 LONG SOCKET 3/8 SQUARE DRIVE 12MM(STAR SOCKET) LENGTH 50MM,N56K0001INDIRECT1550,
+edit,203301,HSS TAP 3/4*16 UNC ADDSION/ITM,N31K0001INDIRECT0318,
 edit,203236,SNAP-ON MAKE LD ST.#3 LONG SOCKET 3/8 SQUARE DRIVE 8MM HEXAGONAL LENGTH 54MM WITH HOLE,N31K0001INDIRECT0616,
 edit,203237,SNAP-ON MAKE LD ST.#3 LONG SOCKET 3/8 SQUARE DRIVE 10MM HEXAGONAL LENGTH 54MM WITH HOLE,N31K0001INDIRECT0617,
 edit,203238,SNAP-ON MAKE SC ST.#60 SOCKET 1/2 SQUARE DRIVE 10MM STAR SOCKET LENGTH 83.3MM WITH HOLE,N56K0001INDIRECT1551,
@@ -3583,7 +3585,6 @@ edit,203246,4 INCH ELBOW M.S,N31K0001INDIRECT0643,
 edit,203247,4 INCH FLANGE E TABLE.,N31K0001INDIRECT0644,
 edit,203248,"Strap Wrench GROZ OFW/S/8 12”, 8” Grip with Nylon Belt",N31K0001INDIRECT0646,
 edit,203249,Feeler Gauge 4” x 26 blades,N50K0001INDIRECT1183,
-edit,203501,T.S.DRILL 22.00 MM DIA,N31K0001INDIRECT0501,
 edit,203250,“C” Spanner 5/8 x 3/4&quot; Best Indian WILLIAMS JHW1729,N31K0001INDIRECT0650,
 edit,203251,Allenkey Set GROZ – 1/16 – 3/8” ALN/HX-HX/10/SAE/GRZ,N31K0001INDIRECT0652,
 edit,203252,Sigma clamp meter- model 999 MECO DT2250,N31K0001INDIRECT0654,
@@ -3633,7 +3634,6 @@ edit,203297,DRILL SPLIT SLEEVE DRILL SIZE 8.3,N39K0001INDIRECT1107,
 edit,203298,HSS TAP 5/16*24 UNF ADDSION/ITM,N31K0001INDIRECT0344,
 edit,203299,HSS TAP 5/16*18 UNC ADDSION/ITM,N31K0001INDIRECT0343,
 edit,203300,HSS TAP 1/2*13 UNC ADDSION/ITM,N56K0001INDIRECT1493,
-edit,203301,HSS TAP 3/4*16 UNC ADDSION/ITM,N31K0001INDIRECT0318,
 edit,203302,HSS TAP 1/4*20 UNC ADDSION/ITM,N39K0001INDIRECT1086,
 edit,203303,HSS TAP 7/16*14 UNC ADDSION/ITM,N31K0001INDIRECT0345,
 edit,203304,HSS TAP 3/8*16 UNC ADDSION/ITM,N31K0001INDIRECT0333,
@@ -3734,7 +3734,6 @@ edit,203401,"Kingtony Standard Socket, 1/2&quot; Sq. Drive with Connection Rod, 
 edit,203402,"Kingtony 3/8&quot; Square Drive, Impact Socket, Bi-Hex, Size 1/2 inch",N31K0001INDIRECT0680,
 edit,203403,"Kingtony 1/2&quot; Square Drive, Impact Socket, Bi-Hex, Size 1/2 inch",N31K0001INDIRECT0679,
 edit,203404,"Kingtony 3/8&quot; Square Drive, Bihexagonal, Size 1/4 inch",N31K0001INDIRECT0678,
-edit,203562,T.S.DRILL 27/64IN DIA,N31K0001INDIRECT0380,
 edit,203405,"Philips TTubelight 18 Watt, Length 24 inch, TL-D 18W/54",N31K0001INDIRECT0676,
 edit,203406,"Bradma IST Alphabets, 5 mm, Length 8 mm, T/050",N35K0001INDIRECT0874,
 edit,203407,"Bradma IST Numbers, 5 mm, Length 8 mm,T/050",N35K0001INDIRECT0883,
@@ -3828,6 +3827,7 @@ edit,203497,S.S.DRILL LG Q (0.332IN),N31K0001INDIRECT0507,
 edit,203498,HSS TS DRILL IT MAKE DIA 9.0MM X FL 107MM X OAL 188 MM X MT1 FOR WATER PUMP SHAFT BAR CAPSTAN.AC.(JAN'15),N31K0001INDIRECT0504,
 edit,203499,T.S.DRILL 37/64IN DIA,N31K0001INDIRECT0503,
 edit,203500,HSS T.S.DRILL IT/ADDISON MAKE DIA 31/32IN X FL160MM MT3 ON YASADA 70NB M/C FOR K6 C'BLOCK.AE(NOV'15),N31K0001INDIRECT0502,
+edit,203501,T.S.DRILL 22.00 MM DIA,N31K0001INDIRECT0501,
 edit,203502,HSS T.S. DRILL IT/ADDISON MAKE DIA 23/64&quot; FL 125 MT1 FOR HEAD FACE DOWEL ON RADIAL DRILLING M/C FOR QSK#19 C'BLOCK.AE.(FEB'16),N31K0001INDIRECT0500,
 edit,203503,T.S.CORE DRILL 1.3/8IN DIA,N31K0001INDIRECT0499,
 edit,203504,HSS T.S.REAMER IT/ADDISON MAKE DIA 25/64&quot; X FL 200 MM X MT1 RADIAL DRILLING MACHINE FOR QSK#19 C'BLOCK.AE.(FEB'16),N31K0001INDIRECT0498,
@@ -3856,7 +3856,6 @@ edit,203526,"T.S.DRILL 13/32IN DIA,IT/ADDISION MAKE,FOR MISC SECTION.AQ.",N31K00
 edit,203527,"S.S.HSS DRILL 19/64IN DIA X 250 OAL,IT MAKE FOR OIL HOLE GALLERY DRILLING ON MAKINO M/C FOR V28 C'BLOCK.BR(OCT'13",N56K0001INDIRECT1514,
 edit,203528,DRILL ADDISON MAKE OF DIA 9/64 WITH 200 OAL REQUIRED FOR BFW MACHINE FOR PT AU (JUN 2013),N31K0001INDIRECT0436,
 edit,203529,"T.S.CORE DRILL 7/16IN DIA,IT/ADDISION MAKE,FOR MISC SECTION.AQ.",N56K0001INDIRECT1513,
-edit,203563,T.S.CORE DRILL 3/4IN DIA,N31K0001INDIRECT0377,
 edit,203530,"HSS SPOT FACE CUTTER DIA 34MM, CL40, OAL190 MT3 WITH PILOT PIN DIA 16.5 AND PILOT LH-25MM HI- CUT MAKE FOR 3/4 UNF TAPPING ON RADIAL DRILLING M/C FOR NH/NT C'BLOCK.AE (DEC'13)",N31K0001INDIRECT0430,
 edit,203531,T.S. DRILL HYCUT MAKE DIA 31/64 X 250 MM OAL MT2 SHANK ON DAEWOO M/C IN NHNT C' BLOCK.AE.(DEC'14),N31K0001INDIRECT0427,
 edit,203532,S S DRILL LG Q X 250 MM,N31K0001INDIRECT0424,
@@ -3886,6 +3885,8 @@ edit,203558,"S.S.DRILL,3/32IN DIA",N31K0001INDIRECT0384,
 edit,203559,"S.S.DRILL, #44 (0.086IN) .",N31K0001INDIRECT0383,
 edit,203560,"(TOOL)HSS. S.S. DRILL, # 27 (0.144 IN) FOR P.T - HASS M/C - AU",N31K0001INDIRECT0382,
 edit,203561,S.S.DRILL 1/8IN DIA X 150MM,N31K0001INDIRECT0381,
+edit,203562,T.S.DRILL 27/64IN DIA,N31K0001INDIRECT0380,
+edit,203563,T.S.CORE DRILL 3/4IN DIA,N31K0001INDIRECT0377,
 edit,203564,"S.S.L.S.DRILL,1/8IN DIA",N31K0001INDIRECT0375,
 edit,203565,T.S.DRILL 17/32IN DIA,N31K0001INDIRECT0374,
 edit,203566,(TOOL)HSS (M35) T.S. EXTRA LONG DRILL 10 MM X 250 MM OAL (WEB 30-35%),N31K0001INDIRECT0369,
@@ -4004,6 +4005,7 @@ edit,203678,"S.S.DRILL, #41 (0.096IN) FOR INJECTOR BODY ON BFW SPM M/C AT PT FUE
 edit,203679,HSS TS DRILL DIA .59/64 X FL 6&quot; X OAL 11 INCH X MT3 TAPER REQUIRED ON RADIAL DRILL MACHINE FOR BACK FACE DRILLING OF NHNT BLOCK . AE (FEB-18),N56K0001INDIRECT1440,
 edit,203680,T.S.CORE DRILL 23/32IN DIA,N56K0001INDIRECT1438,
 edit,203681,"TAP WRENCH SAMRAT MAKE, MODEL NO-6, CAPACITY 1/4&quot;- 3/4&quot; FOR REWORK OPERATIONS OF V28 C'BLOCK.BR(FEB'15)",N56K0001INDIRECT1435,
+edit,203714,EMERY PAPER 220 GRIT - 280MM X 230MM WATER PROOF,N56K0001INDIRECT1407,
 edit,203682,DIAMAND FILE TOOL CENTER MAKE DIAMAND IMPPREGATED BRUSH WITH HANDE 6&quot; LONG X 1/2 WIDTH FOR PRAGA ZOLLER INSPECTION EWAG WALTER TOOL INSPECTION IN TOOL CRIB AZ(APR-18),N56K0001INDIRECT1433,
 edit,203683,Reducer 1/4&quot;F X 1/2&quot;m,N56K0001INDIRECT1621,
 edit,203684,Socket 16mm Bihex 3/4&quot; drive,N55K0001INDIRECT1293,
@@ -4036,7 +4038,6 @@ edit,203710,ALLEN KEY 5MM,N31K0001INDIRECT0230,
 edit,203711,ADAPTOR DRIVE 1/2&quot;F TO 3/4&quot;M,N31K0001INDIRECT0070,
 edit,203712,EMERY PAPER 600GRIT- 280MMX230MM WATER PROOF,N31K0001INDIRECT0219,
 edit,203713,EMERY PAPER 320 GRIT- 280MMX230MM WATER PROOF,N56K0001INDIRECT1409,
-edit,203714,EMERY PAPER 220 GRIT - 280MM X 230MM WATER PROOF,N56K0001INDIRECT1407,
 edit,203715,EMERY PAPER 400GRIT-280MMX230MM WATER PROOF,N56K0001INDIRECT1403,
 edit,203716,6&quot;X9&quot; WATER PROOF POLISH PAPER 220GRIT,N56K0001INDIRECT1400,
 edit,203717,EXTENSION STD. 1/2&quot; SQ DRIVE X 100 OAL,N36K0001INDIRECT0972,
@@ -4074,7 +4075,6 @@ edit,203748,"BIT - 8IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 
 edit,203749,"BIT - 9IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 - 809)",N56K0001INDIRECT1346,
 edit,203750,"BIT - 10IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 - 810)",N31K0001INDIRECT0155,
 edit,203751,"BIT - 15IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 - 815)",N31K0001INDIRECT0154,
-edit,203841,GLASS BURETTE-10ML-A,N35K0001INDIRECT0928,
 edit,203752,"BIT - 20IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 - 820)",N31K0001INDIRECT0153,
 edit,203753,"BIT - 25IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 - 825)",N31K0001INDIRECT0152,
 edit,203754,"BIT - 27IP DRIVE 1/4&quot; HEX,LENGTH 25 MM WIHA MAKE (CODE - 52852 - 827)",N31K0001INDIRECT0151,
@@ -4124,6 +4124,7 @@ edit,203797,"HOSE, 1/2&quot; R2 ,1/2&quot; BSP ST X ST - 1600MM, MEDIA- HYD. OIL
 edit,203799,"HOSE, 1/2&quot; R2 ,3/4&quot; UNF ST X ST - 4.5MTR, MEDIA- HYD. OIL",N31K0001INDIRECT0097,
 edit,203800,"HOSE, 3/4&quot; R2, 3/4&quot; BSP ST X ST - 2MTR, MEDIA- HYD. OIL",N31K0001INDIRECT0096,
 edit,203801,"HOSE, 1/2&quot; R2, 3/4&quot; UNF ST X ST - 3MTR, MEDIA- HYD. OIL",N31K0001INDIRECT0095,
+edit,203900,Medium Size Umbrella.,N71K0001INDIRECT1872,
 edit,203802,"HOSE, 3/8&quot; R1 , ST X ST M12 X 12OD - 3.5MTR, MEDIA- HYD. OIL",N69K0001INDIRECT1845,
 edit,203803,"HOSE, 3/8&quot; R2 , ST X ST M20 X 12 OD - 1.5MTR, MEDIA- WATER",N31K0001INDIRECT0094,
 edit,203804,"HOSE, 3/8&quot; R1 , ST X ST M18 X 12 OD - 6MTR, MEDIA- WATER",N38K0001INDIRECT1045,
@@ -4163,6 +4164,7 @@ edit,203837,GLASS PIPETTE- 5ML,N35K0001INDIRECT0857,
 edit,203838,GLASS PIPETTE- 10ML,N55K0001INDIRECT1267,
 edit,203839,GLASS PIPETTE- 1ML-A,N31K0001INDIRECT0069,
 edit,203840,GLASS BURETTE-25ML-B,N35K0001INDIRECT0930,
+edit,203841,GLASS BURETTE-10ML-A,N35K0001INDIRECT0928,
 edit,203842,GLASS ROD 8&quot;,N31K0001INDIRECT0262,
 edit,203843,EYEWASH SHOWER COMBINATION UNIT.,N39K0001INDIRECT1085,
 edit,203844,FISHER MAKE Copper Sulphate Pentahydrate ( Standard Pack 500 gm ),N55K0001INDIRECT1243,
@@ -4220,7 +4222,6 @@ edit,203896,1/2'' Conduit pipe,N31K0001INDIRECT0015,
 edit,203897,"DOOR MATS , SIZE : 3' X 2'",N44K0001INDIRECT1154,
 edit,203898,DOORMAT 5' X 3',N44K0001INDIRECT1153,
 edit,203899,"TEKNIC MAKE MUSH. TYPE EMERGENCY SWITCH(LATCHABLE),DIA. -22.5 MM ,TYPE:- P2AML4,RED COLOUR.",N39K0001INDIRECT1060,
-edit,203900,Medium Size Umbrella.,N71K0001INDIRECT1872,
 edit,203901,MIREFSPECIAL-TRAFFIC VEST-2&quot; REFLECTIVE (SPECIAL),N31K0001INDIRECT0007,
 edit,203902,NON SPARKING ADJUSTABLE SPANNER TAPARIA MAKE SIZE 0-36 MMX 300 MM LONG MATERIAL BERYLLIUM COPPER REQUIRED FOR LPG AREA IN HEAT TREATMENT SECTION.AN.(APR-19),N31K0001INDIRECT0006,
 edit,203904,Earthing wire 1.5 Sqmm Green colour,N71K0001INDIRECT1867,
@@ -4391,9 +4392,6 @@ edit,204002,WELDING PURPOSE COVERALL SUITE FOR FIRE RETARDANT Full body cover si
 </tr>
 </tbody>
 </table></div>"
-edit,204020,POLYTHENE BAG OF SIZE 6Inch X 7Inch -,N50-KALIKA-POLY14,
-edit,204021,Poly Box Bag 85Inch X 65Inch X 91Inch - 150 mic (N) (6 Sided),N50-KALIKA-POLY15,
-edit,204022,Poly Box Bag 85Inch x 65Inch x 31Inch - 150 mic (N) (6 Sided),N50-KALIKA-POLY16,
 edit,204003,WELDING PURPOSE COVERALL SUITE FOR FIRE RETARDANT Full body cover size 42,N69FRCOVERALL42,"<div><table style=""width: 580px;"" width=""585"">
 <tbody>
 <tr>
@@ -4467,6 +4465,9 @@ edit,204016,18Inch X 18 Inch Polly Bags  150 microns 600 Gauge,N50-KALIKA-POLY10
 edit,204017,18Inch X 18 Inch Polly Bags  100 microns,N50-KALIKA-POLY11,
 edit,204018,POLYTHENE BAG OF SIZE  10Inch X 10Inch -,N50-KALIKA-POLY12,
 edit,204019,POLYTHENE BAG OF SIZE 12Inch X 12Inch -,N50-KALIKA-POLY13,
+edit,204020,POLYTHENE BAG OF SIZE 6Inch X 7Inch -,N50-KALIKA-POLY14,
+edit,204021,Poly Box Bag 85Inch X 65Inch X 91Inch - 150 mic (N) (6 Sided),N50-KALIKA-POLY15,
+edit,204022,Poly Box Bag 85Inch x 65Inch x 31Inch - 150 mic (N) (6 Sided),N50-KALIKA-POLY16,
 edit,204023,Poly Box Bag 78Inch x 50Inch x 28Inch - 150 mic (N) (6 Sided),N50-KALIKA-POLY17,
 edit,204024,Poly Flat Bag 7Inch(open)x 10Inch - 125 mic (N),N50-KALIKA-POLY18,
 edit,204025,LDPE BAG 12Inch X 13Inch/300 G - 75 mic,N50-KALIKA-POLY19,
@@ -4506,7 +4507,6 @@ edit,204037,PRINTED POLY BAGS (18Inch  x 36Inch ) - 100 Micron,N50-KALIKA-POLY30
 edit,204038,PRINTED POLY ROLL (4Inch ) - 100 Micron,N50-KALIKA-POLY31,"<div>
 <p>A plastic bag, poly bag, or pouch is a type of container made of thin, flexible, plastic film, Nonwoven fabric, or plastic textile. Plastic bags are used for containing and transporting goods such as foods, produce, powders, ice, magazines, chemicals, and waste. It is a common form of packaging.</p>
 </div>"
-edit,204100,Rubber seal Make: Fronius Part No.: 42.0510.0152,N35TIGGRINDER15,
 edit,204039,"Non Printed LDPE Poly Bag (120X80) - 75 microns BC18,P1",N50-KALIKA-POLY32,"<div>
 <p>A plastic bag, poly bag, or pouch is a type of container made of thin, flexible, plastic film, Nonwoven fabric, or plastic textile. Plastic bags are used for containing and transporting goods such as foods, produce, powders, ice, magazines, chemicals, and waste. It is a common form of packaging.</p>
 </div>"
@@ -4584,8 +4584,6 @@ edit,204056,Steel mesh hand gloves with leather palm for hot welded parts handli
 </li>
 </ul></div>"
 edit,204058,NAIL COIL- 3X2.8MM Thickness BOX OF 20 NOS,N50-NAILCOIL28MM,
-edit,204101,Spare tank with fluid Make: Fronius Part No.: 42.0510.0160,N35TIGGRINDER16,
-edit,204102,MIG Contact Tip 1.2mm Fronius Part No. 420001646710,N35EG-019-0102,
 edit,204059,"Monoblock pump From Mach powerpoint pumps india pvt ltd 1hp, MODEL MDP170",N35PUMP0550036,"<div><table>
 <tbody>
 <tr>
@@ -4689,7 +4687,7 @@ edit,204070,STANLEY  66052 SCREW DRIVER SET(SMALL),N35SCRWDRVRSTNLY,"<div class=
 <li>Plastic storage case included</li>
 </ul>
 </div>"
-edit,204103,ALFA industrial wall mounted fan close mesh 18&quot;,N39-ALFA18WMFAN,
+edit,204100,Rubber seal Make: Fronius Part No.: 42.0510.0152,N35TIGGRINDER15,
 edit,204071,RAYTEK FLUKE MAKE TEMPERATURE  SENSOR MODEL NO.-T40-LT-50-SF0-1 WITH CABLE,N37-FLUKET40SENSOR,"<div><p>Provides accurate temperature measurements for a wide variety of process control applications. This integrated sensor conforms to Industry 4.0 standards and combines innovative digital technology and standard two-wire installation for all setups. Has a temperature range of -20 to 600&deg;C and a spectral response of 8 to 14 &mu;m.</p>
 <p>FOR DATA SHEET</p>
 <p><a href=""https://www.raytek-direct.ca/pdfs/cache/www.raytek-direct.ca/t40-lt-15-sf0-0/datasheet/t40-lt-15-sf0-0-datasheet.pdf"">https://www.raytek-direct.ca/pdfs/cache/www.raytek-direct.ca/t40-lt-15-sf0-0/datasheet/t40-lt-15-sf0-0-datasheet.pdf</a></p></div>"
@@ -4719,6 +4717,9 @@ edit,204096,Collet chuck 4.0mm Make: Fronius Part No.: 42.0510.0137,N35TIGGRINDE
 edit,204097,Electrode holder Make: Fronius Part No.: 42.0510.0154,N35TIGGRINDER12,
 edit,204098,Electrode holder Make: Fronius Part No.: 42.0510.0153,N35TIGGRINDER13,
 edit,204099,"Electrode holder, complete Make: Fronius Part No.: 42.0510.0155",N35TIGGRINDER14,
+edit,204101,Spare tank with fluid Make: Fronius Part No.: 42.0510.0160,N35TIGGRINDER16,
+edit,204102,MIG Contact Tip 1.2mm Fronius Part No. 420001646710,N35EG-019-0102,
+edit,204103,ALFA industrial wall mounted fan close mesh 18&quot;,N39-ALFA18WMFAN,
 edit,204104,ALFA industrial wall mounted fan close mesh 24&quot;,N39-ALFA24WMFAN,
 edit,204105,"ALFA Industrial Close Mesh cabinet Fan, Size 18&quot;",N39-ALFA18CFAN,
 edit,204106,"ALFA Industrial Close Mesh cabinet Fan, Size 24&quot;",N39-ALFA24CFAN,
@@ -4747,6 +4748,8 @@ edit,204119,LUBI make 80 MM size outlet submersible sewage pump Model LFP - 3335
 </ul></div>"
 edit,204120,Multi-Element Metallo-Organic CRM  V26 Wear Metals – 900 µg/g  - 1 No. with Calibration certificate,N55METAORG-CRMV26,
 edit,204122,VHG AN 3-mgKIOH/gm standard in hydrocarbon TAN Volume – 50 grams with Calibration certificate,N55HYDROCR-VGH-AN3MG,
+edit,204162,JAGUAR CP EXTENCTION SIZE 1/2&quot; X 4&quot;,N35BATHROOMFITTING15,
+edit,204163,HINDWARE MAKE SENSOR URINAL -ONLY SENSOR EYE,N35BATHROOMFITTING16,
 edit,204123,MAGNUM MAKE N95 MASK 3D TYPE NIOSH APPROVED PROTECTION AGAINST AIRBORNE DISEASES LIKE H1 N1 DRUG RESISTANT TUBERCULOSIS SARS,N69MASKN95MAGNUM01,"<div>
 <table>
 <tbody>
@@ -4808,8 +4811,6 @@ edit,204158,JAGUAR Water Inlet Hose Pipe 12”x1/2”,N35BATHROOMFITTING11,
 edit,204159,JAGUAR Urinal PVC Drain Pipe- Coupling Fitting,N35BATHROOMFITTING12,
 edit,204160,JAGUAR PVC FLOOR TRAP ANTI COCKROCH -WHITE,N35BATHROOMFITTING13,
 edit,204161,JAGUAR CP EXTENCTION SIZE 1/2&quot; X 2&quot;,N35BATHROOMFITTING14,
-edit,204162,JAGUAR CP EXTENCTION SIZE 1/2&quot; X 4&quot;,N35BATHROOMFITTING15,
-edit,204163,HINDWARE MAKE SENSOR URINAL -ONLY SENSOR EYE,N35BATHROOMFITTING16,
 edit,204164,PVC FLOOR TRAP 3924 (18),N35BATHROOMFITTING17,
 edit,204165,HINDWARE MAKE SENSOR URINAL ONLY BATTERY BOX.,N35BATHROOMFITTING18,
 edit,204166,LIFEBUOY SOAP ( 125 GMS.),N43LIFEBUOY,
@@ -4934,7 +4935,6 @@ edit,204242,Telle Make EPDM Hose Part No:- 1003110390 Dimension ID : 7.5mmThickn
 edit,204243,MEDIUM SIZE LOCK 50 MM,N39LOCKMEDIUM1,
 edit,204244,"Pressure Gauge Range - 10 Bar Dial Size -2.5INCH Connection Type- Bottom, Glycerine Filled Make Wika",N35PRESSUREGAUGE,
 edit,204246,MEM-NOZ-OP10-Inventory Item-IN6.037.210HM04-S-E11990 s.c. special  boring bar Ø5/6mm incl. TiAlN-coating Drawing No.: 022-800-01017 MOQ 30 Nos. Make TTC,N31MEM01221,
-edit,204276,"Flexlink Spare part kit of X85- model conveyor , 5110796",N36SPAREKIT5110796,
 edit,204247,JOCKEY SOCKS MODEL 70-36,N69SOCKS002,"<div>
 <ul class=""a-unordered-list a-vertical a-spacing-mini"">
 <li><span class=""a-list-item"">Collection: Sport; Style no: 7036</span></li>
@@ -4971,6 +4971,7 @@ edit,204271,Flexlink Pin insertion tool for chain XLMJ 6P,N36CHAINTOOL2,
 edit,204272,"Flexlink Spare part kit of XT-model conveyor , 5053325",N36SPAREKIT5053325,
 edit,204274,"Flexlink Wheel of XT-model conveyor, 5111659",N36WHEELKIT5111659,
 edit,204275,"Flexlink Wheel kit of XT- model conveyor , 5111660",N36WHEELKIT5111660,
+edit,204276,"Flexlink Spare part kit of X85- model conveyor , 5110796",N36SPAREKIT5110796,
 edit,204277,"Flexlink Spare part kit of X85- model conveyor, 5111177",N36SPAREKIT5111177,
 edit,204278,"Flexlink Side plate kit of X85-model conveyor, 5111565",N36SPAREKIT5111565,
 edit,204279,O-Ring -P10,N36TAL10040096,
@@ -5026,8 +5027,6 @@ edit,204334,ROTEX GS 19 spider,N36SPIDER19,
 edit,204335,NB 65-200/190 AF2ABAQE_With MS Base Frame GRUNDFOS Pump,N36PUMPTESTCL-01,
 edit,204336,FOOD GRADE CONTAINER WITH LID FOR LUNCH or DINNER FIVE COMPARTMENT,N70FOODCONTAINER01,
 edit,204337,FOOD GRADE CONTAINER WITH LID FOR BREAKFAST THREE COMPARTMENT,N70FOODCONTAINER02,
-edit,204365,M8X25mm Self threaded screw,N37ELECSPARES-029,M8X25mm Self threaded screw
-edit,204366,16 Sqmm earthing cable Polycab,N37ELECSPARES-031,16 Sqmm earthing cable Polycab
 edit,204338,TARPAULIN 350GSM WITH EYELETS,N50TARPAULIN350GSM01,"<div><h1 class=""a-size-base-plus a-text-bold"">About this item</h1>
 <ul class=""a-unordered-list a-vertical a-spacing-mini"">
 <li><span class=""a-list-item"">100% WATERPROOF</span></li>
@@ -5061,6 +5060,8 @@ edit,204361,40X 40X 5mm Z support,N37ELECSPARES-025,40X 40X 5mm Z support
 edit,204362,Coupling strips,N37ELECSPARES-026,Coupling strips
 edit,204363,Clapming strips,N37ELECSPARES-027,Clapming strips
 edit,204364,M8 X 40mm nut bolts,N37ELECSPARES-028,M8 X 40mm nut bolts
+edit,204365,M8X25mm Self threaded screw,N37ELECSPARES-029,M8X25mm Self threaded screw
+edit,204366,16 Sqmm earthing cable Polycab,N37ELECSPARES-031,16 Sqmm earthing cable Polycab
 edit,204367,6 Sqmm earthing cable Polycab,N37ELECSPARES-032,6 Sqmm earthing cable Polycab
 edit,204368,2.5 Sqmm earthing cable Polycab,N37ELECSPARES-033,2.5 Sqmm earthing cable Polycab
 edit,204369,2.5 sqmm pin type lug,N37ELECSPARES-034,2.5 sqmm pin type lug
@@ -5089,7 +5090,6 @@ edit,204392,CENLUB METERING CARTRIDGE D1- 0.05CC,N40LUBC0020013,
 edit,204393,50X 50mm GI perforated cable tray with cover,N37ELECSPARES-009,
 edit,204395,Fan Make FAVELLE 380V 50Hz 1.20A 320/600W 1300r/min Model YWF 4D-550S,N37FAVELLEFAN,
 edit,204396,JANATICS FOOT OPERATED VALVE DPO45F61 / DPO35F61 3 WAY 2 PORT,N35FOOTVALVE01,
-edit,204947,FINOLEX PVC MTA -40MM,N35FNLEX-35,
 edit,204398,LEGRAND Industrial Socket: 3 Pin P17 TEMPRA INCLI. SKT 250V PART NO 057611,N39SOCKET16A,
 edit,204399,LEGRAND Industrial Socket: PANEL MTG SOC.415VAC 32A3P N E PART NO.057624,N39SOCKET32A,
 edit,204402,Soakclean,N53SOAKCLEAKG,
@@ -5117,6 +5117,7 @@ edit,204422,"Stand structure in 40x40mm Anodized Aluminium section, Overall Size
 edit,204423,Stand structure in 40x40mm& 30x30mm Anodized Aluminium section .Overall Size : 1780x1500mm,N35ALUFANCING002,
 edit,204424,Stand structure in 40x40mm & 30x30mm Anodized Aluminium section . Overall Size : 1280x1500mm.,N35ALUFANCING003,
 edit,204425,SHAKTI MAKE ANCHOR FASTNER SIZE M10 X 75,N39MISC0060034,
+edit,205441,2&quot; UPVC BALL VALVE,N35PLUMBING-37,"2"" UPVC BALL VALVE"
 edit,204426,SHAKTI MAKE ANCHOR FASTNER SIZE M10 X 100,N35INST7770052,
 edit,204427,SHAKTI MAKE ANCHOR FASTNER SIZE M12 X 75,N42MISE0010036,
 edit,204428,SHAKTI MAKE ANCHOR FASTNER SIZE M12 X 100,N39MISC0060050,
@@ -5147,7 +5148,6 @@ edit,204462,AUTOMATIC TWIN BLOWER HAND DRYER (STEEL WITH WHITE ENAMEL COATING) (
 edit,204463,"“SUBODHAN’’MAKES SVG - STATIC VAR GENERATOR: Rating with our standard specifications. 3 Phase, 4 Wire, Input 415 VAC, 50Hz Suitable having CT sensing facility from 33 KV HT Side 200 KVAR",N37STATICVRGENRATR,
 edit,204483,"Hallmark Make soldering machine, Model-TCS-450D, 35W",N38-HALLMARK-450D,
 edit,204484,REDUCTION GEAR BOX BONFIGLIOLI MAKE TYPE VF-R-49-P1-P63-B5 MOUNTING POSTION B3-300,N36KATA1902051,
-edit,205356,DNC-100-200-PPV,N37DNC100200PPV,DNC-100-200-PPV
 edit,204464,NILFISK INDUSTRIAL VACUUM CLEANER VHS120 CC G,N35NILINDVACCLEANER,"<div><p class=""usp_text""><span>Chip extractor with integrated chip basket</span></p>
 <div class=""properties"">
 <ul>
@@ -5228,6 +5228,7 @@ edit,204512,Nitric Acid FOR ETP-STP,N69NITRICKE006,
 edit,204514,Urea FOR ETP-STP,N69UREAKE008,
 edit,204515,DAP FOR ETP-STP,N69DAPKE009,
 edit,204516,Citric Acid FOR ETP-STP,N69CITRICACKE010,
+edit,205442,2&quot; UPVC SOCKET,N35PLUMBING-38,"2"" UPVC SOCKET"
 edit,204517,SAFEX MAKE ISI MARKED CO2 TYPE FIRE EXTINGUISHER 22.5 KGS,N69CO2FIREEXT,
 edit,204518,DANFOSS COMPRESSOR ALONG WITH DRIVE SUITABLE FOR THE SAME MODEL NO.- VZH170AGBNB UL ELECTRIC RATING TO CDS303 FREQUENCY CONVERTER THERMAL PROTECTED SYSTEM,N36DANFOSSCMPSR,
 edit,204519,"Make- UNION BATTERY Model No.3BT 78 , VOLT 48V,Capacity:-250AH Dimension 950L*260W*585H",N36MHESPARE087,
@@ -5572,6 +5573,7 @@ edit,204767,BONDERITE C-NE 5225 Known as P3 Neutrasel 5225 Henkle make,N56MEA034
 edit,204768,BONDERITE C-SO 101 Known as P3-solvclean 101 Henkle make,N56MEA03446,
 edit,204769,"BLACK MOLY GREASE (PACK OF 35 LBS), BOSTIK ANTI SEIZE",N56NEVERSEIZEGREASE,
 edit,204770,Caulking Gun CP-9885,N31RATCHETGUN002,
+edit,204973,8 MM NUT FOR 8 MM BOLT,N51MM8FOR8,
 edit,204771,VELCRO SENDER DISC 5 INCH COMBINATION DISC CD848 (STA MULTICUT DISC 5 INCH 120 GRT),N31SENDERDISC5120,
 edit,204772,WKT1234W (ORDER NO. 017172) SERIES WK…,N37EUCHNER-02,
 edit,204773,"ANTISKID FIBERGLASS FLOORING THICKNESS 4MM,GRITTED IN BLACK, SIZE 3000 X 1220MM",N35ANTSKDFIBRFLRGLS,
@@ -5646,7 +5648,6 @@ edit,204861,MITSUBISHI MRJ3-70T-AC SERVO DRIVE 750W ITEM CODE MR-J3-70T FROM ANU
 edit,204862,NSK TRACK ROLLER PACK BEARING WRP383310,N36HOMA2495144,
 edit,204863,AXIAL FAN 220V AC REXONARD MAKE 120 X 120 X 38 MM,N39PANL44700003,
 edit,204864,100437 ZMO-ZB-PGK CABLE FOR PROGRAMMING PC,N37CBLEUCHN,
-edit,204916,FINOLEX PIPE 75 MM(PIPE),N35FNLEX-03,
 edit,204865,088053 ANWPG SFM KONFIGURATIONS APPLICATION SOFTWARE SALES,N37CBLEUCHN-01,
 edit,204866,SPEEDY Make Spare ‘Collapsible Mandrel’ suitable for QSK-23 concentricity checking gauge along with resting ball,N33SPEEDY-03,
 edit,204867,SPEEDY Make Spare ‘Collapsible Mandrel’ suitable for QSK-23 concentricity checking gauge along with resting ball,N33SPEEDY-04,
@@ -5695,6 +5696,7 @@ edit,204911,IR Lamp Spare Connector,N36-LITELIRSPARE,
 edit,204913,Elkon Private Limited Ampetronic CLD1 with Counter Loop kit and desktop microphone unit,N41ALKONCLD1,
 edit,204914,FINOLEX PIPE 110 MM,N35FNLEX-01,
 edit,204915,FINOLEX PIPE 90 MM(PIPE),N35FNLEX-02,
+edit,204916,FINOLEX PIPE 75 MM(PIPE),N35FNLEX-03,
 edit,204917,FINOLEX PIPE 63 MM(PIPE),N35FNLEX-04,
 edit,204918,FINOLEX PIPE 40 MM(PIPE),N35FNLEX-05,
 edit,204919,FINOLEX PVC REDUCER 110 X90MM,N35FNLEX-06,
@@ -5725,6 +5727,7 @@ edit,204943,FINOLEX PVC MTA -110MM,N35FNLEX-31,
 edit,204944,FINOLEX PVC MTA -90MM,N35FNLEX-32,
 edit,204945,FINOLEX PVC MTA -75MM,N35FNLEX-33,
 edit,204946,FINOLEX PVC MTA -63MM,N35FNLEX-34,
+edit,204947,FINOLEX PVC MTA -40MM,N35FNLEX-35,
 edit,204948,FINOLEX COUPLING STAINLESS STEEL(1.1/4''),N35FNLEX-36,
 edit,204949,ABC 6 Kg Fire Extinguisher SAFEX Make ABC Stored Pressure Type Fire Extinguisher 6Kgs capacity bearing ISI Mark for Fighting ABC Class of Fire. The Extinguisher will be Manufactured Strictly as per BIS: 15683:2018 bearing ISI. Mark.,N69SAFEXEFIREEXTI03,
 edit,204950,"MODULAR CLEAN AGENT 5 KGS FIRE EXTINGUISHER ‘SAFEX SACLON II ECO’ BRAND AUTOMATIC MODULAR FIRE EXTINGUISHER 5KGS CAPACITY WITH WALL HOOK BUILT IN 3 PIECES WITH  MILD STEEL BODY OF 1.6 MM THICKNESS WITH PRESSURE GAUGE,  DEVICE CE CERTIFIED B",N69SAFEXEFIREEXTI09,
@@ -5751,7 +5754,6 @@ edit,204969,5&quot; HOOK KIT BACKUP PAD 1791 FOR SANDER GUN,N31QSKMIS00487,
 edit,204970,RIC EMERY ROLL 50 M x 50 MM GRIT 80,N31QSKMIS00488,
 edit,204971,"SHELL S2 G 80W-90, GEAR OIL (20 LIT PACKING)",N56SHLLS2G80W-90,
 edit,204972,WASHER WITH HEX NUT M5,N51HARD1000-032,
-edit,204973,8 MM NUT FOR 8 MM BOLT,N51MM8FOR8,
 edit,204974,Hitensile full threaded ALLEN BOLT M5 X 175,N51245107,
 edit,204975,Hitensile full threaded ALLEN BOLT M5X100 MM/ 80,N5124542,
 edit,204976,Hitensile full threaded ALLEN BOLT M6 X 175MM,N51HARD1000-082,
@@ -5800,7 +5802,6 @@ edit,205041,SPARES PARTS OF AOD 500 PF PSR SHAFT BLOCK WITH O RING,N36IMECO61200
 edit,205043,Welding Rods  145 XFC x 3.15 mm,N57WELDINGROD03,
 edit,205044,Welding Rods  2240 x 3.15 mm,N57WELDINGROD01,
 edit,205045,"PCB Make Vibration Sensor:-                                                 Supply of High Sensitivity Ceramic Shear ICP@ Accel,100mV/gm0.5Hz to 10KHz, 10-32Side Connection Model:-352C33",N37-PCB-VBRSENSOR,
-edit,205108,HACOP PUMP IMPELLER IMPELLER P.P PART CODE-LUB 023,N36CLASSIC108,
 edit,205046,"PCB Make Cable Connector :-                                                   Low-Noise Coaxial Cable, Blue TFE Jacketm10-m,10-32 Coaxial Plug to BNC Plug Model No:- M003C10",N37-PCB-CBLCONNECTOR,
 edit,205047,"PCB Make Magnetic Base:-                                                   High-Strength,rare Earth Magnetic Base, 0.75&quot; Hex, 12Lbf, 10-32 Thd Model No-080A27",N37-PCB-MGTBASE,
 edit,205048,SPL DEBURRING NOGA BLADE ALTERNATE FOR BS2012 S20,N31QSKMIS00494,
@@ -5851,6 +5852,7 @@ edit,205104,"WORK SUPPORT,HYD ADV ,LD0363-H ,KOSMEK",N36MAZAK1001-195,
 edit,205105,"WORK SUPPORT HYD ADV, LD0453-H,KOSMEK",N36MAZAK1001-196,
 edit,205106,LL0400-CA-015 KOSMEK,N36MAZAK1001-197,
 edit,205107,"Hydraulic Motor Daikin (EDM269A-1R2-3-20-L, MFG NO 27-49-314)",N36HOMA2490467,
+edit,205108,HACOP PUMP IMPELLER IMPELLER P.P PART CODE-LUB 023,N36CLASSIC108,
 edit,205109,HACOP PUMP BALL BEARING (SET OF 2) LU004,N36CLASSIC119,
 edit,205111,HACOP PUMP LOCKING WASHER LU007,N36CLASSIC122,
 edit,205112,HACOP PUMP DRIVEN SHAFT 1250MM LU018,N36CLASSIC133,
@@ -5898,7 +5900,6 @@ edit,205154,TRANSISTOR IGBT MODULE (BLACK) PART CODE- HSCC 002533,N36INDUHESPR-0
 edit,205155,VFR 49 P 300 P63 B5 B3 HELIWORM REDUCTION GEAR BOX,N36OILG2941002,
 edit,205156,IR LEL SENSOR,N37-IRLELSENSOR,
 edit,205157,Safety Glasses by Udyogi - UD71 Safety Spectacle,N69UDYOGIUD71,
-edit,205193,LOVEJOY SPIDER PU COUPLING L-110,N35LOVEJOYL110,LOVEJOY SPIDER PU COUPLING L-110
 edit,205158,Bosch Make Drilling Machine GBM 50-2-Aggregator,N31-BOSCHDRILGBM50,
 edit,205159,CART CLAMP CYLINDER KOSMEK MAKE LK1051CCD,N772020TESTCARTCYL,
 edit,205160,CART CLAMP CYLINDER KOSMEK MAKE LK0901CCD,N772020TESTCARTCYL01,
@@ -5924,6 +5925,7 @@ edit,205189,SAFETY EQUIPMENT AZ16-122VRK-M16,N35SAFETYEQUM16,SAFETY EQUIPMENT AZ
 edit,205190,"GEARBOX WITH 14 RATIO,1HP,1440RPM MOTOR,MODEL-PQ85 B3 14 IEC 80 B5 + SMX 0.75 KW IEC 80B4 B5 HYDROMEC (MACVEL) (FOOTMOUNTED GEAR BOX +FLANGE MOUNTED MOTOR)",N36GEARBOXMOTOR,"GEARBOX WITH 14 RATIO,1HP,1440RPM MOTOR,MODEL-PQ85 B3 14 IEC 80 B5 + SMX 0.75 KW IEC 80B4 B5 HYDROMEC (MACVEL) (FOOTMOUNTED GEAR BOX +FLANGE MOUNTED MOTOR)"
 edit,205191,HSS STEEL STEP CONE DRILL SET ROTARY BIT 4-32MM,N35HSSCONEDRILL,HSS STEEL STEP CONE DRILL SET ROTARY BIT 4-32MM
 edit,205192,"SS BALL VALVE 1 1/4&quot;, THREDED",N35SSBALLVALVE,"SS BALL VALVE 1 1/4"", THREDED"
+edit,205193,LOVEJOY SPIDER PU COUPLING L-110,N35LOVEJOYL110,LOVEJOY SPIDER PU COUPLING L-110
 edit,205194,"ENCLOSED 3 PHASE ISOLATOR SWITCH,16 A,MODEL-VCFN20GE,MAKE-SCHNIEDER ELECTRIC(TELEMECANIQUE)",N37PHASEISO16A,"ENCLOSED 3 PHASE ISOLATOR SWITCH,16 A,MODEL-VCFN20GE,MAKE-SCHNIEDER ELECTRIC(TELEMECANIQUE)"
 edit,205195,"ENCLOSED 3 PHASE ISOLATOR SWITCH,32 A, MODEL-VCF2GE, MAKE-SCHNEIDER ELECTRIC",N37PHASEISO32A,"ENCLOSED 3 PHASE ISOLATOR SWITCH,32 A, MODEL-VCF2GE, MAKE-SCHNEIDER ELECTRIC"
 edit,205196,WARNING LIGHT MODEL-ID-5110J MAKE-ID IDEAL,N37WARNINGLGT5110,WARNING LIGHT MODEL-ID-5110J MAKE-ID IDEAL
@@ -5948,6 +5950,7 @@ edit,205214,"MAKE -KIRLOSKAR , TYPE-MONOBLOCK , CENTRIFUGAL,MODEL-KDT544,5HP, 3 
 edit,205215,MAKE & MODEL -CHAMPION JOINTING 59 GASKET /SPITMAAN AF 120 750MM *420MM*3MM THICK SHEET,N36CHAMPGASKET,MAKE & MODEL -CHAMPION JOINTING 59 GASKET /SPITMAAN AF 120 750MM *420MM*3MM THICK SHEET
 edit,205216,"ZB5AW743 HARMONY XB5, ILLUMINATED EMERGENCY STOP SWITCHING OFF HEAD ,PLASTIC ,RED MUSHROOM",N37SWITCHILLUM,"ZB5AW743 HARMONY XB5, ILLUMINATED EMERGENCY STOP SWITCHING OFF HEAD ,PLASTIC ,RED MUSHROOM"
 edit,205217,SIEMENS AUXILLIARY CONTACT BLOCK 1NO 3TX4010-2A,N37SIEMENS1NO,SIEMENS AUXILLIARY CONTACT BLOCK 1NO 3TX4010-2A
+edit,205243,"345L TIMING BELT, WIDTH- 25MM",N36TIMIGBELT-004,"345L TIMING BELT, WIDTH- 25MM"
 edit,205218,SIEMENS AIR BREAK (POWER) CONTACTOR 3TF30 10-0A AUXILLARY CONTACTS :1NO,N37SIEMENSARBR1N0,SIEMENS AIR BREAK (POWER) CONTACTOR 3TF30 10-0A AUXILLARY CONTACTS :1NO
 edit,205219,VACUUM FILTER ZFC75-B SMC,N36SMCSPAR-001,VACUUM FILTER ZFC75-B SMC
 edit,205220,ELECTRICAL VALVE VX234AGXB SMC,N37SMCSPAR-001,ELECTRICAL VALVE VX234AGXB SMC
@@ -5970,11 +5973,9 @@ edit,205236,INSULATED PIN TYPE LUGS 2.5 SQ MM YELLOW COLOR(100NOS MOQ),N37INSULA
 edit,205237,INSULATED PIN TYPE LUGS 2.5 SQ MM BLUE COLOR(100NOS MOQ),N37INSULATEDPIN2.5-2,INSULATED PIN TYPE LUGS 2.5 SQ MM BLUE COLOR(100NOS MOQ)
 edit,205238,INSULATED PIN TYPE LUGS 2.5 SQ MM BLACK COLOR(100NOS MOQ),N37INSULATEDPIN2.5-3,INSULATED PIN TYPE LUGS 2.5 SQ MM BLACK COLOR(100NOS MOQ)
 edit,205239,INSULATED RING TYPE LUGS 2.5 SQ MM GRAY/BLACK COLOR(100NOS MOQ),N37INSULATEDRING2.5,INSULATED RING TYPE LUGS 2.5 SQ MM GRAY/BLACK COLOR(100NOS MOQ)
-edit,205355,CS2D140A-250,N37CS2D140A250,CS2D140A-250
 edit,205240,"210L TIMING BELT, WIDTH-13MM",N36TIMIGBELT-001,"210L TIMING BELT, WIDTH-13MM"
 edit,205241,"210L-050 TIMING BELT, WIDTH-13MM",N36TIMIGBELT-002,"210L-050 TIMING BELT, WIDTH-13MM"
 edit,205242,"300L TIMING BELT, WIDTH- 25MM",N36TIMIGBELT-003,"300L TIMING BELT, WIDTH- 25MM"
-edit,205243,"345L TIMING BELT, WIDTH- 25MM",N36TIMIGBELT-004,"345L TIMING BELT, WIDTH- 25MM"
 edit,205244,"140XL TIMING BELT, WIDTH- 9.5 MM",N36TIMIGBELT-005,"140XL TIMING BELT, WIDTH- 9.5 MM"
 edit,205245,"MEGADYNE 1000H TIMING BELT , WIDTH- 9.5MM * MBL MAKE",N36TIMIGBELT-006,"MEGADYNE 1000H TIMING BELT , WIDTH- 9.5MM * MBL MAKE"
 edit,205246,"240L050 TIMING BELT, WIDTH-13MM",N36TIMIGBELT-007,"240L050 TIMING BELT, WIDTH-13MM"
@@ -6065,6 +6066,7 @@ edit,205330,"SMC MAKE VALVE SOL VALVE Vx3320OV-02-5DZ1-B, PRESSURE(MPa)- VACUUM 
 edit,205331,"NITTA M0ORE MAKE, QUICK SEAL SERIES INSERTION TYPR BRASA FITTINGS CONNECTOR, PART NO C4N6x4-PT1/8",N36MECHSPAR-0002,"NITTA M0ORE MAKE, QUICK SEAL SERIES INSERTION TYPR BRASA FITTINGS CONNECTOR, PART NO C4N6x4-PT1/8"
 edit,205332,"NITTA MOORE MAKE, QUICK SEAL SERIES INSERTION TYPE BRASS FITTINGS CONNECTOR, PART NO:- C4N6x4-PT1/4",N36MECHSPAR-0003,"NITTA MOORE MAKE, QUICK SEAL SERIES INSERTION TYPE BRASS FITTINGS CONNECTOR, PART NO:- C4N6x4-PT1/4"
 edit,205333,"NITTA MOORE MAKE QUICK SEAL SERIES INSERTION TYPE BRASS FITTINGS 90 DEGREE ELBOW,PART NO :- L4N6x4-PT1/8",N36MECHSPAR-0004,"NITTA MOORE MAKE QUICK SEAL SERIES INSERTION TYPE BRASS FITTINGS 90 DEGREE ELBOW,PART NO :- L4N6x4-PT1/8"
+edit,205385,"CAPACITOR 30 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT",N37CAPACITOR30,"CAPACITOR 30 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT"
 edit,205334,"NITTA M0ORE MAKE QUICK SEAL SERIES INSERTION TYPE BRASA FITTINGS 90 DEGREE ELBOW ,PART NO L4N6x4-PT1/4",N36MECHSPAR-0005,"NITTA M0ORE MAKE QUICK SEAL SERIES INSERTION TYPE BRASA FITTINGS 90 DEGREE ELBOW ,PART NO L4N6x4-PT1/4"
 edit,205335,"SMC MAKE SILENCER, 4&quot; - AN203-02",N36MECHSPAR-0006,"SMC MAKE SILENCER, 4"" - AN203-02"
 edit,205336,DOWTY SEAL -1/4&quot; MOQ- 50 EACH,N36MECHSPAR-0007,"DOWTY SEAL -1/4"" MOQ- 50 EACH"
@@ -6086,8 +6088,11 @@ edit,205351,LAZER CABIN FAN ROTATING 300MM COLOR WHITE POWER CONSUMTION 80W VOLT
 edit,205352,CS2D160-250,N37FESTOCS2D160250,CS2D160-250
 edit,205353,DSBC-100-200-PPVA-N3,N37DSBC1002000N3,DSBC-100-200-PPVA-N3
 edit,205354,MGPM50-200Z,N37MGPM250200Z,MGPM50-200Z
+edit,205355,CS2D140A-250,N37CS2D140A250,CS2D140A-250
+edit,205356,DNC-100-200-PPV,N37DNC100200PPV,DNC-100-200-PPV
 edit,205357,SEAL KIT DNC-100-200-PPV,N37SKTDNC100200PPV,SEAL KIT DNC-100-200-PPV
 edit,205358,"ANTI-VIBRATION MOUNT, MAKE- AVMOUNTS, MODEL NO- VIBRIO DAMPER AVM 80/560",N36AVM80-560,"ANTI-VIBRATION MOUNT, MAKE- AVMOUNTS, MODEL NO- VIBRIO DAMPER AVM 80/560"
+edit,205440,2&quot; UPVC UNION,N35PLUMBING-36,"2"" UPVC UNION"
 edit,205359,SMC MAKE LED MACHINE LAMP WATER AND COOLANT PROOF 11 WATT EXTERNAL BALLAST SUITABLE FOR 220-VAC P.NO. SMC-CNC-2-3-E-,N39LMFL1000059,SMC MAKE LED MACHINE LAMP WATER AND COOLANT PROOF 11 WATT EXTERNAL BALLAST SUITABLE FOR 220-VAC P.NO. SMC-CNC-2-3-E-
 edit,205360,SHAVO MAKE REPAIR KIT FOR SR18 (SR18-100R) MODEL CODE: SPA096G00224,N36SR18-100RSPA224,SHAVO MAKE REPAIR KIT FOR SR18 (SR18-100R) MODEL CODE: SPA096G00224
 edit,205361,"UXCELL/TEKNIC PUSH BUTTON SWITCH CONTROL STATION BOX ,22MM DIA AND 3 HOLE",N37ELESPARES-153,"UXCELL/TEKNIC PUSH BUTTON SWITCH CONTROL STATION BOX ,22MM DIA AND 3 HOLE"
@@ -6114,7 +6119,6 @@ edit,205381,1/2&quot; PLASTIC WATER TAP,N35UPVCMTR121,"1/2"" PLASTIC WATER TAP"
 edit,205382,"CAPACITOR 50 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT",N37CAPACITOR50,"CAPACITOR 50 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT"
 edit,205383,"CAPACITOR 40 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT",N37CAPACITOR40,"CAPACITOR 40 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT"
 edit,205384,"CAPACITOR 36 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT",N37CAPACITOR36,"CAPACITOR 36 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT"
-edit,205385,"CAPACITOR 30 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT",N37CAPACITOR30,"CAPACITOR 30 MFD 440V AC, MAKE- CROMPTON/EPCOS/ EQUIVALENT"
 edit,205386,"CAPACITOR 06 MFD 440V AC, MAKE- CROMPTON/EPCOS/EQUIVALENT",N37CAPACITOR06,"CAPACITOR 06 MFD 440V AC, MAKE- CROMPTON/EPCOS/EQUIVALENT"
 edit,205387,"CAPACITOR 20 MFD 440V AC, MAKE-CROMPTON/EPCOS/ EQUIVALENT",N37CAPACITOR20,"CAPACITOR 20 MFD 440V AC, MAKE-CROMPTON/EPCOS/ EQUIVALENT"
 edit,205388,"GEAR PUMP, MAKE- DOWTY/ BOSS, MODEL NO-3020/6020",N36GEARPMPDWTY,"GEAR PUMP, MAKE- DOWTY/ BOSS, MODEL NO-3020/6020"
@@ -6137,7 +6141,6 @@ edit,205404,"MODULAR 16A SWITCH,MAKE- NORTH WEST, MODEL NO-A1332",N39SWITCHA1332
 edit,205405,"12 WAY MODULAR BASE PLATE WITH FRAME, MAKE- NORTH WEST, MODEL NO- AP9712S",N39BASE12WAY,"12 WAY MODULAR BASE PLATE WITH FRAME, MAKE- NORTH WEST, MODEL NO- AP9712S"
 edit,205406,"8 WAY MODULAR BASE PLATE WITH FRAME, MAKE- NORTH WEST, MODEL NO- AP968S",N39BASE8WAY,"8 WAY MODULAR BASE PLATE WITH FRAME, MAKE- NORTH WEST, MODEL NO- AP968S"
 edit,205407,"3 WAY MODULAR BASE PLATE WITH FRAME, MAKE- NORTH WEST, MODEL NO- AP933",N39BASE3WAY,"3 WAY MODULAR BASE PLATE WITH FRAME, MAKE- NORTH WEST, MODEL NO- AP933"
-edit,205434,1&quot; UPVC PIPE,N35FACILITYSP-037,"1"" UPVC PIPE"
 edit,205408,"CABLE COPPER 2.5 SQMM 3 CORE FLEXIBLE, FRLS,MAKE- POLYCAB",N392.5SQMMCOPPER,"CABLE COPPER 2.5 SQMM 3 CORE FLEXIBLE, FRLS,MAKE- POLYCAB"
 edit,205409,TUBE FSL ACTINIC/ EQUIVALENT MAKE BL T8 F18W,N37TUBEFSLACTINIC,TUBE FSL ACTINIC/ EQUIVALENT MAKE BL T8 F18W
 edit,205410,CHOKE ORIENT/ PHILIPS/ EQUIVALENT MAKE ORI STAR SLIM 36W FTL,N37CHOKEORIENT,CHOKE ORIENT/ PHILIPS/ EQUIVALENT MAKE ORI STAR SLIM 36W FTL
@@ -6164,14 +6167,12 @@ edit,205430,1 1/2&quot; UPVC BRASS SOCKET,N35PLUMBINGMAT07,"1 1/2"" UPVC BRASS S
 edit,205431,1 1/2&quot; FLOAT VALVE,N35PLUMBINGMAT14,"1 1/2"" FLOAT VALVE"
 edit,205432,2&quot;X 2&quot; CPVC TO UPVC CONNECTOR,N35PLUMBINGMAT15,"2""X 2"" CPVC TO UPVC CONNECTOR"
 edit,205433,1/2'' UPVC TO CPVC CONNECTOR,N35PLUMBINGMAT27,1/2'' UPVC TO CPVC CONNECTOR
+edit,205434,1&quot; UPVC PIPE,N35FACILITYSP-037,"1"" UPVC PIPE"
 edit,205435,1&quot; CAPSTAN MAKE WATER METER CLASS-B,N35WATERMTR002,"1"" CAPSTAN MAKE WATER METER CLASS-B"
 edit,205436,1&quot; FLOAT VALVE,N35PLUMBINGMAT31,"1"" FLOAT VALVE"
 edit,205437,11/2&quot; EQUAL TEE EASY FIT,N35EQUALEASY002,"11/2"" EQUAL TEE EASY FIT"
 edit,205438,3/4&quot; COUPLER EASY FIT,N35COUPLEREASY003,"3/4"" COUPLER EASY FIT"
 edit,205439,2&quot; UPVCT,N35PLUMBING-35,"2"" UPVCT"
-edit,205440,2&quot; UPVC UNION,N35PLUMBING-36,"2"" UPVC UNION"
-edit,205441,2&quot; UPVC BALL VALVE,N35PLUMBING-37,"2"" UPVC BALL VALVE"
-edit,205442,2&quot; UPVC SOCKET,N35PLUMBING-38,"2"" UPVC SOCKET"
 edit,205443,1&quot; CAPSTAN MAKE WATER METER CLASS-B WITH CALIBRATION CERTIFICATE,N35PLUMBING-39,"1"" CAPSTAN MAKE WATER METER CLASS-B WITH CALIBRATION CERTIFICATE"
 edit,205444,1&quot; UPVC TANK CONNECTION(NIPPLE) (ONE SIDE PIPE FITTING,N35PLUMBING-40,"1"" UPVC TANK CONNECTION(NIPPLE) (ONE SIDE PIPE FITTING"
 edit,205445,11/2&quot; UPVC MTA,N35PLUMBING-41,"11/2"" UPVC MTA"
@@ -6190,7 +6191,6 @@ edit,205457,"PANEL LOCK ROUND, MATERIAL - STAINLESS STEEL SIZE-15-22MM",N39PANEL
 edit,205458,2&quot; UPVC TANK CONNECTION (NIPPLE),N35PLUMBING-69,"2"" UPVC TANK CONNECTION (NIPPLE)"
 edit,205459,"SILICON MAKE MOTOR PROTECTION RELAY SIZE 96X96,CURRENT RANGE- 62 A,SR NO. 1606006 (SILICON)",N36WHBR0650004,"SILICON MAKE MOTOR PROTECTION RELAY SIZE 96X96,CURRENT RANGE- 62 A,SR NO. 1606006 (SILICON)"
 edit,205460,MS 4&quot; FLANGE C-CLASS,N35FLNAGEMS4INCH,"MS 4"" FLANGE C-CLASS"
-edit,101,QuantumBook Pro 14,SKU-LAP-001,
 edit,205461,4&quot; FLANGED NRV,N35FLNAGENRV4INCH,"4"" FLANGED NRV"
 edit,205462,4&quot; FLANGE GASKET,N35FLNAGEGSKT4INCH,"4"" FLANGE GASKET"
 edit,205463,4&quot; FLANGE NUT BOLT WITH WASHER (1 SET- 8NOS),N35FLNAGENTBLTWSHR4INCH,"4"" FLANGE NUT BOLT WITH WASHER (1 SET- 8NOS)"
@@ -6237,7 +6237,6 @@ edit,205504,"NYLON LIGHT WEIGHT WATER HOSE 9MM ID, 12MM OD BOTH SIDE 3/8&quot; E
 edit,205505,REDUCING NIPPLE 3/8&quot; MALE X 1/4&quot; FEMALE BSP THREAD,N36REDUCINGNIPPLE,"REDUCING NIPPLE 3/8"" MALE X 1/4"" FEMALE BSP THREAD"
 edit,205506,HEX NIPPLE 3/8&quot; MALE X1/2&quot; MALE BSP THREAD,N36HEXNIPPLE001,"HEX NIPPLE 3/8"" MALE X1/2"" MALE BSP THREAD"
 edit,205507,HEX NIPPLE 3/8&quot; MALE X 3/8&quot; MALE BSP THREAD,N36HEXNIPPLE002,"HEX NIPPLE 3/8"" MALE X 3/8"" MALE BSP THREAD"
-edit,102,"NebulaView 27"" 4K",SKU-MON-002,
 edit,205508,HHP886 HANDHELD MANOMETER,N36MANOMETER886,HHP886 HANDHELD MANOMETER
 edit,205509,TADIRAN 3.6V SIZE 1/2AA LITHIUM BATTERY,N38BATTERY3.6V,TADIRAN 3.6V SIZE 1/2AA LITHIUM BATTERY
 edit,205510,"CONTROL TRANSFORMER (SINGLE PHASE) RATING: 1000VA, PRIMARY: 240 VAC, SECONDARY:100VAC, FREQUENCY: 50/60 HZ, COPPER WOUND,INSULATION CLASS F, VPI DRY TYPE, WITH &quot;CEMARK&quot;,WITH ENCLOSURE: IP23, REF. STANDARD IS12021 MAKE PRIMA",N37MAZAK1002-015,"CONTROL TRANSFORMER (SINGLE PHASE) RATING: 1000VA, PRIMARY: 240 VAC, SECONDARY:100VAC, FREQUENCY: 50/60 HZ, COPPER WOUND,INSULATION CLASS F, VPI DRY TYPE, WITH ""CEMARK"",WITH ENCLOSURE: IP23, REF. STANDARD IS12021 MAKE PRIMA"
@@ -6258,7 +6257,6 @@ edit,205524,"REXNORD COOLING FANS REC 8025 A2 M W VOLTAGE 230VAC, SINGLE PHASE",
 edit,205525,"FESTO make Solenoid Valve Connector, Part VALVE -L1-1VR8-LP",N37VALVEL11VR8LP,"FESTO make Solenoid Valve Connector, Part VALVE -L1-1VR8-LP"
 edit,205526,"FESTO Make Cylinder, Model No- DZF-32-50-A-P-A",N37DZF3250APA,"FESTO Make Cylinder, Model No- DZF-32-50-A-P-A"
 edit,205527,"MASONRY DRILL BIT FOR CONCRETE, MAKE MIRANADA/ IT, SIZE- 4.00MM",N31MASONRYDRLL01,"MASONRY DRILL BIT FOR CONCRETE, MAKE MIRANADA/ IT, SIZE- 4.00MM"
-edit,205626,RJ45 CONNECTOR,N37ELESPARES-208,RJ45 CONNECTOR
 edit,205528,"MASONRY DRILL BIT FOR CONCRETE,MAKE MIRANADA/ IT, SIZE-5.00MM",N31MASONRYDRLL02,"MASONRY DRILL BIT FOR CONCRETE,MAKE MIRANADA/ IT, SIZE-5.00MM"
 edit,205529,"MASONRY DRILL BIT FOR CONCRETE,MAKE MIRANADA/ IT, SIZE- 6.00MM",N31MASONRYDRLL03,"MASONRY DRILL BIT FOR CONCRETE,MAKE MIRANADA/ IT, SIZE- 6.00MM"
 edit,205530,"MASONRY DRILL BIT FOR CONCRETE,MAKE MIRANADA/ IT, SIZE-8.00MM",N31MASONRYDRLL04,"MASONRY DRILL BIT FOR CONCRETE,MAKE MIRANADA/ IT, SIZE-8.00MM"
@@ -6283,7 +6281,6 @@ edit,205548,HYDRAULIC MALE STUD STRAIGHT COUPLING 1/4&quot;BSPX10MM TUBE,N36LUBP
 edit,205549,HYDRAULIC MALE STUD STRAIGHT COUPLING 1/4&quot;BSPX12MM TUBE,N36LUBP0011150,"HYDRAULIC MALE STUD STRAIGHT COUPLING 1/4""BSPX12MM TUBE"
 edit,205550,HYDRAULIC MALE STUD STRAIGHT COUPLING 3/8&quot;BSPX8MM TUBE,N36LUBP0011151,"HYDRAULIC MALE STUD STRAIGHT COUPLING 3/8""BSPX8MM TUBE"
 edit,205551,HYDRAULIC MALE STUD STRAIGHT COUPLING 3/8&quot;BSPX10MM TUBE,N36LUBP0011152,"HYDRAULIC MALE STUD STRAIGHT COUPLING 3/8""BSPX10MM TUBE"
-edit,103,Typemaster Mech-Blue,SKU-KEY-003,
 edit,205552,HYDRAULIC MALE STUD STRAIGHT COUPLING 3/8&quot;BSPX12MM TUBE,N36LUBP0011153,"HYDRAULIC MALE STUD STRAIGHT COUPLING 3/8""BSPX12MM TUBE"
 edit,205553,HYDRAULIC MALE STUD STRAIGHT COUPLING 1/2&quot;BSPX8MM TUBE,N36LUBP0011154,"HYDRAULIC MALE STUD STRAIGHT COUPLING 1/2""BSPX8MM TUBE"
 edit,205554,HYDRAULIC MALE STUD STRAIGHT COUPLING 1/2&quot;BSPX10MM TUBE,N36LUBP0011155,"HYDRAULIC MALE STUD STRAIGHT COUPLING 1/2""BSPX10MM TUBE"
@@ -6307,7 +6304,6 @@ edit,205572,"STAINLESS STEEL HEAVY 4&quot; INCH WASTE COUPLING FOR SINK/WASH BAS
 edit,205573,Part lock toggle clamp Cylinder SSC-2550,N37PARTLOCKSSC2550,Part lock toggle clamp Cylinder SSC-2550
 edit,205574,LM block  HSR 25LR,N37LMBLOCKHSR25LR,LM block  HSR 25LR
 edit,205575,Air operated 2/2 valve  VNA201A-15A-B,N37AIROPERATEDVNA201A,Air operated 2/2 valve  VNA201A-15A-B
-edit,104,Orbit-Glide Wireless Mouse,SKU-MOU-004,
 edit,205576,Shuttle valve ( gate valve )  OS-1/8-B,N37SHUTTLEVALVEOS,Shuttle valve ( gate valve )  OS-1/8-B
 edit,205577,5/2 double pilot operated valve 1/8  JH-5-1/8(8823),N3752DOUBLEPILOTJH,5/2 double pilot operated valve 1/8  JH-5-1/8(8823)
 edit,205578,Cylinder  536318 ADN-50-60-A-P-A,N37CYLINDER536318,Cylinder  536318 ADN-50-60-A-P-A
@@ -6334,7 +6330,6 @@ edit,205598,Welding cell actuator ADN-50-80-A-P-A 536319,N37WELDINGTUATORAD0,Wel
 edit,205599,Welding cell actuator ADN-50-80-I-P-A 536329,N37ACTUATORADN50,Welding cell actuator ADN-50-80-I-P-A 536329
 edit,205600,UP-down Cylinder  DSBC-80-500-PPVA-N3 1383344,N37UPINDERDSBCASV,UP-down Cylinder  DSBC-80-500-PPVA-N3 1383344
 edit,205601,DOOR cylinder DSBC-32-850 -PPVA-N3 1463254,N37DOORCYLINDERDSBC,DOOR cylinder DSBC-32-850 -PPVA-N3 1463254
-edit,205674,SMC Push in NRV AKH8,N37AKH8,SMC Push in NRV AKH8
 edit,205602,Shock absorber 2480234 DYSC-25-25-Y1F,N37SHOCKABSORBER2480234,Shock absorber 2480234 DYSC-25-25-Y1F
 edit,205603,DSBC (m)-Standard cylinder 1463495 DSBC-80-400-PA-N3,N37DSBCCYLINDER1463495,DSBC (m)-Standard cylinder 1463495 DSBC-80-400-PA-N3
 edit,205604,SELF-ALIGNING ROD COUPLER FK-M20x1.5 6143,N37SELFOUPLERFKM20,SELF-ALIGNING ROD COUPLER FK-M20x1.5 6143
@@ -6359,6 +6354,7 @@ edit,205622,"1 SQ/MM 3 CORE, POLYCAB(300/500 VOLTS GRADE FR-LSH ATR 3 CORE*1.0 S
 edit,205623,"SWITCH BOARD (4 MODULE PLATE WITH ASSEMBLY BOX), MAKE- LEGRAND-673204 + 673304",N37ELESPARES-211,"SWITCH BOARD (4 MODULE PLATE WITH ASSEMBLY BOX), MAKE- LEGRAND-673204 + 673304"
 edit,205624,"SWITCH BOARD (6 MODULE PLATE WITH ASSEMBLY BOX), MAKE- LEGRAND-673206 +673306",N37ELESPARES-212,"SWITCH BOARD (6 MODULE PLATE WITH ASSEMBLY BOX), MAKE- LEGRAND-673206 +673306"
 edit,205625,"PG GLAND (13.5,14 & 16)",N37ELESPARES-213,"PG GLAND (13.5,14 & 16)"
+edit,205626,RJ45 CONNECTOR,N37ELESPARES-208,RJ45 CONNECTOR
 edit,205627,"Vaccum Pump, Model No- TRMX 257/1-C/RX/SP, Make- Pompetravaini",N37INJ02917,"Vaccum Pump, Model No- TRMX 257/1-C/RX/SP, Make- Pompetravaini"
 edit,205628,"Switch, Make- Phoenix Contact Model No- FL SWITCH SFN 8Gt",N36INJ02940,"Switch, Make- Phoenix Contact Model No- FL SWITCH SFN 8Gt"
 edit,205629,"SMOKE DETECTOR, MODEL NO - FSP-851, MAKE NOTIFIER",N37FSP-851,"SMOKE DETECTOR, MODEL NO - FSP-851, MAKE NOTIFIER"
@@ -6367,6 +6363,7 @@ edit,205631,"CABIN FAN 12 INCH 300 MM HIGH SPEED COPPER MOTOR, MAKE- ALMONARD",N
 edit,205632,MOTION SENSOR - MICROWAVE DIGITAL SENSORS(10AMP) MODEL NAME-MR1500P / MR155PF Make- MK- Honeywell,N39ELESPARES-062,MOTION SENSOR - MICROWAVE DIGITAL SENSORS(10AMP) MODEL NAME-MR1500P / MR155PF Make- MK- Honeywell
 edit,205633,"Adjustable clamp, Min Dia-95/96mm, Max Dia- 105/103mm, Width- 20/18mm",N36DLTCLAMP01,"Adjustable clamp, Min Dia-95/96mm, Max Dia- 105/103mm, Width- 20/18mm"
 edit,205634,"Adjustable clamp, Min Dia-145/148mm, Max Dia-160/156mm, Width- 20/18mm",N36DLTCLAMP02,"Adjustable clamp, Min Dia-145/148mm, Max Dia-160/156mm, Width- 20/18mm"
+edit,205660,4 MICRO CAPACITOR,N37CAPACITOR-12,4 MICRO CAPACITOR
 edit,205635,"Adjustable clamp, Min Dia-125/128mm, Max Dia- 145/140mm, Width- 20/18mm",N36DLTCLAMP03,"Adjustable clamp, Min Dia-125/128mm, Max Dia- 145/140mm, Width- 20/18mm"
 edit,205636,"Adjustable clamp, Min Dia-120/118mm, Max Dia-140/134mm, Width- 20/18mm",N36DLTCLAMP04,"Adjustable clamp, Min Dia-120/118mm, Max Dia-140/134mm, Width- 20/18mm"
 edit,205637,"Adjustable clamp, Min Dia-90/92mm, Max Dia-110/108mm, Width- 20/18mm",N36DLTCLAMP05,"Adjustable clamp, Min Dia-90/92mm, Max Dia-110/108mm, Width- 20/18mm"
@@ -6392,7 +6389,6 @@ edit,205656,"2A MCB 2P, MAKE- LEGRAND",N37LEGRANTOP004,"2A MCB 2P, MAKE- LEGRAND
 edit,205657,24V REALY WITH BASE (8 PIN),N37OMRONREALAY-01,24V REALY WITH BASE (8 PIN)
 edit,205658,240V REALY WITH BASE (8 PIN),N37OMRONREALAY-02,240V REALY WITH BASE (8 PIN)
 edit,205659,2.5 MICRO CAPACITOR,N37CAPACITOR-11,2.5 MICRO CAPACITOR
-edit,205660,4 MICRO CAPACITOR,N37CAPACITOR-12,4 MICRO CAPACITOR
 edit,205661,IP65 JUNCTION BOX 100MM X100MM X80 MM WITH TERMINAL MODEL NO-VS101080 PPC,N37IP65JUCTONBOX06,IP65 JUNCTION BOX 100MM X100MM X80 MM WITH TERMINAL MODEL NO-VS101080 PPC
 edit,205662,FIXED CASTTOR WHEEL PU ON CI DIA-100 WIDTH-50 HEIGHT-120 MOUNTING -115*100,N80TROLLYWHEEL11,FIXED CASTTOR WHEEL PU ON CI DIA-100 WIDTH-50 HEIGHT-120 MOUNTING -115*100
 edit,205663,SWIVEL CASTOR WHEEL PU ON CI DIA-100 WIDTH -50 HEIGHT-120 MOUNTING-115*100,N80TROLLYWHEEL12,SWIVEL CASTOR WHEEL PU ON CI DIA-100 WIDTH -50 HEIGHT-120 MOUNTING-115*100
@@ -6406,6 +6402,7 @@ edit,205670,FIXED CASTOR WHEEL PU ON CI DIA- 100 WIDTH-50 HEIGHT -130 MOUNTING-1
 edit,205671,SWIVEL CASTOR WHEEL PU ON CI DIA- 100 WIDTH-50 HEIGHT -130 MOUNTING-115*100,N80TROLLYWHEEL20,SWIVEL CASTOR WHEEL PU ON CI DIA- 100 WIDTH-50 HEIGHT -130 MOUNTING-115*100
 edit,205672,FIXED CASTOR WHEEL PU ON CI DIA- 100 WIDTH-30/50 HEIGHT -130 MOUNTING-95*65,N80TROLLYWHEEL21,FIXED CASTOR WHEEL PU ON CI DIA- 100 WIDTH-30/50 HEIGHT -130 MOUNTING-95*65
 edit,205673,SWIVEL CASTOR WHEEL PU ON CI DIA- 100 WIDTH-30/50 HEIGHT -130 MOUNTING-95*65,N80TROLLYWHEEL22,SWIVEL CASTOR WHEEL PU ON CI DIA- 100 WIDTH-30/50 HEIGHT -130 MOUNTING-95*65
+edit,205674,SMC Push in NRV AKH8,N37AKH8,SMC Push in NRV AKH8
 edit,205675,SMC Y Push in Connector  8*8*8,N378888YPUSH,SMC Y Push in Connector  8*8*8
 edit,205676,Festo ON/OFF Valve for Fixture H-3-1 /4B,N37H314BVALVE,Festo ON/OFF Valve for Fixture H-3-1 /4B
 edit,205677,Festo Pressure regulator LRMA-QS-8,N37LRMAQS8,Festo Pressure regulator LRMA-QS-8
@@ -6484,7 +6481,6 @@ edit,205749,"INA Needle Combination Bearing, Inner Dia 40 mm, Outer Dia. 90 mm, 
 edit,205750,THK RECTANGULAR TYPE SUPPORT UNIT BK-25,N36THKRECTBK25,THK RECTANGULAR TYPE SUPPORT UNIT BK-25
 edit,205751,YINSH BEARING LOCK NUT-YSK M25X1.5,N36YINSHBEARING-01,YINSH BEARING LOCK NUT-YSK M25X1.5
 edit,205752,STICKERING SQUEEGEE,N35STICKERING-01,STICKERING SQUEEGEE
-edit,205798,UPS SNAKE REPELLENT DEVICE,N69SNAKEREPEL,UPS SNAKE REPELLENT DEVICE
 edit,205753,CONTITECH MAKE SYNCHROBELT HTD 300-5M 15MM WIDTH,N36CONBELT30015,CONTITECH MAKE SYNCHROBELT HTD 300-5M 15MM WIDTH
 edit,205754,"Ejector Cylinder U Seal, ID-20mm, OD-29.81mm, Thickness- 7.02mm, Make- IPH 0420",N36IPHUSEAL020,"Ejector Cylinder U Seal, ID-20mm, OD-29.81mm, Thickness- 7.02mm, Make- IPH 0420"
 edit,205755,"B Series Solenoid Valves for Water, Light oils,Neutral Liquids, Parkers #443788W",N36VALVE443788,"B Series Solenoid Valves for Water, Light oils,Neutral Liquids, Parkers #443788W"
@@ -6508,7 +6504,6 @@ edit,205772,4&quot; (100NB)FLANGE GUARD,N35FACI7770298,"4"" (100NB)FLANGE GUARD"
 edit,205773,"TIMER, MAKE-CRONO, DIGITAL TIME SWITCH CRONO TM, CAT ID-67DDTO, SUPPLY-110-240 VAC, 50/60 HZ, BATCH NO-20171013 00073,REV:R024/C24:09,0/P-1C/0,16A(NO)& A(NC),JEC60947@240VACO24VDC",N37TIMER-001,"TIMER, MAKE-CRONO, DIGITAL TIME SWITCH CRONO TM, CAT ID-67DDTO, SUPPLY-110-240 VAC, 50/60 HZ, BATCH NO-20171013 00073,REV:R024/C24:09,0/P-1C/0,16A(NO)& A(NC),JEC60947@240VACO24VDC"
 edit,205774,"CONTACTOR, MAKE- SCHNEIDER, LC1DT40 (4 POLE) 40 A",N37CNTRLC1DT40,"CONTACTOR, MAKE- SCHNEIDER, LC1DT40 (4 POLE) 40 A"
 edit,205775,"ENCLOSURE BOX, MAKE- ENSTO/ EQUIVALENT,SIZE-125/140*175/185*150/130, IP65, ABS PLASTIC ENCLOSURE",N37ENCLSUREBX-01,"ENCLOSURE BOX, MAKE- ENSTO/ EQUIVALENT,SIZE-125/140*175/185*150/130, IP65, ABS PLASTIC ENCLOSURE"
-edit,205864,1/2&quot; FLEXIBLE CONDUIT PIPE,N37ELESPARES-255,"1/2"" FLEXIBLE CONDUIT PIPE"
 edit,205776,"MOTION SENSOR, MAKE- MK SENSOR, SUPERIOR PIR WITH PHOTOCELL-K4015,OPERATING VTG 220-240 V, 50 HZ,OUTPUT RATING -6A,",N37MOTINSNSE,"MOTION SENSOR, MAKE- MK SENSOR, SUPERIOR PIR WITH PHOTOCELL-K4015,OPERATING VTG 220-240 V, 50 HZ,OUTPUT RATING -6A,"
 edit,205777,"WHEEL WASTE BIN WITH FOOT OPERATED LIDS (FOOT PEDAL DUMPSTER), SIZE- 240 ITR,MAKE- ARISTO/EQUIVALENT",N35WASTEBIN,"WHEEL WASTE BIN WITH FOOT OPERATED LIDS (FOOT PEDAL DUMPSTER), SIZE- 240 ITR,MAKE- ARISTO/EQUIVALENT"
 edit,205778,RETURN LINE FILTER MAKE HYDROLINE TIF-2G-06-25,N36HYDLINE0625,RETURN LINE FILTER MAKE HYDROLINE TIF-2G-06-25
@@ -6531,6 +6526,7 @@ edit,205794,"Motor belt, Alfa Laval Genuine part 130826 (S) 260 169-51",N36MOTOR
 edit,205795,"Filter, HFRO5-04B-025",N36FILTRHFR05,"Filter, HFRO5-04B-025"
 edit,205796,"Make-Argo Hytos, 4/2 solenoid valve RPE306J15 15762700, 1105/1169182, Pmax PA,B-350 bar Pmax temp- 210 bar",N36SOLVALVE01,"Make-Argo Hytos, 4/2 solenoid valve RPE306J15 15762700, 1105/1169182, Pmax PA,B-350 bar Pmax temp- 210 bar"
 edit,205797,"DEAD LOCK AS PER PHOTO, SIZE 25*105*35",N35DEADLCK-01,"DEAD LOCK AS PER PHOTO, SIZE 25*105*35"
+edit,205798,UPS SNAKE REPELLENT DEVICE,N69SNAKEREPEL,UPS SNAKE REPELLENT DEVICE
 edit,205799,"PEPPERL+FUCHS Ball Float Switch, Output 250V AC/150V DC, Cable Length 3 Mtr - LFL2-BK-UCSM3",N38NAGEL52790004,"PEPPERL+FUCHS Ball Float Switch, Output 250V AC/150V DC, Cable Length 3 Mtr - LFL2-BK-UCSM3"
 edit,205800,"BECKHOFF make 8-channel digital input terminal 24 V DC, fi lter 3.0 ms, 1-wire system EL1008",N35CONCORD003,"BECKHOFF make 8-channel digital input terminal 24 V DC, fi lter 3.0 ms, 1-wire system EL1008"
 edit,205801,"BECKHOFF make 16-channel digital input terminal 24 V DC, filter 3.0 ms, type 3 EL1809",N38RBOTCELL162100011,"BECKHOFF make 16-channel digital input terminal 24 V DC, filter 3.0 ms, type 3 EL1809"
@@ -6539,6 +6535,7 @@ edit,205803,"BECKHOFF make 16-channel digital output terminal 24 V DC, 0.5 A, 1-
 edit,205804,"PROFIBUS MODULE-BECKHOFF EL6731 0010 +EL6731 EtherCAT Terminal, 1-channel communication interface, PROFIBUS, Master +slave Terminal",N38BECKOFFEL6731,"PROFIBUS MODULE-BECKHOFF EL6731 0010 +EL6731 EtherCAT Terminal, 1-channel communication interface, PROFIBUS, Master +slave Terminal"
 edit,205805,FX3U-32BL MITSUBISHI FX3U PLC Lithium Battery,N38MISC0101553,FX3U-32BL MITSUBISHI FX3U PLC Lithium Battery
 edit,205806,"NON SPARKING TOOLS 10-11 RING SPANNER., MAKE- TOLSEN",N31NONSPARKTOOL-25,"NON SPARKING TOOLS 10-11 RING SPANNER., MAKE- TOLSEN"
+edit,205851,D LINK DES-1008C 8PORT,N41DLINK,D LINK DES-1008C 8PORT
 edit,205807,"NON SPARKING TOOLS 12-13 RING SPANNER., MAKE- TOLSEN",N31NONSPARKTOOL-26,"NON SPARKING TOOLS 12-13 RING SPANNER., MAKE- TOLSEN"
 edit,205808,TINNED BRAIDED COPPER FLEXIBLE SHUNT/ JUMPER SIZE 25MM X 7.5MM (T1)X 150 MM LONG MODEL NO- BFTC10025 MOQ-100NOS,N37COPPERBFTC10025,TINNED BRAIDED COPPER FLEXIBLE SHUNT/ JUMPER SIZE 25MM X 7.5MM (T1)X 150 MM LONG MODEL NO- BFTC10025 MOQ-100NOS
 edit,205809,HYDRAULIC STRAIGHT CONNECTORS FOR 6MM TUBE,N36FITT0070129,HYDRAULIC STRAIGHT CONNECTORS FOR 6MM TUBE
@@ -6554,7 +6551,6 @@ edit,205818,HYDRAULIC STRAIGHT CONNECTORS FOR 1/4 X 1/4 IN,N36FITT0070138,HYDRAU
 edit,205819,"CAPACITOR 1 MFD, MAKE- STANDARD/ EPCOS",N37ELESPARES-239,"CAPACITOR 1 MFD, MAKE- STANDARD/ EPCOS"
 edit,205820,"EAGLE BALLON, 24&quot;",N69EAGLEBALLON,"EAGLE BALLON, 24"""
 edit,205821,NEPTUNE DUGATI MAKE ULTIMA 15KVAR 440V CAPACITOR,N37ELESPARES-240,NEPTUNE DUGATI MAKE ULTIMA 15KVAR 440V CAPACITOR
-edit,105,AcousticWave Pro Headset,SKU-HDP-005,
 edit,205822,NEPTUNE DUGATI MAKE ULTIMA 20KVAR 440V CAPACITOR,N37ELESPARES-241,NEPTUNE DUGATI MAKE ULTIMA 20KVAR 440V CAPACITOR
 edit,205823,NEPTUNE DUGATI MAKE ULTIMA 25KVAR 440V CAPACITOR,N37ELESPARES-242,NEPTUNE DUGATI MAKE ULTIMA 25KVAR 440V CAPACITOR
 edit,205824,"BELT, POLY-F PLUS/PIX-A800/ A30",N40VBELT-011,"BELT, POLY-F PLUS/PIX-A800/ A30"
@@ -6563,6 +6559,7 @@ edit,205826,"CABLES FOR BANNER MAKE LIGHT CURTAIN, TRANSMITTER AND RECEIVER SET,
 edit,205827,"EEC0382B1-0000-A99, 120*38MM 24VDC 2 WIRE MAKE-SUNON",N37EXHSTFN-01,"EEC0382B1-0000-A99, 120*38MM 24VDC 2 WIRE MAKE-SUNON"
 edit,205828,PART NO:-G54SVO01690 AS3201F-03-08S SMC SPEED CONTROLLER,N36MAZAK1001-096,PART NO:-G54SVO01690 AS3201F-03-08S SMC SPEED CONTROLLER
 edit,205829,"GRLIGHTS , LED T5 BATTEN PRO SERIES 5W, 6500K , 220 V AC , 50 Hz , 500 Lm, P.F. >0.90 , Ta  : 50 DEG. CELCIUS ,Tc : 70 DEG. CELCIUS LISE .",N37GRLIGT-01,"GRLIGHTS , LED T5 BATTEN PRO SERIES 5W, 6500K , 220 V AC , 50 Hz , 500 Lm, P.F. >0.90 , Ta  : 50 DEG. CELCIUS ,Tc : 70 DEG. CELCIUS LISE ."
+edit,205852,"EMI SINGLE PHASE FILTER EP 10AP,250V AC",N36FILTER-01,"EMI SINGLE PHASE FILTER EP 10AP,250V AC"
 edit,205830,"TORK MAKE PNEUMATIC REACTION LESS RATCHET WRENCH, MODEL- TRW-ST04, MAX CAPACITY-130NM, SQ DRIVE-1/2&quot;",N31TRKRTWRCH,"TORK MAKE PNEUMATIC REACTION LESS RATCHET WRENCH, MODEL- TRW-ST04, MAX CAPACITY-130NM, SQ DRIVE-1/2"""
 edit,205831,"ISOLATORS FOR OUTDOOR INSTALLATION, MAKE-SCHNEIDER, MODEL NO- VCF1GE",N37ISOLATOR-001,"ISOLATORS FOR OUTDOOR INSTALLATION, MAKE-SCHNEIDER, MODEL NO- VCF1GE"
 edit,205832,HELI- BEVEL GEAR BOX A 604 UR 226.1 P 90 B5 B3 BONFIGLIOLI,N36GEARBONFIGLIOLI,HELI- BEVEL GEAR BOX A 604 UR 226.1 P 90 B5 B3 BONFIGLIOLI
@@ -6576,7 +6573,6 @@ edit,205839,"Rexnord DC 1 FAN AXIAL, rec 6025 A24, 24Vdc, amp-0.07 A, Part No-60
 edit,205840,"Rexnord AXIAL FAN FOR PANAL 119 X 119 X 38 MM,115 VAC, Part No- EC22038A1MT",N39PANL44700002,"Rexnord AXIAL FAN FOR PANAL 119 X 119 X 38 MM,115 VAC, Part No- EC22038A1MT"
 edit,205841,"24 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE ,MAKE- IDEALE/ QUIVALENT",N37ELESPARES-244,"24 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE ,MAKE- IDEALE/ QUIVALENT"
 edit,205842,"6 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE ,MAKE-IDEAL/ EQUIVALENT",N37ELESPARES-245,"6 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE ,MAKE-IDEAL/ EQUIVALENT"
-edit,205865,"Roller Followers IKO-NART 15 UUR, 15 x 35 x 19 mm",N40BRNG9994336,"Roller Followers IKO-NART 15 UUR, 15 x 35 x 19 mm"
 edit,205843,"32 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE , MAKE- ILME./EQUIVALENT",N37ELESPARES-246,"32 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE , MAKE- ILME./EQUIVALENT"
 edit,205844,"48 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE,MAKE- ILME/EQUIVALENT",N37ELESPARES-247,"48 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE,MAKE- ILME/EQUIVALENT"
 edit,205845,"16 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE ,MAKE- ILME/EQUIVALENT",N37ELESPARES-248,"16 PIN 16 AMP HEAVY DUTY CONNECTOR BOTTOM CLOSE SIDE ENTRY MALE AND FEMALE ,MAKE- ILME/EQUIVALENT"
@@ -6585,8 +6581,6 @@ edit,205847,"WEATHER  PROOF SOLENOIED VALVE WITH COIL , MAKE-AVCON   PIPE SIZ
 edit,205848,"WEATHER  PROOF SOLENOIED  COIL  9230E504/CF8/S6/V/BSP, M50 AL-RD/FLP-IIC/H ,COIL VOLTAGE-24 VDC",N36AVCON-003,"WEATHER  PROOF SOLENOIED  COIL  9230E504/CF8/S6/V/BSP, M50 AL-RD/FLP-IIC/H ,COIL VOLTAGE-24 VDC"
 edit,205849,"ISOLATION TRANSFORMER ,2KVA ,PR-440V ,SEC.-230V",N37ELECTSPARES-006,"ISOLATION TRANSFORMER ,2KVA ,PR-440V ,SEC.-230V"
 edit,205850,"3PH (Inevrter )Filter Chock, 4mH, 10A",N37ELECTSPARES-007,"3PH (Inevrter )Filter Chock, 4mH, 10A"
-edit,205851,D LINK DES-1008C 8PORT,N41DLINK,D LINK DES-1008C 8PORT
-edit,205852,"EMI SINGLE PHASE FILTER EP 10AP,250V AC",N36FILTER-01,"EMI SINGLE PHASE FILTER EP 10AP,250V AC"
 edit,205853,"VINSH ENTERPRISE OIL TRANSFER PUMP, FUEL TRANSFER PUMP KIT, HIGH FLOW SIPHON HAND OIL PUMP, PORTABLE MANUAL CAR FUEL PUMP FOR PETROL DIESEL OIL LIQUID WATER FISH TANK WITH 2M SYPHON HOSE",N35OILPUMP,"VINSH ENTERPRISE OIL TRANSFER PUMP, FUEL TRANSFER PUMP KIT, HIGH FLOW SIPHON HAND OIL PUMP, PORTABLE MANUAL CAR FUEL PUMP FOR PETROL DIESEL OIL LIQUID WATER FISH TANK WITH 2M SYPHON HOSE"
 edit,205854,ASIAN PUMPS & MACHINERIES 12V NEW PORTABLE DC FUEL TRANSFER PUMP & DIESEL KEROSENE OIL COMMERCIAL FUEL TRANSFER EXTRACTOR PUMP MOTOR 200W     ,N35PUMPASIAN,ASIAN PUMPS & MACHINERIES 12V NEW PORTABLE DC FUEL TRANSFER PUMP & DIESEL KEROSENE OIL COMMERCIAL FUEL TRANSFER EXTRACTOR PUMP MOTOR 200W     
 edit,205855,"EUREKA FORBES QUICK CLEAN DX VACUUM CLEANER WITH 1200 WATTS POWERFUL SUCTION CONTROL, 3 FREE REUSABLE DUST BAG WORTH RS 500, COMES WITH MULTIPLE ACCESSORIES, DUST BAG FULL INDICATOR (RED), STANDERD",N35EUREKAVACCUM-01,"EUREKA FORBES QUICK CLEAN DX VACUUM CLEANER WITH 1200 WATTS POWERFUL SUCTION CONTROL, 3 FREE REUSABLE DUST BAG WORTH RS 500, COMES WITH MULTIPLE ACCESSORIES, DUST BAG FULL INDICATOR (RED), STANDERD"
@@ -6598,6 +6592,8 @@ edit,205860,"HRC FUSE 40A, MAKE- L& T",N37ELESPARES-251,"HRC FUSE 40A, MAKE- L& 
 edit,205861,"HRC FUSE 32A, MAKE- L& T",N37ELESPARES-252,"HRC FUSE 32A, MAKE- L& T"
 edit,205862,"HRC FUSE 125A, MAKE- L& T",N37ELESPARES-253,"HRC FUSE 125A, MAKE- L& T"
 edit,205863,"HRC FUSE 160A, MAKE- L& T",N37ELESPARES-254,"HRC FUSE 160A, MAKE- L& T"
+edit,205864,1/2&quot; FLEXIBLE CONDUIT PIPE,N37ELESPARES-255,"1/2"" FLEXIBLE CONDUIT PIPE"
+edit,205865,"Roller Followers IKO-NART 15 UUR, 15 x 35 x 19 mm",N40BRNG9994336,"Roller Followers IKO-NART 15 UUR, 15 x 35 x 19 mm"
 edit,205866,Timing belt HTD 480-8MGT-30MM WIDTH,N40BELT9995289,Timing belt HTD 480-8MGT-30MM WIDTH
 edit,205867,"Ex-Air make Swivel QRC Connector for Air, Size-1/4” Model no-9053, MOC-SS304",N36FITT0070139,"Ex-Air make Swivel QRC Connector for Air, Size-1/4” Model no-9053, MOC-SS304"
 edit,205868,"AVCON  11N A1710 SOLENOIED VALVE WITH COIL ,FLANGE TYPE,   FLAMPROOF AND WEATHERPROOF COIL 24V DC, SIZE-80MM MODEL NO-9160K755/SGI/S4/HY/A1/FLP",N36AVCON-001,"AVCON  11N A1710 SOLENOIED VALVE WITH COIL ,FLANGE TYPE,   FLAMPROOF AND WEATHERPROOF COIL 24V DC, SIZE-80MM MODEL NO-9160K755/SGI/S4/HY/A1/FLP"
@@ -6607,6 +6603,7 @@ edit,205871,TAPER BORE V-BELT PULLEYS  WITH TAPER BUSH PART NO. SPA300-03 TB  
 edit,205872,2&quot; END CAP UPVC,N35FACILITYUPVC01,"2"" END CAP UPVC"
 edit,205873,3/4&quot; FEMALE THREADED UPVC,N35FACILITYUPVC02,"3/4"" FEMALE THREADED UPVC"
 edit,205874,1. 1/4&quot; FEMALE THREADED UPVC,N35FACILITYUPVC03,"1. 1/4"" FEMALE THREADED UPVC"
+edit,206062,O- RING 34 ID X 2T,N36TAL10040125,O- RING 34 ID X 2T
 edit,205875,1. 1/4 &quot; MALE THREADED UPVC,N35FACILITYUPVC04,"1. 1/4 "" MALE THREADED UPVC"
 edit,205876,1. 1/2 MALE THREADED UPVC,N35FACILITYUPVC05,1. 1/2 MALE THREADED UPVC
 edit,205877,1. 1/4  FLUSH JAQUAR,N35FACILITYJAQAUR06,1. 1/4  FLUSH JAQUAR
@@ -6621,7 +6618,6 @@ edit,205885,"Indian Pneumatic & Hydraulics Co. Pvt. Ltd make hydraulic cylinder.
 edit,205886,"Indian Pneumatic & Hydraulics Co. Pvt. Ltd make hydraulic cylinder. Bore-50mm, stroke-50 mm, rod-22mm, Max Pressure-160 Bar",N36-INDB50XS5022,"Indian Pneumatic & Hydraulics Co. Pvt. Ltd make hydraulic cylinder. Bore-50mm, stroke-50 mm, rod-22mm, Max Pressure-160 Bar"
 edit,205887,"Achive Pneumatic & Hydraulics make- hydraulic cylinder. Bore-50mm, Stroke-75mm. Max Pressure-180 Bar",N36-ACHIEVEB50X75,"Achive Pneumatic & Hydraulics make- hydraulic cylinder. Bore-50mm, Stroke-75mm. Max Pressure-180 Bar"
 edit,205888,"Achive Pneumatic & Hydraulics make hydraulic cylinder.Bore-50mm, Stroke-50mm, Max Pressure-180 Bar",N36-ACHIB50XS50,"Achive Pneumatic & Hydraulics make hydraulic cylinder.Bore-50mm, Stroke-50mm, Max Pressure-180 Bar"
-edit,106,ClearView 1080p Webcam,SKU-CAM-006,
 edit,205889,"Bosch make valve, model-810091546, with coil-230V",N36-BOSCH46230V,"Bosch make valve, model-810091546, with coil-230V"
 edit,205890,"Rexroth make valve, Model-R900909559, With coil-230V",N36-REXRO559230V,"Rexroth make valve, Model-R900909559, With coil-230V"
 edit,205891,"Rexroth make valve, Model-R983030850, With coil-230V",N36-REXRO850230V,"Rexroth make valve, Model-R983030850, With coil-230V"
@@ -6691,7 +6687,6 @@ edit,205954,"WEAR RING T-3MM, W-5MM, L-130MM",N36SEALPU-04,"WEAR RING T-3MM, W-5
 edit,205955,QUICK RELEASE COUPLING MS MATERIAL NOMINAL SIZE 1/2&quot; BSP,N36QRCBSP-01,"QUICK RELEASE COUPLING MS MATERIAL NOMINAL SIZE 1/2"" BSP"
 edit,205956,"1/4&quot; BSP MALE X 1/2&quot; BSP MALE 90 DEGREE ELBOW ADAPTER, MOC- BRASS / MS",N36ELBOWBSP-02,"1/4"" BSP MALE X 1/2"" BSP MALE 90 DEGREE ELBOW ADAPTER, MOC- BRASS / MS"
 edit,205957,"Air Pressure Gauge, Model: AA.F2.3BM.0/10 Kg/Cm2, Dial Size: 100 mm, MOC: Case MS Powder Coated, Internal Copper Alloy,Accuracy:2.5%, Process Temp.: 150 Deg C, Conn.:3/8&quot;BSP, Bottom, Range: 0...10 Kg/Cm2, Make-Baumer",N35FACI7770350,"Air Pressure Gauge, Model: AA.F2.3BM.0/10 Kg/Cm2, Dial Size: 100 mm, MOC: Case MS Powder Coated, Internal Copper Alloy,Accuracy:2.5%, Process Temp.: 150 Deg C, Conn.:3/8""BSP, Bottom, Range: 0...10 Kg/Cm2, Make-Baumer"
-edit,206001,Hex Impact Socket 3/8&quot;x13mm Extra Long,N31-IMSKT-3-8X13EL,"Hex Impact Socket 3/8""x13mm Extra Long"
 edit,205958,"Air Pressure Gauge, Model: AA.H2.3BM.0/16 Kg/Cm2, Dial Size: 150 mm, MOC: Case MS Powder Coated,Internal Cu Alloy, Accuracy:2.5%, Process Temp.: 150 Deg C,Conn.:3/8&quot;BSP, Bottom Range:0.to 10/16 Kg/Cm2, Make-Baumer",N35FACI7770351,"Air Pressure Gauge, Model: AA.H2.3BM.0/16 Kg/Cm2, Dial Size: 150 mm, MOC: Case MS Powder Coated,Internal Cu Alloy, Accuracy:2.5%, Process Temp.: 150 Deg C,Conn.:3/8""BSP, Bottom Range:0.to 10/16 Kg/Cm2, Make-Baumer"
 edit,205959,6&quot; CHAMPION RING GASKET,N35FACSPARE20013,"6"" CHAMPION RING GASKET"
 edit,205960,"Hydraulic fitting (⌀26.80 OD,2mm pitch) X (⌀25.80 OD, 1.5mm pitch) with 18mm pipe ferul and nut",N36FITT0070145,"Hydraulic fitting (⌀26.80 OD,2mm pitch) X (⌀25.80 OD, 1.5mm pitch) with 18mm pipe ferul and nut"
@@ -6714,7 +6709,6 @@ edit,205976,LED 621/WORK LIGHT RECHARGEBLE SITE LAMP GROZ LED 621/WORK LIGHT REC
 edit,205977,Rust Preventive Lubrication Spray G20,N37M12CABCDM10,Rust Preventive Lubrication Spray G20
 edit,205978,"M12 Male R/A 4 Pin D coded with 01 mtr CAT5 Shielded cable , CDM12R4D-RJ45CAT5-SHE, M12 Male R/A 4 Pin D coded with 01 mtr CAT5 Shielded cable , CDM12R4D-RJ45CAT5-SHE,",N37AP25CORE,"M12 Male R/A 4 Pin D coded with 01 mtr CAT5 Shielded cable , CDM12R4D-RJ45CAT5-SHE, M12 Male R/A 4 Pin D coded with 01 mtr CAT5 Shielded cable , CDM12R4D-RJ45CAT5-SHE,"
 edit,205979,Lapp cable 25 core 0.5 sq mm-5Meter Lapp cable 25 core 0.5 sq mm-50M,N37GP360CAB,Lapp cable 25 core 0.5 sq mm-5Meter Lapp cable 25 core 0.5 sq mm-50M
-edit,206408,"EPCOS, 25UF +/- 5%, 50/60 HZ.",N37EPCOSCPCITR,"EPCOS, 25UF +/- 5%, 50/60 HZ."
 edit,205980,Metalic Slide Surface Lubricant for Robot Gripper GP 360,N37MODEAWM1131A,Metalic Slide Surface Lubricant for Robot Gripper GP 360
 edit,205981,Model type-AWM-1131A Model type-AWM-1131A,N38G2RVS700,Model type-AWM-1131A Model type-AWM-1131A
 edit,205982,Slim Relay (Coil Voltage-24VDC; Contact Current-6A;Contact Current-250VAC;) G2RV-SL700-24 VDC,N37PS1AC24DC,Slim Relay (Coil Voltage-24VDC; Contact Current-6A;Contact Current-250VAC;) G2RV-SL700-24 VDC
@@ -6736,7 +6730,7 @@ edit,205997,"Flat Belt 3500x50x3 GT14/GR2,3MM",N40EM-013-0104,"Flat Belt 3500x50
 edit,205998,"Flat Belt 3660x50x3 GT14/GR2,3MM",N40EM-013-0105,"Flat Belt 3660x50x3 GT14/GR2,3MM"
 edit,205999,Hex Impact Socket 3/8&quot;x10mm Extra Long,N31-IMSKT-3-8X10EL,"Hex Impact Socket 3/8""x10mm Extra Long"
 edit,206000,Hex Impact Socket 3/8&quot;x10mm Standard,N31-IMSKT-3-8X10SD,"Hex Impact Socket 3/8""x10mm Standard"
-edit,107,Inkjet All-in-One X5,SKU-PRN-007,
+edit,206001,Hex Impact Socket 3/8&quot;x13mm Extra Long,N31-IMSKT-3-8X13EL,"Hex Impact Socket 3/8""x13mm Extra Long"
 edit,206002,Hex Impact Socket 3/8&quot;x13mm Standard,N31-IMSKT-3-8X13SD,"Hex Impact Socket 3/8""x13mm Standard"
 edit,206003,Hex Impact Socket 3/8&quot;x17mm Extra Long,N31-IMSKT-3-8X17EL,"Hex Impact Socket 3/8""x17mm Extra Long"
 edit,206004,Hex Impact Socket 3/8&quot;x17mm Standard,N31-IMSKT-3-8X17SD,"Hex Impact Socket 3/8""x17mm Standard"
@@ -6759,7 +6753,6 @@ edit,206020,"SWING CHECK VALVE ALARM VALVE OF HD FIRE MAKE,  BODY: LEAD FREE BR
 edit,206021,SPINDLE ENCODER TIMING BELT 650 5M 18 MM WIDTH,N40SPNTMBLT,SPINDLE ENCODER TIMING BELT 650 5M 18 MM WIDTH
 edit,206022,BALL SCREW SUPPORT BEARING BSB040090T,N40BALLBEARSUPP,BALL SCREW SUPPORT BEARING BSB040090T
 edit,206023,LOCK NUT M40 X 1.5 PITCH (K M-08),N36LCKNUT,LOCK NUT M40 X 1.5 PITCH (K M-08)
-edit,206048,"PVC Elbow 6&quot; 4KgF/ Cm2, Make- ASTRAL",N36MHESPARE236,"PVC Elbow 6"" 4KgF/ Cm2, Make- ASTRAL"
 edit,206024,"3/8&quot; QRC HOLMBURY IA710-F-066-V D19 MAKE- HOLMBURY, IAZ SERIES IS REPLACE BY IA SERIES, Model No-IA10-F-06G",N36QRCHLMBRY,"3/8"" QRC HOLMBURY IA710-F-066-V D19 MAKE- HOLMBURY, IAZ SERIES IS REPLACE BY IA SERIES, Model No-IA10-F-06G"
 edit,206025,"GLASS FUSE AMP‐1 , 5X20MM",N37FUSEGLS,"GLASS FUSE AMP‐1 , 5X20MM"
 edit,206026,CALGUARAD WATER BASED ANTI SPATER GEL,N36CALGUARDANTIMIX,CALGUARAD WATER BASED ANTI SPATER GEL
@@ -6784,6 +6777,7 @@ edit,206044,"Viton O ring, Size-7 mm ID* 2 mm C/S",N36-VITON72ORING,"Viton O rin
 edit,206045,"Viton O ring, Size-7 mm ID* 1.5 mm C/S",N36-VITON715ORING,"Viton O ring, Size-7 mm ID* 1.5 mm C/S"
 edit,206046,"INPUT VOLTAGE-230V,OUTPUT VOLTAGE 24VDC, AMP-20A, SMPS INDUSTRIAL POWER SUPPLY 24V 20A,SKU: 6680-AS PER PHOTO PROVIDED",N37SMPSSUKO,"INPUT VOLTAGE-230V,OUTPUT VOLTAGE 24VDC, AMP-20A, SMPS INDUSTRIAL POWER SUPPLY 24V 20A,SKU: 6680-AS PER PHOTO PROVIDED"
 edit,206047,"Upright Sprinklers, Make Tyco TY-B UP 3/4&quot;K115 141C CHR SR",N36MHESPARE235,"Upright Sprinklers, Make Tyco TY-B UP 3/4""K115 141C CHR SR"
+edit,206048,"PVC Elbow 6&quot; 4KgF/ Cm2, Make- ASTRAL",N36MHESPARE236,"PVC Elbow 6"" 4KgF/ Cm2, Make- ASTRAL"
 edit,206049,"PVC joint Socket, Size- 4&quot;, Make- ASTRAL",N36MHESPARE237,"PVC joint Socket, Size- 4"", Make- ASTRAL"
 edit,206050,"PVC pipe,Size- 4&quot;, Make- ASTRAL (10FT)",N36MHESPARE238,"PVC pipe,Size- 4"", Make- ASTRAL (10FT)"
 edit,206051,"PVC pipe,Size- 6&quot;, Make- ASTRAL (10FT)",N36MHESPARE239,"PVC pipe,Size- 6"", Make- ASTRAL (10FT)"
@@ -6797,7 +6791,6 @@ edit,206058,O- RING 8ID X 1T,N36TAL10040113,O- RING 8ID X 1T
 edit,206059,O- RING 170 ID X 4 T,N36TAL10040115,O- RING 170 ID X 4 T
 edit,206060,O- RING 166.2/166 IDX2T,N36TAL10040116,O- RING 166.2/166 IDX2T
 edit,206061,O- RING 22.4/22 ID X 1.8/2T,N36TAL10040117,O- RING 22.4/22 ID X 1.8/2T
-edit,206062,O- RING 34 ID X 2T,N36TAL10040125,O- RING 34 ID X 2T
 edit,206063,O RING 44.6/45 IDX 2.4/2 T,N36TAL10040126,O RING 44.6/45 IDX 2.4/2 T
 edit,206064,O- RING 24.6/25 ID X 2T,N36TAL10040127,O- RING 24.6/25 ID X 2T
 edit,206065,O-RING 27.3/27 IDX2.4/2T,N36TAL10040128,O-RING 27.3/27 IDX2.4/2T
@@ -6809,7 +6802,6 @@ edit,206070,LIMIT SWITCH HONEYWELL,N37TUSKERTUGGER-01,LIMIT SWITCH HONEYWELL
 edit,206071,TEST CELL DYNO ROLLING BEARING GREASE KLUBERPLEX BEM 41-132,N56KLUBERBEM,TEST CELL DYNO ROLLING BEARING GREASE KLUBERPLEX BEM 41-132
 edit,206072,"Britool/ Stanley/ Protool make Trwue Wrench with reversible mode, Model no-PTw-250R /STMT73591-8,Torque Range- 60-340Nm, Drive-4 as Britool manufacture only clockwise movement type wrench",N31TRWUEWRENCH,"Britool/ Stanley/ Protool make Trwue Wrench with reversible mode, Model no-PTw-250R /STMT73591-8,Torque Range- 60-340Nm, Drive-4 as Britool manufacture only clockwise movement type wrench"
 edit,206073,"PRESSURE GAUGE, MODEL-HDP1, WITH HD LOGO & NAME, DIAL SIZE - 90MM (3-1/2&quot;), 1/4&quot; BSPT(M), RANGE 0-300 PSI, UL LISTED& FM APPROVED",N35PRSSGAUGE,"PRESSURE GAUGE, MODEL-HDP1, WITH HD LOGO & NAME, DIAL SIZE - 90MM (3-1/2""), 1/4"" BSPT(M), RANGE 0-300 PSI, UL LISTED& FM APPROVED"
-edit,108,Velocity 1TB NVMe SSD,SKU-SSD-008,
 edit,206074,"DOWTY GEAR PUMP - FOR TEST CELL OIL DISPENSER UNIT, ITEM PART NO- RCCO0230/ VRF-35",N36DWTYGPMPOILDSP,"DOWTY GEAR PUMP - FOR TEST CELL OIL DISPENSER UNIT, ITEM PART NO- RCCO0230/ VRF-35"
 edit,206075,hydraulic male stud connector 3/4” BSP X 16mm tube OD,N36FITT0070147,hydraulic male stud connector 3/4” BSP X 16mm tube OD
 edit,206076,hydraulic male stud connector3/4” BSP X 18mm tube OD,N36FITT0070148,hydraulic male stud connector3/4” BSP X 18mm tube OD
@@ -6845,6 +6837,7 @@ edit,206105,"EATON/ EQUIVAENT LS ZBZ/X SERIES SAFETY RATED INTERLOCK SWITCH, MAX
 edit,206106,"RATHI COUPLING SPACER,SIZE RRS 110/100,24/42",N36COUPLINGSPACER01,"RATHI COUPLING SPACER,SIZE RRS 110/100,24/42"
 edit,206107,"COUPLING HUB, MAKE- LOVEJOY, SIZE- SW-110",N36LVJYSW110,"COUPLING HUB, MAKE- LOVEJOY, SIZE- SW-110"
 edit,206108,"BALL TRANSFER UNIT CY-25 B( SS304 ), MAKE- ALWAYSE/ EQUIVALENT",N36BALLTRNSFRUNIT,"BALL TRANSFER UNIT CY-25 B( SS304 ), MAKE- ALWAYSE/ EQUIVALENT"
+edit,206182,Allen Bolt M8*100mm,N37M8X100,Allen Bolt M8*100mm
 edit,206109,"Cenlub Metering Cartridge for Oil D1-0.16, M8x1",N40LUBC0020038,"Cenlub Metering Cartridge for Oil D1-0.16, M8x1"
 edit,206110,"Cenlub Metering Cartridge for Oil D2-0.25, M8x1",N40LUBC0020054,"Cenlub Metering Cartridge for Oil D2-0.25, M8x1"
 edit,206111,"Cenlub Metering Cartridge for Oil D2-0.40, M8x1",N40LUBC0020041,"Cenlub Metering Cartridge for Oil D2-0.40, M8x1"
@@ -6868,6 +6861,7 @@ edit,206128,"HYD HOSE 3/8&quot; R1 , 180 BAR X 5 FT LONG BOTH END STRAIGHT FITTI
 edit,206129,HYD HOSE 5/8&quot; R1 130 BAR X 5 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL,N36HYDHOSE-002,"HYD HOSE 5/8"" R1 130 BAR X 5 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL"
 edit,206130,"HYD HOSE 1&quot; , 88 BAR SAE 100 R1 X 7 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL",N36HYDHOSE-004,"HYD HOSE 1"" , 88 BAR SAE 100 R1 X 7 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL"
 edit,206131,HYD HOSE 1/2&quot; R2 X 1630MM LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL,N36HYDHOSE-009,"HYD HOSE 1/2"" R2 X 1630MM LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL"
+edit,206155,UNBRAKO ALLEN BOLT 26X60MM With Grade 10.2,N31-UNBRAKO26X60,UNBRAKO ALLEN BOLT 26X60MM With Grade 10.2
 edit,206132,HYD HOSE 1/4&quot; R2 X 9 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL,N36HYDHOSE-010,"HYD HOSE 1/4"" R2 X 9 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL"
 edit,206133,"HYD HOSE 1/2&quot; , 415 BAR X 2 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL",N36HYDHOSE-014,"HYD HOSE 1/2"" , 415 BAR X 2 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL"
 edit,206134,"HYD HOSE 1/2&quot; R1 ,160 BAR X 13 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL",N36HYDHOSE-015,"HYD HOSE 1/2"" R1 ,160 BAR X 13 FT LONG BOTH END STRAIGHT FITTING MAKE-POLYHOSE/CONTINENTAL"
@@ -6877,7 +6871,6 @@ edit,206137,"HYD HOSE 3/4&quot; R1 , 105 BAR X 1 1/2' FT LONG BOTH END STRAIGHT 
 edit,206138,"BC9 LIMIT SWITCH (JLSL-F M) IP67 1NO+1NC,WITH FORK TYPE LEVER MAKE- JAI BALAJI",N37LIMITSWTCHJLSLFM,"BC9 LIMIT SWITCH (JLSL-F M) IP67 1NO+1NC,WITH FORK TYPE LEVER MAKE- JAI BALAJI"
 edit,206139,"Pressure Relief Valve, AGF-GERMANY Make, Model 7000, Factory rated at 175 PSI.Size 1/2&quot;, UL Listed & FM Approved",N35PRSSRLFVLVE,"Pressure Relief Valve, AGF-GERMANY Make, Model 7000, Factory rated at 175 PSI.Size 1/2"", UL Listed & FM Approved"
 edit,206140,"SURIEEN/EQUIVALENT R410 REFRIGERANT A/C CHARGING HOSE TUBE SET (4000-800) PSI, &quot;,SAE- 5/16 SAE THREAD 60&quot; 5 FT 3 COLORS, FITS FOR HVAC AIR CONDITION R410 R32 REFRIGERANT MANIFOLD GAUGE, SET OF 03",N35VLVRFRTHSE-02,"SURIEEN/EQUIVALENT R410 REFRIGERANT A/C CHARGING HOSE TUBE SET (4000-800) PSI, "",SAE- 5/16 SAE THREAD 60"" 5 FT 3 COLORS, FITS FOR HVAC AIR CONDITION R410 R32 REFRIGERANT MANIFOLD GAUGE, SET OF 03"
-edit,109,Corsair Vengeance 32GB,SKU-RAM-009,
 edit,206141,"NL4-FRE-GO12-GAN-100-PNB-AO-05,00, Make Aventics, Part No- 0821300367",N36MAG1026-4021,"NL4-FRE-GO12-GAN-100-PNB-AO-05,00, Make Aventics, Part No- 0821300367"
 edit,206142,1/4-28 UNF Tap set,N31HSSTAPSET001,1/4-28 UNF Tap set
 edit,206143,1/4&quot; BSW Tap set HSS,N31HSSTAPSET002,"1/4"" BSW Tap set HSS"
@@ -6892,7 +6885,6 @@ edit,206151,"EL-0-Matic Valve, Model no- ED25/A,",N36-EL-O-ED25A,"EL-0-Matic Val
 edit,206152,"EL-O-Matic Valve, Model no- ED40/A,",N36-EL-O-ED40A,"EL-O-Matic Valve, Model no- ED40/A,"
 edit,206153,"EL-0-Matic Valve, Model no- PD150/A,",N36-EL-O-ED150A,"EL-0-Matic Valve, Model no- PD150/A,"
 edit,206154,OKS Make Silicon Grease,N56-OKSGREASE,OKS Make Silicon Grease
-edit,206155,UNBRAKO ALLEN BOLT 26X60MM With Grade 10.2,N31-UNBRAKO26X60,UNBRAKO ALLEN BOLT 26X60MM With Grade 10.2
 edit,206156,UNBRAKO ALLEN BOLT 26X100MM With Grade 10.2,N31-UNBRAKO26X100,UNBRAKO ALLEN BOLT 26X100MM With Grade 10.2
 edit,206157,ROTEX SOLENOID VALVE MODEL : 51424-6-2G+I-24V-DC-37-H,N36ROTEXVALVE,ROTEX SOLENOID VALVE MODEL : 51424-6-2G+I-24V-DC-37-H
 edit,206158,ROTEX COIL 24VDC MODEL : 34-I-24V-DC-37-H,N36ROTEXCOIL,ROTEX COIL 24VDC MODEL : 34-I-24V-DC-37-H
@@ -6919,7 +6911,6 @@ edit,206178,LVDT LT-M-0130-PXL0202 F043617,N37LVDTLTMPX617,LVDT LT-M-0130-PXL020
 edit,206179,Loctite Loctite 277,N37KOCTITE277,Loctite Loctite 277
 edit,206180,Welding Cable 50 sq.mm BS638 (PART 4) 0361TQ WELDING CABLE SINGLE CORE,N37WELDCABL50MM,Welding Cable 50 sq.mm BS638 (PART 4) 0361TQ WELDING CABLE SINGLE CORE
 edit,206181,Allen Bolt M8*80mm,N37M8X80,Allen Bolt M8*80mm
-edit,206182,Allen Bolt M8*100mm,N37M8X100,Allen Bolt M8*100mm
 edit,206183,Allen Bolt M8*120mm,N37M8X120,Allen Bolt M8*120mm
 edit,206184,Allen Bolt M6*80mm,N37M6X80,Allen Bolt M6*80mm
 edit,206185,Allen Bolt M6*100mm,N37M6X100,Allen Bolt M6*100mm
@@ -6930,7 +6921,6 @@ edit,206189,Allen Bolt M10*120mm,N37M10X120,Allen Bolt M10*120mm
 edit,206190,"NRV SIZE DN100, CLASS- PN10, SEAT NBR,MAKE- INTERVALVE, WAFER TYPE CHECK VALVE,FLANGE STD:SUITABLE TO INSERT IN BETWEEN 2 ASA 150 CLASS FLANGES PRESSURE RATING: PN 16",N35NRVINTRVLV-01,"NRV SIZE DN100, CLASS- PN10, SEAT NBR,MAKE- INTERVALVE, WAFER TYPE CHECK VALVE,FLANGE STD:SUITABLE TO INSERT IN BETWEEN 2 ASA 150 CLASS FLANGES PRESSURE RATING: PN 16"
 edit,206191,"ELECTRO MAGNET-FAIL SAFE LOCK HANDLING FORCE 600LBS-272KG ,MAKE- EBELCO ,MODEL- 600-LED",N35EBLECOMGNT,"ELECTRO MAGNET-FAIL SAFE LOCK HANDLING FORCE 600LBS-272KG ,MAKE- EBELCO ,MODEL- 600-LED"
 edit,206192,"4 WAY MODULAR SWITCH BOX WITH BASE PLATE,MAKE- NORTHWEST, BOX MOC- GI/ PLASTIC",N374WYNRTWST,"4 WAY MODULAR SWITCH BOX WITH BASE PLATE,MAKE- NORTHWEST, BOX MOC- GI/ PLASTIC"
-edit,110,NVIDIA RTX 4070,SKU-GPU-010,
 edit,206193,"L TYPE BRACKET- MOC- SS/ PLASTIC, Size- 50*25",N35LTYBRCKT,"L TYPE BRACKET- MOC- SS/ PLASTIC, Size- 50*25"
 edit,206194,QUANTUM 4 PORT USB HUB QUANTUM,N41USBHUB01,QUANTUM 4 PORT USB HUB QUANTUM
 edit,206195,"3-AXIS PU TIMING BELTS , WIDTH-20MM, LENGTH- 50 METER, THICKNESS- 2.6 MM",N36TIMINGBELT012,"3-AXIS PU TIMING BELTS , WIDTH-20MM, LENGTH- 50 METER, THICKNESS- 2.6 MM"
@@ -6971,6 +6961,7 @@ edit,206229,25 SQMMALUMINIUM RING (TUBE) TYPE  LUG,N39ALUMINIUMLG-05,25 SQMMALU
 edit,206230,35 SQMM ALUMINIUM RING (TUBE) TYPE  LUG,N39ALUMINIUMLG-07,35 SQMM ALUMINIUM RING (TUBE) TYPE  LUG
 edit,206231,50 SQMM ALUMINIUM RING  (TUBE) TYPE  LUG,N39ALUMINIUMLG-09,50 SQMM ALUMINIUM RING  (TUBE) TYPE  LUG
 edit,206232,70 SQMM ALUMINIUM RING (TUBE) TYPE  LUG,N39ALUMINIUMLG-11,70 SQMM ALUMINIUM RING (TUBE) TYPE  LUG
+edit,206258,CPVC 1/2&quot; BRASS ELBOW,N35CPVCSPRS-11,"CPVC 1/2"" BRASS ELBOW"
 edit,206233,"METAL BELLOW COUPLING, GS-24/28-98SHA-GS-2.5-019X30-2.5XØ22X30, MAKE: ROTEX;BOUCBIBOTO160",N36CPLRTX,"METAL BELLOW COUPLING, GS-24/28-98SHA-GS-2.5-019X30-2.5XØ22X30, MAKE: ROTEX;BOUCBIBOTO160"
 edit,206234,"1/2 BSP LATHE CNC MACHINE FLEXIBLE WATER OIL COOLANT PIPE HOSE, ROUND NOZZLE &MM,LENGHT-300MM",N36NZLPIPEFLX,"1/2 BSP LATHE CNC MACHINE FLEXIBLE WATER OIL COOLANT PIPE HOSE, ROUND NOZZLE &MM,LENGHT-300MM"
 edit,206235,"SOCKET HEAD ALLEN CAP SCREW M6-1.0X5OMM HALF TREADED, TREAD LENGHT-35MM, BODY LENGHT-15MM",N36SCKTHNALN,"SOCKET HEAD ALLEN CAP SCREW M6-1.0X5OMM HALF TREADED, TREAD LENGHT-35MM, BODY LENGHT-15MM"
@@ -6979,7 +6970,6 @@ edit,206237,U SEAL 16*23*5 - BLUE COLOR,N36USEALBLC-02,U SEAL 16*23*5 - BLUE COL
 edit,206238,NOP Trochoid Pump with Motor: 2MY-750-216HBMVB – 400-440V 50Hz ( Old part no TOP 216 HA),N36HOMA2495107,NOP Trochoid Pump with Motor: 2MY-750-216HBMVB – 400-440V 50Hz ( Old part no TOP 216 HA)
 edit,206239,Hydroline Breather FSB 25,N36PRES0010071,Hydroline Breather FSB 25
 edit,206240,Hydroline Breather FSB 05,N36INGS2912134,Hydroline Breather FSB 05
-edit,206314,HYD CS FITTINGS-M10*1/4- STRAIGHT,N36TAL10040137,HYD CS FITTINGS-M10*1/4- STRAIGHT
 edit,206241,180 DEGREE SELF LOCKING FOLDING HINGES FOR WOODEN FURNITURE,N35180HINGES,180 DEGREE SELF LOCKING FOLDING HINGES FOR WOODEN FURNITURE
 edit,206242,SELF CLOSING HINGES- SS304,N35SS304HINGES,SELF CLOSING HINGES- SS304
 edit,206243,"ROTEX COUPLING -GS 48 CLAMPING HUB,MODEL- NO.98 -SHA-GS-2.6, WITH PILOT BORE,",N36RTXCPLGS48,"ROTEX COUPLING -GS 48 CLAMPING HUB,MODEL- NO.98 -SHA-GS-2.6, WITH PILOT BORE,"
@@ -6997,7 +6987,6 @@ edit,206254,CONTRINEX MAKE PHOTO SENSOR LRS 1180-304 WITH CONNECTOR AND CABLE,N3
 edit,206255,CPVC 2.1/2&quot;TEE,N35CPVCSPRS-04,"CPVC 2.1/2""TEE"
 edit,206256,CPVC 2.1/2&quot;ELBOW,N35CPVCSPRS-07,"CPVC 2.1/2""ELBOW"
 edit,206257,CPVC 2.1/2&quot;SOCKET,N35CPVCSPRS-09,"CPVC 2.1/2""SOCKET"
-edit,206258,CPVC 1/2&quot; BRASS ELBOW,N35CPVCSPRS-11,"CPVC 1/2"" BRASS ELBOW"
 edit,206259,CPVC 1.1/2&quot; FTA,N35CPVCSPRS-12,"CPVC 1.1/2"" FTA"
 edit,206260,X NIPPLE 1&quot;,N35XNPLSPRS-01,"X NIPPLE 1"""
 edit,206261,X NIPPLE 1/2&quot;,N35XNPLSPRS-02,"X NIPPLE 1/2"""
@@ -7024,6 +7013,7 @@ edit,206281,Magnet 101203564,N37D4905R02223,Magnet 101203564
 edit,206282,"MS Flange(200NB) for matching with existing Fire Hydrant Isolation Valve,Material -Mild Steel, Shape Round, Inner Diameter 200mm Number of Holes 8",N33COMPSPRING,"MS Flange(200NB) for matching with existing Fire Hydrant Isolation Valve,Material -Mild Steel, Shape Round, Inner Diameter 200mm Number of Holes 8"
 edit,206283,"Compression Spring 12 mm Outer Diameter And 150mm Length, 3mm pitch, 1mm Wire Compression Spring",N33PRESSUREGAUGE,"Compression Spring 12 mm Outer Diameter And 150mm Length, 3mm pitch, 1mm Wire Compression Spring"
 edit,206284,25 AT 10/4500 M - PU JOINTED BRECO/ MONTFLEX MAKE,N40MNTFLXBLT4500,25 AT 10/4500 M - PU JOINTED BRECO/ MONTFLEX MAKE
+edit,206379,1/2&quot; U clamp,N51PIPEFITTING6,"1/2"" U clamp"
 edit,206285,32 AT10/2120-FLEX- PU JOINTED BRECO/MONTFLEXX MAKE,N40MNTFLXBLT2120,32 AT10/2120-FLEX- PU JOINTED BRECO/MONTFLEXX MAKE
 edit,206286,"100 MM FLASHING TYPE LAMP WITH BUZZER,COLOR: R/G/A/B, CAT NO- DSS-5-100-FL-BZ,",N37RVLBLUBFLBUZ,"100 MM FLASHING TYPE LAMP WITH BUZZER,COLOR: R/G/A/B, CAT NO- DSS-5-100-FL-BZ,"
 edit,206287,LEGRAND PLASTIC MYLINC 100W FAN REGULATOR (WHITE),N37LEGRNDRGLTR,LEGRAND PLASTIC MYLINC 100W FAN REGULATOR (WHITE)
@@ -7053,6 +7043,7 @@ edit,206310,HYDAX MAKE SUCTION STRAINER  2&quot; BSP,N36STRN0010075,"HYDAX MAKE
 edit,206311,HYDAX MAKE SUCTION STRAINER  1 1/4&quot; BSP,N36STRN0010073,"HYDAX MAKE SUCTION STRAINER  1 1/4"" BSP"
 edit,206312,"HP/ CASTROL/ TVS MAKE GEAR OIL, EP-90",N56HPGEAROILEP90,"HP/ CASTROL/ TVS MAKE GEAR OIL, EP-90"
 edit,206313,"Pneufit Push in fittings-OD Tube:4 mm Threading: M3 threaded, Shape: straight, Make : Norgren",N51-102250403,"Pneufit Push in fittings-OD Tube:4 mm Threading: M3 threaded, Shape: straight, Make : Norgren"
+edit,206314,HYD CS FITTINGS-M10*1/4- STRAIGHT,N36TAL10040137,HYD CS FITTINGS-M10*1/4- STRAIGHT
 edit,206315,HYD CS SWIVEL ELBOW-M16 MALE * M16 FEMALE FOR 10MM SEMALESS PIPE,N36TAL10040138,HYD CS SWIVEL ELBOW-M16 MALE * M16 FEMALE FOR 10MM SEMALESS PIPE
 edit,206316,"HYDRUALIC HOSE PIPE-R2,SIZE- THREAD ID M16*3/8*2250MM LONG, PR RANGE UPTO- 280 BAR",N36TAL10040139,"HYDRUALIC HOSE PIPE-R2,SIZE- THREAD ID M16*3/8*2250MM LONG, PR RANGE UPTO- 280 BAR"
 edit,206317,TOSHIBA 26cm COLOUR TET-LCD  MODULE (10.4 TYPE) LTM10C209A (a-Si TET),N38ECOG4476001,TOSHIBA 26cm COLOUR TET-LCD  MODULE (10.4 TYPE) LTM10C209A (a-Si TET)
@@ -7117,7 +7108,6 @@ edit,206375,"1&quot; MS Elbow, C Class",N51PIPEFITTING2,"1"" MS Elbow, C Class"
 edit,206376,"2&quot; MS Elbow, C Class",N51PIPEFITTING3,"2"" MS Elbow, C Class"
 edit,206377,"1&quot; MS FIange, D Table",N51PIPEFITTING4,"1"" MS FIange, D Table"
 edit,206378,"3&quot; MS Flange, D Table",N51PIPEFITTING5,"3"" MS Flange, D Table"
-edit,206379,1/2&quot; U clamp,N51PIPEFITTING6,"1/2"" U clamp"
 edit,206380,2&quot; U clamp,N51PIPEFITTING7,"2"" U clamp"
 edit,206381,3&quot; U clamp,N51PIPEFITTING8,"3"" U clamp"
 edit,206382,"1/2&quot;X4&quot; Barrel piece, MOC- MS",N23-FITTINGS001,"1/2""X4"" Barrel piece, MOC- MS"
@@ -7146,6 +7136,7 @@ edit,206404,"SUPPLY OF MCCB HANDLE - DPX³ 160- 1CU 25 KA 400 V- 3P - 160 A, MAK
 edit,206405,Solenoid operated directional control valve. 84818090 2 Nos 4952 9904 4DE06 DSA220-07 09/17 MAKE-POLYHYDRON,N36SU04727,Solenoid operated directional control valve. 84818090 2 Nos 4952 9904 4DE06 DSA220-07 09/17 MAKE-POLYHYDRON
 edit,206406,"Connection: Power supply, M12 plug (4-pinL-coded) and 4-wire cable, Make- MURR,",N37P12LUGMURR3,"Connection: Power supply, M12 plug (4-pinL-coded) and 4-wire cable, Make- MURR,"
 edit,206407,"GEFRAN,SIGNAL CONDITIONAR, MODEL PCIR A, RANGE- I,F.R OUT-0....10V,EXCITATION-15....30V",N37ZEFRANGE10V,"GEFRAN,SIGNAL CONDITIONAR, MODEL PCIR A, RANGE- I,F.R OUT-0....10V,EXCITATION-15....30V"
+edit,206408,"EPCOS, 25UF +/- 5%, 50/60 HZ.",N37EPCOSCPCITR,"EPCOS, 25UF +/- 5%, 50/60 HZ."
 edit,206409,HI38033 TOTAL HARDNESS TEST KIT,N35WTRINSPECTION-05,HI38033 TOTAL HARDNESS TEST KIT
 edit,206410,"D2410, SSR Module, Make- Crydom/Unison",N37D2410RW,"D2410, SSR Module, Make- Crydom/Unison"
 edit,206411,"DNR60US48, SMPS, 48V, Make- XP-POWER",N37SMPS60US,"DNR60US48, SMPS, 48V, Make- XP-POWER"
@@ -7226,7 +7217,6 @@ edit,206485,COPPER LUGS RING TYPE 50 SQ.MM MOQ 20 Nos,N39BULK-LUGS27,COPPER LUGS
 edit,206486,COPPER LUGS PIN TYPE 50 SQ.MM MOQ 20 Nos,N39BULK-LUGS28,COPPER LUGS PIN TYPE 50 SQ.MM MOQ 20 Nos
 edit,206487,CKS Drag Chain - CK-10 ,N36MAA03484,CKS Drag Chain - CK-10 
 edit,206488,Junction Box K8100 Hensel MOQ 10 Nos,N37SPRJBKM1800,Junction Box K8100 Hensel MOQ 10 Nos
-edit,206509,FISCHER FRSR 32-36 IN - 703113 (moq 100 nos),N51FISCHERFRSR36,FISCHER FRSR 32-36 IN - 703113 (moq 100 nos)
 edit,206489,"Cooling Tower Chemical_Make OLKLIN-AS- (CW)-2N (Standard Packing- 50 KG ),UOM(EACH=KG)",N71BULKMROPTP01,"Cooling Tower Chemical_Make OLKLIN-AS- (CW)-2N (Standard Packing- 50 KG ),UOM(EACH=KG)"
 edit,206490,"Cooling Tower Chemical_Make OLKLIN-AC-3 (Standard Packing- 35 KG ),UOM(EACH=KG)",N71BULKMROPTP02,"Cooling Tower Chemical_Make OLKLIN-AC-3 (Standard Packing- 35 KG ),UOM(EACH=KG)"
 edit,206491,"Cooling Tower Chemical_Make OLKLIN-AC 5 (Standard Packing- 35 KG ),UOM(EACH=KG)",N71BULKMROPTP03,"Cooling Tower Chemical_Make OLKLIN-AC 5 (Standard Packing- 35 KG ),UOM(EACH=KG)"
@@ -7247,6 +7237,7 @@ edit,206505,MAKE -SNAP ON Combination Spanner M13x 220long (MOQ 20 NOS ),N7-SPAN
 edit,206506,FISCHER FCN CLIX P 10 CHANNEL NUT - 559759 (moq 100 nos),N51FISCHERFCNCHNL,FISCHER FCN CLIX P 10 CHANNEL NUT - 559759 (moq 100 nos)
 edit,206507,FISCHER HK 41/10.5 GI CHANNEL WASHER IN - 706978 (moq 50 nos),N51FISCHERHKCHNLW,FISCHER HK 41/10.5 GI CHANNEL WASHER IN - 706978 (moq 50 nos)
 edit,206508,FISCHER FRSR 20-25 IN - 703111 (moq 100 nos),N51FISCHERFRSR25,FISCHER FRSR 20-25 IN - 703111 (moq 100 nos)
+edit,206509,FISCHER FRSR 32-36 IN - 703113 (moq 100 nos),N51FISCHERFRSR36,FISCHER FRSR 32-36 IN - 703113 (moq 100 nos)
 edit,206510,FISCHER FEC 41 B End cover for 41/41STRUT - 77355 (moq 100 nos),N51FISCHERFECSTRT,FISCHER FEC 41 B End cover for 41/41STRUT - 77355 (moq 100 nos)
 edit,206511,FISCHER M10 HEXAGONAL NUT GI - 543723 (moq 200 nos),N51FISCHERHEXNUT,FISCHER M10 HEXAGONAL NUT GI - 543723 (moq 200 nos)
 edit,206512,"SOLDRON 740 3-In-1 Hot Air And Soldering Station, Input Voltage 230V AC, Power 700W",N71BULKSOLDRON01,"SOLDRON 740 3-In-1 Hot Air And Soldering Station, Input Voltage 230V AC, Power 700W"
@@ -7310,12 +7301,12 @@ edit,206569,"NRV- FLANGE ENDED, MAKE- AUDCO,SIZE- 80MM",N35NRV80MM,"NRV- FLANGE 
 edit,206570,"STRAINER- FLANGE ENDED, MAKE- AUDCO,SIZE- 200MM",N35STRAINER200,"STRAINER- FLANGE ENDED, MAKE- AUDCO,SIZE- 200MM"
 edit,206571,"THREADING GATE VALVE, MAKE- HAMMER,SIZE- 2&quot;",N35THGTVLV01,"THREADING GATE VALVE, MAKE- HAMMER,SIZE- 2"""
 edit,206572,"THREADING GATE VALVE, MAKE- HAMMERSIZE- 2.5&quot;",N35THGTVLV02,"THREADING GATE VALVE, MAKE- HAMMERSIZE- 2.5"""
+edit,206620,3/8'' Dummy male Plug,N36MAA04834,3/8'' Dummy male Plug
 edit,206573,"THREADING GATE VALVE, MAKE- HAMMER,SIZE- 3&quot;",N35THGTVLV03,"THREADING GATE VALVE, MAKE- HAMMER,SIZE- 3"""
 edit,206574,"THREADING BALL VALVE, MAKE- HAMMER,SIZE- 2&quot;",N35THBLVL001,"THREADING BALL VALVE, MAKE- HAMMER,SIZE- 2"""
 edit,206575,"THREADING BALL VALVE, MAKE- HAMMER,SIZE- 2.5&quot;",N35THBLVL002,"THREADING BALL VALVE, MAKE- HAMMER,SIZE- 2.5"""
 edit,206576,"THREADING BALL VALVE, MAKE- HAMMER,SIZE- 3&quot;",N35THBLVL003,"THREADING BALL VALVE, MAKE- HAMMER,SIZE- 3"""
 edit,206577,"FILTRATION GROUP PI 23025 RN PS 10 Filter Element,Nominal Size 250 l/min, Outer Dia. 99mm-77924160",N36JUNK43350073,"FILTRATION GROUP PI 23025 RN PS 10 Filter Element,Nominal Size 250 l/min, Outer Dia. 99mm-77924160"
-edit,206651,FUNCLAY FOR QUALITY DEPARTMENT,N34FUNCLAYGRAY,FUNCLAY FOR QUALITY DEPARTMENT
 edit,206578,"FILTRATION GROUP PI 73025 DN PS VST 10 Filter Element, Nominal Size 250 l/min, Outer Dia. 80mm -77925696",N36JUNK43350074,"FILTRATION GROUP PI 73025 DN PS VST 10 Filter Element, Nominal Size 250 l/min, Outer Dia. 80mm -77925696"
 edit,206579,RELIEF VALVE DAIKIN REDUCING VALVE MODEL NO SGB-G03-1-20 ( old MODEL NO- SGB-G03-1-15),N361SCL1000059,RELIEF VALVE DAIKIN REDUCING VALVE MODEL NO SGB-G03-1-20 ( old MODEL NO- SGB-G03-1-15)
 edit,206580,MALE STUD COUPLING 1&quot;*28MM (PIPE OD IN MM),N36MLSTDCPLNG,"MALE STUD COUPLING 1""*28MM (PIPE OD IN MM)"
@@ -7358,7 +7349,6 @@ edit,206616,3/8''to 3/8'' both side compression nut Female fitting connector 50 
 edit,206617,1/4''to 1/4'' both side compression nut Female fitting connector 50 MM  length,N36MAA04831,1/4''to 1/4'' both side compression nut Female fitting connector 50 MM  length
 edit,206618,1/2'' Dummy male Plug,N36MAA04832,1/2'' Dummy male Plug
 edit,206619,1/4&quot; Dummy male plug,N36MAA04833,"1/4"" Dummy male plug"
-edit,206620,3/8'' Dummy male Plug,N36MAA04834,3/8'' Dummy male Plug
 edit,206621,1/2'' Dummy Female Plug,N36MAA04835,1/2'' Dummy Female Plug
 edit,206622,1/4'' Dummy Female Plug,N36MAA04836,1/4'' Dummy Female Plug
 edit,206623,3/8'' Dummy Female Plug,N36MAA04837,3/8'' Dummy Female Plug
@@ -7389,6 +7379,7 @@ edit,206647,"Serial Interface Unit, Make- SMC, Model no- EX260-SEN",N36INJ01276,
 edit,206648,"Reed Switch, Model no- D-M9P, Make SMC",N36INJ01287,"Reed Switch, Model no- D-M9P, Make SMC"
 edit,206649,"Reed Switch, Model no- D-M9PV, Make SMC",N36INJ01288,"Reed Switch, Model no- D-M9PV, Make SMC"
 edit,206650,"Digital Pressure Switch, Model no- ZSE20 P-C6H, Make- SMC",N36INJ01293,"Digital Pressure Switch, Model no- ZSE20 P-C6H, Make- SMC"
+edit,206651,FUNCLAY FOR QUALITY DEPARTMENT,N34FUNCLAYGRAY,FUNCLAY FOR QUALITY DEPARTMENT
 edit,206652,"PAIR OF OUTDOOR PHOTOCELLS, MAKE- NICE. MODEL NO- EPM",N35PHTCELNCEEPM,"PAIR OF OUTDOOR PHOTOCELLS, MAKE- NICE. MODEL NO- EPM"
 edit,206653,"NEUTRAL, LED LIGHT, 12-36 VDC, FOR PRESET CONTROL, MAKE-NICE, MODEL NO- ELDC",N35LEDLGTNICEELDC,"NEUTRAL, LED LIGHT, 12-36 VDC, FOR PRESET CONTROL, MAKE-NICE, MODEL NO- ELDC"
 edit,206654,"NICE RB1000 MOTOR FOR ROBUS KIT 3 (24V, 100OKG)",N35NCERB1000,"NICE RB1000 MOTOR FOR ROBUS KIT 3 (24V, 100OKG)"
@@ -7437,7 +7428,6 @@ edit,206696,PANEL EXHAUST FAN MAKE- EBMPAPST MODEL- K2E250-AH34-06 RPM-2550RPM/2
 edit,206697,LOCKNUT (STELLMUTTER) MSR 30X1.5 MAKE-SPIETH,N36NAGEL1501-036,LOCKNUT (STELLMUTTER) MSR 30X1.5 MAKE-SPIETH
 edit,206698,HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 1&quot;X1&quot;,N36HYDADFTING1,"HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 1""X1"""
 edit,206699,HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 3/4&quot; X 1&quot;,N36HYDADFTING2,"HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 3/4"" X 1"""
-edit,206748,PISTON COMPOSITE SEAL 24.2/24 x 31.7/32 X3.2 /3.5,N36PISTONCSL18,PISTON COMPOSITE SEAL 24.2/24 x 31.7/32 X3.2 /3.5
 edit,206700,HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 3/4&quot; X 1/2&quot;,N36HYDADFTING3,"HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 3/4"" X 1/2"""
 edit,206701,HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 1&quot;X 1.5&quot;,N36HYDADFTING4,"HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 1""X 1.5"""
 edit,206702,HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 1.5&quot; X 1.5&quot;,N36HYDADFTING5,"HYDRAULIC ADAPTOR FITTING BOTH SIDE MALE 1.5"" X 1.5"""
@@ -7460,7 +7450,6 @@ edit,206721,Bonfiglioli Make Gear Box VF 30 U 15 P63 BSB3 + Bonfiglioli Make Mot
 edit,206722,"DOUBLE ACTING HYDRAULIC CYLINDER BORE Ø 80 X ROD 45 X STROKE 25 MM MOUNTING-REAR FLANGE (ME6) WORKING PRESSURE- 160 BAR, MAKE ACHIEVE",N36ACHIVECYLNDR,"DOUBLE ACTING HYDRAULIC CYLINDER BORE Ø 80 X ROD 45 X STROKE 25 MM MOUNTING-REAR FLANGE (ME6) WORKING PRESSURE- 160 BAR, MAKE ACHIEVE"
 edit,206723,HYDRAULIC CYLINDER SEAL KIT BORE Ø 80 X ROD Ø 45 X STROKE 25 MM MAKE- ACHIEVE,N36ACHSEALKIT1,HYDRAULIC CYLINDER SEAL KIT BORE Ø 80 X ROD Ø 45 X STROKE 25 MM MAKE- ACHIEVE
 edit,206724,"HYDRAULIC CYLINDER SEAL KIT BORE Ø 100 X ROD 45 X STROKE 350 MM, MAKE- ACHIEVE",N36ACHSEALKIT2,"HYDRAULIC CYLINDER SEAL KIT BORE Ø 100 X ROD 45 X STROKE 350 MM, MAKE- ACHIEVE"
-edit,206747,HAVELLS 32 A 3P+N+E INTERLOCKING SOCKET DHQIA65032 IP44,N37HVLS32A3P1,HAVELLS 32 A 3P+N+E INTERLOCKING SOCKET DHQIA65032 IP44
 edit,206725,"SS304 BALL VALVE FLANGED TYPE WITH 2 NOS MATCHING FLANGE- ASA 150 CLASS SIZE-1.1/2&quot; MAKE-L&T, APPLICATION DIESEL, WORKING PRESSURE -15 BAR",N35SS304VLVBLVE1,"SS304 BALL VALVE FLANGED TYPE WITH 2 NOS MATCHING FLANGE- ASA 150 CLASS SIZE-1.1/2"" MAKE-L&T, APPLICATION DIESEL, WORKING PRESSURE -15 BAR"
 edit,206726,"SS304 BALL VALVE FLANGED TYPE WITH 2 NOS MATCHING FLANGE- ASA 150 CLASS, SIZE-1&quot; MAKE-L&T, APPLICATION- DIESEL WORKING PRESSURE -15 BAR",N35SS304VLVBLVE2,"SS304 BALL VALVE FLANGED TYPE WITH 2 NOS MATCHING FLANGE- ASA 150 CLASS, SIZE-1"" MAKE-L&T, APPLICATION- DIESEL WORKING PRESSURE -15 BAR"
 edit,206727,"SS304 BALL VALVE FLANGED TYPE WITH 2 NOS MATCHING FLANGE -ASA 150 CLASS, SIZE-1/2&quot; MAKE- L&T, APPLICATION DIESEL, WORKING PRESSURE -15 BAR",N35SS304VLVBLVE3,"SS304 BALL VALVE FLANGED TYPE WITH 2 NOS MATCHING FLANGE -ASA 150 CLASS, SIZE-1/2"" MAKE- L&T, APPLICATION DIESEL, WORKING PRESSURE -15 BAR"
@@ -7483,6 +7472,8 @@ edit,206743,DOWTY WASHER 1/8&quot;,N36DOWTYWASH018,"DOWTY WASHER 1/8"""
 edit,206744,3 CORE 0.5SQMM FLEXIBLE CABLE COPPER  MAKE-POLYCAB,N37CBLEPOLYCAB-02,3 CORE 0.5SQMM FLEXIBLE CABLE COPPER  MAKE-POLYCAB
 edit,206745,"5 CORE 4.0SQMM FLEXIBLE CABLE COPPER MAKE- POLYCAB(RED, YELLOW,BLUE, BLACK,Y-GRREN)",N37-5CORECABLE,"5 CORE 4.0SQMM FLEXIBLE CABLE COPPER MAKE- POLYCAB(RED, YELLOW,BLUE, BLACK,Y-GRREN)"
 edit,206746,DURACELL RECHARGABLE AA 1300mAH BATTERIES,N35DURARECHABATTERY,DURACELL RECHARGABLE AA 1300mAH BATTERIES
+edit,206747,HAVELLS 32 A 3P+N+E INTERLOCKING SOCKET DHQIA65032 IP44,N37HVLS32A3P1,HAVELLS 32 A 3P+N+E INTERLOCKING SOCKET DHQIA65032 IP44
+edit,206748,PISTON COMPOSITE SEAL 24.2/24 x 31.7/32 X3.2 /3.5,N36PISTONCSL18,PISTON COMPOSITE SEAL 24.2/24 x 31.7/32 X3.2 /3.5
 edit,206749,NITRILE-O RING (21.95 /22 x 1.78/2),N36OILRING3437,NITRILE-O RING (21.95 /22 x 1.78/2)
 edit,206750,NITRILE-O RING (35 x 2),N36OILRING3678,NITRILE-O RING (35 x 2)
 edit,206751,NITRILE-O RING (22 x 2),N36OILRING3440,NITRILE-O RING (22 x 2)
@@ -7505,9 +7496,9 @@ edit,206767,S8VK-C48024,N37LINESPRETLA15,S8VK-C48024
 edit,206768,"I/O Module, Compact station, Field Logic Controller (ARGEE) TBEN-L5-8IOL",N37LINESPRETLA16,"I/O Module, Compact station, Field Logic Controller (ARGEE) TBEN-L5-8IOL"
 edit,206769,"HDMI Female to Female HDMI Coupler Extension Adapter 8K HDMI Extender HDMI Coupler, Support 3D 4K 8K PC TV Projector",N37LINESPRETLA17,"HDMI Female to Female HDMI Coupler Extension Adapter 8K HDMI Extender HDMI Coupler, Support 3D 4K 8K PC TV Projector"
 edit,206770,"shock absorber caster wheel (4 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley. EN 08D",N37TRAMRMCWHE4F,"shock absorber caster wheel (4 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley. EN 08D"
+edit,206821,Supply of 121PP (12-24VDC) 5 Meter-Aggregator,N36-121PP5METER,
 edit,206771,"shock absorber caster wheel (4 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley",N37TRAMRMCWHE4S,"shock absorber caster wheel (4 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley"
 edit,206772,"shock absorber caster wheel  (5&quot; inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley",N37TRAMRMCWHE5F,"shock absorber caster wheel  (5"" inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley"
-edit,206798,Bosch GLL 3-15x 15 m Line Laser Level,N37BOSCHGLL3-15X15M,
 edit,206773,"shock absorber caster wheel  (5&quot; inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley",N37TRAMRMCWHE5S,"shock absorber caster wheel  (5"" inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for Dolley"
 edit,206774,"shock absorber caster wheel (6 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for dolley",N37TRAMRMCWHE6F,"shock absorber caster wheel (6 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for dolley"
 edit,206775,"shock absorber caster wheel (6 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for dolley",N37TRAMRMCWHE6S,"shock absorber caster wheel (6 inch)(PUAH) cast iron wheel hub wheel with ( 2X6204)BRG  , CIRCLIP, GFBUSH, NB,NYLOC , PCD match for dolley"
@@ -7526,9 +7517,11 @@ edit,206787,Schnorr Disc Spring 50 X 25.4 X 3 X 4.1,N36DISCSPRING66,
 edit,206788,Laser Base Distance Measurement tool BOSCH 100 GLM,N37GLM100LASERDST,
 edit,206789,MIMSK991129-9911-29 DOUBLE BIB MAINTENANCE FREE TYVEK HOOD ( Minimum Order Qty 25 Nos),N69HOOD9911-29,
 edit,206790,"DIAMOND DRESSING WHEEL EFFGEN LAPPORT MAKE D120 X D75 X 18 (JUNKAR DRG.NO.7295492-Z01) SK-120-8-W10-G10-D851V MS-AL BORE-75,7295492-Z01 FOR CBN GRINDING WHEEL ON JUNKAR 2 M/C IN CAMSHAFT.AF.(SEP-2024)",N3159050000030,
+edit,206822,Supply of Saddle with SS Clamp (ABS   PP) : 50NB-Aggregator,N36-SADDLESSCLAMP,
 edit,206795,"ABC 2 Kg Fire Extinguisher, SAFEX Make 'MAP 40' ABC Stored Pressure Type Fire Extinguisher 2Kgs capacity bearing ISI Mark for Fighting ABC Class of Fire. The Extinguisher will be Manufactured Strictly as per BIS: 15683:2018 bearing ISI. Mark.",N69FIREEXT2KG,
 edit,206796,EK12042CFM – 120KN – 400MM square – 18VDC battery operated crimping tool of Make – Klauke_ Aggregator,N31-KLAUKEEK12042CFM,
 edit,206797,"FC 1000 FACE SHEILD -MAKE - UDYOGI STANDARD: EN166 :2001, LEVEL-A CE",N69UDYOGIFACESHILD,
+edit,206798,Bosch GLL 3-15x 15 m Line Laser Level,N37BOSCHGLL3-15X15M,
 edit,206799,LDPE COVER 50&quot;X54&quot;X32&quot; - 125 MICRON,N50POLY50X54X32,
 edit,206800,LDPE Bag Width 115 cm x length 135 cm / 100 Mic,N50LDPEBAG115X135,
 edit,206801,(24L DEF TANK ASSEMBL),N81-MB404170,
@@ -7551,14 +7544,6 @@ edit,206817,"Watson Marlow make rotor assembly complete with pumping roller, Par
 edit,206818,SEAL KIT FOR IPH HYDRAULIC CYLINDER BORE 50 MM,N36IPHSEALKIT50,
 edit,206819,"ROD SEAL 20 * 30 * 7 MM,MATERIAL-PU",N36IPHSEAL20,
 edit,206820,Supply of FLOWCOUNTER PANEL-Aggregator,N36-FLOWCUNTPANEL,
-edit,206821,Supply of 121PP (12-24VDC) 5 Meter-Aggregator,N36-121PP5METER,
-edit,206822,Supply of Saddle with SS Clamp (ABS   PP) : 50NB-Aggregator,N36-SADDLESSCLAMP,
 edit,206823,Bonfiglioli Gear Box VF 49 P1 45 P71B5 B3,N36TOD6223001,
 edit,206834,NT 100-RE-RS net TAP 100 Real-Time-Ethernet Article No. 1712-100,N38IND40SPRE007,
 edit,206835,"3MTM Secure Fit TM Safety Glasses SF401AF-FM, Foam, Clear Anti-fog Lens",N69GOGGLE-ANTI-FOG,
-edit,201933," Air DRILL GUN, MODEL NO. CP785/9285C",N31EG-014-0004,"<div><p>3/8"" (10 mm) pistol drill. Industrial maintenance duty and designed for smooth operation and extended tool life Ideal tool for all types of maintenance work. Powerful energy efficient motor resists stalls Handle exhaust</p></div>"
-edit,3,5G Smartphone,ITM-ELEC-0001,A powerful 5G smartphone with a stunning display and all-day battery life.
-edit,4,Ultra-Thin Laptop,ITM-ELEC-0002,A lightweight and powerful ultra-thin laptop for professionals on the go.
-edit,5,Noise-Cancelling Headphones,ITM-ELEC-0003,Immerse yourself in music with these high-fidelity noise-cancelling headphones.
-edit,6,Fitness Smartwatch,ITM-ELEC-0004,Track your fitness goals and stay connected with this feature-packed smartwatch.
-edit,7,4K Action Camera,ITM-ELEC-0005,Capture your adventures in stunning 4K resolution with this durable action camera.

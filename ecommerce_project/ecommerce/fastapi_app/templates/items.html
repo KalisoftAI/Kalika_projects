@@ -1,503 +1,503 @@
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-    {% block title %}Products{% endblock %}
+{% block title %}Products{% endblock %}
 
-    {% block content %}
-    <div class="flex justify-between items-center mb-4">
-        <h4 class="text-xl font-semibold text-text-primary">Items List</h4>
-        <div class="flex gap-2">
-            <a href="/admin/bulk-modify" class="bulk-modify-btn flex items-center justify-center">
-                <i class="fas fa-edit mr-2"></i> Bulk Modify
-            </a>
-            <button id="openAddProductModalBtn" class="bulk-modify-btn flex items-center justify-center">
-                <i class="fas fa-plus mr-2"></i> Add Products
-            </button>   
-            <button id="deleteSelectedProductsBtn" class="bulk-modify-btn flex items-center justify-center bg-red-600 hover:bg-red-700 text-white">
-                <i class="fas fa-trash-alt mr-2"></i> Delete Selected
-            </button>
-        </div>
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h4 class="text-xl font-semibold text-text-primary">Items List</h4>
+    <div class="flex gap-2">
+        <a href="/admin/bulk-modify" class="bulk-modify-btn flex items-center justify-center">
+            <i class="fas fa-edit mr-2"></i> Bulk Modify
+        </a>
+        <button id="openAddProductModalBtn" class="bulk-modify-btn flex items-center justify-center">
+            <i class="fas fa-plus mr-2"></i> Add Products
+        </button>   
+        <button id="deleteSelectedProductsBtn" class="bulk-modify-btn flex items-center justify-center bg-red-600 hover:bg-red-700 text-white">
+            <i class="fas fa-trash-alt mr-2"></i> Delete Selected
+        </button>
     </div>
+</div>
 
-    <div class="card-glass p-6 rounded-xl overflow-x-auto">
-        <table id="products-table" class="min-w-full data-table rounded-lg overflow-hidden">
-            <thead>
-                <tr>
-                    <th>Select</th> {# New Select column #}
-                    <th>Title</th>
-                    <th>Item Code</th>
-                    <th>Status</th>
-                    <th>Copy</th>
-                    <th>Last Modified</th>
-                    <th>Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                {# Data will be loaded here by DataTable #}
-            </tbody>
-        </table>
-    </div>
+<div class="card-glass p-6 rounded-xl overflow-x-auto">
+    <table id="products-table" class="min-w-full data-table rounded-lg overflow-hidden">
+        <thead>
+            <tr>
+                <th>Select</th> {# New Select column #}
+                <th>Title</th>
+                <th>Item Code</th>
+                <th>Status</th>
+                <th>Copy</th>
+                <th>Last Modified</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Data will be loaded here by DataTable #}
+        </tbody>
+    </table>
+</div>
 
-    <div id="addProductModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        {# Adjusted max-w-2xl for wider modal and added max-h-[90vh] and overflow-y-auto for height control and scrolling #}
-        <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-2xl w-full text-text-primary animate-scale-in max-h-[90vh] overflow-y-auto">
-            <h3 class="text-2xl font-bold mb-6 text-center">Add New Product</h3>
-            <form id="addProductForm" enctype="multipart/form-data">
-                <div class="mb-4">
-                    <label for="itemCode" class="block text-sm font-medium text-text-secondary mb-1">Item Code</label>
-                    <input type="text" id="modalItemCode" name="itemCode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
-                </div>
-                <div class="mb-4">
-                    <label for="productTitle" class="block text-sm font-medium text-text-secondary mb-1">Product Title</label>
-                    <input type="text" id="modalProductTitle" name="productName" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
-                </div>
-                <div class="mb-4">
-                    <label for="productCategory" class="block text-sm font-medium text-text-secondary mb-1">Main Category</label>
-                    <select id="modalProductCategory" name="productCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
-                        <option value="">Select Main Category</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="productSubCategory" class="block text-sm font-medium text-text-secondary mb-1">Sub Category</label>
-                    <select id="modalProductSubCategory" name="productSubCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
-                        <option value="">Select Sub Category</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="productDescription" class="block text-sm font-medium text-text-secondary mb-1">Description</label>
-                    <textarea id="modalProductDescription" name="productDescription" rows="3" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo"></textarea>
-                </div>
-
-                {# New fields added below #}
-                <div class="mb-4">
-                    <label for="modalInventory" class="block text-sm font-medium text-text-secondary mb-1">Inventory</label>
-                    <input type="number" id="modalInventory" name="inventory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" value="0">
-                </div>
-                <div class="mb-4">
-                    <label for="modalListPrice" class="block text-sm font-medium text-text-secondary mb-1">List Price</label>
-                    <input type="number" id="modalListPrice" name="listPrice" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" value="0.00">
-                </div>
-                <div class="mb-4">
-                    <label for="modalPrice" class="block text-sm font-medium text-text-secondary mb-1">Price</label>
-                    <input type="number" id="modalPrice" name="price" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required value="0.00">
-                </div>
-                {# End of new fields #}
-
-                <div class="mb-6">
-                    <label for="imageUrl" class="block text-sm font-medium text-text-secondary mb-1">Image URL/Path (Optional)</label>
-                    <input type="text" id="modalImageUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg or /static/my_image.png" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
-                </div>
-                <div id="modalFormMessage" class="text-red-500 text-sm mb-4 hidden"></div>
-                <div class="flex justify-end gap-3">
-                    <button type="button" id="cancelAddProductBtn" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200 text-sm">Cancel</button>
-                    <button type="submit" class="px-6 py-2 rounded-md bg-accent-indigo text-white hover:bg-accent-indigo/80 transition-colors duration-200 text-sm">Add Product</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="confirmDeleteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-sm w-full text-center text-text-primary animate-scale-in">
-            <i class="fas fa-exclamation-triangle text-yellow-500 text-6xl mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Confirm Deletion</h3>
-            <p class="text-text-secondary mb-6">Are you sure you want to delete the selected items? This action cannot be undone.</p>
-            <div class="flex justify-center gap-4">
-                <button type="button" id="cancelDeleteBtn" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Cancel</button>
-                <button type="button" id="confirmDeleteBtn" class="px-6 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors duration-200">Delete</button>
+<div id="addProductModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+    {# Adjusted max-w-2xl for wider modal and added max-h-[90vh] and overflow-y-auto for height control and scrolling #}
+    <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-2xl w-full text-text-primary animate-scale-in max-h-[90vh] overflow-y-auto">
+        <h3 class="text-2xl font-bold mb-6 text-center">Add New Product</h3>
+        <form id="addProductForm" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="itemCode" class="block text-sm font-medium text-text-secondary mb-1">Item Code</label>
+                <input type="text" id="modalItemCode" name="itemCode" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
             </div>
+            <div class="mb-4">
+                <label for="productTitle" class="block text-sm font-medium text-text-secondary mb-1">Product Title</label>
+                <input type="text" id="modalProductTitle" name="productName" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+            </div>
+            <div class="mb-4">
+                <label for="productCategory" class="block text-sm font-medium text-text-secondary mb-1">Main Category</label>
+                <select id="modalProductCategory" name="productCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                    <option value="">Select Main Category</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="productSubCategory" class="block text-sm font-medium text-text-secondary mb-1">Sub Category</label>
+                <select id="modalProductSubCategory" name="productSubCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                    <option value="">Select Sub Category</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="productDescription" class="block text-sm font-medium text-text-secondary mb-1">Description</label>
+                <textarea id="modalProductDescription" name="productDescription" rows="3" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo"></textarea>
+            </div>
+
+            {# New fields added below #}
+            <div class="mb-4">
+                <label for="modalInventory" class="block text-sm font-medium text-text-secondary mb-1">Inventory</label>
+                <input type="number" id="modalInventory" name="inventory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" value="0">
+            </div>
+            <div class="mb-4">
+                <label for="modalListPrice" class="block text-sm font-medium text-text-secondary mb-1">List Price</label>
+                <input type="number" id="modalListPrice" name="listPrice" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" value="0.00">
+            </div>
+            <div class="mb-4">
+                <label for="modalPrice" class="block text-sm font-medium text-text-secondary mb-1">Price</label>
+                <input type="number" id="modalPrice" name="price" step="0.01" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required value="0.00">
+            </div>
+            {# End of new fields #}
+
+            <div class="mb-6">
+                <label for="imageUrl" class="block text-sm font-medium text-text-secondary mb-1">Image URL/Path (Optional)</label>
+                <input type="text" id="modalImageUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg or /static/my_image.png" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+            </div>
+            <div id="modalFormMessage" class="text-red-500 text-sm mb-4 hidden"></div>
+            <div class="flex justify-end gap-3">
+                <button type="button" id="cancelAddProductBtn" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200 text-sm">Cancel</button>
+                <button type="submit" class="px-6 py-2 rounded-md bg-accent-indigo text-white hover:bg-accent-indigo/80 transition-colors duration-200 text-sm">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="confirmDeleteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-card-bg p-8 rounded-lg shadow-xl max-w-sm w-full text-center text-text-primary animate-scale-in">
+        <i class="fas fa-exclamation-triangle text-yellow-500 text-6xl mb-4"></i>
+        <h3 class="text-2xl font-bold mb-2">Confirm Deletion</h3>
+        <p class="text-text-secondary mb-6">Are you sure you want to delete the selected items? This action cannot be undone.</p>
+        <div class="flex justify-center gap-4">
+            <button type="button" id="cancelDeleteBtn" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Cancel</button>
+            <button type="button" id="confirmDeleteBtn" class="px-6 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors duration-200">Delete</button>
         </div>
     </div>
+</div>
+{% endblock %}
 
-    {% endblock %}
+{% block scripts %}
+<script>
+    let productsDataTable; // Declare DataTable instance globally
 
-    {% block scripts %}
-    <script>
-        let productsDataTable; // Declare DataTable instance globally
+    // Get references to modal elements
+    const addProductModal = document.getElementById('addProductModal');
+    const openAddProductModalBtn = document.getElementById('openAddProductModalBtn');
+    const cancelAddProductBtn = document.getElementById('cancelAddProductBtn');
+    const addProductForm = document.getElementById('addProductForm');
+    const modalFormMessage = document.getElementById('modalFormMessage');
 
-        // Get references to modal elements
-        const addProductModal = document.getElementById('addProductModal');
-        const openAddProductModalBtn = document.getElementById('openAddProductModalBtn');
-        const cancelAddProductBtn = document.getElementById('cancelAddProductBtn');
-        const addProductForm = document.getElementById('addProductForm');
-        const modalFormMessage = document.getElementById('modalFormMessage');
+    // Modal form inputs
+    const modalItemCode = document.getElementById('modalItemCode');
+    const modalProductTitle = document.getElementById('modalProductTitle');
+    const modalProductCategory = document.getElementById('modalProductCategory');
+    const modalProductSubCategory = document.getElementById('modalProductSubCategory');
+    const modalProductDescription = document.getElementById('modalProductDescription');
+    const modalInventory = document.getElementById('modalInventory'); // New
+    const modalListPrice = document.getElementById('modalListPrice'); // New
+    const modalPrice = document.getElementById('modalPrice');
+    const modalImageUrl = document.getElementById('modalImageUrl');
 
-        // Modal form inputs
-        const modalItemCode = document.getElementById('modalItemCode');
-        const modalProductTitle = document.getElementById('modalProductTitle');
-        const modalProductCategory = document.getElementById('modalProductCategory');
-        const modalProductSubCategory = document.getElementById('modalProductSubCategory');
-        const modalProductDescription = document.getElementById('modalProductDescription');
-        const modalInventory = document.getElementById('modalInventory'); // New
-        const modalListPrice = document.getElementById('modalListPrice'); // New
-        const modalPrice = document.getElementById('modalPrice');
-        const modalImageUrl = document.getElementById('modalImageUrl');
+    let allCategories = {}; // To store fetched categories for dropdowns
 
-        let allCategories = {}; // To store fetched categories for dropdowns
+    // Get references to delete elements
+    const deleteSelectedProductsBtn = document.getElementById('deleteSelectedProductsBtn');
+    const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 
-        // Get references to delete elements
-        const deleteSelectedProductsBtn = document.getElementById('deleteSelectedProductsBtn');
-        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
-        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-
-        // Common alert/toast functions (assuming they are in base.html or a common JS file)
-        function showAlert(message, type) {
-            const alertContainer = document.getElementById('alertContainer'); // Assuming an alertContainer exists in base.html
-            if (alertContainer) {
-                alertContainer.innerHTML = `
-                    <div class="p-3 mb-4 rounded-md text-sm ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                        ${message}
-                    </div>
-                `;
-                alertContainer.classList.remove('hidden');
-                setTimeout(() => {
-                    alertContainer.classList.add('hidden');
-                    alertContainer.innerHTML = '';
-                }, 5000);
+    // Common alert/toast functions (assuming they are in base.html or a common JS file)
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer'); // Assuming an alertContainer exists in base.html
+        if (alertContainer) {
+            alertContainer.innerHTML = `
+                <div class="p-3 mb-4 rounded-md text-sm ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                    ${message}
+                </div>
+            `;
+            alertContainer.classList.remove('hidden');
+            setTimeout(() => {
+                alertContainer.classList.add('hidden');
+                alertContainer.innerHTML = '';
+            }, 5000);
+        } else {
+            console.warn('Alert container not found. Displaying alert via console.');
+            if (type === 'success') {
+                console.log('Success: ' + message);
             } else {
-                console.warn('Alert container not found. Displaying alert via console.');
-                if (type === 'success') {
-                    console.log('Success: ' + message);
-                } else {
-                    console.error('Error: ' + message);
-                }
+                console.error('Error: ' + message);
             }
         }
+    }
 
-        // Function to open the add product modal
-        function openAddProductModal() {
-            addProductModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling background
-            modalFormMessage.classList.add('hidden'); // Hide previous messages
-            addProductForm.reset(); // Clear form fields
-            // Set default values for new fields
-            modalInventory.value = '0';
-            modalListPrice.value = '0.00';
-            modalPrice.value = '0.00';
-            fetchCategoriesForModal(); // Populate categories when modal opens
+    // Function to open the add product modal
+    function openAddProductModal() {
+        addProductModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        modalFormMessage.classList.add('hidden'); // Hide previous messages
+        addProductForm.reset(); // Clear form fields
+        // Set default values for new fields
+        modalInventory.value = '0';
+        modalListPrice.value = '0.00';
+        modalPrice.value = '0.00';
+        fetchCategoriesForModal(); // Populate categories when modal opens
+    }
+
+    // Function to close the add product modal
+    function closeAddProductModal() {
+        addProductModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+        addProductForm.reset(); // Clear form fields
+        modalFormMessage.classList.add('hidden'); // Hide any messages
+        // Reset category dropdowns
+        modalProductCategory.innerHTML = '<option value="">Select Main Category</option>';
+        modalProductSubCategory.innerHTML = '<option value="">Select Sub Category</option>';
+    }
+
+    // Event listeners for add product modal buttons
+    openAddProductModalBtn.addEventListener('click', openAddProductModal);
+    cancelAddProductBtn.addEventListener('click', closeAddProductModal);
+
+    // Close add product modal if clicked outside content
+    addProductModal.addEventListener('click', (e) => {
+        if (e.target === addProductModal) {
+            closeAddProductModal();
         }
+    });
 
-        // Function to close the add product modal
-        function closeAddProductModal() {
-            addProductModal.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore scrolling
-            addProductForm.reset(); // Clear form fields
-            modalFormMessage.classList.add('hidden'); // Hide any messages
-            // Reset category dropdowns
-            modalProductCategory.innerHTML = '<option value="">Select Main Category</option>';
-            modalProductSubCategory.innerHTML = '<option value="">Select Sub Category</option>';
-        }
-
-        // Event listeners for add product modal buttons
-        openAddProductModalBtn.addEventListener('click', openAddProductModal);
-        cancelAddProductBtn.addEventListener('click', closeAddProductModal);
-
-        // Close add product modal if clicked outside content
-        addProductModal.addEventListener('click', (e) => {
-            if (e.target === addProductModal) {
-                closeAddProductModal();
+    // Function to fetch categories for the modal dropdowns
+    async function fetchCategoriesForModal() {
+        try {
+            const response = await fetch('/admin/api/categories');
+            if (response.ok) {
+                allCategories = await response.json();
+                populateMainCategoriesModal();
+            } else {
+                console.error('Failed to fetch categories:', await response.text());
+                showAlert('Failed to load categories.', 'error');
             }
-        });
-
-        // Function to fetch categories for the modal dropdowns
-        async function fetchCategoriesForModal() {
-            try {
-                const response = await fetch('/admin/api/categories');
-                if (response.ok) {
-                    allCategories = await response.json();
-                    populateMainCategoriesModal();
-                } else {
-                    console.error('Failed to fetch categories:', await response.text());
-                    showAlert('Failed to load categories.', 'error');
-                }
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-                showAlert('Error connecting to category service.', 'error');
-            }
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+            showAlert('Error connecting to category service.', 'error');
         }
+    }
 
-        function populateMainCategoriesModal() {
-            modalProductCategory.innerHTML = '<option value="">Select Main Category</option>';
-            for (const mainCat in allCategories) {
+    function populateMainCategoriesModal() {
+        modalProductCategory.innerHTML = '<option value="">Select Main Category</option>';
+        for (const mainCat in allCategories) {
+            const option = document.createElement('option');
+            option.value = mainCat;
+            option.textContent = mainCat;
+            modalProductCategory.appendChild(option);
+        }
+        // Trigger change to populate sub-categories if a main category is pre-selected (e.g., on edit)
+        modalProductCategory.dispatchEvent(new Event('change'));
+    }
+
+    modalProductCategory.addEventListener('change', (event) => {
+        populateSubCategoriesModal(event.target.value);
+    });
+
+    function populateSubCategoriesModal(selectedMainCategory) {
+        modalProductSubCategory.innerHTML = '<option value="">Select Sub Category</option>';
+        if (selectedMainCategory && allCategories[selectedMainCategory]) {
+            allCategories[selectedMainCategory].forEach(subCat => {
                 const option = document.createElement('option');
-                option.value = mainCat;
-                option.textContent = mainCat;
-                modalProductCategory.appendChild(option);
-            }
-            // Trigger change to populate sub-categories if a main category is pre-selected (e.g., on edit)
-            modalProductCategory.dispatchEvent(new Event('change'));
-        }
-
-        modalProductCategory.addEventListener('change', (event) => {
-            populateSubCategoriesModal(event.target.value);
-        });
-
-        function populateSubCategoriesModal(selectedMainCategory) {
-            modalProductSubCategory.innerHTML = '<option value="">Select Sub Category</option>';
-            if (selectedMainCategory && allCategories[selectedMainCategory]) {
-                allCategories[selectedMainCategory].forEach(subCat => {
-                    const option = document.createElement('option');
-                    option.value = subCat;
-                    option.textContent = subCat;
-                    modalProductSubCategory.appendChild(option);
-                });
-            }
-        }
-
-        // REDIRECT FUNCTIONS FOR EDIT AND ADVANCE EDIT
-        function copyProduct(itemId) {
-            // Implement logic to copy product, e.g., open a modal with pre-filled data, or send API request
-            showAlert(`Copy product with Item ID: ${itemId}`, 'info');
-            console.log(`Attempting to copy product with Item ID: ${itemId}`);
-        }
-
-        function editProduct(itemId) {
-            // Redirect to edit_product.html with item_id as query parameter
-            window.location.href = `/admin/edit-product?item_id=${itemId}`;
-        }
-
-        function advanceEditProduct(itemId) {
-            // Redirect to advance_edit.html with item_id as query parameter
-            window.location.href = `/admin/advance-edit?item_id=${itemId}`;
-        }
-
-        // Function to initialize and render products into the DataTable with server-side processing
-        function initializeDataTable() {
-            if ($.fn.DataTable.isDataTable('#products-table')) {
-                productsDataTable.destroy();
-                $('#products-table tbody').empty(); // Clear existing tbody content
-            }
-
-            productsDataTable = $('#products-table').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                    "url": "/admin/api/products-list",
-                    "type": "GET",
-                    "data": function (d) {
-                        // d contains the DataTables parameters (start, length, search, order, columns)
-                        // No need to modify d, FastAPI will parse it correctly from query parameters
-                    },
-                    "dataSrc": function (json) {
-                        // json should contain { "data": [...], "recordsTotal": N, "recordsFiltered": M }
-                        // Map the data to the format DataTables expects for rendering
-                        return json.data.map(product => {
-                            // Format last_modified date
-                            const lastModifiedDate = product.last_modified ? new Date(product.last_modified).toLocaleString() : 'N/A';
-                            return [
-                                `<input type="checkbox" class="product-select-checkbox" data-item-id="${product.item_id}">`,
-                                product.product_title,
-                                product.item_code,
-                                product.status,
-                                `<button class="text-blue-500 hover:text-blue-700 font-bold" onclick="copyProduct('${product.item_id}')">Copy</button>`,
-                                lastModifiedDate,
-                                `
-                                    <div class="flex flex-col space-y-2">
-                                        <button class="text-green-500 hover:text-green-700 font-bold text-sm px-2 py-1 rounded" onclick="editProduct('${product.item_id}')">Edit Product</button>
-                                        <button class="text-purple-500 hover:text-purple-700 font-bold text-sm px-2 py-1 rounded" onclick="advanceEditProduct('${product.item_id}')">Advance Edit</button>
-                                    </div>
-                                `
-                            ];
-                        });
-                    }
-                },
-                "columns": [
-                    { "data": 0, "orderable": false }, // Select
-                    { "data": 1 }, // Title
-                    { "data": 2 }, // Item Code
-                    { "data": 3 }, // Status
-                    { "data": 4, "orderable": false }, // Copy
-                    { "data": 5 }, // Last Modified
-                    { "data": 6, "orderable": false }  // Edit
-                ],
-                "pagingType": "simple_numbers",
-                "lengthMenu": [5, 10, 20, 50],
-                "language": {
-                    "search": "Filter records:"
-                },
-                "order": [[ 1, 'asc' ]] // Default sort by Title ascending
+                option.value = subCat;
+                option.textContent = subCat;
+                modalProductSubCategory.appendChild(option);
             });
         }
+    }
 
-        // Handle form submission for adding a product
-        addProductForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            modalFormMessage.classList.add('hidden'); // Hide previous error messages
+    // REDIRECT FUNCTIONS FOR EDIT AND ADVANCE EDIT
+    function copyProduct(itemId) {
+        // Implement logic to copy product, e.g., open a modal with pre-filled data, or send API request
+        showAlert(`Copy product with Item ID: ${itemId}`, 'info');
+        console.log(`Attempting to copy product with Item ID: ${itemId}`);
+    }
 
-            const formData = new FormData(addProductForm);
+    function editProduct(itemId) {
+        // Redirect to edit_product.html with item_id as query parameter
+        window.location.href = `/admin/edit-product?item_id=${itemId}`;
+    }
 
-            try {
-                const response = await fetch('/admin/products/add', {
-                    method: 'POST',
-                    body: formData,
-                });
+    function advanceEditProduct(itemId) {
+        // Redirect to advance_edit.html with item_id as query parameter
+        window.location.href = `/admin/advance-edit?item_id=${itemId}`;
+    }
 
-                const result = await response.json();
+    // Function to initialize and render products into the DataTable with server-side processing
+    function initializeDataTable() {
+        if ($.fn.DataTable.isDataTable('#products-table')) {
+            productsDataTable.destroy();
+            $('#products-table tbody').empty();
+        }
 
-                // Ensure the message is always a string
-                let displayMessage = 'An unknown error occurred.';
-                if (typeof result.message === 'string') {
-                    displayMessage = result.message;
-                } else if (typeof result.detail === 'string') {
-                    displayMessage = result.detail;
-                } else {
-                    displayMessage = JSON.stringify(result); // Fallback to stringify the whole object
-                }
-
-                if (response.ok) {
-                    showAlert(displayMessage, 'success');
-                    closeAddProductModal();
-                    productsDataTable.ajax.reload(null, false); // Reload DataTable without resetting paging
-                } else {
-                    modalFormMessage.textContent = displayMessage;
-                    modalFormMessage.classList.remove('hidden');
-                    showAlert(displayMessage, 'error');
-                }
-            } catch (error) {
-                console.error('Error adding product:', error);
-                modalFormMessage.textContent = 'An unexpected error occurred. Please try again.';
-                modalFormMessage.classList.remove('hidden');
-                showAlert('An unexpected error occurred.', 'error');
-            }
-        });
-
-        // Function to handle deletion of selected products
-        async function deleteSelectedProducts() {
-            const selectedProductIds = [];
-            document.querySelectorAll('.product-select-checkbox:checked').forEach(checkbox => {
-                selectedProductIds.push(checkbox.dataset.itemId);
-            });
-
-            if (selectedProductIds.length === 0) {
-                showAlert('Please select at least one product to delete.', 'error');
-                return;
-            }
-
-            // Show confirmation modal
-            confirmDeleteModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling background
-
-            confirmDeleteBtn.onclick = async () => {
-                confirmDeleteModal.classList.add('hidden');
-                document.body.style.overflow = ''; // Restore scrolling
-
-                let successCount = 0;
-                let errorCount = 0;
-                let errorMessages = [];
-
-                for (const itemId of selectedProductIds) {
-                    const formData = new FormData();
-                    formData.append('deleteById', itemId); // Use deleteById for item_id
-
-                    try {
-                        const response = await fetch('/admin/products/delete', {
-                            method: 'POST',
-                            body: formData,
-                        });
-                        const result = await response.json();
-
-                        if (response.ok) {
-                            successCount++;
-                        } else {
-                            errorCount++;
-                            errorMessages.push(`Failed to delete Item ID ${itemId}: ${result.message || result.detail || 'Unknown error'}`);
-                        }
-                    } catch (error) {
-                        errorCount++;
-                        errorMessages.push(`Network error deleting Item ID ${itemId}: ${error.message}`);
-                        console.error(`Network error deleting Item ID ${itemId}:`, error);
+        productsDataTable = $('#products-table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "/admin/api/products-list",
+                "type": "GET"
+            },
+            "columns": [
+                {
+                    "data": "item_id",
+                    "orderable": false,
+                    "render": function(data, type, row) {
+                        return `<input type="checkbox" class="product-select-checkbox" data-item-id="${data}">`;
+                    }
+                },
+                { "data": "product_title" },
+                { "data": "item_code" },
+                { "data": "status" },
+                {
+                    "data": "item_id",
+                    "orderable": false,
+                    "render": function(data, type, row) {
+                        return `<button class="text-blue-500 hover:text-blue-700 font-bold" onclick="copyProduct('${data}')">Copy</button>`;
+                    }
+                },
+                {
+                    "data": "last_modified",
+                    "render": function(data, type, row) {
+                        return data ? new Date(data).toLocaleString() : 'N/A';
+                    }
+                },
+                {
+                    "data": "item_id",
+                    "orderable": false,
+                    "render": function(data, type, row) {
+                        return `
+                            <div class="flex flex-col space-y-2">
+                                <button class="text-green-500 hover:text-green-700 font-bold text-sm px-2 py-1 rounded" onclick="editProduct('${data}')">Edit Product</button>
+                                <button class="text-purple-500 hover:text-purple-700 font-bold text-sm px-2 py-1 rounded" onclick="advanceEditProduct('${data}')">Advance Edit</button>
+                            </div>
+                        `;
                     }
                 }
+            ],
+            "pagingType": "simple_numbers",
+            "lengthMenu": [5, 10, 20, 50],
+            "language": {
+                "search": "Filter records:"
+            },
+            "order": [[ 1, 'asc' ]]
+        });
+    }
 
-                if (errorCount === 0) {
-                    showAlert(`Successfully deleted ${successCount} product(s).`, 'success');
-                } else {
-                    showAlert(`Deleted ${successCount} product(s) with ${errorCount} error(s). See console for details.`, 'error');
-                    console.error("Deletion Errors:", errorMessages);
-                }
+    // Handle form submission for adding a product
+    addProductForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        modalFormMessage.classList.add('hidden'); // Hide previous error messages
 
+        const formData = new FormData(addProductForm);
+
+        try {
+            const response = await fetch('/admin/products/add', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            // Ensure the message is always a string
+            let displayMessage = 'An unknown error occurred.';
+            if (typeof result.message === 'string') {
+                displayMessage = result.message;
+            } else if (typeof result.detail === 'string') {
+                displayMessage = result.detail;
+            } else {
+                displayMessage = JSON.stringify(result); // Fallback to stringify the whole object
+            }
+
+            if (response.ok) {
+                showAlert(displayMessage, 'success');
+                closeAddProductModal();
                 productsDataTable.ajax.reload(null, false); // Reload DataTable without resetting paging
-            };
+            } else {
+                modalFormMessage.textContent = displayMessage;
+                modalFormMessage.classList.remove('hidden');
+                showAlert(displayMessage, 'error');
+            }
+        } catch (error) {
+            console.error('Error adding product:', error);
+            modalFormMessage.textContent = 'An unexpected error occurred. Please try again.';
+            modalFormMessage.classList.remove('hidden');
+            showAlert('An unexpected error occurred.', 'error');
+        }
+    });
 
-            cancelDeleteBtn.onclick = () => {
+    // Function to handle deletion of selected products
+    async function deleteSelectedProducts() {
+        const selectedProductIds = [];
+        document.querySelectorAll('.product-select-checkbox:checked').forEach(checkbox => {
+            selectedProductIds.push(checkbox.dataset.itemId);
+        });
+
+        if (selectedProductIds.length === 0) {
+            showAlert('Please select at least one product to delete.', 'error');
+            return;
+        }
+
+        // Show confirmation modal
+        confirmDeleteModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+
+        confirmDeleteBtn.onclick = async () => {
+            confirmDeleteModal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+
+            let successCount = 0;
+            let errorCount = 0;
+            let errorMessages = [];
+
+            for (const itemId of selectedProductIds) {
+                const formData = new FormData();
+                formData.append('deleteById', itemId); // Use deleteById for item_id
+
+                try {
+                    const response = await fetch('/admin/products/delete', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        successCount++;
+                    } else {
+                        errorCount++;
+                        errorMessages.push(`Failed to delete Item ID ${itemId}: ${result.message || result.detail || 'Unknown error'}`);
+                    }
+                } catch (error) {
+                    errorCount++;
+                    errorMessages.push(`Network error deleting Item ID ${itemId}: ${error.message}`);
+                    console.error(`Network error deleting Item ID ${itemId}:`, error);
+                }
+            }
+
+            if (errorCount === 0) {
+                showAlert(`Successfully deleted ${successCount} product(s).`, 'success');
+            } else {
+                showAlert(`Deleted ${successCount} product(s) with ${errorCount} error(s). See console for details.`, 'error');
+                console.error("Deletion Errors:", errorMessages);
+            }
+
+            productsDataTable.ajax.reload(null, false); // Reload DataTable without resetting paging
+        };
+
+        cancelDeleteBtn.onclick = () => {
+            confirmDeleteModal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        };
+
+        // Close modal if clicked outside content
+        confirmDeleteModal.addEventListener('click', (e) => {
+            if (e.target === confirmDeleteModal) {
                 confirmDeleteModal.classList.add('hidden');
                 document.body.style.overflow = ''; // Restore scrolling
-            };
-
-            // Close modal if clicked outside content
-            confirmDeleteModal.addEventListener('click', (e) => {
-                if (e.target === confirmDeleteModal) {
-                    confirmDeleteModal.classList.add('hidden');
-                    document.body.style.overflow = ''; // Restore scrolling
-                }
-            });
-        }
-
-        // Attach event listener to the delete selected button
-        deleteSelectedProductsBtn.addEventListener('click', deleteSelectedProducts);
-
-        $(document).ready(function() {
-            // Initial load and initialization of DataTable
-            initializeDataTable();
+            }
         });
-    </script>
+    }
 
-    {% endblock %}
+    // Attach event listener to the delete selected button
+    deleteSelectedProductsBtn.addEventListener('click', deleteSelectedProducts);
 
-    {% block styles %}
-    <style>
-        /* Custom CSS for Bulk Modify Button and Add Products Button */
-        .bulk-modify-btn {
-            padding: 15px 25px;
-            border: unset;
-            border-radius: 15px;
-            color: #212121; /* Text color for light theme */
-            z-index: 1;
-            background: #e8e8e8; /* Background for light theme */
-            position: relative;
-            font-weight: 1000;
-            font-size: 15px; /* Decreased font size */
-            -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-            box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-            transition: all 250ms;
-            overflow: hidden;
-            /* Ensure flex properties are maintained from HTML */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none; /* Remove underline for anchor tag */
-        }
+    $(document).ready(function() {
+        // Initial load and initialization of DataTable
+        initializeDataTable();
+    });
+</script>
+{% endblock %}
 
-        .bulk-modify-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0;
-            border-radius: 15px;
-            background-color: #212121; /* Hover background color */
-            z-index: -1;
-            -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-            box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-            transition: all 250ms;
-        }
+{% block styles %}
+<style>
+    /* Custom CSS for Bulk Modify Button and Add Products Button */
+    .bulk-modify-btn {
+        padding: 15px 25px;
+        border: unset;
+        border-radius: 15px;
+        color: #212121; /* Text color for light theme */
+        z-index: 1;
+        background: #e8e8e8; /* Background for light theme */
+        position: relative;
+        font-weight: 1000;
+        font-size: 15px; /* Decreased font size */
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms;
+        overflow: hidden;
+        /* Ensure flex properties are maintained from HTML */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; /* Remove underline for anchor tag */
+    }
 
-        .bulk-modify-btn:hover {
-            color: #e8e8e8; /* Text color on hover */
-        }
+    .bulk-modify-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121; /* Hover background color */
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms;
+    }
 
-        html.dark .bulk-modify-btn {
-            background: #2D3748; /* Darker background for dark theme */
-            color: #E2E8F0; /* Lighter text for dark theme */
-            border: 1px solid #4A5568; /* Border for dark theme */
-        }
+    .bulk-modify-btn:hover {
+        color: #e8e8e8; /* Text color on hover */
+    }
 
-        html.dark .bulk-modify-btn:hover {
-            color: #212121; /* Dark text on hover in dark theme */
-        }
+    html.dark .bulk-modify-btn {
+        background: #2D3748; /* Darker background for dark theme */
+        color: #E2E8F0; /* Lighter text for dark theme */
+        border: 1px solid #4A5568; /* Border for dark theme */
+    }
 
-        html.dark .bulk-modify-btn::before {
-            background-color: #E2E8F0; /* Lighter hover background in dark theme */
-        }
-    </style>
-    {% endblock %}
+    html.dark .bulk-modify-btn:hover {
+        color: #212121; /* Dark text on hover in dark theme */
+    }
+
+    html.dark .bulk-modify-btn::before {
+        background-color: #E2E8F0; /* Lighter hover background in dark theme */
+    }
+</style>
+{% endblock %}
