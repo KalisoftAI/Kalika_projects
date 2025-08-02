@@ -281,6 +281,7 @@ def search_products(request):
     if query:  # Only perform query if non-empty
         products = Product.objects.filter(
             Q(product_title__icontains=query) |
+            Q(item_code__icontains=query) | 
             Q(main_category__icontains=query) |
             Q(sub_categories__icontains=query)
         ).exclude(
