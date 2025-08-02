@@ -82,10 +82,16 @@
             </div>
             {# End of new fields #}
 
-            <div class="mb-6">
-                <label for="imageUrl" class="block text-sm font-medium text-text-secondary mb-1">Image URL/Path (Optional)</label>
-                <input type="text" id="modalImageUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg or /static/my_image.png" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+           <!-- *** MODIFIED IMAGE SECTION *** -->
+            <div class="mb-4">
+                <label for="imageUrl" class="block text-sm font-medium text-text-secondary mb-1">Image Path (Option 1)</label>
+                <input type="text" id="modalImageUrl" name="imageUrl" placeholder="e.g., /kalika-images/my-image.jpg" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
             </div>
+            <div class="mb-6">
+                <label for="imageFile" class="block text-sm font-medium text-text-secondary mb-1">Upload Image (Option 2)</label>
+                <input type="file" id="modalImageFile" name="imageFile" class="w-full text-sm text-text-secondary file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-accent-indigo/10 file:text-accent-indigo hover:file:bg-accent-indigo/20">
+            </div>
+            <!-- *** END OF MODIFIED SECTION *** -->
             <div id="modalFormMessage" class="text-red-500 text-sm mb-4 hidden"></div>
             <div class="flex justify-end gap-3">
                 <button type="button" id="cancelAddProductBtn" class="px-6 py-2 rounded-md bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200 text-sm">Cancel</button>

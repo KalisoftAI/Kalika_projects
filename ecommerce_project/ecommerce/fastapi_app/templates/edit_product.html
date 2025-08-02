@@ -27,7 +27,7 @@
 
             <div class="mb-4">
                 <label for="productTitle" class="block text-sm font-medium text-text-secondary mb-1">Title</label>
-                <input type="text" id="productTitle" name="productTitle" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                <input type="text" id="productTitle" name="productName" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
             </div>
 
             <div class="mb-4">
@@ -38,13 +38,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="mainCategory" class="block text-sm font-medium text-text-secondary mb-1">Category</label>
-                    <select id="mainCategory" name="mainCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
+                    <select id="mainCategory" name="productCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo" required>
                         <option value="">Select Category</option>
                         </select>
                 </div>
                 <div>
                     <label for="subCategory" class="block text-sm font-medium text-text-secondary mb-1">Subcategories</label>
-                    <select id="subCategory" name="subCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
+                    <select id="subCategory" name="productSubCategory" class="w-full p-2 border border-border-color rounded-md bg-bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-indigo">
                         <option value="">Select Subcategory</option>
                         </select>
                 </div>
@@ -383,32 +383,14 @@
 
     async function submitEditProductForm() {
         const form = document.getElementById('editProductForm');
-        const formData = new FormData(form); // Use the form directly
+        const formData = new FormData(form); 
         
-        // Get item_id from URL and add to formData
         const itemId = new URLSearchParams(window.location.search).get('item_id');
-        formData.append('itemId', itemId); // Must match backend expectation
+        formData.append('itemId', itemId);
         
-        // Rename fields to match backend expectations
-        formData.append('productName', document.getElementById('productTitle').value);
-        formData.append('productCategory', document.getElementById('mainCategory').value);
-        formData.append('productSubCategory', document.getElementById('subCategory').value || '');
-        formData.append('itemCode', document.getElementById('itemCode').value);
-        formData.append('productDescription', document.getElementById('productDescription').value || '');
-        formData.append('price', document.getElementById('price').value);
-        formData.append('barcode', document.getElementById('barcode').value || '');
-        
-        // Image handling
-        const imageFile = document.getElementById('mainImage').files[0];
-        const imageUrl = document.getElementById('imagePathUrl').value;
-        
-        if (imageFile) {
-            formData.append('imageFile', imageFile);
-        } else if (imageUrl) {
-            formData.append('imageUrl', imageUrl);
-        } else if (currentProductData.large_image) {
-            formData.append('imageUrl', currentProductData.large_image);
-        }
+        // The form already has the correct `name` attributes for most fields.
+        // The FormData object will pick them up automatically.
+        // No need to manually append each one.
 
         try {
             const response = await fetch(`/admin/products/update`, {
@@ -419,7 +401,7 @@
             const result = await response.json();
             if (response.ok) {
                 showAlert(result.message || 'Product updated successfully!', 'success');
-                // Refresh product data
+                // Refresh the form with the latest data from the server
                 const updatedProduct = await fetchProductDetails(itemId);
                 if (updatedProduct) {
                     currentProductData = updatedProduct;
@@ -433,6 +415,8 @@
             showAlert('An unexpected error occurred while updating the product.', 'error');
         }
     }
+
+
     // Common alert/toast functions (assuming they are in base.html or a common JS file)
     function showAlert(message, type) {
         const alertContainer = document.getElementById('alertContainer');

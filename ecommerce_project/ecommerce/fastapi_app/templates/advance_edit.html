@@ -439,60 +439,58 @@
     }
 
     async function submitProductionData() {
-        const form = document.getElementById('productionDataForm');
-        const formData = new FormData(); // Create new FormData to control what's sent
-        const itemId = new URLSearchParams(window.location.search).get('item_id'); // Get item_id from URL
+        const itemId = new URLSearchParams(window.location.search).get('item_id');
+        if (!itemId) {
+            showAlert('Cannot update. Item ID is missing.', 'error');
+            return;
+        }
 
-        // Append fields that are part of the main product update
+        // First, get the most recent full product data
+        const currentProduct = await fetchProductDetails(itemId);
+        if (!currentProduct) {
+            showAlert('Could not fetch current product data to perform update.', 'error');
+            return;
+        }
+
+        const formData = new FormData();
+
+        // Append all existing data from the fetched product
+        // This ensures we don't lose any data when updating
         formData.append('itemId', itemId);
-        formData.append('itemCode', document.getElementById('prodItemCode').value);
-        formData.append('barcode', document.getElementById('prodBarcode').value);
-        formData.append('status', document.getElementById('workflowState').value);
+        formData.append('productName', currentProduct.product_title || '');
+        formData.append('productCategory', currentProduct.main_category || '');
+        formData.append('productSubCategory', currentProduct.sub_categories || '');
+        formData.append('productDescription', currentProduct.product_description || '');
+        formData.append('price', currentProduct.price || 0);
+        formData.append('listPrice', currentProduct.list_price || 0);
+        formData.append('inventory', currentProduct.inventory || 0);
+        formData.append('minOrderQty', currentProduct.min_order_qty || 0);
+        formData.append('available', currentProduct.available || '');
+        formData.append('leadTime', currentProduct.lead_time || '');
+        formData.append('length', currentProduct.length || '');
+        formData.append('materialType', currentProduct.material_type || '');
+        formData.append('sysNumImages', currentProduct.sys_num_images || '');
+        formData.append('sysProductType', currentProduct.sys_product_type || '');
+        formData.append('unitOfMeasure', currentProduct.unit_of_measure || '');
+        formData.append('unspsc', currentProduct.unspsc || '');
+        formData.append('brand', currentProduct.brand || '');
+        formData.append('department', currentProduct.department || '');
+        formData.append('type', currentProduct.type || '');
+        formData.append('tag', currentProduct.tag || '');
+        
+        // Now, override with the values changed in this specific form
+        formData.set('itemCode', document.getElementById('prodItemCode').value);
+        formData.set('barcode', document.getElementById('prodBarcode').value); // Corresponds to UPC
+        formData.set('status', document.getElementById('workflowState').value);
 
-        // For image upload, check if a new file is selected
+        // Handle the image file
         const largeImageFile = document.getElementById('largeImage').files[0];
         if (largeImageFile) {
             formData.append('imageFile', largeImageFile);
         } else {
-            // If no new file, but there was an existing image, we need to tell the backend to keep it.
-            // This assumes the backend's /products/update handles 'imageUrl' or fetches existing if 'imageFile' is empty.
-            // For now, we'll rely on the backend's logic to retain existing image if no new file is provided.
-            // If the backend requires explicit imageUrl, you'd fetch currentProductData and append its large_image.
+            // If no new file is selected, we don't need to append anything.
+            // The backend will retain the old image by default.
         }
-        
-        // Include other fields from the main product form that might be relevant for a full update
-        // These are examples; you should add all fields that can be updated via this form
-        // You'll need to fetch the full product data first to get all current values if you're not updating them.
-        // For simplicity in this example, we'll only send the fields explicitly present in this form.
-        // A more robust solution would fetch the full product data, update relevant fields, and then send the whole object.
-        const currentProduct = await fetchProductDetails(itemId);
-        if (currentProduct) {
-            formData.append('productName', currentProduct.product_title || '');
-            formData.append('productCategory', currentProduct.main_category || '');
-            formData.append('productSubCategory', currentProduct.sub_categories || '');
-            formData.append('productDescription', currentProduct.product_description || '');
-            formData.append('price', currentProduct.price || 0);
-            formData.append('listPrice', currentProduct.list_price || 0);
-            formData.append('inventory', currentProduct.inventory || 0);
-            formData.append('minOrderQty', currentProduct.min_order_qty || 0);
-            formData.append('available', currentProduct.available || '');
-            formData.append('leadTime', currentProduct.lead_time || '');
-            formData.append('length', currentProduct.length || '');
-            formData.append('materialType', currentProduct.material_type || '');
-            formData.append('sysNumImages', currentProduct.sys_num_images || '');
-            formData.append('sysProductType', currentProduct.sys_product_type || '');
-            formData.append('unitOfMeasure', currentProduct.unit_of_measure || '');
-            formData.append('unspsc', currentProduct.unspsc || '');
-            formData.append('brand', currentProduct.brand || '');
-            formData.append('department', currentProduct.department || '');
-            formData.append('type', currentProduct.type || '');
-            formData.append('tag', currentProduct.tag || '');
-            // If no new image file, send the existing image URL to retain it
-            if (!largeImageFile && currentProduct.large_image) {
-                formData.append('imageUrl', currentProduct.large_image);
-            }
-        }
-
 
         try {
             const response = await fetch(`/admin/products/update`, {
@@ -502,7 +500,7 @@
             const result = await response.json();
             if (response.ok) {
                 showAlert(result.message || 'Production data updated successfully!', 'success');
-                // Re-fetch product details to update the form with fresh data
+                // Re-fetch and re-populate the form to show the changes
                 const updatedProduct = await fetchProductDetails(itemId);
                 if (updatedProduct) {
                     populateAdvanceEditForm(updatedProduct);

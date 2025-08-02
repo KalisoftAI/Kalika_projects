@@ -1,7 +1,18 @@
-.env
+
 
 
 *.csv
 *.xlsx
 id_rsa
 id_rsa.pub
+
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Database
+db.sqlite3

@@ -17,7 +17,9 @@ import pandas as pd
 import uuid # Import uuid for unique filenames
 import json # Import json for handling item_properties
 from datetime import datetime # Import datetime for date formatting
-
+# --- S3 Integration Imports ---
+import boto3
+from botocore.exceptions import NoCredentialsError
 # Pydantic for request body validation
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
@@ -715,65 +717,92 @@ async def get_single_product_details(
 @app.post("/products/update")
 async def update_product_post(
     request: Request,
-    itemId: int = Form(...), # This is the item_id of the product to update
+    itemId: int = Form(...),
     productName: str = Form(...),
     productCategory: str = Form(...),
-    productSubCategory: Optional[str] = Form(None), # Made optional
-    productSubSubCategory: Optional[str] = Form(None), # Made optional
+    productSubCategory: Optional[str] = Form(None),
+    productSubSubCategory: Optional[str] = Form(None),
     itemCode: str = Form(...),
-    productDescription: Optional[str] = Form(None), # Made optional
+    productDescription: Optional[str] = Form(None),
     price: float = Form(...),
-    barcode: Optional[str] = Form(None), # Added barcode to form data, made optional
+    barcode: Optional[str] = Form(None),
     imageUrl: Optional[str] = Form(None),
     imageFile: Optional[UploadFile] = File(None),
-    # Add new optional form fields for other columns if they can be updated via this form
     brand: Optional[str] = Form(None),
     department: Optional[str] = Form(None),
-    type_field: Optional[str] = Form(None, alias="type"), # Use alias for 'type' to avoid Python keyword clash
+    type_field: Optional[str] = Form(None, alias="type"),
     tag: Optional[str] = Form(None),
-    listPrice: Optional[float] = Form(None), # Assuming this is passed from the edit form
+    listPrice: Optional[float] = Form(None),
     inventory: Optional[int] = Form(None),
-    minOrderQty: Optional[int] = Form(None, alias="min_order_qty"), # Use alias for 'min_order_qty'
+    minOrderQty: Optional[int] = Form(None, alias="min_order_qty"),
     available: Optional[str] = Form(None),
-    status: Optional[str] = Form(None), # Added status to form data
-    leadTime: Optional[str] = Form(None, alias="lead_time"), # Use alias for 'lead_time'
+    status: Optional[str] = Form(None),
+    leadTime: Optional[str] = Form(None, alias="lead_time"),
     length: Optional[str] = Form(None),
-    materialType: Optional[str] = Form(None, alias="material_type"), # Use alias for 'material_type'
-    sysNumImages: Optional[str] = Form(None, alias="sys_num_images"), # Use alias for 'sys_num_images'
-    sysProductType: Optional[str] = Form(None, alias="sys_product_type"), # Use alias for 'sys_product_type'
+    materialType: Optional[str] = Form(None, alias="material_type"),
+    sysNumImages: Optional[str] = Form(None, alias="sys_num_images"),
+    sysProductType: Optional[str] = Form(None, alias="sys_product_type"),
     unitOfMeasure: Optional[str] = Form(None),
     unspsc: Optional[str] = Form(None)
 ):
     if 'user' not in request.session:
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
 
-    product_image_url = None
-    try:
-        if imageFile and imageFile.filename:
-            file_extension = os.path.splitext(imageFile.filename)[1]
-            unique_filename = f"{uuid.uuid4().hex}{file_extension}"
-            file_path = os.path.join(UPLOAD_DIR, unique_filename)
-            with open(file_path, "wb") as buffer:
-                buffer.write(await imageFile.read())
-            product_image_url = f"/{STATIC_DIR}/images/products/{unique_filename}"
-            logger.info(f"Uploaded image saved to: {product_image_url}")
-        elif imageUrl:
-            product_image_url = imageUrl
-            logger.info(f"Using image URL: {product_image_url}")
-        else:
-            # If neither new file nor URL is provided, try to retain existing image
-            existing_product = get_product_by_identifier(item_id=itemId)
-            if existing_product and existing_product.get('large_image'):
-                product_image_url = existing_product['large_image']
-            else:
-                product_image_url = "/static/images/noimage.jpg"
-            logger.info("No new image provided, retaining existing or using default.")
+    # --- NEW LOGIC STARTS HERE ---
+    s3_bucket_name = 'kalika-ecom'
+    s3_folder = 'kalika-images'
+    
+    # Step 1: Get the existing product to find the old image path
+    existing_product = get_product_by_identifier(item_id=itemId)
+    if not existing_product:
+        return JSONResponse(status_code=404, content={"message": "Product not found."})
+    
+    old_image_path = existing_product.get('large_image')
+    new_db_image_path = old_image_path  # Default to keeping the old image
+    image_changed = False
 
+    try:
+        s3_client = boto3.client('s3')
+        
+        # Step 2: Process new image (file upload has priority)
+        if imageFile and imageFile.filename:
+            original_filename = imageFile.filename
+            s3_key = f"{s3_folder}/{original_filename}"
+            s3_client.upload_fileobj(imageFile.file, s3_bucket_name, s3_key)
+            new_db_image_path = f"/{s3_key}"
+            image_changed = True
+            logger.info(f"Uploaded new image '{original_filename}' for product {itemId}.")
+
+        elif imageUrl and imageUrl.strip() and imageUrl.strip() != old_image_path:
+            base_name = os.path.basename(imageUrl.strip())
+            new_db_image_path = f"/{s3_folder}/{base_name}"
+            image_changed = True
+            logger.info(f"Using new image URL for product {itemId}.")
+            
+        elif not imageUrl and old_image_path: # Case where user deletes the image URL from the form
+            new_db_image_path = None
+            image_changed = True
+            logger.info(f"Image removed for product {itemId}.")
+
+
+        # Step 3: If the image was changed and an old image existed, delete it from S3
+        if image_changed and old_image_path:
+            try:
+                old_s3_key = old_image_path.lstrip('/')
+                s3_client.delete_object(Bucket=s3_bucket_name, Key=old_s3_key)
+                logger.info(f"Successfully deleted old image '{old_s3_key}' from S3.")
+            except Exception as e:
+                # Log error but don't stop the update process
+                logger.error(f"Failed to delete old image '{old_s3_key}' from S3: {e}")
+
+    except NoCredentialsError:
+        logger.error("S3 credentials not found.")
+        return JSONResponse(status_code=500, content={"message": "Server configuration error: S3 credentials not found."})
     except Exception as e:
-        logger.error(f"Error processing image for product {itemId}: {e}", exc_info=True)
-        # If image processing fails, product_image_url remains None, and we proceed without updating the image field.
-        # This allows other fields to be updated.
-        product_image_url = None # Explicitly set to None if an error occurred
+        logger.error(f"Error processing image for product update {itemId}: {e}", exc_info=True)
+        return JSONResponse(status_code=500, content={"message": f"An error occurred while processing the image: {e}"})
+
+    # --- NEW LOGIC ENDS HERE ---
 
     combined_sub_category = productSubCategory if productSubCategory is not None else ""
     if productSubSubCategory:
@@ -787,12 +816,13 @@ async def update_product_post(
         'itemCode': itemCode,
         'productDescription': productDescription,
         'price': price,
-        'barcode': barcode, # Pass barcode to update function
+        'large_image': new_db_image_path,  # Use the new path
+        'barcode': barcode,
         'listPrice': listPrice,
         'inventory': inventory,
         'minOrderQty': minOrderQty,
         'available': available,
-        'status': status, # Pass status to update function
+        'status': status,
         'leadTime': leadTime,
         'length': length,
         'materialType': materialType,
@@ -802,13 +832,9 @@ async def update_product_post(
         'unspsc': unspsc,
         'brand': brand,
         'department': department,
-        'type': type_field, # Use type_field to match alias
+        'type': type_field,
         'tag': tag
     }
-
-    # Only add 'large_image' to product_data if a valid URL was determined
-    if product_image_url is not None:
-        product_data['large_image'] = product_image_url
 
     try:
         if update_product_in_db(itemId, product_data):
@@ -820,7 +846,8 @@ async def update_product_post(
     except Exception as e:
         logger.error(f"Error updating product {itemId}: {e}", exc_info=True)
         return JSONResponse(status_code=500, content={"message": f"Error updating product: {e}"})
-
+    
+    
 @app.post("/products/update_properties")
 async def update_product_properties_post(
     request: Request,
@@ -1114,67 +1141,75 @@ async def add_products_post(
     request: Request,
     productName: str = Form(...),
     productCategory: str = Form(...),
-    productSubCategory: Optional[str] = Form(None), # Made optional
-    productSubSubCategory: Optional[str] = Form(None), # Made optional
+    productSubCategory: Optional[str] = Form(None),
+    productSubSubCategory: Optional[str] = Form(None),
     itemCode: str = Form(...),
-    productDescription: Optional[str] = Form(None), # Made optional
+    productDescription: Optional[str] = Form(None),
     price: float = Form(...),
-    barcode: Optional[str] = Form(None), # Added barcode for new product, made optional
-    imageUrl: Optional[str] = Form(None), # Existing URL input
-    imageFile: Optional[UploadFile] = File(None), # New file upload input
-    # Add new optional form fields for other columns if they can be updated via this form
+    barcode: Optional[str] = Form(None),
+    imageUrl: Optional[str] = Form(None),
+    imageFile: Optional[UploadFile] = File(None),
     brand: Optional[str] = Form(None),
     department: Optional[str] = Form(None),
-    type_field: Optional[str] = Form(None, alias="type"), # Use alias for 'type' to avoid Python keyword clash
+    type_field: Optional[str] = Form(None, alias="type"),
     tag: Optional[str] = Form(None),
-    listPrice: Optional[float] = Form(None), # Assuming listPrice is from form, maps to list_price
+    listPrice: Optional[float] = Form(None),
     inventory: Optional[int] = Form(None),
-    minOrderQty: Optional[int] = Form(None, alias="min_order_qty"), # Use alias for 'min_order_qty'
+    minOrderQty: Optional[int] = Form(None, alias="min_order_qty"),
     available: Optional[str] = Form(None),
     status: Optional[str] = Form(None),
-    leadTime: Optional[str] = Form(None, alias="lead_time"), # Use alias for 'lead_time'
+    leadTime: Optional[str] = Form(None, alias="lead_time"),
     length: Optional[str] = Form(None),
-    materialType: Optional[str] = Form(None, alias="material_type"), # Use alias for 'material_type'
-    sysNumImages: Optional[str] = Form(None, alias="sys_num_images"), # Use alias for 'sys_num_images'
-    sysProductType: Optional[str] = Form(None, alias="sys_product_type"), # Use alias for 'sys_product_type'
+    materialType: Optional[str] = Form(None, alias="material_type"),
+    sysNumImages: Optional[str] = Form(None, alias="sys_num_images"),
+    sysProductType: Optional[str] = Form(None, alias="sys_product_type"),
     unitOfMeasure: Optional[str] = Form(None),
     unspsc: Optional[str] = Form(None)
 ):
     if 'user' not in request.session:
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
     
-    product_image_url = None
-    conn = None # Initialize conn to None
-    cursor = None # Initialize cursor to None
+    db_image_path = None
+    s3_bucket_name = 'kalika-ecom'
+    s3_folder = 'kalika-images'
+
     try:
-        # Determine the image URL to save
+        # Priority 1: Handle file upload to S3
         if imageFile and imageFile.filename:
-            # Generate a unique filename
-            file_extension = os.path.splitext(imageFile.filename)[1]
-            unique_filename = f"{uuid.uuid4().hex}{file_extension}"
-            file_path = os.path.join(UPLOAD_DIR, unique_filename)
+            s3_client = boto3.client('s3')
             
-            # Save the uploaded file
-            with open(file_path, "wb") as buffer:
-                buffer.write(await imageFile.read())
+            # --- THIS IS THE CORRECTION ---
+            # Use the original filename directly
+            original_filename = imageFile.filename
+            s3_key = f"{s3_folder}/{original_filename}"
+            # --- END OF CORRECTION ---
+
+            s3_client.upload_fileobj(imageFile.file, s3_bucket_name, s3_key)
             
-            product_image_url = f"/{STATIC_DIR}/images/products/{unique_filename}"
-            logger.info(f"Uploaded image saved to: {product_image_url}")
-        elif imageUrl:
-            product_image_url = imageUrl
-            logger.info(f"Using image URL: {product_image_url}")
+            db_image_path = f"/{s3_key}"
+            logger.info(f"Successfully uploaded {original_filename} to S3 bucket {s3_bucket_name}.")
+
+        # Priority 2: Handle pasted URL/path
+        elif imageUrl and imageUrl.strip():
+            base_name = os.path.basename(imageUrl.strip())
+            db_image_path = f"/{s3_folder}/{base_name}"
+            logger.info(f"Using pasted path. Storing '{db_image_path}' in database.")
+        
+        # Priority 3: No image provided
         else:
-            product_image_url = "/static/images/noimage.jpg" # Default image if neither is provided
-            logger.info("No image provided, using default placeholder.")
+            db_image_path = None 
+            logger.info("No new image provided.")
 
+    except NoCredentialsError:
+        logger.error("S3 credentials not found. Please configure AWS credentials.")
+        return JSONResponse(status_code=500, content={"message": "Server configuration error: S3 credentials not found."})
     except Exception as e:
-        logger.error(f"Error processing image for new product: {e}", exc_info=True)
-        product_image_url = "/static/images/noimage.jpg" # Fallback to default if image processing fails
+        logger.error(f"Error processing image: {e}", exc_info=True)
+        return JSONResponse(status_code=500, content={"message": f"An error occurred while processing the image: {e}"})
 
-    # Combine sub_category and sub_sub_category if sub_sub_category is provided
+    # ... (The rest of the function remains the same) ...
     combined_sub_category = productSubCategory if productSubCategory is not None else ""
     if productSubSubCategory:
-        # Ensure no duplicates if subSubCategory is already part of productSubCategory
         if productSubSubCategory not in combined_sub_category.split(','):
             combined_sub_category = f"{combined_sub_category}, {productSubSubCategory}"
 
@@ -1185,11 +1220,11 @@ async def add_products_post(
         'item_code': itemCode, 
         'product_description': productDescription, 
         'price': price,
-        'large_image': product_image_url,
-        'upc': barcode, # Store barcode as UPC
+        'large_image': db_image_path,
+        'upc': barcode,
         'brand': brand,
         'department': department,
-        'type': type_field, # Use type_field to match alias
+        'type': type_field,
         'tag': tag,
         'list_price': listPrice,
         'inventory': inventory,
@@ -1216,11 +1251,9 @@ async def add_products_post(
         logger.error(f"Error adding product: {e}", exc_info=True)
         request.session['flash_messages'] = [f"Error adding product: {e}"]
         return JSONResponse(status_code=500, content={"message": f"Error adding product: {e}"})
-    finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+
+
+
 
 @app.get("/bulk-modify", name="import_from_xl_page") # Added name
 async def bulk_modify_get(request: Request):
